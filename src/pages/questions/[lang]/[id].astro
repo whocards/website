@@ -1,0 +1,47 @@
+---
+import Layout from '~layouts/Layout.astro'
+import { DATA_URL } from '~utils/constants'
+
+export async function getStaticPaths() {
+  const data = await fetch(DATA_URL + '/questions.json').then((r) => r.json())
+
+  // loop through questions
+  return Object.entries(data).map(([id, entries]) =>
+    // loop through languages in each question
+    Object.entries(entries as Record<string, string>).map(
+      ([lang, question]) => ({
+        params: { id, lang },
+        props: { question },
+      })
+    )
+  )
+}
+
+const { question } = Astro.props
+const { lang } = Astro.params
+---
+
+<Layout title='question'>
+  <main>
+    <h1>{question}</h1>
+  </main>
+</Layout>
+
+<style>
+  main {
+    margin: auto;
+    padding: 1.5rem;
+    max-width: 80vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  h1 {
+    display: flex;
+    flex-direction: column;
+    row-gap: 1rem;
+    max-width: 50vw;
+    font-size: 5vw;
+  }
+</style>
