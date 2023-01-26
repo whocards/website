@@ -1,36 +1,35 @@
 ---
+export const prerender = true
 import Card from '~components/Card.astro'
 import Layout from '~layouts/Layout.astro'
-import { resJson } from '~utils'
-import { DATA_URL } from '~utils/constants'
+import languages from 'public/data/languages.json'
 
 export async function getStaticPaths() {
-  const languagesList = await fetch(DATA_URL + '/languages.json').then(resJson)
-  // get questions for each language
-  const fetches = Object.entries(languagesList).map(([lang, name]) =>
-    fetch(DATA_URL + `/${lang}.json`)
-      .then(resJson)
-      .then((questions) => ({
-        params: { lang },
-        props: { questions, langName: name },
-      }))
-  )
-
-  return await Promise.all(fetches)
+  return Object.entries(languages).map(([langCode, langName]) => ({
+    params: { lang: langCode },
+    props: {
+      name: langName,
+    },
+  }))
 }
 
-const { questions, langName } = Astro.props
-const { lang } = Astro.params
+const { lang: language } = Astro.params
+const { name } = Astro.props
+
+const allQuestions = await Astro.glob(
+  '../../../../public/data/languages/*.json'
+)
+const questions = allQuestions.find((qs) => qs.language === language)?.questions
 ---
 
 <Layout title='question'>
   <main>
     <ul>
-      <h1>{langName} ({lang})</h1>
+      <h1>{name} ({language})</h1>
       {
         Object.entries(questions).map(([id, question]) => (
           <Card
-            href={`${Astro.url.pathname}/${id}`}
+            href={`${Astro.url.pathname}/all/${id}`}
             title={id}
             body={question as string}
           />

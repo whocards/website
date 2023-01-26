@@ -1,14 +1,10 @@
 ---
+export const prerender = true
 import Layout from '~layouts/Layout.astro'
-import { DATA_URL } from '~utils/constants'
-import { fetchLangs } from '~utils'
 import Card from '~components/Card.astro'
-
-const langs = await fetchLangs()
+import data from 'public/data/questions.json'
 
 export async function getStaticPaths() {
-  const data = await fetch(DATA_URL + '/questions.json').then((r) => r.json())
-
   // loop through questions
   return Object.entries(data).map(([id, questions]) => ({
     params: { id },
@@ -20,16 +16,16 @@ const { questions } = Astro.props
 const { id } = Astro.params
 ---
 
-<Layout title='question'>
+<Layout title='all question'>
   <main>
     <ul>
       <h1>Question {id}</h1>
       {
         Object.entries(questions).map(([lang, question]) => (
           <Card
-            body={question as string}
-            title={lang}
             href={`/questions/${lang}/${id}`}
+            title={lang}
+            body={question as string}
           />
         ))
       }
