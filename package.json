@@ -11,5 +11,9 @@
   },
   "dependencies": {
     "astro": "^2.0.0"
+  },
+  "devDependencies": {
+    "@netlify/functions": "^1.4.0",
+    "@types/node": "^18.11.18"
   }
 }

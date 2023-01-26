@@ -1,13 +1,10 @@
 ---
+export const prerender = true
+
 import Card from '~components/Card.astro'
 import Layout from '~layouts/Layout.astro'
-import { resJson } from '~utils'
-import { DATA_URL } from '~utils/constants'
-
-const languages: { [key: string]: string } = await fetch(
-  DATA_URL + '/languages.json'
-).then(resJson)
-const questions = await fetch(DATA_URL + '/questions.json').then(resJson)
+import languages from 'public/data/languages.json'
+import questions from 'public/data/questions.json'
 ---
 
 <Layout title='question'>
@@ -37,7 +34,7 @@ const questions = await fetch(DATA_URL + '/questions.json').then(resJson)
       <ul class='qs-grid'>
         {
           Object.keys(questions).map((id) => (
-            <a href={`/questions/${id}`}>{id}</a>
+            <a href={`/questions/all/${id}`}>{id}</a>
           ))
         }
       </ul>

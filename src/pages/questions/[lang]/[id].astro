@@ -1,24 +1,20 @@
 ---
+export const prerender = true
 import Layout from '~layouts/Layout.astro'
-import { DATA_URL } from '~utils/constants'
+import questions from 'public/data/questions.json'
 
 export async function getStaticPaths() {
-  const data = await fetch(DATA_URL + '/questions.json').then((r) => r.json())
-
   // loop through questions
-  return Object.entries(data).map(([id, entries]) =>
+  return Object.entries(questions).map(([id, entries]) =>
     // loop through languages in each question
-    Object.entries(entries as Record<string, string>).map(
-      ([lang, question]) => ({
-        params: { id, lang },
-        props: { question },
-      })
-    )
+    Object.entries(entries).map(([lang, question]) => ({
+      params: { id, lang },
+      props: { question },
+    }))
   )
 }
 
 const { question } = Astro.props
-const { lang } = Astro.params
 ---
 
 <Layout title='question'>
