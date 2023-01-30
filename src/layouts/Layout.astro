@@ -11,7 +11,7 @@ export interface Props {
 const { title: t, id, lang } = Astro.props
 const {props} = Astro
 const title = id ? `WhoCards | ${languages[lang as Language]} | Question ${id}` : t
-const imgUrl = Astro.url.origin + (id ? `/data/images/${lang}/${id}.png` : 'TODO ADD')
+const imgUrl = id ? `/data/images/${lang}/${id}.png` : '/TODO-ADD'
 ---
 
 <!DOCTYPE html>
