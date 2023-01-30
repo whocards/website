@@ -34,7 +34,7 @@ import questions from 'public/data/questions.json'
       <ul class='qs-grid'>
         {
           Object.keys(questions).map((id) => (
-            <a href={`/questions/all/${id}`}>{id}</a>
+            <a href={`/questions/${id}`}>{id}</a>
           ))
         }
       </ul>

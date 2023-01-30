@@ -9,6 +9,10 @@ const DEFAULT_LANG = 'en'
 const VALID_LANGS = Object.keys(languages)
 
 const handler: Handler = async (event, context) => {
+  // validate method
+  if (event.httpMethod !== 'GET') {
+    return { statusCode: 405 }
+  }
   // validate language
   const lang = (event.queryStringParameters?.lang || DEFAULT_LANG) as Language
 
