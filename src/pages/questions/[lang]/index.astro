@@ -29,7 +29,7 @@ const questions = allQuestions.find((qs) => qs.language === language)?.questions
       {
         Object.entries(questions).map(([id, question]) => (
           <Card
-            href={`${Astro.url.pathname}/all/${id}`}
+            href={`${Astro.url.pathname}/${id}`}
             title={id}
             body={question as string}
           />

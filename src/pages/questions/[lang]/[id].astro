@@ -15,9 +15,10 @@ export async function getStaticPaths() {
 }
 
 const { question } = Astro.props
+const {id, lang} = Astro.params
 ---
 
-<Layout title='question'>
+<Layout title='question' id={id} lang={lang}>
   <main>
     <h1>{question}</h1>
   </main>

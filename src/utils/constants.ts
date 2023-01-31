@@ -9,3 +9,6 @@ try {
 if (!DATA_URL) {
   throw Error('DATA_URL failed to load')
 }
+
+export const BASE_URL =
+  process.env.DEPLOY_PRIME_URL || process.env.URL || import.meta.env.URL
