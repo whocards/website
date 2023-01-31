@@ -1,6 +1,7 @@
 ---
 import type { Language, QuestionId } from 'types/Questions'
 import languages from 'public/data/languages.json'
+import { BASE_URL } from '~utils/constants'
 
 export interface Props {
   title: string
@@ -39,7 +40,7 @@ const imgUrl = id ? `/data/images/${lang}/${id}.png` : '/TODO-ADD'
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content={Astro.url}>
+    <meta property="og:url" content={Astro.url.pathname}>
     <meta property="og:title" content={title}>
     <meta property="og:description" content="Open Up?">
     <meta property="og:image" content={imgUrl}>
@@ -49,12 +50,13 @@ const imgUrl = id ? `/data/images/${lang}/${id}.png` : '/TODO-ADD'
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content={Astro.url}>
+    <meta property="twitter:url" content={Astro.url.pathname}>
     <meta property="twitter:title" content={title}>
     <meta property="twitter:description" content="Open Up?">
     <meta property="twitter:image" content={imgUrl}>
   </head>
   <body>
+    <div class="hidden">{BASE_URL}</div>
     <slot />
   </body>
 </html>
@@ -75,5 +77,8 @@ const imgUrl = id ? `/data/images/${lang}/${id}.png` : '/TODO-ADD'
   code {
     font-family: Menlo, Monaco, Lucida Console, Liberation Mono,
       DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
+  }
+  .hidden {
+    visibility: hidden;
   }
 </style>
