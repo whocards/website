@@ -6,20 +6,20 @@ import languages from 'public/data/languages.json'
 
 export async function getStaticPaths() {
   return Object.entries(languages).map(([langCode, langName]) => ({
-    params: { lang: langCode },
+    params: {lang: langCode},
     props: {
       name: langName,
     },
   }))
 }
 
-const { lang: language } = Astro.params
-const { name } = Astro.props
+const {lang: language} = Astro.params
+const {name} = Astro.props
 
 const allQuestions = await Astro.glob(
   '../../../../public/data/languages/*.json'
 )
-const questions = allQuestions.find((qs) => qs.language === language)?.questions
+const questions = allQuestions.find(qs => qs.language === language)?.questions
 ---
 
 <Layout title='question'>

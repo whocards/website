@@ -8,13 +8,13 @@ export async function getStaticPaths() {
   return Object.entries(questions).map(([id, entries]) =>
     // loop through languages in each question
     Object.entries(entries).map(([lang, question]) => ({
-      params: { id, lang },
-      props: { question },
+      params: {id, lang},
+      props: {question},
     }))
   )
 }
 
-const { question } = Astro.props
+const {question} = Astro.props
 const {id, lang} = Astro.params
 ---
 

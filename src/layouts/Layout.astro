@@ -1,7 +1,8 @@
 ---
-import type { Language, QuestionId } from 'types/Questions'
+import type {Language, QuestionId} from 'types/Questions'
 import languages from 'public/data/languages.json'
-import { BASE_URL } from '~utils/constants'
+import {BASE_URL} from '~utils/constants'
+import Navbar from '~components/Navbar.astro'
 
 export interface Props {
   title: string
@@ -9,15 +10,17 @@ export interface Props {
   lang?: Language
 }
 
-const { title: t, id, lang } = Astro.props
-const title = id ? `WhoCards | ${languages[lang as Language]} | Question ${id}` : t
+const {title: t, id, lang} = Astro.props
+const title = id
+  ? `WhoCards | ${languages[lang as Language]} | Question ${id}`
+  : t
 const imgUrl = BASE_URL + (id ? `/data/images/${lang}/${id}.png` : '/TODO-ADD')
 const pageUrl = BASE_URL + Astro.url.pathname
 const description = 'Open up?'
 ---
 
 <!DOCTYPE html>
-<html lang='en'>
+<html lang='en' class='bg-dark'>
   <head>
     <meta charset='UTF-8' />
     <meta name='viewport' content='width=device-width' />
@@ -36,46 +39,32 @@ const description = 'Open up?'
     <meta name='generator' content={Astro.generator} />
     <!-- Primary Meta Tags -->
     <title>{title}</title>
-    <meta name="title" content={title}>
-    <meta name="description" content={description}>
+    <meta name='title' content={title} />
+    <meta name='description' content={description} />
 
     <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content={pageUrl}>
-    <meta property="og:title" content={title}>
-    <meta property="og:description" content={description}>
-    <meta property="og:image" content={imgUrl}>
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="822">
-    <meta property="og:locale" content={lang}>
+    <meta property='og:type' content='website' />
+    <meta property='og:url' content={pageUrl} />
+    <meta property='og:title' content={title} />
+    <meta property='og:description' content={description} />
+    <meta property='og:image' content={imgUrl} />
+    <meta property='og:image:width' content='1200' />
+    <meta property='og:image:height' content='822' />
+    <meta property='og:locale' content={lang} />
 
     <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content={pageUrl}>
-    <meta property="twitter:title" content={title}>
-    <meta property="twitter:description" content={description}>
-    <meta property="twitter:image" content={imgUrl}>
+    <meta property='twitter:card' content='summary_large_image' />
+    <meta property='twitter:url' content={pageUrl} />
+    <meta property='twitter:title' content={title} />
+    <meta property='twitter:description' content={description} />
+    <meta property='twitter:image' content={imgUrl} />
   </head>
-  <body>
-    <slot />
+  <body class='min-h-screen bg-hero bg-cover bg-fixed bg-center bg-no-repeat'>
+    <Navbar />
+    <main
+      class='items-top flex min-h-screen justify-center pt-28 lg:items-center lg:pt-16'>
+      <slot />
+    </main>
   </body>
 </html>
-<style is:global>
-  :root {
-    --accent: 124, 58, 237;
-    --accent-gradient: linear-gradient(
-      45deg,
-      rgb(var(--accent)),
-      #da62c4 30%,
-      white 60%
-    );
-  }
-  html {
-    font-family: 'Nunito', sans-serif;
-    background-color: #f6f6f6;
-  }
-  code {
-    font-family: Menlo, Monaco, Lucida Console, Liberation Mono,
-      DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
-  }
-</style>
+<style is:global></style>

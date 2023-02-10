@@ -4,8 +4,8 @@ import type {
   QuestionsResponse,
   QuestionsResponse1Lang,
 } from 'types/Questions'
-import { resJson } from '~utils'
-import { DATA_URL } from './constants'
+import {resJson} from '~utils'
+import {DATA_URL} from './constants'
 
 const ALL_LANGUAGES_URL = DATA_URL + '/languages.json'
 const ALL_QUESTIONS_URL = DATA_URL + '/questions.json'
