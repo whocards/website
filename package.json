@@ -7,13 +7,26 @@
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro build --experimental-static-build",
-    "preview": "astro preview"
+    "preview": "astro preview",
+    "pretty": "prettier --write --plugin-search-dir=. ."
   },
   "dependencies": {
-    "astro": "^2.0.0"
+    "@astrojs/image": "^0.14.1",
+    "@astrojs/mdx": "^0.16.0",
+    "@astrojs/sitemap": "^1.0.1",
+    "@astrojs/tailwind": "^3.0.1",
+    "@fontsource/nunito": "^4.5.12",
+    "@tailwindcss/typography": "^0.5.9",
+    "astro": "^2.0.0",
+    "astro-icon": "^0.8.0",
+    "astro-seo": "^0.7.0",
+    "sharp": "^0.31.3",
+    "tailwindcss": "^3.2.6"
   },
   "devDependencies": {
     "@netlify/functions": "^1.4.0",
-    "@types/node": "^18.11.18"
+    "@types/node": "^18.11.18",
+    "prettier": "^2.8.4",
+    "prettier-plugin-tailwindcss": "^0.2.2"
   }
 }

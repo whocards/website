@@ -1,0 +1,4 @@
+dist/
+.netlify
+.vscode
+node_modules

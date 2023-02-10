@@ -7,13 +7,13 @@ import data from 'public/data/questions.json'
 export async function getStaticPaths() {
   // loop through questions
   return Object.entries(data).map(([id, questions]) => ({
-    params: { id },
-    props: { questions },
+    params: {id},
+    props: {questions},
   }))
 }
 
-const { questions } = Astro.props
-const { id } = Astro.params
+const {questions} = Astro.props
+const {id} = Astro.params
 ---
 
 <Layout title='all question'>
