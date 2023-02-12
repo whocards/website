@@ -1,14 +1,11 @@
-export let DATA_URL: string
+import type {Language} from '#types/Questions'
+
+export let BASE_URL: string
 
 try {
-  DATA_URL = import.meta.env.DATA_URL // astro
+  BASE_URL = import.meta.env.URL!
 } catch (error) {
-  DATA_URL = process.env.DATA_URL! // netlify
+  BASE_URL = (process.env.DEPLOY_PRIME_URL || process.env.URL)!
 }
 
-if (!DATA_URL) {
-  throw Error('DATA_URL failed to load')
-}
-
-export const BASE_URL =
-  process.env.DEPLOY_PRIME_URL || process.env.URL || import.meta.env.URL
+export const DEFAULT_LANGUAGE: Language = 'en'

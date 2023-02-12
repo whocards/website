@@ -1,10 +1,18 @@
 ---
+import type {Language} from '#types/Questions'
 import Logo from '~icons/Logo.astro'
 import Menu from '~icons/Menu.astro'
+import {LanguageButton} from './Button'
+const language = Astro.params.language || 'en'
 ---
 
 <nav
   class='fixed top-0 z-50 flex h-16 w-full items-center justify-between bg-transparent px-6'>
-  <Logo height='30' width='145' />
-  <Menu />
+  <a href={`/${language}`}>
+    <Logo height='30' width='145' />
+  </a>
+  <div class='flex gap-4'>
+    <LanguageButton language={language as Language} client:only />
+    <Menu />
+  </div>
 </nav>

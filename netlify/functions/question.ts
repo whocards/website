@@ -1,7 +1,7 @@
 import type {Handler} from '@netlify/functions'
 import type {Language, QuestionId} from 'types/Questions'
-import languages from 'public/data/languages.json'
-import questions from 'public/data/questions.json'
+import languages from '~data/languages.json'
+import questions from '~data/questions.json'
 import crypto from 'crypto'
 
 const DEFAULT_LANG = 'en'

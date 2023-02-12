@@ -1,20 +1,22 @@
 ---
 import type {Language, QuestionId} from 'types/Questions'
-import languages from 'public/data/languages.json'
+import languages from '~data/languages.json'
 import {BASE_URL} from '~utils/constants'
 import Navbar from '~components/Navbar.astro'
 
 export interface Props {
   title: string
   id?: QuestionId
-  lang?: Language
+  language?: Language
 }
 
-const {title: t, id, lang} = Astro.props
+const {title: t, id, language} = Astro.props
+// setLanguage(language || 'en')
 const title = id
-  ? `WhoCards | ${languages[lang as Language]} | Question ${id}`
+  ? `WhoCards | ${languages[language as Language]} | Question ${id}`
   : t
-const imgUrl = BASE_URL + (id ? `/data/images/${lang}/${id}.png` : '/TODO-ADD')
+const imgUrl =
+  BASE_URL + (id ? `/data/images/${language}/${id}.png` : '/TODO-ADD')
 const pageUrl = BASE_URL + Astro.url.pathname
 const description = 'Open up?'
 ---
@@ -50,7 +52,7 @@ const description = 'Open up?'
     <meta property='og:image' content={imgUrl} />
     <meta property='og:image:width' content='1200' />
     <meta property='og:image:height' content='822' />
-    <meta property='og:locale' content={lang} />
+    <meta property='og:locale' content={language} />
 
     <!-- Twitter -->
     <meta property='twitter:card' content='summary_large_image' />
