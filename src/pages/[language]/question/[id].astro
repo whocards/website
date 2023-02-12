@@ -1,0 +1,25 @@
+---
+import Layout from '~layouts/Layout.astro'
+import questions from '~data/questions.json'
+import type {Language, QuestionId} from '#types/Questions'
+import {PlayMoveButton} from '~components/Button'
+
+export async function getStaticPaths() {
+  // loop through questions
+  return Object.entries(questions).map(([id, entries]) =>
+    // loop through languages in each question
+    Object.entries(entries).map(([language, question]) => ({
+      params: {id, language},
+      props: {question},
+    }))
+  )
+}
+
+const {question} = Astro.props
+const {id, language} = Astro.params
+---
+
+<Layout title='question' id={id as QuestionId} language={language as Language}>
+  <h1 class='text-5xl text-white'>{question}</h1>
+  <PlayMoveButton id={id as QuestionId} client:only />
+</Layout>

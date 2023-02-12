@@ -1,0 +1,16 @@
+---
+import type {Language} from '#types/Questions'
+import LangingPage from '~components/LandingPage.astro'
+import languages from '~data/languages.json'
+
+export async function getStaticPaths() {
+  return Object.entries(languages).map(([language, name]) => ({
+    params: {language},
+    props: {name},
+  }))
+}
+
+const {language} = Astro.params
+---
+
+<LangingPage language={language as Language} />

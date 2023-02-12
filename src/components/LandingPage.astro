@@ -1,0 +1,43 @@
+---
+import type {Language} from '#types/Questions'
+import Layout from '~layouts/Layout.astro'
+import languages from '~data/languages.json'
+import {PlayStartButton} from '~components/Button'
+
+interface Props {
+  language: Language
+}
+
+const {language: languageCode} = Astro.props
+const language = languages[languageCode]
+---
+
+<Layout title=''>
+  <section>
+    <div
+      class='mx-auto grid max-w-screen-xl p-8 lg:grid-cols-12 lg:gap-8 lg:py-16 xl:gap-0'>
+      <div class='mr-auto place-self-center lg:col-span-7'>
+        <h1
+          class='mb-4 max-w-2xl text-5xl font-extrabold leading-none tracking-tight text-white xl:text-6xl'>
+          <span class='text-primary-light'>OPEN</span> UP<span
+            class='text-primary-dark'>?</span
+          >
+        </h1>
+        <p class='mb-6 max-w-2xl text-xl font-light text-white lg:my-4 lg:mb-8'>
+          From our hearts to yours we hope these new questions brings you
+          openness and connection in your life.
+        </p>
+        <PlayStartButton client:only />
+        <!-- TODO add language changer opener small text -->
+        <a
+          href='#'
+          class='inline-flex w-full items-center justify-center rounded-full border-4 border-primary-light px-6 py-5 text-center text-xl font-semibold text-primary-light hover:border-primary-dark hover:text-primary-dark focus:border-primary-dark focus:text-primary-dark focus:ring-4 md:w-auto'>
+          Coming soon &#128515;
+        </a>
+      </div>
+      <div class='hidden lg:col-span-5 lg:mt-0 lg:flex'>
+        <img src='/images/CardsForHumanity.png' alt='cards for humanity' />
+      </div>
+    </div>
+  </section>
+</Layout>
