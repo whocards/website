@@ -6,6 +6,13 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        yellow: {
+          100: '#7E7552',
+          200: '#FFE37E',
+          400: '#F9D75F',
+          500: '#FFC700',
+        },
+        gray: '#65636E',
         dark: '#262433',
         darker: '#111516',
         white: '#F5F5F5',
@@ -18,7 +25,8 @@ module.exports = {
         hero: 'url(/images/background.svg)',
       },
       fontFamily: {
-        sans: ['NunitoVariable', 'Nunito', ...defaultTheme.fontFamily.sans],
+        sans: ['Nunito', ...defaultTheme.fontFamily.sans],
+        'dm-sans': ['DM Sans', ...defaultTheme.fontFamily.sans],
       },
     },
   },

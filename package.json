@@ -16,6 +16,7 @@
     "@astrojs/sitemap": "^1.0.1",
     "@astrojs/solid-js": "^2.0.2",
     "@astrojs/tailwind": "^3.0.1",
+    "@fontsource/dm-sans": "^4.5.9",
     "@fontsource/nunito": "^4.5.12",
     "@nanostores/persistent": "^0.7.0",
     "@nanostores/solid": "^0.3.2",
