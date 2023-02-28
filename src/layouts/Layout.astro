@@ -3,6 +3,9 @@ import type {Language, QuestionId} from 'types/Questions'
 import languages from '~data/languages.json'
 import {BASE_URL} from '~utils/constants'
 import Navbar from '~components/Navbar.astro'
+import '@fontsource/nunito'
+import '@fontsource/dm-sans'
+import './base.css'
 
 export interface Props {
   title: string
@@ -64,7 +67,7 @@ const description = 'Open up?'
   <body class='min-h-screen bg-hero bg-cover bg-fixed bg-center bg-no-repeat'>
     <Navbar />
     <main
-      class='items-top flex min-h-screen justify-center pt-28 lg:items-center lg:pt-16'>
+      class='flex min-h-screen justify-center items-center md:items-start pt-16 landscape:pt-10 md:p-16'>
       <slot />
     </main>
   </body>
