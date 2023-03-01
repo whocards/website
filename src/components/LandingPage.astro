@@ -7,15 +7,12 @@ import {PlayStartButton} from '~components/Button'
 interface Props {
   language: Language
 }
-
-const {language: languageCode} = Astro.props
-const language = languages[languageCode]
 ---
 
 <Layout>
   <section class='mx-4 flex flex-col items-center gap-8 text-center md:mt-16 md:gap-12 lg:mt-20'>
     <h1
-      class='max-w-2xl text-5xl font-extrabold leading-none tracking-tight text-white md:max-w-xs lg:max-w-md xl:text-6xl'
+      class='max-w-xs text-5xl font-extrabold leading-none tracking-tight text-white xl:max-w-none xl:text-6xl'
     >
       An invitation to open up!
     </h1>
@@ -28,7 +25,7 @@ const language = languages[languageCode]
     >
       <PlayStartButton client:only />
       <!-- TODO add language changer opener small text -->
-      <label for='who-modal' class='btn-secondary btn'> Choose Language</label>
+      <button class='close-modal btn-secondary btn'> Choose Language</button>
     </div>
   </section>
 </Layout>

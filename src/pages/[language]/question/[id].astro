@@ -1,8 +1,10 @@
 ---
 import Layout from '~layouts/Layout.astro'
 import questions from '~data/questions.json'
+import languages from '~data/languages.json'
 import type {Language, QuestionId} from '#types/Questions'
 import {PlayMoveButton} from '~components/Button'
+import Icon from 'astro-icon'
 
 export async function getStaticPaths() {
   // loop through questions
@@ -20,6 +22,26 @@ const {id, language} = Astro.params
 ---
 
 <Layout title='question' id={id as QuestionId} language={language as Language}>
-  <h1 class='text-5xl text-white'>{question}</h1>
-  <PlayMoveButton id={id as QuestionId} client:only />
+  <div class='flex w-full flex-col justify-between self-stretch py-8 sm:px-4 md:pb-0 md:pt-16'>
+    <h1 class='self-start text-5xl text-white'>{question}</h1>
+    <div class='flex items-center justify-center'>
+      <PlayMoveButton id={id as QuestionId} direction='prev' client:only>
+        <Icon name='ic:outline-arrow-back' class:list='h-10 w-10' />
+      </PlayMoveButton>
+      <div class='flex gap-6'>
+        <button
+          class:list={[
+            'btn btn-circle close-modal uppercase bg-gray hover:bg-gray hover:text-primary-light',
+            {'w-fit px-4': language?.includes('-')},
+          ]}>{language}</button
+        >
+        <!-- <button class="btn btn-circle">
+        <Icon name="ic:twotone-share" class="h-6 w-6" />
+      </button> -->
+      </div>
+      <PlayMoveButton id={id as QuestionId} direction='next' client:only>
+        <Icon name='ic:outline-arrow-forward' class='h-10 w-10' />
+      </PlayMoveButton>
+    </div>
+  </div>
 </Layout>
