@@ -10,6 +10,14 @@
     "preview": "astro preview",
     "pretty": "prettier --write --plugin-search-dir=. ."
   },
+  "lint-staged": {
+    "*.{ts,js,css,json,mdx,astro}": [
+      "prettier --write"
+    ],
+    "*.js": [
+      "eslint --fix"
+    ]
+  },
   "dependencies": {
     "@astrojs/image": "^0.14.1",
     "@astrojs/mdx": "^0.16.0",
@@ -33,6 +41,8 @@
   "devDependencies": {
     "@netlify/functions": "^1.4.0",
     "@types/node": "^18.11.18",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.1.2",
     "prettier": "^2.8.4",
     "prettier-plugin-tailwindcss": "^0.2.2"
   }

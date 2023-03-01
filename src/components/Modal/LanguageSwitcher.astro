@@ -1,21 +1,29 @@
 ---
 import ModalBase from './ModalBase.astro'
 import langugages from '~data/languages.json'
-import { DEFAULT_LANGUAGE } from '~utils/constants'
+import {DEFAULT_LANGUAGE} from '~utils/constants'
 import Icon from 'astro-icon'
 
 // handle paths / and /en
 const currentPath = Astro.url.pathname.slice(1)
 const currentLang = currentPath.slice(0, 2) || DEFAULT_LANGUAGE
-
 ---
-<ModalBase title="Choose your language">
-  <section class="grid auto-rows-auto grid-cols-1 max-h-96 overflow-y-auto pb-4">
-    {Object.entries(langugages).map(([key, name]) => (
-      <a
-        href={'/' + (currentPath.replace(currentLang, key) || key)}
-        class:list={[{"text-primary-dark": key === currentLang }, "btn-ghost h-16 w-full flex items-center px-4 close-modal"]}
-      >{name}{key === currentLang && <Icon name="zondicons:checkmark" class="h-4 w-4 ml-2" />}</a>
-    ))}
+
+<ModalBase title='Choose your language'>
+  <section class='grid max-h-96 auto-rows-auto grid-cols-1 overflow-y-auto pb-4'>
+    {
+      Object.entries(langugages).map(([key, name]) => (
+        <a
+          href={'/' + (currentPath.replace(currentLang, key) || key)}
+          class:list={[
+            {'text-primary-dark': key === currentLang},
+            'btn-ghost h-16 w-full flex items-center px-4 close-modal',
+          ]}
+        >
+          {name}
+          {key === currentLang && <Icon name='zondicons:checkmark' class='ml-2 h-4 w-4' />}
+        </a>
+      ))
+    }
   </section>
 </ModalBase>

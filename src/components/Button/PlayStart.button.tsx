@@ -10,7 +10,7 @@ export const PlayStartButton = () => {
   const $ids = useStore(idsStore)
 
   return (
-    <a id='play' href={`/${$lang()}/question/${$ids().current}`} class='btn btn-primary'>
+    <a id='play' href={`/${$lang()}/question/${$ids().current}`} class='btn-primary btn'>
       Play
     </a>
   )

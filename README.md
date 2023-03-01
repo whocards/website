@@ -16,7 +16,6 @@
 [ ] use daisy UI
 [ ] update readme
 
-
 ## References
 
 https://icon-sets.iconify.design/
