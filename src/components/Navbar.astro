@@ -6,8 +6,7 @@ import {LanguageButton} from '~components/Button'
 const language = Astro.params.language || 'en'
 ---
 
-<nav
-  class='fixed top-0 z-50 flex h-16 w-full items-center justify-between bg-transparent px-6'>
+<nav class='fixed top-0 z-50 flex h-16 w-full items-center justify-between bg-transparent px-6'>
   <a href={`/${language}`}>
     <Logo height='30' width='145' />
   </a>

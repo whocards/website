@@ -4,6 +4,8 @@
 [x] button components
 [x] landing page -> mobile up
 [ ] language switcher
-[ ] prettier
+[x] prettier
 [ ] game buttons
 [ ] share button
+[ ] astro-seo
+[ ] update readme

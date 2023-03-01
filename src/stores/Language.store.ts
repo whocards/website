@@ -13,4 +13,4 @@ export const setLanguage = action(
   }
 )
 
-export const languageName = computed(languageStore, lang => languages[lang])
+export const languageName = computed(languageStore, (lang) => languages[lang])

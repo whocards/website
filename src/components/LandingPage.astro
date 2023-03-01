@@ -12,29 +12,23 @@ const {language: languageCode} = Astro.props
 const language = languages[languageCode]
 ---
 
-<Layout title=''>
-  <section>
+<Layout>
+  <section class='mx-4 flex flex-col items-center gap-8 text-center md:mt-16 md:gap-12 lg:mt-20'>
+    <h1
+      class='max-w-2xl text-5xl font-extrabold leading-none tracking-tight text-white md:max-w-xs lg:max-w-md xl:text-6xl'
+    >
+      An invitation to open up!
+    </h1>
+    <p class='text-xl font-light text-white lg:max-w-2xl'>
+      We are so happy to have you here!<br />
+      Come play with the WhoCards game or take a look around!
+    </p>
     <div
-      class='lg:mt-20 md:mt-16 mx-4'>
-      <div class='flex flex-col items-center gap-8 md:gap-12 text-center'>
-        <h1
-          class='max-w-2xl text-5xl font-extrabold leading-none tracking-tight text-white md:max-w-xs lg:max-w-md xl:text-6xl'>
-          An invitation to open up!
-        </h1>
-        <p class='lg:max-w-2xl text-xl font-light text-white'>
-          We are so happy to have you here!<br />
-          Come play with the WhoCards game or take a look around!
-        </p>
-        <div class="flex flex-col landscape:flex-row md:landscape:flex-col lg:landscape:flex-row lg:flex-row w-full gap-8 items-center">
-          <PlayStartButton client:only />
-          <!-- TODO add language changer opener small text -->
-          <btn
-            href='#'
-            class='btn btn-secondary'>
-            Choose Language
-          </btn>
-        </div>
-      </div>
+      class='flex w-full flex-col items-center gap-8 lg:flex-row landscape:flex-row md:landscape:flex-col lg:landscape:flex-row'
+    >
+      <PlayStartButton client:only />
+      <!-- TODO add language changer opener small text -->
+      <btn href='#' class='btn btn-secondary'> Choose Language</btn>
     </div>
   </section>
 </Layout>

@@ -19,14 +19,16 @@ export const PlayMoveButton = ({id}: Props) => {
       {$ids().prev && (
         <a
           class='fixed bottom-20 left-28 text-primary-light'
-          href={`/${$lang()}/question/${$ids().prev}`}>
+          href={`/${$lang()}/question/${$ids().prev}`}
+        >
           prev
         </a>
       )}
       {$ids().next && (
         <a
           class='fixed bottom-20 right-28 text-primary-light'
-          href={`/${$lang()}/question/${$ids().next}`}>
+          href={`/${$lang()}/question/${$ids().next}`}
+        >
           next
         </a>
       )}

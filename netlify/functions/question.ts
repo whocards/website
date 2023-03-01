@@ -27,8 +27,7 @@ const handler: Handler = async (event, context) => {
   }
 
   // validate question
-  const id = (event.queryStringParameters?.qid ||
-    crypto.randomInt(1, 66).toString()) as QuestionId
+  const id = (event.queryStringParameters?.qid || crypto.randomInt(1, 66).toString()) as QuestionId
 
   return {
     statusCode: 200,

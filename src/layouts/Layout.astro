@@ -8,18 +8,15 @@ import '@fontsource/dm-sans'
 import './base.css'
 
 export interface Props {
-  title: string
+  title?: string
   id?: QuestionId
   language?: Language
 }
 
-const {title: t, id, language} = Astro.props
+const {title: t = '', id, language} = Astro.props
 // setLanguage(language || 'en')
-const title = id
-  ? `WhoCards | ${languages[language as Language]} | Question ${id}`
-  : t
-const imgUrl =
-  BASE_URL + (id ? `/data/images/${language}/${id}.png` : '/TODO-ADD')
+const title = id ? `WhoCards | ${languages[language as Language]} | Question ${id}` : t
+const imgUrl = BASE_URL + (id ? `/data/images/${language}/${id}.png` : '/TODO-ADD')
 const pageUrl = BASE_URL + Astro.url.pathname
 const description = 'Open up?'
 ---
@@ -67,7 +64,8 @@ const description = 'Open up?'
   <body class='min-h-screen bg-hero bg-cover bg-fixed bg-center bg-no-repeat'>
     <Navbar />
     <main
-      class='flex min-h-screen justify-center items-center md:items-start pt-16 landscape:pt-10 md:p-16'>
+      class='flex min-h-screen items-center justify-center pt-16 md:items-start md:p-16 landscape:pt-10'
+    >
       <slot />
     </main>
   </body>

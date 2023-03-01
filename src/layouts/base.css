@@ -1,15 +1,15 @@
 .btn {
-  @apply rounded-full font-bold text-xl w-full sm:landscape:w-64 md:w-64 font-dm-sans text-center inline-flex h-14 items-center justify-center no-underline border-none cursor-pointer flex-wrap select-none shrink-0 transition-all ease-in-out duration-200 active:scale-95;
+  @apply inline-flex h-14 w-full shrink-0 cursor-pointer select-none flex-wrap items-center justify-center rounded-full border-none text-center font-dm-sans text-xl font-bold no-underline transition-all duration-200 ease-in-out active:scale-95 md:w-64 sm:landscape:w-64;
 }
 
 .btn-primary {
-  @apply bg-yellow-400 hover:bg-yellow-500 
+  @apply bg-yellow-400 hover:bg-yellow-500;
 }
 
 .btn-secondary {
-  @apply bg-gray hover:text-yellow-500 text-white
+  @apply bg-gray text-white hover:text-yellow-500;
 }
 
 .btn-circle {
-  @apply w-10 h-10
+  @apply h-10 w-10;
 }
