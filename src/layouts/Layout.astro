@@ -3,6 +3,7 @@ import type {Language, QuestionId} from 'types/Questions'
 import languages from '~data/languages.json'
 import {BASE_URL} from '~utils/constants'
 import Navbar from '~components/Navbar.astro'
+import LanguageSwitcher from '~components/Modal/LanguageSwitcher.astro'
 import '@fontsource/nunito'
 import '@fontsource/dm-sans'
 import './base.css'
@@ -69,5 +70,6 @@ const description = 'Open up?'
       <slot />
     </main>
   </body>
+  <LanguageSwitcher />
 </html>
 <style is:global></style>
