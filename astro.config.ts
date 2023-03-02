@@ -6,7 +6,6 @@ import mdx from '@astrojs/mdx'
 import sitemap from '@astrojs/sitemap'
 // import solidJs from '@astrojs/solid-js'
 
-// https://astro.build/config
 export default defineConfig({
   integrations: [
     tailwind(),
@@ -15,6 +14,5 @@ export default defineConfig({
     }),
     mdx(),
     sitemap(),
-    // solidJs(),
   ],
 })

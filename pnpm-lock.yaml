@@ -1,6 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@amplitude/analytics-browser': ^1.9.0
   '@astrojs/image': ^0.14.1
   '@astrojs/mdx': ^0.16.0
   '@astrojs/sitemap': ^1.0.1
@@ -29,6 +30,7 @@ specifiers:
   tailwindcss: ^3.2.6
 
 dependencies:
+  '@amplitude/analytics-browser': 1.9.0
   '@astrojs/image': 0.14.1_astro@2.0.0+sharp@0.31.3
   '@astrojs/mdx': 0.16.0_astro@2.0.0
   '@astrojs/sitemap': 1.0.1
@@ -62,6 +64,64 @@ packages:
 
   /@altano/tiny-async-pool/1.0.2:
     resolution: {integrity: sha512-qQzaI0TBUPdpjZ3qo5b2ziQY9MSNpbziH2ZrE5lvtUZL+kn9GwVuVJwoOubaoNkeDB+rqEefnpu1k+oMpOCYiw==}
+    dev: false
+
+  /@amplitude/analytics-browser/1.9.0:
+    resolution: {integrity: sha512-sJwlTScvz3znNQ6veSqf9b0sg4GPoESZnidWyb+dbAJgyOrizEBFbLFPRQDG6DDrG2FjJGWd4gG2oMU1xhSC4Q==}
+    dependencies:
+      '@amplitude/analytics-client-common': 0.6.0
+      '@amplitude/analytics-core': 0.12.0
+      '@amplitude/analytics-types': 0.17.0
+      '@amplitude/plugin-page-view-tracking-browser': 0.6.0
+      '@amplitude/plugin-web-attribution-browser': 0.6.0
+      '@amplitude/ua-parser-js': 0.7.31
+      tslib: 2.4.1
+    dev: false
+
+  /@amplitude/analytics-client-common/0.6.0:
+    resolution: {integrity: sha512-pXb4d9MSCY5dFFPjNCqkV9ivLp1DsD/vFrCZYeJbhi7Ev5qfLgmxIZuG4NlLfbXG4u6mfZlv7ESeYtkD84nkdg==}
+    dependencies:
+      '@amplitude/analytics-connector': 1.4.6
+      '@amplitude/analytics-core': 0.12.0
+      '@amplitude/analytics-types': 0.17.0
+      tslib: 2.4.1
+    dev: false
+
+  /@amplitude/analytics-connector/1.4.6:
+    resolution: {integrity: sha512-6jD2pOosRD4y8DT8StUCz7yTd5ZDkdOU9/AWnlWKM5qk90Mz7sdZrdZ9H7sA/L3yOJEpQOYZgQplQdWWUzyWug==}
+    dependencies:
+      '@amplitude/ua-parser-js': 0.7.31
+    dev: false
+
+  /@amplitude/analytics-core/0.12.0:
+    resolution: {integrity: sha512-Qg5own7VApdEOUtOnKwk7vFKbXubZ/YBQq0COYK+QFMCp0eF1xwLLLEiE4ThYiq49EwptvinH/bziU6IMi205g==}
+    dependencies:
+      '@amplitude/analytics-types': 0.17.0
+      tslib: 2.4.1
+    dev: false
+
+  /@amplitude/analytics-types/0.17.0:
+    resolution: {integrity: sha512-J6JdlUkYPaOInsqYBBOjxwhYi+3ZFl+ICE6yG/1SySX/Eu7a7jAJbBbrH1HrYk+0Hzl5sdO/WA2zhHi0j00qTQ==}
+    dev: false
+
+  /@amplitude/plugin-page-view-tracking-browser/0.6.0:
+    resolution: {integrity: sha512-w2Jv+yxrcMKHO/5dSF7Nqi+t3hVxoS083Lx5qd07NTvy8e2pg7xFZk/SS4YCyQr6i6KBbcTqFDDO1Iy4/ifTPA==}
+    dependencies:
+      '@amplitude/analytics-client-common': 0.6.0
+      '@amplitude/analytics-types': 0.17.0
+      tslib: 2.4.1
+    dev: false
+
+  /@amplitude/plugin-web-attribution-browser/0.6.0:
+    resolution: {integrity: sha512-JiMduFu/Lyvq+GlBAPRQbd33coV4Z+EGSyjIrpN2xCTBZ+Bsj+3jLIfcWov+iyNvY1PGlWQgRy8poN9OfR3NLg==}
+    dependencies:
+      '@amplitude/analytics-client-common': 0.6.0
+      '@amplitude/analytics-types': 0.17.0
+      tslib: 2.4.1
+    dev: false
+
+  /@amplitude/ua-parser-js/0.7.31:
+    resolution: {integrity: sha512-+z8UGRaj13Pt5NDzOnkTBy49HE2CX64jeL0ArB86HAtilpnfkPB7oqkigN7Lf2LxscMg4QhFD7mmCfedh3rqTg==}
     dev: false
 
   /@ampproject/remapping/2.2.0:

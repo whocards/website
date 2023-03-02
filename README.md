@@ -6,15 +6,17 @@
 [x] language switcher
 [x] prettier
 [x] game buttons - key press
-[ ] share button - https://css-tricks.com/how-to-use-the-web-share-api/
+[x] share button - https://css-tricks.com/how-to-use-the-web-share-api/
 [ ] astro-seo
 [ ] analytics
 [ ] 404 page
 
 # questions / non critical upgrades
 
-[ ] switch hto using our icons?
-[ ] continue option?
+[ ] switch to using our icons?
+[ ] continue option from main screen?
+[ ] full / small screen
+[ ] share modal
 
 [ ] detect language from browser
 [x] use daisy UI
@@ -24,6 +26,7 @@
 [ ] language switcher keyboard events (esc, move)
 [ ] play actions refactor
 [ ] testing
+[ ] sitemap
 
 ## References
 

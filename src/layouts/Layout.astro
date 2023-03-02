@@ -1,9 +1,10 @@
 ---
 import type {Language, QuestionId} from 'types/Questions'
 import languages from '~data/languages.json'
-import {BASE_URL} from '~utils/constants'
+import {BASE_URL, AMPLITUDE_API_KEY} from '~utils/constants'
 import Navbar from '~components/Navbar.astro'
 import LanguageSwitcher from '~components/Modal/LanguageSwitcher.astro'
+
 import '@fontsource/nunito'
 import '@fontsource/dm-sans'
 import './base.css'
@@ -20,13 +21,23 @@ const title = id ? `WhoCards | ${languages[language as Language]} | Question ${i
 const imgUrl = BASE_URL + (id ? `/data/images/${language}/${id}.png` : '/TODO-ADD')
 const pageUrl = BASE_URL + Astro.url.pathname
 const description = 'Open up?'
+const amplitudeApiKey = AMPLITUDE_API_KEY
 ---
 
 <!DOCTYPE html>
 <html lang='en' class='bg-dark'>
   <head>
+    <script>
+      import * as amplitude from '@amplitude/analytics-browser'
+      import {AMPLITUDE_API_KEY} from '~utils'
+
+      amplitude.init(AMPLITUDE_API_KEY, undefined, {
+        defaultTracking: {sessions: true, pageViews: true, formInteractions: true},
+      })
+    </script>
     <meta charset='UTF-8' />
     <meta name='viewport' content='width=device-width' />
+    <!-- favicons -->
     <link
       rel='icon'
       type='image/svg+xml'
@@ -39,6 +50,8 @@ const description = 'Open up?'
       href='/favicon-dark.svg'
       media='(prefers-color-scheme: dark)'
     />
+    <!-- analytics -->
+
     <meta name='generator' content={Astro.generator} />
     <!-- Primary Meta Tags -->
     <title>{title}</title>
@@ -72,4 +85,5 @@ const description = 'Open up?'
     <LanguageSwitcher />
   </body>
 </html>
+
 <style is:global></style>

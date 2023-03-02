@@ -9,3 +9,5 @@ try {
 }
 
 export const DEFAULT_LANGUAGE: Language = 'en'
+
+export let AMPLITUDE_API_KEY = import.meta.env.PUBLIC_AMPLITUDE_API_KEY
