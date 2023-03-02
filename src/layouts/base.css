@@ -1,3 +1,11 @@
+/* fix for mobile https://css-tricks.com/css-fix-for-100vh-in-mobile-webkit/ */
+html {
+  height: 100%;
+  height: 100dvh;
+}
+body {
+  @apply h-full;
+}
 .btn {
   @apply rounded-full border-none font-dm-sans text-xl;
 }

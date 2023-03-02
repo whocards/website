@@ -14,10 +14,11 @@
 # questions / non critical upgrades
 
 [ ] switch hto using our icons?
+[ ] continue option?
+
 [ ] detect language from browser
 [x] use daisy UI
 [ ] update readme
-[ ] continue option
 [ ] click outside modal
 [ ] animations
 [ ] language switcher keyboard events (esc, move)
