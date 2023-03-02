@@ -11,12 +11,14 @@ specifiers:
   '@nanostores/persistent': ^0.7.0
   '@nanostores/solid': ^0.3.2
   '@netlify/functions': ^1.4.0
+  '@solid-primitives/keyboard': ^1.0.8
   '@tailwindcss/typography': ^0.5.9
   '@types/node': ^18.11.18
   astro: ^2.0.0
   astro-icon: ^0.8.0
   astro-seo: ^0.7.0
   daisyui: ^2.51.2
+  gsap: ^3.11.4
   husky: ^8.0.3
   lint-staged: ^13.1.2
   nanostores: ^0.7.3
@@ -36,11 +38,13 @@ dependencies:
   '@fontsource/nunito': 4.5.12
   '@nanostores/persistent': 0.7.0_nanostores@0.7.3
   '@nanostores/solid': 0.3.2_sfin3ujwn2ejxfplytnxfiltgu
+  '@solid-primitives/keyboard': 1.0.8_solid-js@1.6.10
   '@tailwindcss/typography': 0.5.9_tailwindcss@3.2.6
   astro: 2.0.0_@types+node@18.11.18
   astro-icon: 0.8.0
   astro-seo: 0.7.0
   daisyui: 2.51.2
+  gsap: 3.11.4
   nanostores: 0.7.3
   sharp: 0.31.3
   solid-js: 1.6.10
@@ -870,6 +874,43 @@ packages:
       '@types/estree': 1.0.0
       estree-walker: 2.0.2
       picomatch: 2.3.1
+    dev: false
+
+  /@solid-primitives/event-listener/2.2.7_solid-js@1.6.10:
+    resolution: {integrity: sha512-rvu4ZbeM3Z9ncYc+nVI7y1KY/XqN2uDkhc0wvXzmVempSr5WfbsFEieuah8SAUd0ypi/qvy7aaFXh5fYKOgnOw==}
+    peerDependencies:
+      solid-js: ^1.6.0
+    dependencies:
+      '@solid-primitives/utils': 5.3.0_solid-js@1.6.10
+      solid-js: 1.6.10
+    dev: false
+
+  /@solid-primitives/keyboard/1.0.8_solid-js@1.6.10:
+    resolution: {integrity: sha512-R6hD84/tU+GC0QuEKm80npFv5Uu1K6R0kka0MGlItLxm/TSEv2Mof4l3xboU1mZoz6M3tuGDwBO7ECNPkxx58g==}
+    peerDependencies:
+      solid-js: ^1.6.0
+    dependencies:
+      '@solid-primitives/event-listener': 2.2.7_solid-js@1.6.10
+      '@solid-primitives/rootless': 1.2.5_solid-js@1.6.10
+      '@solid-primitives/utils': 5.3.0_solid-js@1.6.10
+      solid-js: 1.6.10
+    dev: false
+
+  /@solid-primitives/rootless/1.2.5_solid-js@1.6.10:
+    resolution: {integrity: sha512-HLtF965ptJ0IYXPWluzpCVyTwWeiYNTpjiINlZeaSoAY8Ba6NnbSAV587emdvbt4bbrgi2Y8Gmav+/00AQJ6Hw==}
+    peerDependencies:
+      solid-js: ^1.6.11
+    dependencies:
+      '@solid-primitives/utils': 5.3.0_solid-js@1.6.10
+      solid-js: 1.6.10
+    dev: false
+
+  /@solid-primitives/utils/5.3.0_solid-js@1.6.10:
+    resolution: {integrity: sha512-YlMvXtJxm5zWQC+EW24qO9kMoUdfR5I4bi6zsL9RlETyfJEPrmTY2ztU0T9lPq5hC3Qwn3q+ifd4tz4js3fTUA==}
+    peerDependencies:
+      solid-js: ^1.6.0
+    dependencies:
+      solid-js: 1.6.10
     dev: false
 
   /@tailwindcss/typography/0.5.9_tailwindcss@3.2.6:
@@ -2039,6 +2080,10 @@ packages:
       kind-of: 6.0.3
       section-matter: 1.0.0
       strip-bom-string: 1.0.0
+    dev: false
+
+  /gsap/3.11.4:
+    resolution: {integrity: sha512-McHhEguHyExMMnjqKA8G+7TvxmlKQGMbjgwAilnFe1e4id7V/tFveRQ2YMZhTYu0oxHGWvbPltdVYQOu3z1SCA==}
     dev: false
 
   /has-flag/3.0.0:

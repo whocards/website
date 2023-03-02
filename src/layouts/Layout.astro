@@ -62,14 +62,14 @@ const description = 'Open up?'
     <meta property='twitter:description' content={description} />
     <meta property='twitter:image' content={imgUrl} />
   </head>
-  <body class='min-h-screen bg-hero bg-cover bg-fixed bg-center bg-no-repeat'>
+  <body class='min-h-screen bg-hero bg-cover bg-fixed bg-center bg-no-repeat text-white'>
     <Navbar />
     <main
       class='md:p-18 phone:landscape:pt-10 flex min-h-screen items-center justify-center pt-16 md:items-start'
     >
       <slot />
     </main>
+    <LanguageSwitcher />
   </body>
-  <LanguageSwitcher />
 </html>
 <style is:global></style>

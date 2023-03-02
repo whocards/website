@@ -1,0 +1,81 @@
+---
+import {Icon} from 'astro-icon'
+import type {QuestionId} from 'types/Questions'
+// import { PlayMoveButton } from '~components/Button';
+import Layout from './Layout.astro'
+
+const {id, language} = Astro.params
+---
+
+<Layout>
+  <div class='flex w-full max-w-5xl flex-col justify-between self-stretch p-4 md:py-8'>
+    <slot />
+    <div class='flex items-center justify-between'>
+      <a id='prev' class='game-btn enabled'>
+        <Icon name='ic:outline-arrow-back' class:list='h-10 w-10' />
+      </a>
+      <div class='flex gap-6'>
+        <button
+          class:list={[
+            'btn btn-circle close-modal uppercase bg-gray hover:bg-gray hover:text-primary-light',
+            {'w-fit px-4': language?.includes('-')},
+          ]}>{language}</button
+        >
+        <!-- <button class="btn btn-circle">
+        <Icon name="ic:twotone-share" class="h-6 w-6" />
+      </button> -->
+      </div>
+      <!-- <PlayMoveButton id={id as QuestionId} direction='next' client:only> -->
+      <a id='next' class='game-btn enabled'>
+        <Icon name='ic:outline-arrow-forward' class='h-10 w-10' />
+      </a>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  a.game-btn {
+    @apply btn-circle btn border-none bg-transparent transition-all duration-500 ease-linear;
+  }
+  a.disabled {
+    @apply pointer-events-none text-gray opacity-50;
+  }
+  a.enabled {
+    @apply hover:bg-transparent hover:text-yellow-500;
+  }
+</style>
+
+<script>
+  import {initPage, idsStore, GameStatus} from '~stores/Game.store'
+  import {getCurrentQuestionId, getQuestionUrl} from '~utils'
+
+  initPage(getCurrentQuestionId())
+
+  const dirs = ['prev', 'next']
+  const els = {
+    [dirs[0]]: document.getElementById(dirs[0])!,
+    [dirs[1]]: document.getElementById(dirs[1])!,
+  }
+  const keys: {[key: string]: string} = {
+    ArrowLeft: dirs[0],
+    ArrowRight: dirs[1],
+  }
+
+  dirs.forEach((dir) => {
+    const qid = idsStore.get()[dir as keyof GameStatus]
+
+    if (qid) {
+      els[dir].setAttribute('href', getQuestionUrl(qid)!)
+    } else {
+      els[dir].classList.replace('enabled', 'disabled')
+    }
+  })
+
+  const keyPress = (e: KeyboardEvent) => {
+    if (Object.keys(keys).includes(e.key)) {
+      els[keys[e.key]].click()
+    }
+  }
+
+  document.addEventListener('keydown', keyPress)
+</script>

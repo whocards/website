@@ -1,8 +1,6 @@
 ---
 import type {Language} from '#types/Questions'
 import Layout from '~layouts/Layout.astro'
-import languages from '~data/languages.json'
-import {PlayStartButton} from '~components/Button'
 
 interface Props {
   language: Language
@@ -23,9 +21,17 @@ interface Props {
     <div
       class='flex w-full flex-col items-center gap-8 lg:flex-row landscape:flex-row md:landscape:flex-col lg:landscape:flex-row'
     >
-      <PlayStartButton client:only />
-      <!-- TODO add language changer opener small text -->
+      <a id='play' class='btn-primary btn'> Play</a>
       <button class='close-modal btn-secondary btn'> Choose Language</button>
     </div>
   </section>
 </Layout>
+
+<script>
+  import {initGame, idsStore} from '~stores/Game.store'
+  import {getQuestionUrl} from '~utils'
+
+  initGame()
+
+  document.getElementById('play')?.setAttribute('href', getQuestionUrl(idsStore.get().next))
+</script>
