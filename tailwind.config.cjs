@@ -22,7 +22,7 @@ module.exports = {
         },
       },
       backgroundImage: {
-        hero: 'url(/images/background.svg)',
+        hero: 'url(/background.svg)',
       },
       fontFamily: {
         sans: ['Nunito', ...defaultTheme.fontFamily.sans],
