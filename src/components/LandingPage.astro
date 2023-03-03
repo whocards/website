@@ -1,5 +1,5 @@
 ---
-import type {Language} from '#types/Questions'
+import type {Language} from '~types'
 import Layout from '~layouts/Layout.astro'
 
 interface Props {
@@ -8,7 +8,9 @@ interface Props {
 ---
 
 <Layout>
-  <section class='mx-4 flex flex-col items-center gap-8 text-center md:mt-16 md:gap-12 lg:mt-20'>
+  <section
+    class='m-4 flex flex-col items-center justify-center gap-8 text-center lg:mt-20 lg:gap-12'
+  >
     <h1
       class='max-w-xs text-5xl font-extrabold leading-none tracking-tight text-white xl:max-w-none xl:text-6xl'
     >
@@ -18,20 +20,18 @@ interface Props {
       We are so happy to have you here!<br />
       Come play with the WhoCards game or take a look around!
     </p>
-    <div
-      class='flex w-full flex-col items-center gap-8 lg:flex-row landscape:flex-row md:landscape:flex-col lg:landscape:flex-row'
-    >
-      <a id='play' class='btn-primary btn'> Play</a>
-      <button class='close-modal btn-secondary btn'> Choose Language</button>
+    <div class='phone-landscape:flex-row flex w-full flex-col items-center gap-8 md:flex-row'>
+      <a id='play' class='btn-primary btn'>Play</a>
+      <button class='who-modal btn-secondary btn'> Choose Language</button>
     </div>
   </section>
 </Layout>
 
 <script>
   import {initGame, idsStore} from '~stores/Game.store'
-  import {getQuestionUrl} from '~utils'
+  import {getFirstQuestionUrl} from '~utils'
 
   initGame()
 
-  document.getElementById('play')?.setAttribute('href', getQuestionUrl(idsStore.get().next))
+  document.getElementById('play')?.setAttribute('href', getFirstQuestionUrl(idsStore.get().next))
 </script>

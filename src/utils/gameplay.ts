@@ -1,4 +1,4 @@
-import type {QuestionIds} from '#types/Questions'
+import type {QuestionIds} from '~types'
 import questions from '~data/questions.json'
 
 // create shuffled array list

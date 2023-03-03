@@ -1,0 +1,81 @@
+---
+import type {Language} from '~types'
+import languages from '~data/languages.json'
+// TODO add title mapping per page
+// const { title } = Astro.props;
+
+let title = 'Who?Cards'
+
+const {id, language} = Astro.params
+
+if (id) {
+  title += ` | Question ${id} in ${languages[language as Language]}`
+}
+
+const description = 'Open up?'
+
+const site = Astro.url.origin
+const canonicalUrl = new URL(Astro.url.pathname, site)
+const coverUrl = `${site}/images/${language}/${id}.png`
+---
+
+<!-- Global Metadata -->
+<meta charset='utf-8' />
+<meta name='viewport' content='width=device-width' />
+
+<!-- Primary Meta Tags -->
+<title>{title}</title>
+<meta name='title' content={title} />
+{description && <meta name='description' content={description} />}
+<link rel='canonical' href={canonicalUrl} />
+
+<!-- Favicon -->
+<link
+  rel='icon'
+  type='image/svg+xml'
+  href='/favicon-light.svg'
+  media='(prefers-color-scheme: light)'
+/>
+<link
+  rel='icon'
+  type='image/svg+xml'
+  href='/favicon-dark.svg'
+  media='(prefers-color-scheme: dark)'
+/>
+<link rel='mask-icon' href='/favicon-dark.svg' color='#F9D75F' />
+<!-- TODO add favicons https://medium.com/swlh/are-you-using-svg-favicons-yet-a-guide-for-modern-browsers-836a6aace3df -->
+
+<!-- Open Graph -->
+<meta property='og:type' content='website' />
+<meta property='og:url' content={canonicalUrl} />
+<meta property='og:title' content={title} />
+{description && <meta property='og:description' content={description} />}
+<meta property='og:image' content={coverUrl} />
+<meta property='og:image:width' content='1200' />
+<meta property='og:image:height' content='630' />
+<meta property='og:locale' content={language} />
+
+<!-- Twitter -->
+<meta property='twitter:card' content='summary_large_image' />
+<meta property='twitter:url' content={canonicalUrl} />
+<meta property='twitter:title' content={title} />
+{description && <meta property='twitter:description' content={description} />}
+<meta property='twitter:image' content={coverUrl} />
+
+<!-- generator -->
+<meta name='generator' content={Astro.generator} />
+
+<!-- Analytics -->
+<script>
+  import * as amplitude from '@amplitude/analytics-browser'
+  import {AMPLITUDE_API_KEY} from '~utils'
+
+  amplitude.init(AMPLITUDE_API_KEY, undefined, {
+    defaultTracking: {sessions: true, pageViews: true, formInteractions: true},
+  })
+</script>
+<!-- {analytics && analytics.provider && analytics.provider === 'fathom' && analytics.site && <Fathom site={analytics.site} />}
+{analytics && analytics.provider && analytics.provider === 'google' && analytics.id && <GoogleAnalytics id={analytics.id} />}
+{analytics && analytics.provider && analytics.provider === 'metrical' && analytics.app && <Metrical app={analytics.app} />}
+{analytics && analytics.provider && analytics.provider === 'plausible' && analytics.domain && <Plausible domain={analytics.domain} />}
+{analytics && analytics.provider && analytics.provider === 'simple' && analytics.site && <SimpleAnalytics site={analytics.site} />} -->

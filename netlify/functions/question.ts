@@ -1,5 +1,5 @@
 import type {Handler} from '@netlify/functions'
-import type {Language, QuestionId} from 'types/Questions'
+import type {Language, QuestionId} from '~types'
 import languages from '~data/languages.json'
 import questions from '~data/questions.json'
 import crypto from 'crypto'

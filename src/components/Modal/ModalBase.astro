@@ -8,8 +8,11 @@ const {title} = Astro.props
 ---
 
 <input type='checkbox' id='who-modal' class='modal-toggle' />
-<div class='modal cursor-pointer'>
-  <div class='h-full w-full bg-white text-darker md:h-fit md:max-w-2xl md:rounded-lg'>
+<div role='dialog' class='modal z-20'>
+  <label class='fixed top-0 right-0 bottom-0 left-0 z-30 cursor-pointer' for='who-modal'></label>
+  <div
+    class='phone-landscape:max-w-full z-40 h-full w-full bg-white text-darker md:h-fit md:max-w-2xl md:rounded-lg'
+  >
     <div class='flex h-16 items-center justify-between pl-4 pr-3'>
       <h3 class='text-2xl font-bold'>{title}</h3>
       <label for='who-modal' class='btn-ghost btn-circle btn'>
@@ -21,7 +24,7 @@ const {title} = Astro.props
 </div>
 
 <script>
-  const buttons = document.querySelectorAll('.close-modal')
+  const buttons = document.querySelectorAll('.who-modal')
   const target = document.querySelector('#who-modal') as HTMLInputElement
 
   buttons.forEach((button) => {

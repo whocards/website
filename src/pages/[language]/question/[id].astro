@@ -1,10 +1,5 @@
 ---
-import Layout from '~layouts/Layout.astro'
 import questions from '~data/questions.json'
-import languages from '~data/languages.json'
-import type {Language, QuestionId} from '#types/Questions'
-import {PlayMoveButton} from '~components/Button'
-import Icon from 'astro-icon'
 import QuestionLayout from '~layouts/QuestionLayout.astro'
 
 export async function getStaticPaths() {
@@ -19,9 +14,10 @@ export async function getStaticPaths() {
 }
 
 const {question} = Astro.props
-const {id, language} = Astro.params
 ---
 
 <QuestionLayout>
-  <h1 class='self-start text-5xl text-white md:text-7xl'>{question}</h1>
+  <h1 class='phone:text-2xl self-center text-5xl text-white md:max-w-[80vw] md:text-7xl'>
+    {question}
+  </h1>
 </QuestionLayout>

@@ -1,4 +1,4 @@
-import type {QuestionId, QuestionIds} from '#types/Questions'
+import type {QuestionId, QuestionIds} from '~types'
 import {generateGame} from '~utils'
 import {persistentAtom} from '@nanostores/persistent'
 import {action, computed} from 'nanostores'

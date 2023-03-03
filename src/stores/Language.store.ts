@@ -1,4 +1,4 @@
-import type {Language} from '#types/Questions'
+import type {Language} from '~types'
 import {persistentAtom} from '@nanostores/persistent'
 import {action, computed} from 'nanostores'
 import languages from '~data/languages.json'

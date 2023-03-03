@@ -1,89 +1,24 @@
 ---
-import type {Language, QuestionId} from 'types/Questions'
-import languages from '~data/languages.json'
-import {BASE_URL, AMPLITUDE_API_KEY} from '~utils/constants'
 import Navbar from '~components/Navbar.astro'
 import LanguageSwitcher from '~components/Modal/LanguageSwitcher.astro'
+import Head from './Head.astro'
 
 import '@fontsource/nunito'
 import '@fontsource/dm-sans'
-import './base.css'
-
-export interface Props {
-  title?: string
-  id?: QuestionId
-  language?: Language
-}
-
-const {title: t = '', id, language} = Astro.props
-// setLanguage(language || 'en')
-const title = id ? `WhoCards | ${languages[language as Language]} | Question ${id}` : t
-const imgUrl = BASE_URL + (id ? `/data/images/${language}/${id}.png` : '/TODO-ADD')
-const pageUrl = BASE_URL + Astro.url.pathname
-const description = 'Open up?'
-const amplitudeApiKey = AMPLITUDE_API_KEY
+import '~styles/base.css'
 ---
 
 <!DOCTYPE html>
-<html lang='en' class='bg-dark'>
+<html lang='en' class='h-full bg-dark'>
   <head>
-    <script>
-      import * as amplitude from '@amplitude/analytics-browser'
-      import {AMPLITUDE_API_KEY} from '~utils'
-
-      amplitude.init(AMPLITUDE_API_KEY, undefined, {
-        defaultTracking: {sessions: true, pageViews: true, formInteractions: true},
-      })
-    </script>
-    <meta charset='UTF-8' />
-    <meta name='viewport' content='width=device-width' />
-    <!-- favicons -->
-    <link
-      rel='icon'
-      type='image/svg+xml'
-      href='/favicon-light.svg'
-      media='(prefers-color-scheme: light)'
-    />
-    <link
-      rel='icon'
-      type='image/svg+xml'
-      href='/favicon-dark.svg'
-      media='(prefers-color-scheme: dark)'
-    />
-    <!-- analytics -->
-
-    <meta name='generator' content={Astro.generator} />
-    <!-- Primary Meta Tags -->
-    <title>{title}</title>
-    <meta name='title' content={title} />
-    <meta name='description' content={description} />
-
-    <!-- Open Graph / Facebook -->
-    <meta property='og:type' content='website' />
-    <meta property='og:url' content={pageUrl} />
-    <meta property='og:title' content={title} />
-    <meta property='og:description' content={description} />
-    <meta property='og:image' content={imgUrl} />
-    <meta property='og:image:width' content='1200' />
-    <meta property='og:image:height' content='822' />
-    <meta property='og:locale' content={language} />
-
-    <!-- Twitter -->
-    <meta property='twitter:card' content='summary_large_image' />
-    <meta property='twitter:url' content={pageUrl} />
-    <meta property='twitter:title' content={title} />
-    <meta property='twitter:description' content={description} />
-    <meta property='twitter:image' content={imgUrl} />
+    <Head />
   </head>
-  <body class='flex justify-center bg-hero bg-cover bg-fixed bg-center bg-no-repeat text-white'>
+  <body class='flex h-full justify-center bg-hero bg-fixed bg-center bg-no-repeat text-white'>
     <Navbar />
-    <main
-      class='md:p-18 phone:landscape:pt-10 flex items-center justify-center pt-16 md:items-start'
-    >
+    <main class='md:p-18 flex w-full items-center justify-center overflow-y-auto py-8'>
       <slot />
     </main>
     <LanguageSwitcher />
+    <style is:global></style>
   </body>
 </html>
-
-<style is:global></style>

@@ -6,16 +6,16 @@ const {language} = Astro.params
 ---
 
 <Layout>
-  <div class='flex w-full max-w-5xl flex-col justify-between self-stretch p-4 md:py-8'>
+  <div class='grid-rows-question grid h-full w-full justify-center gap-12 p-4 md:gap-[20%]'>
     <slot />
-    <div class='flex items-center justify-between'>
+    <div class='flex w-full max-w-2xl items-center justify-between justify-self-center'>
       <a id='prev' class='game-btn enabled'>
         <Icon name='ic:outline-arrow-back' class:list='h-10 w-10' />
       </a>
       <div class='flex gap-6'>
         <button
           class:list={[
-            'btn btn-circle close-modal uppercase bg-gray hover:bg-gray hover:text-primary-light',
+            'btn btn-circle who-modal uppercase bg-gray hover:bg-gray hover:text-primary-light',
             {'w-fit px-4': language?.includes('-')},
           ]}>{language}</button
         >

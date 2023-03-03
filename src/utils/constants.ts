@@ -1,4 +1,4 @@
-import type {Language} from '#types/Questions'
+import type {Language} from '~types'
 
 export let BASE_URL: string
 
@@ -10,4 +10,4 @@ try {
 
 export const DEFAULT_LANGUAGE: Language = 'en'
 
-export let AMPLITUDE_API_KEY = import.meta.env.PUBLIC_AMPLITUDE_API_KEY
+export const AMPLITUDE_API_KEY = import.meta.env.PUBLIC_AMPLITUDE_API_KEY
