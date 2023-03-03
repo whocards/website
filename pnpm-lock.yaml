@@ -29,6 +29,7 @@ specifiers:
   prettier-plugin-tailwindcss: ^0.2.2
   sharp: ^0.31.3
   solid-js: ^1.4.3
+  split-text-js: ^1.0.3
   tailwindcss: ^3.2.6
 
 dependencies:
@@ -52,6 +53,7 @@ dependencies:
   nanostores: 0.7.3
   sharp: 0.31.3
   solid-js: 1.6.10
+  split-text-js: 1.0.3
   tailwindcss: 3.2.6
 
 devDependencies:
@@ -4088,6 +4090,10 @@ packages:
 
   /space-separated-tokens/2.0.2:
     resolution: {integrity: sha512-PEGlAwrG8yXGXRjW32fGbg66JAlOAwbObuqVoJpv/mRgoWDQfgH1wDPvtzWyUSNAXBGSk8h755YDbbcEy3SH2Q==}
+    dev: false
+
+  /split-text-js/1.0.3:
+    resolution: {integrity: sha512-M27Ou2Vje/d5PK7CMgZGjVBqjRwRw6pwS6j1/tI0utkQ/LBU4Jugc7bMBqyd2bPjgZDu4z6KYfT2lkrNUCvVXA==}
     dev: false
 
   /sprintf-js/1.0.3:

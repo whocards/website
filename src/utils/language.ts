@@ -36,5 +36,7 @@ export const getBrowserLang = (): Language => {
  * get current language from url with fallback to default language
  */
 export const getCurrentLanguage = (url: string): Language => {
-  return (url.replace(/^\//, '').split('/')[0] as Language) || DEFAULT_LANGUAGE
+  const lang = url.replace(/^\//, '').split('/')[0] as Language
+
+  return LANG_KEYS.includes(lang) ? lang : DEFAULT_LANGUAGE
 }

@@ -16,14 +16,14 @@ body {
 
 @font-face {
   font-family: 'aptly';
-  src: url('fonts/aptly_medium.woff2') format('woff2');
+  src: url('/fonts/aptly_medium.woff2') format('woff2');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'aptly';
-  src: url('fonts/aptly_medium.woff2') format('woff2');
+  src: url('/fonts/aptly_medium.woff2') format('woff2');
   font-weight: bold;
   font-style: normal;
   font-display: swap;
