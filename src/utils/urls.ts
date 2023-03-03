@@ -1,5 +1,5 @@
 import type {QuestionId, Language} from '~types'
-import {DEFAULT_LANGUAGE} from './constants'
+import {DEFAULT_LANGUAGE} from './language'
 
 export const getTrimmedPath = () => window.location.pathname.replace(/\/$/, '')
 
