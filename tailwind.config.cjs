@@ -28,6 +28,11 @@ module.exports = {
         sans: ['Nunito', ...defaultTheme.fontFamily.sans],
         'dm-sans': ['DM Sans', ...defaultTheme.fontFamily.sans],
       },
+      screens: {
+        'phone-landscape': {
+          raw: `only screen and (max-height: 480px) and (max-width: 960px) and (orientation: portrait)`,
+        },
+      },
     },
   },
   plugins: [require('@tailwindcss/typography'), require('daisyui')],
