@@ -28,6 +28,9 @@ module.exports = {
         sans: ['Nunito', ...defaultTheme.fontFamily.sans],
         'dm-sans': ['DM Sans', ...defaultTheme.fontFamily.sans],
       },
+      gridTemplateRows: {
+        question: '1fr min-content',
+      },
       screens: {
         'phone-landscape': {
           raw: `only screen and (max-height: 480px) and (max-width: 960px) and (orientation: portrait)`,

@@ -7,7 +7,7 @@ export const getTrimmedPath = () => window.location.pathname.replace(/\/$/, '')
  *
  */
 export const getCurrentQuestionId = (): QuestionId => {
-  return window.location.pathname.split('/').pop() as QuestionId
+  return getTrimmedPath().split('/').pop() as QuestionId
 }
 
 /**
@@ -17,8 +17,9 @@ export const getFirstQuestionUrl = (id?: QuestionId, defaultLang: string = DEFAU
   if (!id) return ''
   // pathname with removed trailing slash
   let url = getTrimmedPath().replace(/^\//, '')
+
   // handle '/' route
-  return `/${url || defaultLang}/question/${id}`
+  return `${window.location.origin}/${url || defaultLang}/question/${id}`
 }
 
 /**
@@ -26,5 +27,6 @@ export const getFirstQuestionUrl = (id?: QuestionId, defaultLang: string = DEFAU
  */
 export const getQuestionUrl = (id: QuestionId) => {
   if (!id) return ''
-  return getTrimmedPath().replace(getCurrentQuestionId(), id)
+
+  return window.location.origin + getTrimmedPath().replace(/\/[^\/]*$/, `/${id}`)
 }

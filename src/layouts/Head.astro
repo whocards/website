@@ -70,9 +70,13 @@ const coverUrl = `${site}/images/${language}/${id}.png`
   import * as amplitude from '@amplitude/analytics-browser'
   import {AMPLITUDE_API_KEY} from '~utils'
 
-  amplitude.init(AMPLITUDE_API_KEY, undefined, {
-    defaultTracking: {sessions: true, pageViews: true, formInteractions: true},
-  })
+  if (AMPLITUDE_API_KEY) {
+    amplitude.init(AMPLITUDE_API_KEY, undefined, {
+      defaultTracking: {sessions: true, pageViews: true, formInteractions: true},
+    })
+  } else {
+    console.log('ANALYTICS DISABLED')
+  }
 </script>
 <!-- {analytics && analytics.provider && analytics.provider === 'fathom' && analytics.site && <Fathom site={analytics.site} />}
 {analytics && analytics.provider && analytics.provider === 'google' && analytics.id && <GoogleAnalytics id={analytics.id} />}

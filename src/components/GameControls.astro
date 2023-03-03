@@ -10,7 +10,7 @@ const {language} = Astro.params
 
 <div class='flex w-full max-w-2xl items-center justify-between justify-self-center'>
   <!-- back button -->
-  <a id='prev' class='game-btn enabled'>
+  <a id='prev' class='game-btn enabled' href=''>
     <Icon name='ic:outline-arrow-back' class:list='h-10 w-10' />
   </a>
   <div class='flex gap-6'>
@@ -31,7 +31,7 @@ const {language} = Astro.params
     </button> -->
   </div>
   <!-- next button -->
-  <a id='next' class='game-btn enabled'>
+  <a id='next' class='game-btn enabled' href=''>
     <Icon name='ic:outline-arrow-forward' class='h-10 w-10' />
   </a>
 </div>
@@ -80,9 +80,9 @@ const {language} = Astro.params
     }
   })
 
-  const keyPress = (e: KeyboardEvent) => {
-    if (Object.keys(keys).includes(e.key)) {
-      els[keys[e.key]].click()
+  const keyPress = ({key}: KeyboardEvent) => {
+    if (Object.keys(keys).includes(key)) {
+      els[keys[key]].click()
     }
   }
 
