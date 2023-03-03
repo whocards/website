@@ -7,6 +7,8 @@ import sitemap from '@astrojs/sitemap'
 // import solidJs from '@astrojs/solid-js'
 
 export default defineConfig({
+  site: 'https://calmly.whocards.cc',
+  trailingSlash: 'never',
   integrations: [
     tailwind(),
     image({

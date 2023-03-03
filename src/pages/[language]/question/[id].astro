@@ -1,6 +1,7 @@
 ---
+import GameControls from '~components/GameControls.astro'
 import questions from '~data/questions.json'
-import QuestionLayout from '~layouts/QuestionLayout.astro'
+import Layout from '~layouts/Layout.astro'
 
 export async function getStaticPaths() {
   // loop through questions
@@ -14,10 +15,16 @@ export async function getStaticPaths() {
 }
 
 const {question} = Astro.props
+const {language} = Astro.params
 ---
 
-<QuestionLayout>
-  <h1 class='phone:text-2xl self-center text-5xl text-white md:max-w-[80vw] md:text-7xl'>
-    {question}
-  </h1>
-</QuestionLayout>
+<Layout>
+  <div class='grid-rows-question grid h-full w-full justify-center gap-12 p-4 md:gap-[20%]'>
+    <h1
+      class='self-center text-5xl text-white md:max-w-[80vw] md:text-7xl phone-landscape:text-2xl'
+    >
+      {question}
+    </h1>
+    <GameControls language={language} />
+  </div>
+</Layout>

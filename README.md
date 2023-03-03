@@ -9,7 +9,7 @@
 [x] prettier
 [x] game buttons - key press
 [x] share button - https://css-tricks.com/how-to-use-the-web-share-api/
-[ ] astro-seo
+[x] astro-seo
 [ ] analytics
 [ ] 404 page
 

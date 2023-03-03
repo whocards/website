@@ -1,37 +1,40 @@
 ---
 import Icon from 'astro-icon'
-import Layout from './Layout.astro'
+
+interface Props {
+  language: string | undefined
+}
 
 const {language} = Astro.params
 ---
 
-<Layout>
-  <div class='grid-rows-question grid h-full w-full justify-center gap-12 p-4 md:gap-[20%]'>
-    <slot />
-    <div class='flex w-full max-w-2xl items-center justify-between justify-self-center'>
-      <a id='prev' class='game-btn enabled'>
-        <Icon name='ic:outline-arrow-back' class:list='h-10 w-10' />
-      </a>
-      <div class='flex gap-6'>
-        <button
-          class:list={[
-            'btn btn-circle who-modal uppercase bg-gray hover:bg-gray hover:text-primary-light',
-            {'w-fit px-4': language?.includes('-')},
-          ]}>{language}</button
-        >
-        <button id='share' class='hidden'>
-          <Icon name='ic:twotone-share' class='h-6 w-6' />
-        </button>
-        <!-- <button id="full-screen" class="game-btn" onclick="document.documentElement.requestFullscreen()">
-          <Icon name="ps:full-screen" class="h-6 w-6" />
-        </button> -->
-      </div>
-      <a id='next' class='game-btn enabled'>
-        <Icon name='ic:outline-arrow-forward' class='h-10 w-10' />
-      </a>
-    </div>
+<div class='flex w-full max-w-2xl items-center justify-between justify-self-center'>
+  <!-- back button -->
+  <a id='prev' class='game-btn enabled' href=''>
+    <Icon name='ic:outline-arrow-back' class:list='h-10 w-10' />
+  </a>
+  <div class='flex gap-6'>
+    <!-- language button -->
+    <button
+      class:list={[
+        'btn btn-circle who-modal uppercase bg-gray hover:bg-gray hover:text-primary-light',
+        {'w-fit px-4': language?.includes('-')},
+      ]}>{language}</button
+    >
+    <!-- share button -->
+    <button id='share' class='hidden'>
+      <Icon name='ic:twotone-share' class='h-6 w-6' />
+    </button>
+    <!-- full screen button -->
+    <!-- <button id="full-screen" class="game-btn" onclick="document.documentElement.requestFullscreen()">
+      <Icon name="ps:full-screen" class="h-6 w-6" />
+    </button> -->
   </div>
-</Layout>
+  <!-- next button -->
+  <a id='next' class='game-btn enabled' href=''>
+    <Icon name='ic:outline-arrow-forward' class='h-10 w-10' />
+  </a>
+</div>
 
 <style>
   .game-btn {
@@ -77,9 +80,9 @@ const {language} = Astro.params
     }
   })
 
-  const keyPress = (e: KeyboardEvent) => {
-    if (Object.keys(keys).includes(e.key)) {
-      els[keys[e.key]].click()
+  const keyPress = ({key}: KeyboardEvent) => {
+    if (Object.keys(keys).includes(key)) {
+      els[keys[key]].click()
     }
   }
 
