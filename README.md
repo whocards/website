@@ -1,5 +1,7 @@
 # Whocards website
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/63e10c87-1757-4444-95bb-e7ec2c34dd9d/deploy-status)](https://app.netlify.com/sites/whocards-calmly/deploys)
+
 [x] background to new one
 [x] button components
 [x] landing page -> mobile up
