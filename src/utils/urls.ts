@@ -1,5 +1,7 @@
-import type {QuestionId, Language} from '~types'
+import type {QuestionId} from '~types'
 import {DEFAULT_LANGUAGE} from './language'
+
+export const AMPLITUDE_API_KEY = import.meta.env.PUBLIC_AMPLITUDE_API_KEY
 
 export const getTrimmedPath = () => window.location.pathname.replace(/\/$/, '')
 
