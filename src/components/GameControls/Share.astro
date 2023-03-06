@@ -1,0 +1,26 @@
+---
+import Icon from 'astro-icon'
+---
+
+<button id='share' class='hidden'>
+  <Icon name='ic:twotone-share' class='h-6 w-6' />
+</button>
+
+<script>
+  import {getCurrentQuestionId} from '~utils' // share button
+
+  if (!!navigator.share) {
+    const shareEl = document.getElementById('share')
+
+    shareEl?.classList.replace('hidden', 'game-btn')
+
+    shareEl?.addEventListener('click', () => {
+      navigator.share({
+        title: 'Who cards - Question ' + getCurrentQuestionId(),
+        url: window.location.toString(),
+      })
+    })
+  } else {
+    // TODO add share modal
+  }
+</script>

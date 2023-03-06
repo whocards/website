@@ -14,9 +14,6 @@
   "lint-staged": {
     "*.{ts,js,css,json,mdx,astro}": [
       "prettier --write"
-    ],
-    "*.js": [
-      "eslint --fix"
     ]
   },
   "dependencies": {
