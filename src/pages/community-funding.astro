@@ -1,0 +1,34 @@
+---
+import Layout from '~layouts/Layout.astro'
+import Logo from '~icons/Logo.astro'
+
+const rotateWords = ['HEART', 'MIND', 'BODY', 'WALLET', 'YOURSELF', '']
+---
+
+<Layout>
+  <div class='hero min-h-screen font-aptly'>
+    <div class='hero-content text-center'>
+      <div class='max-w-6x'>
+        <h1 class='text-8xl font-bold text-yellow-300'>
+          Let's keep spreading<br /><span class='text-primary-dark'>the magic of</span>
+        </h1>
+        <Logo height={90} class='mt-10 mb-20 mx-auto' />
+        <h2 class='text-8xl font-bold'>
+          Dare to open up<br />
+          <div id='rotator' class='mt-20 text-center leading-[0]'>
+            {
+              rotateWords.map((word, idx) => (
+                <div class:list={[idx ? 'hidden' : '', 'rotate']}>{word}</div>
+              ))
+            }
+          </div>?
+        </h2>
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<script>
+  import rotateText from '~styles/rotateText'
+  rotateText()
+</script>

@@ -1,12 +1,8 @@
 import type {Handler} from '@netlify/functions'
 import type {Language, QuestionId} from '~types'
-import languages from '~data/languages.json'
 import questions from '~data/questions.json'
 import crypto from 'crypto'
-
-const DEFAULT_LANG = 'en'
-
-const VALID_LANGS = Object.keys(languages)
+import {LANG_KEYS, DEFAULT_LANGUAGE} from '~utils'
 
 const handler: Handler = async (event, context) => {
   // validate method
@@ -14,14 +10,14 @@ const handler: Handler = async (event, context) => {
     return {statusCode: 405}
   }
   // validate language
-  const lang = (event.queryStringParameters?.lang || DEFAULT_LANG) as Language
+  const lang = (event.queryStringParameters?.lang || DEFAULT_LANGUAGE) as Language
 
-  if (!VALID_LANGS.includes(lang)) {
+  if (!LANG_KEYS.includes(lang)) {
     return {
       statusCode: 400,
       body: JSON.stringify({
         error: `lang=${lang} is invalid`,
-        options: VALID_LANGS.join(', '),
+        options: LANG_KEYS.join(', '),
       }),
     }
   }

@@ -27,6 +27,7 @@ module.exports = {
       fontFamily: {
         sans: ['Nunito', ...defaultTheme.fontFamily.sans],
         'dm-sans': ['DM Sans', ...defaultTheme.fontFamily.sans],
+        aptly: ['aptly', ...defaultTheme.fontFamily.sans],
       },
       gridTemplateRows: {
         question: '1fr min-content',

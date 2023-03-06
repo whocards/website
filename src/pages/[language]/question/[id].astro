@@ -1,5 +1,5 @@
 ---
-import GameControls from '~components/GameControls.astro'
+import GameControls from '~components/GameControls'
 import questions from '~data/questions.json'
 import Layout from '~layouts/Layout.astro'
 
@@ -19,7 +19,7 @@ const {language} = Astro.params
 ---
 
 <Layout>
-  <div class='grid-rows-question grid h-full w-full justify-center gap-12 p-4 md:gap-[20%]'>
+  <div class='grid h-full w-full grid-rows-question justify-center gap-12 p-4 md:gap-[20%]'>
     <h1
       class='self-center text-5xl text-white md:max-w-[80vw] md:text-7xl phone-landscape:text-2xl'
     >

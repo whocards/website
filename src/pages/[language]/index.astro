@@ -1,16 +1,13 @@
 ---
-import type {Language} from '~types'
 import LangingPage from '~components/LandingPage.astro'
-import languages from '~data/languages.json'
+import {LANGUAGES} from '~/utils'
 
 export async function getStaticPaths() {
-  return Object.entries(languages).map(([language, name]) => ({
+  return Object.entries(LANGUAGES).map(([language, name]) => ({
     params: {language},
     props: {name},
   }))
 }
-
-const {language} = Astro.params
 ---
 
-<LangingPage language={language as Language} />
+<LangingPage />

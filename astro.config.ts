@@ -4,10 +4,11 @@ import tailwind from '@astrojs/tailwind'
 import image from '@astrojs/image'
 import mdx from '@astrojs/mdx'
 import sitemap from '@astrojs/sitemap'
-// import solidJs from '@astrojs/solid-js'
+import {SITE_URL} from './scripts/env'
 
+// https://astro.build/config
 export default defineConfig({
-  site: 'https://calmly.whocards.cc',
+  site: SITE_URL,
   trailingSlash: 'never',
   integrations: [
     tailwind(),

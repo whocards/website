@@ -1,0 +1,19 @@
+---
+import Icon from 'astro-icon'
+---
+
+<label id='btn-full-screen' class='btn-game swap swap-rotate relative'>
+  <input type='checkbox' id='full-screen' />
+  <Icon name='ps:full-screen' class='h-6 w-6 swap-off absolute' />
+  <Icon name='ps:resize' class='h-6 w-6 swap-on absolute' />
+</label>
+
+<script>
+  document.getElementById('btn-full-screen')?.addEventListener('click', () => {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen()
+    } else if (document.exitFullscreen) {
+      document.exitFullscreen()
+    }
+  })
+</script>

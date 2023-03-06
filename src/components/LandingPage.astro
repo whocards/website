@@ -1,26 +1,20 @@
 ---
-import type {Language} from '~types'
 import Layout from '~layouts/Layout.astro'
-
-interface Props {
-  language: Language
-}
 ---
 
 <Layout>
-  <section
-    class='m-4 flex flex-col items-center justify-center gap-8 text-center lg:mt-20 lg:gap-12'
-  >
+  <section class='m-4 flex flex-col justify-center gap-8 text-center font-aptly lg:gap-12'>
     <h1
-      class='max-w-xs text-5xl font-extrabold leading-none tracking-tight text-white xl:max-w-none xl:text-6xl'
+      class='max-w-xs text-left text-7xl font-extrabold leading-none tracking-tight text-white xl:max-w-none xl:text-9xl'
     >
-      An invitation to open up!
+      Dare to <span class='text-primary-light'>Open</span>
+      <span class='text-primary-dark'>Up</span>?
     </h1>
-    <p class='text-xl font-light text-white lg:max-w-2xl'>
-      We are so happy to have you here!<br />
-      Come play with the WhoCards game or take a look around!
+    <p class='text-left text-xl font-light text-white lg:max-w-3xl lg:text-4xl'>
+      From our hearts to yours<br />we hope the WhoCards<br />bring more connection<br />into your
+      life 🙏
     </p>
-    <div class='phone-landscape:flex-row flex w-full flex-col items-center gap-8 md:flex-row'>
+    <div class='flex w-full flex-col items-center gap-8 md:flex-row phone-landscape:flex-row'>
       <a id='play' class='btn-primary btn'>Play</a>
       <button class='who-modal btn-secondary btn'> Choose Language</button>
     </div>

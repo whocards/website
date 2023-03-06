@@ -1,6 +1,5 @@
 ---
-import type {Language} from '~types'
-import languages from '~data/languages.json'
+import {getLangName} from '~utils'
 // TODO add title mapping per page
 // const { title } = Astro.props;
 
@@ -9,12 +8,12 @@ let title = 'Who?Cards'
 const {id, language} = Astro.params
 
 if (id) {
-  title += ` | Question ${id} in ${languages[language as Language]}`
+  title += ` ? ${getLangName(language)} ? #${id}`
 }
 
 const description = 'Open up?'
 
-const site = Astro.url.origin
+const site = Astro.site
 const canonicalUrl = new URL(Astro.url.pathname, site)
 const coverUrl = `${site}/images/${language}/${id}.png`
 ---
