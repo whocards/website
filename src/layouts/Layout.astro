@@ -13,9 +13,9 @@ import '~styles/base.css'
   <head>
     <Head />
   </head>
-  <body class='flex h-full justify-center bg-hero bg-fixed bg-center bg-no-repeat text-white'>
+  <body class='flex h-full flex-col bg-hero bg-fixed bg-center bg-no-repeat text-white'>
     <Navbar />
-    <main class='md:p-18 flex w-full items-center justify-center overflow-y-auto py-8'>
+    <main class='flex h-full w-full items-center justify-center'>
       <slot />
     </main>
     <LanguageSwitcher />
