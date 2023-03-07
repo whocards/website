@@ -16,6 +16,8 @@ export async function getStaticPaths() {
 
 const {question} = Astro.props
 const {language} = Astro.params
+
+const splitText = question.includes('?') ? '? ' : '？'
 ---
 
 <Layout>
@@ -23,7 +25,19 @@ const {language} = Astro.params
     <h1
       class='self-center text-5xl text-white md:max-w-[80vw] md:text-7xl phone-landscape:text-2xl'
     >
-      {question}
+      {
+        question
+          .trim()
+          .split(splitText)
+          .map((el: string) => (
+            <>
+              {el}
+              {splitText}
+              <br />
+              <br />
+            </>
+          ))
+      }
     </h1>
     <GameControls language={language} />
   </div>
