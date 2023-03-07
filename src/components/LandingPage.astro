@@ -28,10 +28,10 @@ import Layout from '~layouts/Layout.astro'
 </Layout>
 
 <script>
-  import {initGame, idsStore} from '~stores/Game.store'
+  import {initGame, firstQuestionId} from '~stores/Game.store'
   import {getFirstQuestionUrl} from '~utils'
 
   initGame()
 
-  document.getElementById('play')?.setAttribute('href', getFirstQuestionUrl(idsStore.get().next))
+  document.getElementById('play')?.setAttribute('href', getFirstQuestionUrl(firstQuestionId.get()))
 </script>

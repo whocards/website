@@ -1,5 +1,4 @@
 import type {QuestionId} from '~types'
-import {DEFAULT_LANGUAGE} from './language'
 
 export const AMPLITUDE_API_KEY = import.meta.env.PUBLIC_AMPLITUDE_API_KEY
 
@@ -15,13 +14,13 @@ export const getCurrentQuestionId = (): QuestionId => {
 /**
  * defaultLang in case we want to start from different language in the future
  */
-export const getFirstQuestionUrl = (id?: QuestionId, defaultLang: string = DEFAULT_LANGUAGE) => {
+export const getFirstQuestionUrl = (id?: QuestionId, lang?: string) => {
   if (!id) return ''
   // pathname with removed trailing slash
   let url = getTrimmedPath().replace(/^\//, '')
 
   // handle '/' route
-  return `${window.location.origin}/${url || defaultLang}/question/${id}`
+  return `${window.location.origin}/${lang || url}/question/${id}`
 }
 
 /**

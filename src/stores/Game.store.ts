@@ -37,6 +37,10 @@ export const idsStore = computed(
   })
 )
 
+export const firstQuestionId = computed(gameStore, (store): QuestionId | undefined => {
+  return store.idx < 0 ? store.ids[0] : undefined
+})
+
 export const initPage = action(gameStore, 'initPage', (store, currentId: QuestionId) => {
   if (store.get().ids.length) {
     store.set({
