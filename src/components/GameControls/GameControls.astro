@@ -10,7 +10,9 @@ interface Props {
 const {language} = Astro.params
 ---
 
-<div class='group flex h-12 flex-col items-center justify-end overflow-hidden'>
+<div
+  class='group fixed bottom-4 left-4 right-4 flex h-12 flex-col items-center justify-center overflow-hidden'
+>
   <div
     id='controls'
     class='flex w-full max-w-2xl items-center justify-between overflow-hidden transition-all duration-300'

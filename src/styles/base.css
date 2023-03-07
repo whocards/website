@@ -1,17 +1,11 @@
-/* fix for mobile https://css-tricks.com/css-fix-for-100vh-in-mobile-webkit/ */
 html {
-  min-height: 100vh;
-  min-height: 100dvh;
-  min-height: -webkit-fill-available;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-feature-settings: 'kern' 1;
   font-kerning: normal;
 }
 body {
-  min-height: 100vh;
-  min-height: 100dvh;
-  min-height: -webkit-fill-available;
+  height: 100vh;
 }
 
 @font-face {
