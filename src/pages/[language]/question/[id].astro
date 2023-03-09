@@ -19,7 +19,7 @@ const {question} = Astro.props
 const {language} = Astro.params
 
 const formatedQuestion = question.trim().replace(/([?|？]) /g, '$1\n\n')
-// FIX for https://github.com/withastro/prettier-plugin-astro/issues/308
+// FIX for adding extra whitespace if the line wraps https://github.com/withastro/prettier-plugin-astro/issues/308
 const questionClasses =
   'whitespace-pre-wrap text-5xl text-white md:text-7xl phone-landscape:text-2xl'
 ---
