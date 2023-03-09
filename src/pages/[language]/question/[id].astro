@@ -1,4 +1,5 @@
 ---
+// prettier-ignore
 import GameControls from '~components/GameControls'
 import questions from '~data/questions.json'
 import Layout from '~layouts/Layout.astro'
@@ -16,15 +17,18 @@ export async function getStaticPaths() {
 
 const {question} = Astro.props
 const {language} = Astro.params
+
+const formatedQuestion = question.trim().replace(/([?|？]) /g, '$1\n\n')
+// FIX for https://github.com/withastro/prettier-plugin-astro/issues/308
+const questionClasses =
+  'whitespace-pre-wrap text-5xl text-white md:text-7xl phone-landscape:text-2xl'
 ---
 
 <Layout>
   <div
     class='flex h-full w-full items-center px-4 pb-16 md:items-start md:px-8 md:pt-[10%] lg:max-w-6xl xl:pt-32'
   >
-    <h1 class='whitespace-pre-wrap text-5xl text-white md:text-7xl phone-landscape:text-2xl'>
-      {question.trim().replace(/([?|？]) /g, '$1\n\n')}
-    </h1>
+    <h1 class={questionClasses}>{formatedQuestion}</h1>
   </div>
   <GameControls language={language} />
 </Layout>
