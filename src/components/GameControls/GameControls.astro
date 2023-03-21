@@ -11,29 +11,27 @@ const {language} = Astro.params
 ---
 
 <div
-  class='group fixed bottom-4 left-4 right-4 flex h-12 flex-col items-center justify-center overflow-hidden'
+  class='group fixed bottom-4 mx-auto flex h-12 flex-col items-center justify-center overflow-hidden'
 >
   <div
     id='controls'
-    class='flex w-full max-w-2xl items-center justify-between overflow-hidden transition-all duration-300'
+    class='flex w-full max-w-2xl items-center justify-between gap-4 overflow-hidden transition-all duration-300'
   >
     <!-- back button -->
     <a id='prev' class='btn-game enabled' href=''>
       <Icon name='ic:outline-arrow-back' class:list='h-10 w-10' />
     </a>
-    <div class='flex gap-6'>
-      <!-- full screen button -->
-      <FullscreenButton />
-      <!-- language button -->
-      <button
-        class:list={[
-          'btn btn-circle who-modal uppercase bg-gray hover:bg-gray hover:text-primary-light',
-          {'w-fit px-4': language?.includes('-')},
-        ]}>{language}</button
-      >
-      <!-- share button -->
-      <ShareButton />
-    </div>
+    <!-- full screen button -->
+    <FullscreenButton />
+    <!-- language button -->
+    <button
+      class:list={[
+        'btn btn-circle who-modal uppercase bg-gray hover:bg-gray hover:text-primary-light',
+        {'w-fit px-4': language?.includes('-')},
+      ]}>{language}</button
+    >
+    <!-- share button -->
+    <ShareButton />
     <!-- next button -->
     <a id='next' class='btn-game enabled' href=''>
       <Icon name='ic:outline-arrow-forward' class='h-10 w-10' />

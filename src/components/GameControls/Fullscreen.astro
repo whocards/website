@@ -9,11 +9,33 @@ import Icon from 'astro-icon'
 </label>
 
 <script>
+  interface Elmnt extends HTMLElement {
+    webkitRequestFullscreen(): void
+  }
+  interface Doc extends Document {
+    webkitExitFullscreen(): void
+    webkitFullscreenElement: Element
+  }
   document.getElementById('btn-full-screen')?.addEventListener('click', () => {
-    if (!document.fullscreenElement) {
-      document.documentElement.requestFullscreen()
-    } else if (document.exitFullscreen) {
-      document.exitFullscreen()
+    const doc = document as Doc
+    const el = doc.documentElement as Elmnt
+    // TODO test on more devices
+    // safari
+    if (!!doc.webkitExitFullscreen) {
+      if (!doc.webkitFullscreenElement) {
+        el.webkitRequestFullscreen()
+      } else {
+        doc.webkitExitFullscreen()
+      }
+    } else {
+      // chrome / firefox
+      if (!doc.fullscreenElement) {
+        if (el.requestFullscreen) {
+          el.requestFullscreen()
+        } else {
+          doc.exitFullscreen()
+        }
+      }
     }
   })
 </script>

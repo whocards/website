@@ -1,5 +1,5 @@
 ---
-import Navbar from '~components/Navbar.astro'
+import Navigation from '~components/Navigation.astro'
 import LanguageSwitcher from '~components/Modal/LanguageSwitcher.astro'
 import Head from './Head.astro'
 
@@ -14,10 +14,11 @@ import '~styles/base.css'
     <Head />
   </head>
   <body class='flex flex-col bg-hero bg-fixed bg-center bg-no-repeat text-white'>
-    <Navbar />
-    <main class='flex h-full w-full items-center justify-center'>
-      <slot />
-    </main>
+    <Navigation>
+      <main class='flex h-full w-full items-center justify-center'>
+        <slot />
+      </main>
+    </Navigation>
     <LanguageSwitcher />
     <style is:global></style>
   </body>
