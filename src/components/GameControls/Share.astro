@@ -2,17 +2,17 @@
 import Icon from 'astro-icon'
 ---
 
-<button id='share' class='btn-game'>
+<button id='share' class='hidden'>
   <Icon name='ic:twotone-share' class='h-6 w-6' />
 </button>
 
-<!-- <script>
+<script>
   import {getCurrentQuestionId} from '~utils' // share button
 
   if (!!navigator.share) {
     const shareEl = document.getElementById('share')
 
-    shareEl?.classList.replace('hidden', 'game-btn')
+    shareEl?.classList.replace('hidden', 'btn-game')
 
     shareEl?.addEventListener('click', () => {
       navigator.share({
@@ -23,4 +23,4 @@ import Icon from 'astro-icon'
   } else {
     // TODO add share modal
   }
-</script> -->
+</script>
