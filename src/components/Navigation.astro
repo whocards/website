@@ -14,7 +14,7 @@ const isQuestionPage = Astro.url.pathname.includes('question')
     <!-- Navbar -->
     <div class='navbar h-16 bg-transparent'>
       <div class='mx-2 flex-1 px-2'>
-        <a href={`/${home}`}>
+        <a href={`/${home}`} aria-label='homepage link'>
           <Icon name='logo' class='w-36' />
         </a>
       </div>

@@ -7,7 +7,7 @@ interface Props {
 const {title} = Astro.props
 ---
 
-<input type='checkbox' id='who-modal' class='modal-toggle' />
+<input type='checkbox' id='who-modal' class='modal-toggle' aria-label='modal toggle' />
 <div role='dialog' class='modal z-20'>
   <label class='fixed top-0 right-0 bottom-0 left-0 z-30 cursor-pointer' for='who-modal'></label>
   <div

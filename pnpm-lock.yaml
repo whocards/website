@@ -7,8 +7,6 @@ specifiers:
   '@astrojs/sitemap': ^1.0.1
   '@astrojs/solid-js': ^2.0.2
   '@astrojs/tailwind': ^3.0.1
-  '@fontsource/dm-sans': ^4.5.9
-  '@fontsource/nunito': ^4.5.12
   '@nanostores/persistent': ^0.7.0
   '@nanostores/solid': ^0.3.2
   '@netlify/functions': ^1.4.0
@@ -39,8 +37,6 @@ dependencies:
   '@astrojs/sitemap': 1.0.1
   '@astrojs/solid-js': 2.0.2_solid-js@1.6.10
   '@astrojs/tailwind': 3.0.1_v3a3yxhoofv7nqq4z77emzv5iy
-  '@fontsource/dm-sans': 4.5.9
-  '@fontsource/nunito': 4.5.12
   '@nanostores/persistent': 0.7.0_nanostores@0.7.3
   '@nanostores/solid': 0.3.2_sfin3ujwn2ejxfplytnxfiltgu
   '@solid-primitives/keyboard': 1.0.8_solid-js@1.6.10
@@ -751,14 +747,6 @@ packages:
     requiresBuild: true
     dev: false
     optional: true
-
-  /@fontsource/dm-sans/4.5.9:
-    resolution: {integrity: sha512-qaFvSBJhoeley1A9myRUUuHbm9sz7ADyC2WodezBzdFSPs2VD/p5WPPwtpVE8b1SglQrOPAnxA7s3fH5zOtiMQ==}
-    dev: false
-
-  /@fontsource/nunito/4.5.12:
-    resolution: {integrity: sha512-Li90TCJha1E+nBgP51GjcIGV6LxyQi7QisW8KZ4kpz5mpnQc1HmsJWVr9fyTMItUF/OuZUOfEazenXjaY6qRpQ==}
-    dev: false
 
   /@jridgewell/gen-mapping/0.1.1:
     resolution: {integrity: sha512-sQXCasFk+U8lWYEe66WxRDOE9PjVz4vSM51fTu3Hw+ClTpUSQb718772vH3pyS5pShp6lvQM7SxgIDXXXmOX7w==}

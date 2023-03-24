@@ -25,8 +25,7 @@ module.exports = {
         hero: 'url(/background.svg)',
       },
       fontFamily: {
-        sans: ['Nunito', ...defaultTheme.fontFamily.sans],
-        'dm-sans': ['DM Sans', ...defaultTheme.fontFamily.sans],
+        sans: ['Golos Text', ...defaultTheme.fontFamily.sans],
         aptly: ['aptly', ...defaultTheme.fontFamily.sans],
       },
       gridTemplateRows: {

@@ -24,7 +24,7 @@ body {
 }
 
 .btn {
-  @apply rounded-full border-none font-dm-sans text-xl;
+  @apply rounded-full border-none font-sans text-xl;
 }
 
 .btn-primary,
