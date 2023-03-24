@@ -11,6 +11,7 @@ interface Game {
 export interface GameStatus {
   prev: QuestionId | undefined
   next: QuestionId | undefined
+  current: QuestionId
 }
 
 export const gameStore = persistentAtom<Game>(
@@ -34,12 +35,9 @@ export const idsStore = computed(
   (store): GameStatus => ({
     next: store.ids[store.idx + 1],
     prev: store.ids[store.idx - 1],
+    current: store.idx < 0 ? store.ids[store.idx + 1] : store.ids[store.idx],
   })
 )
-
-export const firstQuestionId = computed(gameStore, (store): QuestionId | undefined => {
-  return store.idx < 0 ? store.ids[0] : undefined
-})
 
 export const initPage = action(gameStore, 'initPage', (store, currentId: QuestionId) => {
   if (store.get().ids.length) {

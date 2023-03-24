@@ -36,16 +36,14 @@ const currentLang = getCurrentLanguage(currentPath)
 </ModalBase>
 
 <script>
-  import {firstQuestionId} from '~stores/Game.store'
+  import {idsStore} from '~stores/Game.store'
   import {getFirstQuestionUrl} from '~utils'
 
   // select language and play from landing page
-  if (firstQuestionId.get()) {
-    document.querySelectorAll('a.who-modal').forEach((element) => {
-      element.setAttribute(
-        'href',
-        getFirstQuestionUrl(firstQuestionId.get(), (element as HTMLElement).dataset.lang)
-      )
-    })
-  }
+  document.querySelectorAll('a.who-modal').forEach((element) => {
+    element.setAttribute(
+      'href',
+      getFirstQuestionUrl(idsStore.get().current, (element as HTMLElement).dataset.lang)
+    )
+  })
 </script>

@@ -20,3 +20,4 @@ https://app.netlify.com/sites/whocards-calmly/overview
 [ ] update readme
 [ ] animations
 [ ] testing
+[ ] remove redirects
