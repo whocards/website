@@ -7,15 +7,14 @@ import Layout from '~layouts/Layout.astro'
     class='m-4 flex flex-col justify-center gap-6 text-center md:mb-16 md:max-w-[80vw] md:gap-8 lg:gap-12'
   >
     <h1
-      class='font-aptly text-7xl font-extrabold leading-none tracking-tight text-white md:text-8xl xl:text-9xl'
+      class='text-gradient font-aptly text-7xl font-extrabold leading-none tracking-tight text-white md:text-8xl xl:text-9xl'
     >
       <span class='whitespace-nowrap'>Dare to</span>
-      <span class='whitespace-nowrap'
-        ><span class='text-primary-light'>Open</span>
-        <span class='text-primary-dark'>Up</span>?</span
-      >
+      <span class='whitespace-nowrap'>Open Up?</span>
     </h1>
-    <p class='text-gradient max-w-[85%] self-center text-xl md:max-w-[70%] md:text-2xl lg:text-4xl'>
+    <p
+      class='max-w-[85%] self-center text-xl text-slate-300 md:max-w-[70%] md:text-2xl lg:text-4xl'
+    >
       From our hearts to yours we hope the WhoCards bring more connection into your life<br /><span
         class='text-white'>🙏</span
       >
@@ -31,17 +30,15 @@ import Layout from '~layouts/Layout.astro'
 </Layout>
 
 <script>
-  import {initGame, idsStore} from '~stores/Game.store'
-  import {getFirstQuestionUrl} from '~utils'
+  import {initGame} from '~stores/Game.store'
+  import {getCurrentQuestionUrl} from '~utils'
   import {allTasks} from 'nanostores'
 
   const init = async () => {
     initGame()
     await allTasks()
 
-    document
-      .getElementById('play')
-      ?.setAttribute('href', getFirstQuestionUrl(idsStore.get().current))
+    document.getElementById('play')?.setAttribute('href', getCurrentQuestionUrl())
     document.getElementById('play-wrapper')?.classList.remove('opacity-0')
   }
 

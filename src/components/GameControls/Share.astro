@@ -7,7 +7,7 @@ import Icon from 'astro-icon'
 </button>
 
 <script>
-  import {getCurrentQuestionId} from '~utils' // share button
+  import {idsStore} from '~stores/Game.store' // share button
 
   if (!!navigator.share) {
     const shareEl = document.getElementById('share')
@@ -16,7 +16,7 @@ import Icon from 'astro-icon'
 
     shareEl?.addEventListener('click', () => {
       navigator.share({
-        title: 'Who cards - Question ' + getCurrentQuestionId(),
+        title: 'Who cards - Question ' + idsStore.get().current,
         url: window.location.toString(),
       })
     })
