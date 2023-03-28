@@ -15,9 +15,9 @@ https://app.netlify.com/sites/whocards-calmly/overview
 
 # questions / non critical upgrades
 
-[ ] switch to using our icons?
-[ ] share modal
-[ ] update readme
-[ ] animations
-[ ] testing
-[ ] remove redirects
+- [ ] switch to using our icons?
+- [ ] share modal
+- [ ] update readme
+- [ ] animations
+- [ ] testing
+- [ ] remove redirects

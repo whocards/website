@@ -46,5 +46,5 @@ body {
 }
 
 .text-gradient {
-  @apply bg-gradient-to-tl from-primary-dark to-primary-light bg-clip-text text-transparent;
+  @apply bg-gradient-to-r from-primary-light to-primary-dark bg-clip-text text-transparent;
 }

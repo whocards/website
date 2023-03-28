@@ -28,9 +28,7 @@ const {title} = Astro.props
   const target = document.querySelector('#who-modal') as HTMLInputElement
 
   const toggleChecked = () => {
-    setTimeout(() => {
-      target.checked = !target.checked
-    }, 400)
+    target.checked = !target.checked
   }
 
   buttons.forEach((button) => button.addEventListener('click', toggleChecked))

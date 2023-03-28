@@ -19,16 +19,13 @@ const {question} = Astro.props
 const {language} = Astro.params
 
 const formatedQuestion = question.trim().replace(/([?|？]) /g, '$1\n\n')
-// FIX for adding extra whitespace if the line wraps https://github.com/withastro/prettier-plugin-astro/issues/308
-const questionClasses =
-  'whitespace-pre-wrap text-5xl text-white md:text-7xl phone-landscape:text-2xl'
 ---
 
 <Layout>
   <div
-    class='flex h-full w-full items-center px-4 pb-16 md:items-start md:px-8 md:pt-[10%] lg:max-w-6xl xl:pt-32'
+    class='flex h-full w-full items-center px-6 pb-[10%] text-5xl font-semibold text-white md:text-7xl lg:max-w-[1140px] phone-landscape:text-2xl'
   >
-    <h1 class={questionClasses}>{formatedQuestion}</h1>
+    <h1 class='whitespace-pre-wrap leading-tight'>{formatedQuestion}</h1>
   </div>
   <GameControls language={language} />
 </Layout>
