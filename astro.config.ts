@@ -9,7 +9,7 @@ import {SITE_URL} from './scripts/env'
 // https://astro.build/config
 export default defineConfig({
   site: SITE_URL,
-  trailingSlash: 'ignore',
+  trailingSlash: 'never',
   integrations: [
     tailwind(),
     // image({
