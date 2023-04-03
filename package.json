@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "astro build --experimental-static-build",
+    "build": "astro build",
     "preview": "astro preview",
     "pretty": "prettier --write --plugin-search-dir=. .",
     "prepare": "is-ci || husky install"
