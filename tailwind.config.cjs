@@ -25,7 +25,7 @@ module.exports = {
         hero: 'url(/background.svg)',
       },
       fontFamily: {
-        sans: ['Golos Text', ...defaultTheme.fontFamily.sans],
+        sans: ['golos-text', ...defaultTheme.fontFamily.sans],
         aptly: ['aptly', ...defaultTheme.fontFamily.sans],
       },
       gridTemplateRows: {
