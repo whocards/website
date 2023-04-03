@@ -45,8 +45,8 @@ import Icon from 'astro-icon'
   import {socialShare} from '~utils'
 
   const title = 'Who cards - Question ' + idsStore.get().current
-  // const url = window.location.toString()
-  const url = 'https://calmly.whocards.cc' + window.location.pathname
+  const url = window.location.toString()
+  // const url = 'https://calmly.whocards.cc' + window.location.pathname
 
   // use navigator share on mobile
   if (!!navigator.share) {
