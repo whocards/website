@@ -2,25 +2,91 @@
 import Icon from 'astro-icon'
 ---
 
-<button id='share' class='hidden'>
-  <Icon name='ic:twotone-share' class='h-6 w-6' />
+<button tabindex='0' class='btn-game' id='share'>
+  <Icon name='ic:twotone-share' class='h-7 w-7' />
 </button>
 
+<div class='hidden' id='share-dropdown'>
+  <!-- main share button -->
+  <label tabindex='0' class='btn-game active:border-none'>
+    <Icon name='ic:twotone-share' class='h-7 w-7' />
+  </label>
+  <!-- sharing buttons for desktop -->
+  <div
+    id='share-menu'
+    tabindex='0'
+    class='dropdown-content w-12 rounded-full bg-gray text-white shadow'
+  >
+    <button class='btn-ghost btn-circle btn hover:text-primary-light' data-sharer='facebook'>
+      <Icon name='ri:facebook-fill' class='h-6 w-6' />
+    </button>
+    <button class='btn-ghost btn-circle btn hover:text-primary-light' data-sharer='twitter'>
+      <Icon name='mdi:twitter' class='h-6 w-6' />
+    </button>
+    <button class='btn-ghost btn-circle btn hover:text-primary-light' data-sharer='linkedin'>
+      <Icon name='mdi:linkedin' class='h-6 w-6' />
+    </button>
+    <button class='btn-ghost btn-circle btn hover:text-primary-light' data-sharer='email'>
+      <Icon name='ic:baseline-email' class='h-6 w-6' />
+    </button>
+    <!-- handle different -->
+    <button
+      class='swap btn-ghost swap-flip btn-circle btn hover:text-primary-light'
+      data-sharer='copy'
+    >
+      <Icon name='fa-solid:clone' class='h-5 w-5 swap-off' />
+      <Icon name='zondicons:checkmark' class='h-5 w-5 swap-on' />
+    </button>
+  </div>
+</div>
+
 <script>
-  import {idsStore} from '~stores/Game.store' // share button
+  import {idsStore} from '~stores/Game.store'
+  import {socialShare} from '~utils'
 
+  const title = 'Who cards - Question ' + idsStore.get().current
+  // const url = window.location.toString()
+  const url = 'https://calmly.whocards.cc' + window.location.pathname
+
+  // use navigator share on mobile
   if (!!navigator.share) {
-    const shareEl = document.getElementById('share')
-
-    shareEl?.classList.replace('hidden', 'btn-game')
-
-    shareEl?.addEventListener('click', () => {
+    document.getElementById('share-dropdown')!.remove()
+    document.getElementById('share')!.addEventListener('click', (e) => {
+      e.preventDefault()
+      e.stopPropagation()
       navigator.share({
-        title: 'Who cards - Question ' + idsStore.get().current,
-        url: window.location.toString(),
+        title,
+        url,
       })
     })
   } else {
-    // TODO add share modal
+    document.getElementById('share')!.remove()
+    document.getElementById('share-dropdown')!.className = 'dropdown dropdown-top dropdown-hover'
+    // share
+    const els = document.getElementById('share-menu')?.children
+    if (els) {
+      for (let i = 0; i < els.length; i++) {
+        const el = els[i] as HTMLButtonElement
+        const social = el.dataset.sharer
+        const isCopy = social === 'copy'
+
+        el.addEventListener('click', () => {
+          el.classList.add('pointer-events-none')
+
+          if (isCopy) {
+            el.classList.add('swap-active')
+          }
+
+          socialShare(social, title, url)
+
+          setTimeout(() => {
+            el.classList.remove('pointer-events-none')
+            if (isCopy) {
+              el.classList.remove('swap-active')
+            }
+          }, 2000)
+        })
+      }
+    }
   }
 </script>

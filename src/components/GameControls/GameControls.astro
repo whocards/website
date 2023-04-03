@@ -10,12 +10,10 @@ interface Props {
 const {language} = Astro.params
 ---
 
-<div
-  class='group fixed bottom-4 mx-auto flex h-12 flex-col items-center justify-center overflow-hidden'
->
+<div class='group fixed bottom-4 mx-auto flex h-12 flex-col items-center justify-center'>
   <div
     id='controls'
-    class='flex w-full max-w-2xl items-center justify-between gap-4 overflow-hidden transition-all duration-300'
+    class='flex w-full max-w-2xl items-center justify-between gap-4 transition-all duration-500'
   >
     <!-- back button -->
     <a id='prev' class='btn-game enabled' href=''>
@@ -54,8 +52,8 @@ const {language} = Astro.params
   const el = document.getElementById('controls')
 
   if (el) {
-    const hide = () => el.classList.add('translate-y-12')
-    const show = () => el.classList.remove('translate-y-12')
+    const hide = () => el.classList.add('translate-y-16')
+    const show = () => el.classList.remove('translate-y-16')
     const delayHide = debounce(() => hide(), 3000)
 
     delayHide()
