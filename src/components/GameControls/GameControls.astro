@@ -1,7 +1,7 @@
 ---
 import Icon from 'astro-icon'
 import ShareButton from './Share.astro'
-import FullscreenButton from './Fullscreen.astro'
+// import {FullScreen} from './FullScreen'
 
 interface Props {
   language: string | undefined
@@ -20,7 +20,7 @@ const {language} = Astro.params
       <Icon name='ic:outline-arrow-back' class:list='h-10 w-10' />
     </a>
     <!-- full screen button -->
-    <FullscreenButton />
+    <!-- <FullScreen client:only /> -->
     <!-- language button -->
     <button
       class:list={[

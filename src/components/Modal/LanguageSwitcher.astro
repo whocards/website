@@ -8,8 +8,14 @@ const currentPath = Astro.url.pathname.slice(1)
 const currentLang = getCurrentLanguage(currentPath)
 ---
 
-<input type='checkbox' id='who-modal' class='modal-toggle' aria-label='modal toggle' />
-<div role='dialog' class='modal z-20'>
+<input
+  type='checkbox'
+  id='who-modal'
+  class='modal-toggle'
+  aria-label='modal toggle'
+  checked={false}
+/>
+<div role='dialog' class='modal'>
   <label class='fixed top-0 right-0 bottom-0 left-0 z-30 cursor-pointer' for='who-modal'></label>
   <div
     class='z-40 h-full w-full bg-white text-darker md:h-fit md:max-w-2xl md:rounded-lg phone-landscape:max-w-full'
