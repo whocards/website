@@ -1,9 +1,13 @@
 ---
-import Navigation from '~components/Navigation.astro'
+// import Navigation from '~components/Navigation.astro'
 import LanguageSwitcher from '~components/Modal/LanguageSwitcher.astro'
 import Head from './Head.astro'
 
 import '~styles/base.css'
+// temp
+import Icon from 'astro-icon'
+import {getCurrentLanguage} from '~utils/language'
+const home = getCurrentLanguage(Astro.url.pathname)
 ---
 
 <!DOCTYPE html>
@@ -12,11 +16,16 @@ import '~styles/base.css'
     <Head />
   </head>
   <body class='flex flex-col bg-hero bg-fixed bg-center bg-no-repeat font-sans text-white'>
-    <Navigation>
-      <main class='flex h-full w-full items-center justify-center'>
-        <slot />
-      </main>
-    </Navigation>
+    <div class='navbar h-16 justify-between bg-transparent pr-4 pl-0 md:px-4'>
+      <a href={`/${home}`} aria-label='homepage link' class='btn-ghost btn'>
+        <Icon name='logo' class='w-36' />
+      </a>
+    </div>
+    <!-- <Navigation> -->
+    <main class='flex h-full w-full items-center justify-center'>
+      <slot />
+    </main>
+    <!-- </Navigation> -->
     <LanguageSwitcher />
     <style is:global></style>
   </body>
