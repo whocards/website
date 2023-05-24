@@ -26,7 +26,7 @@ module.exports = {
       },
       fontFamily: {
         sans: ['golos-text', ...defaultTheme.fontFamily.sans],
-        aptly: ['aptly', ...defaultTheme.fontFamily.sans],
+        title: ['aptly', ...defaultTheme.fontFamily.sans],
       },
       gridTemplateRows: {
         question: '1fr min-content',
