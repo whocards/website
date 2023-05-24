@@ -1,0 +1,88 @@
+---
+import Layout from '~layouts/Layout.astro'
+import HeaderLink from '~components/Buttons/HeaderLink.astro'
+import {Icon} from 'astro-icon'
+---
+
+<Layout>
+  <section
+    id='home'
+    class='flex h-screen flex-col items-center justify-center gap-6 text-center md:gap-8 lg:gap-12'
+  >
+    <h1
+      class='text-gradient font-aptly text-7xl font-extrabold uppercase leading-none tracking-tight text-white md:text-8xl xl:text-9xl'
+    >
+      who we are?
+    </h1>
+    <div class='flex flex-col items-center justify-between gap-4 px-2 text-3xl md:h-8 md:flex-row'>
+      <HeaderLink href='#story'>Story</HeaderLink>
+      <HeaderLink href='#mission'>Mission</HeaderLink>
+      <HeaderLink href='#values'>Values</HeaderLink>
+      <HeaderLink href='#humans' noBorder>Humans</HeaderLink>
+    </div>
+  </section>
+  <section
+    id='story'
+    class='flex h-screen flex-col justify-center gap-6 text-center md:gap-8 lg:gap-12'
+  >
+    <h1
+      class='text-gradient font-aptly text-7xl font-extrabold uppercase leading-none tracking-tight text-white md:text-8xl xl:text-9xl'
+    >
+      story
+    </h1>
+  </section>
+  <section
+    id='mission'
+    class='flex h-screen flex-col justify-center gap-6 text-center md:gap-8 lg:gap-12'
+  >
+    <h1
+      class='text-gradient font-aptly text-7xl font-extrabold uppercase leading-none tracking-tight text-white md:text-8xl xl:text-9xl'
+    >
+      mission
+    </h1>
+  </section>
+  <section
+    id='values'
+    class='flex h-screen flex-col justify-center gap-6 text-center md:gap-8 lg:gap-12'
+  >
+    <h1
+      class='text-gradient font-aptly text-7xl font-extrabold uppercase leading-none tracking-tight text-white md:text-8xl xl:text-9xl'
+    >
+      values
+    </h1>
+  </section>
+  <section
+    id='humans'
+    class='flex h-screen flex-col justify-center gap-6 text-center md:gap-8 lg:gap-12'
+  >
+    <h1
+      class='text-gradient font-aptly text-7xl font-extrabold uppercase leading-none tracking-tight text-white md:text-8xl xl:text-9xl'
+    >
+      humans
+    </h1>
+  </section>
+  <div class='btn-circle btn fixed -bottom-14 right-4 transition-all' id='btn-back-to-top'>
+    <Icon name='akar-icons:arrow-up' class='h-6 w-6' />
+  </div>
+</Layout>
+
+<script>
+  const scrollButton = document.getElementById('btn-back-to-top')!
+  const container = document.getElementById('main')!
+  const TOP = 100
+  let visible = false
+
+  const scrollEvent = () => {
+    if (container.scrollTop > TOP !== visible) {
+      visible = container.scrollTop > TOP
+      scrollButton.classList.toggle('-bottom-14')
+      scrollButton.classList.toggle('bottom-4')
+    }
+  }
+
+  container.addEventListener('scroll', scrollEvent)
+
+  scrollButton.onclick = () => {
+    container.scrollTo({top: 0})
+  }
+</script>

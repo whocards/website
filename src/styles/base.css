@@ -4,9 +4,6 @@ html {
   font-feature-settings: 'kern' 1;
   font-kerning: normal;
 }
-body {
-  height: 100vh;
-}
 
 @font-face {
   font-family: 'aptly';
