@@ -4,18 +4,20 @@ import HeaderLink from '~components/Buttons/HeaderLink.astro'
 import {Icon} from 'astro-icon'
 ---
 
-<Layout>
+<Layout class='text-xl text-slate-300 md:text-2xl lg:text-4xl container mx-auto px-5'>
   <!-- home section -->
   <section
     id='home'
-    class='flex h-screen flex-col items-center justify-center gap-6 text-center md:gap-8 lg:gap-12'
+    class='flex min-h-screen flex-col items-center justify-center gap-6 text-center md:max-w-3xl md:gap-8 lg:gap-12'
   >
     <h1
       class='text-gradient font-title text-7xl font-extrabold uppercase leading-none tracking-tight text-white md:text-8xl xl:text-9xl'
     >
       who we are?
     </h1>
-    <div class='flex flex-col items-center justify-between gap-4 px-2 text-3xl md:h-8 md:flex-row'>
+    <div
+      class='grid grid-rows-4 items-center justify-between gap-4 px-2 text-3xl md:h-20 md:grid-cols-7 md:grid-rows-1 md:gap-0'
+    >
       <HeaderLink href='#story'>Story</HeaderLink>
       <HeaderLink href='#mission'>Mission</HeaderLink>
       <HeaderLink href='#values'>Values</HeaderLink>
@@ -26,46 +28,53 @@ import {Icon} from 'astro-icon'
   <!-- story -->
   <section
     id='story'
-    class='flex h-screen flex-col justify-center gap-6 text-center md:gap-8 lg:gap-12'
+    class='flex min-h-screen flex-col justify-center gap-6 pt-16 text-left md:gap-8 lg:gap-12'
   >
     <h2
-      class='text-gradient font-title text-7xl font-extrabold uppercase leading-none tracking-tight text-white md:text-8xl xl:text-9xl'
+      class='text-gradient text-center font-title text-7xl font-extrabold uppercase leading-none tracking-tight text-white md:text-8xl xl:text-9xl'
     >
       story
     </h2>
-    <p>
-      In 2016, a dynamic, self-organised laboratory called <a
-        href='https://www.amanitas.cc/'
-        target='_blank'>Amanitas</a
-      > was born in order to explore radical collaboration and emergence for our future humanity. Amanitas
-      was inspired by the superpowers and patterns of the natural world. Throughout a series of retreats,
-      a community house and co-created events, we learnt, played and experimented around a core belief:
-      That positive change does not originate from any single individual, rather it ebbs and flows as
-      a force which guides a living system.
-    </p>
-    <p>
-      WhoCards were born as part of this experiment, as a helper to go beyond starting conversations
-      with questions related to our job titles, identities and social status. Instead of leaning on
-      socially acceptable questions like, “What do you do?’ or “Where are you from?,” we focused on
-      “Who are you?” and a myriad of subsequent questions like “What does happiness mean to you?”,
-      “How do you want to grow old?” or “What was the last thing you cried about?”
-    </p>
-    <p>
-      Since then, countless people have found delight in using our carefully curated questions
-      across the planet amongst a manifold of different contexts. From garden parties to strategic
-      and innovation workshops, from orthodox jewish matchmaking dates to political negotiations;
-      WhoCards have helped us to move beyond social anxiety, disconnection and loneliness.
-    </p>
-    <p>
-      As a result we, humans, were able to playfully find commonalities with others while holding
-      completely different beliefs, norms and ideas about what it means to be alive today.
-    </p>
+    <div class='grid grid-cols-2 gap-16'>
+      <p>
+        In 2016, a dynamic, self-organised laboratory called <a
+          class='text-primary-dark opacity-80 hover:underline hover:opacity-50 active:opacity-100'
+          href='https://www.amanitas.cc/'
+          target='_blank'>Amanitas</a
+        > was born in order to explore radical collaboration and emergence for our future humanity. Amanitas
+        was inspired by the superpowers and patterns of the natural world. Throughout a series of retreats,
+        a community house and co-created events, we learnt, played and experimented around a core belief:
+        That positive change does not originate from any single individual, rather it ebbs and flows
+        as a force which guides a living system.
+      </p>
+      <div class='flex items-center justify-center'>img</div>
+      <div class='flex items-center justify-center'>img</div>
+      <p>
+        WhoCards were born as part of this experiment, as a helper to go beyond starting
+        conversations with questions related to our job titles, identities and social status.
+        Instead of leaning on socially acceptable questions like, “What do you do?’ or “Where are
+        you from?,” we focused on “Who are you?” and a myriad of subsequent questions like “What
+        does happiness mean to you?”, “How do you want to grow old?” or “What was the last thing you
+        cried about?”
+      </p>
+      <p>
+        Since then, countless people have found delight in using our carefully curated questions
+        across the planet amongst a manifold of different contexts. From garden parties to strategic
+        and innovation workshops, from orthodox jewish matchmaking dates to political negotiations;
+        WhoCards have helped us to move beyond social anxiety, disconnection and loneliness.
+      </p>
+      <div class='flex items-center justify-center'>img</div>
+      <p class='col-span-2 px-[15%]'>
+        As a result we, humans, were able to playfully find commonalities with others while holding
+        completely different beliefs, norms and ideas about what it means to be alive today.
+      </p>
+    </div>
   </section>
 
   <!-- mission -->
   <section
     id='mission'
-    class='flex h-screen flex-col justify-center gap-6 text-center md:gap-8 lg:gap-12'
+    class='flex min-h-screen flex-col justify-center gap-6 pt-16 text-center md:gap-8 lg:gap-12'
   >
     <h2
       class='text-gradient font-title text-7xl font-extrabold uppercase leading-none tracking-tight text-white md:text-8xl xl:text-9xl'
@@ -87,13 +96,15 @@ import {Icon} from 'astro-icon'
       We believe that by speaking what's true for us and actively listening to others as they do the
       same, we can quiet the noise of the world and enter the warm hum of mutuality.
     </p>
-    <h3>Alchemy occurs: Two anxious “I”s morph quickly into a relaxed and delighted “We.”</h3>
+    <h3 class='text-primary-light'>
+      Alchemy occurs: Two anxious “I”s morph quickly into a relaxed and delighted “We.”
+    </h3>
   </section>
 
   <!-- values -->
   <section
     id='values'
-    class='flex h-screen flex-col justify-center gap-6 text-center md:gap-8 lg:gap-12'
+    class='flex min-h-screen flex-col justify-center gap-6 pt-16 text-center md:gap-8 lg:gap-12'
   >
     <h2
       class='text-gradient font-title text-7xl font-extrabold uppercase leading-none tracking-tight text-white md:text-8xl xl:text-9xl'
@@ -101,84 +112,98 @@ import {Icon} from 'astro-icon'
       Core Values
     </h2>
     <p>Our core DNA is inspired by the values of the Amanitas experience.</p>
-    <div class='container mx-auto px-5'>
-      <div class='-m-4 flex flex-wrap'>
-        <div class='p-4 md:w-1/2 xl:w-1/4'>
-          <div
-            class='relative h-full overflow-hidden rounded-lg bg-gray bg-opacity-20 px-8 pt-16 pb-24 text-center'
-          >
-            <h4 class='mb-3 font-title text-xl font-medium text-white sm:text-2xl'>
-              The Magic of Nature
-            </h4>
-            <p class='mb-3 leading-relaxed'>
-              We are humbled by the super organism we are inhabiting, planet Earth. We find our
-              inspiration in nature’s wisdom, inventiveness and diversity; by embracing our
-              intrinsic interconnectedness. We understand that nature does not have one master plan,
-              but has rooted its resiliency in its ability to respond to and adapt to anything that
-              emerges.
-            </p>
-          </div>
+    <div class='flex flex-wrap text-left text-lg'>
+      <div class='p-4 md:w-1/2 xl:w-1/4'>
+        <div class='relative h-full overflow-hidden rounded-lg bg-gray bg-opacity-20 p-8'>
+          <h4 class='mb-6 font-title text-2xl font-medium text-white md:text-3xl'>
+            The Magic of Nature
+          </h4>
+          <p class='leading-relaxed'>
+            We are humbled by the super organism we are inhabiting, planet Earth. We find our
+            inspiration in nature's wisdom, inventiveness and diversity; by embracing our intrinsic
+            interconnectedness. We understand that nature does not have one master plan, but has
+            rooted its resiliency in its ability to respond to and adapt to anything that emerges.
+          </p>
         </div>
-        <div class='p-4 md:w-1/2 xl:w-1/4'>
-          <div
-            class='relative h-full overflow-hidden rounded-lg bg-gray bg-opacity-20 px-8 pt-16 pb-24 text-center'
-          >
-            <h4 class='mb-3 font-title text-xl font-medium text-white sm:text-2xl'>
-              The Magic of Nature
-            </h4>
-            <p class='mb-3 leading-relaxed'>
-              We are humbled by the super organism we are inhabiting, planet Earth. We find our
-              inspiration in nature’s wisdom, inventiveness and diversity; by embracing our
-              intrinsic interconnectedness. We understand that nature does not have one master plan,
-              but has rooted its resiliency in its ability to respond to and adapt to anything that
-              emerges.
-            </p>
-          </div>
+      </div>
+      <div class='p-4 md:w-1/2 xl:w-1/4'>
+        <div class='relative h-full overflow-hidden rounded-lg bg-gray bg-opacity-20 p-8'>
+          <h4 class='mb-6 font-title text-2xl font-medium text-white md:text-3xl'>
+            Courageous Curiosity
+          </h4>
+          <p class='leading-relaxed'>
+            Our strong desire to learn and grow together creates an opportunity for us to humbly
+            practise three powerful words: I don’t know. We dare to follow our hunches, to listen
+            deeply, to engage in unprecedented experiments in which we take the risk to fail
+            honestly. Why? Because we understand that even if our egos take a hit, there is only
+            winning or learning to be gained in the process.
+          </p>
         </div>
-        <div class='p-4 md:w-1/2 xl:w-1/4'>
-          <div
-            class='relative h-full overflow-hidden rounded-lg bg-gray bg-opacity-20 px-8 pt-16 pb-24 text-center'
-          >
-            <h4 class='mb-3 font-title text-xl font-medium text-white sm:text-2xl'>
-              The Magic of Nature
-            </h4>
-            <p class='mb-3 leading-relaxed'>
-              We are humbled by the super organism we are inhabiting, planet Earth. We find our
-              inspiration in nature’s wisdom, inventiveness and diversity; by embracing our
-              intrinsic interconnectedness. We understand that nature does not have one master plan,
-              but has rooted its resiliency in its ability to respond to and adapt to anything that
-              emerges.
-            </p>
-          </div>
+      </div>
+      <div class='p-4 md:w-1/2 xl:w-1/4'>
+        <div class='relative h-full overflow-hidden rounded-lg bg-gray bg-opacity-20 p-8'>
+          <h4 class='mb-6 font-title text-2xl font-medium text-white md:text-3xl'>Whole Beings</h4>
+          <p class='leading-relaxed'>
+            We start from our core selves with openness, kindness and care; uncovering who we are as
+            individuals and as a team to inform why and how we do what we do. Cultivating this deep
+            inner alignment, celebrating authenticity and discovering our shared humanity; we seed
+            wellbeing at the individual, community and global level. We embrace inner change as it
+            leads to outer change, and vice-versa.
+          </p>
         </div>
-        <div class='p-4 md:w-1/2 xl:w-1/4'>
+      </div>
+      <div class='p-4 md:w-1/2 xl:w-1/4'>
+        <div class='relative h-full overflow-hidden rounded-lg bg-gray bg-opacity-20 p-8'>
+          <h4 class='mb-6 font-title text-2xl font-medium text-white md:text-3xl'>
+            Creation of Commons
+          </h4>
+          <p class='leading-relaxed'>
+            We are creating self-renewable resources that belong to everyone sharing our mission and
+            values. Everything we learn, create or receive is shared open source to benefit the
+            public good.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- humans -->
+  <section
+    id='humans'
+    class='flex min-h-screen flex-col justify-center gap-6 pt-16 text-center md:gap-8 lg:gap-12'
+  >
+    <h2
+      class='text-gradient font-title text-7xl font-extrabold uppercase leading-none tracking-tight text-white md:text-8xl xl:text-9xl'
+    >
+      Humans of WhoCards
+    </h2>
+    <p>
+      WhoCards is co-created by our distributed team, invisibly connected through shared ethos and
+      practice. The core creators are:
+    </p>
+    <div class='flex flex-wrap text-left text-lg'>
+      <div class='p-4 sm:w-1/2 lg:w-1/3'>
+        <div class='group relative flex'>
+          <img
+            alt='gallery'
+            class='absolute inset-0 h-full w-full object-cover object-center group-hover:opacity-50'
+            src='https://dummyimage.com/600x360'
+          />
           <div
-            class='relative h-full overflow-hidden rounded-lg bg-gray bg-opacity-20 px-8 pt-16 pb-24 text-center'
+            class='border-gray-800 bg-gray-900 relative z-10 w-full border-4 px-8 py-10 opacity-0 hover:opacity-100'
           >
-            <h4 class='mb-3 font-title text-xl font-medium text-white sm:text-2xl'>
-              The Magic of Nature
-            </h4>
-            <p class='mb-3 leading-relaxed'>
-              We are humbled by the super organism we are inhabiting, planet Earth. We find our
-              inspiration in nature’s wisdom, inventiveness and diversity; by embracing our
-              intrinsic interconnectedness. We understand that nature does not have one master plan,
-              but has rooted its resiliency in its ability to respond to and adapt to anything that
-              emerges.
+            <h2 class='title-font mb-1 text-sm font-medium tracking-widest text-indigo-400'>
+              THE SUBTITLE
+            </h2>
+            <h1 class='title-font mb-3 text-lg font-medium text-white'>Shooting Stars</h1>
+            <p class='leading-relaxed'>
+              Photo booth fam kinfolk cold-pressed sriracha leggings jianbing microdosing tousled
+              waistcoat.
             </p>
           </div>
         </div>
       </div>
     </div>
-  </section>
-  <section
-    id='humans'
-    class='flex h-screen flex-col justify-center gap-6 text-center md:gap-8 lg:gap-12'
-  >
-    <h2
-      class='text-gradient font-title text-7xl font-extrabold uppercase leading-none tracking-tight text-white md:text-8xl xl:text-9xl'
-    >
-      humans
-    </h2>
   </section>
   <div class='btn-circle btn fixed -bottom-14 right-4 transition-all' id='btn-back-to-top'>
     <Icon name='akar-icons:arrow-up' class='h-6 w-6' />

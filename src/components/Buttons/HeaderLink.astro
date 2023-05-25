@@ -2,7 +2,7 @@
 const {href, noBorder} = Astro.props
 ---
 
-<div class='relative flex items-center justify-center'>
+<div class='box-content flex items-center justify-center'>
   <a
     href={href}
     class='group relative mx-4 transition-all md:hover:mt-6 md:hover:text-4xl md:hover:font-bold md:hover:text-primary-light'
@@ -17,4 +17,4 @@ const {href, noBorder} = Astro.props
     <slot />
   </a>
 </div>
-{!noBorder && <div class='hidden h-8 w-px bg-white md:block' />}
+{!noBorder && <div class='hidden h-8 w-px justify-self-center bg-white md:block' />}

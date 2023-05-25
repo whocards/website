@@ -4,6 +4,8 @@ import LanguageSwitcher from '~components/Modal/LanguageSwitcher.astro'
 import Head from './Head.astro'
 
 import '~styles/base.css'
+
+const {class: mainClasses} = Astro.props
 ---
 
 <!DOCTYPE html>
@@ -13,7 +15,7 @@ import '~styles/base.css'
   </head>
   <body class='m-0 flex flex-col bg-hero bg-fixed bg-center bg-no-repeat font-sans text-white'>
     <Navigation>
-      <main class='flex min-h-full w-full flex-col items-center justify-center'>
+      <main class={'flex min-h-full w-full flex-col items-center justify-center ' + mainClasses}>
         <slot />
       </main>
     </Navigation>
