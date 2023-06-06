@@ -40,6 +40,7 @@
     "tailwindcss": "^3.2.6"
   },
   "devDependencies": {
+    "@iconify-icon/solid": "^1.0.7",
     "@netlify/functions": "^1.4.0",
     "@types/node": "^18.11.18",
     "dotenv": "^16.0.3",

@@ -2,12 +2,11 @@
 import Layout from '~layouts/Layout.astro'
 import {Icon} from 'astro-icon'
 import langugages from '~data/languages.json'
+import Printer from '~components/Print'
 ---
 
-<Layout
-  class='flex min-h-screen flex-col justify-center gap-6 pt-28 pb-16 text-center md:gap-8 lg:gap-12'
->
-  <h1
+<Layout class='flex min-h-screen flex-col justify-center gap-6 pt-28 pb-16 md:gap-8 lg:gap-12'>
+  <!-- <h1
     class='text-gradient font-title text-7xl font-extrabold uppercase leading-none tracking-tight text-white md:text-8xl xl:text-9xl'
   >
     Print It Yourself
@@ -57,5 +56,6 @@ import langugages from '~data/languages.json'
     <div class='mt-20 md:col-span-2'>
       <a target='_blank' class='btn-primary btn mt-auto' href='/cards/en-wide.pdf'>Download</a>
     </div>
-  </div>
+  </div> -->
+  <Printer client:load />
 </Layout>
