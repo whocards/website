@@ -1,22 +1,29 @@
 ---
 const {id, language} = Astro.params
+const {title: propTitle, desc: propDesc} = Astro.props
 const site = Astro.site
 
 const canonicalUrl = new URL(Astro.url.pathname, site)
 
 // non question pages
-let title = 'WhoCards'
-let description = 'Bringing connection into our lives'
+const titles: string[] = ['WhoCards']
+let description = propDesc || 'Bringing connection into our lives'
 let image = `whocards-social.png`
+
+if (propTitle) {
+  titles.push(propTitle)
+}
 
 // question pages
 if (id) {
-  title += ` | Question #${id}`
+  titles.push(`Question #${id}`)
   description = 'Dare to Open Up?'
   image = `${language}/${id}.png`
 }
 // complete image url
 image = `${site}/images/` + image
+
+const title = titles.join(' | ')
 ---
 
 <!-- Global Metadata -->

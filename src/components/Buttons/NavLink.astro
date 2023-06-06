@@ -2,14 +2,11 @@
 const {href, title, selected} = Astro.props
 ---
 
-<li>
-  <a
-    href={href}
-    class:list={[
-      'font-bold',
-      selected
-        ? 'text-primary-light pointer-events-none'
-        : 'btn-ghost hover:text-primary-light hover:opacity-80 active:opacity-100',
-    ]}>{title}</a
-  >
+<li
+  class:list={{
+    'text-primary-light pointer-events-none': selected,
+    'btn-ghost hover:text-primary-light hover:opacity-80 active:opacity-100': !selected,
+  }}
+>
+  <a href={href} class='text-lg font-bold'>{title}</a>
 </li>

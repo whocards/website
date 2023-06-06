@@ -7,6 +7,8 @@ export default function Print() {
   const [lang, setLang] = createSignal<Language>('en')
   const [isWide, setIsWide] = createSignal<boolean>(true)
 
+  const changeLang = (newLang: string) => () => setLang(newLang as Language)
+
   return (
     <>
       <h1 class='text-gradient font-title text-7xl font-extrabold uppercase leading-none tracking-tight text-white md:text-8xl xl:text-9xl'>
@@ -20,11 +22,9 @@ export default function Print() {
           </div>
           {Object.entries(LANGUAGES).map(([key, name]) => (
             <button
-              class={
-                'btn-ghost flex h-16 w-full items-center px-4' +
-                (key === lang() ? ' text-primary-dark' : '')
-              }
-              onClick={() => setLang(key as Language)}
+              class='btn-ghost flex h-16 w-full items-center px-4'
+              classList={{'text-primary-dark': key === lang()}}
+              onClick={changeLang(key)}
             >
               <div class='text-left'>{name}</div>
               {key === lang() && <Icon icon='zondicons:checkmark' class='ml-2 mt-px h-4 w-4' />}

@@ -1,25 +1,27 @@
 ---
 import Navigation from '~components/Navigation.astro'
-import LanguageSwitcher from '~components/Modal/LanguageSwitcher.astro'
+import {LanguageSwitcher} from '~components/Modal/LanguageSwitcher'
 import Head from './Head.astro'
 
 import '~styles/base.css'
 
-const {class: mainClasses} = Astro.props
+const {class: mainClasses, title, description} = Astro.props
 ---
 
 <!DOCTYPE html>
 <html lang='en' class='scroll-smooth bg-dark'>
   <head>
-    <Head />
+    <Head title={title} description={description} />
   </head>
-  <body class='m-0 flex flex-col bg-hero bg-fixed bg-center bg-no-repeat font-sans text-white'>
+  <body
+    class='m-0 flex h-screen flex-col bg-hero bg-fixed bg-center bg-no-repeat font-sans text-white'
+  >
     <Navigation>
-      <main class={'flex min-h-full w-full flex-col items-center justify-center ' + mainClasses}>
+      <main class:list={['flex h-screen w-full flex-col items-center justify-center', mainClasses]}>
         <slot />
       </main>
     </Navigation>
-    <LanguageSwitcher />
+    <LanguageSwitcher client:only />
     <style is:global></style>
   </body>
 </html>

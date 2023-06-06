@@ -31,7 +31,7 @@
     "astro": "^2.0.17",
     "astro-icon": "^0.8.0",
     "astro-seo": "^0.7.0",
-    "daisyui": "^2.51.5",
+    "daisyui": "^3.0.3",
     "gsap": "^3.11.4",
     "nanostores": "^0.7.3",
     "sharp": "^0.31.3",

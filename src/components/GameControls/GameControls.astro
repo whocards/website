@@ -23,6 +23,7 @@ const {language} = Astro.params
     <!-- <FullScreen client:only /> -->
     <!-- language button -->
     <button
+      onclick='langsModal.showModal()'
       class:list={[
         'btn btn-circle who-modal uppercase bg-gray hover:bg-gray hover:text-primary-light',
         {'w-fit px-4': language?.includes('-')},
