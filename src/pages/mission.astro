@@ -1,12 +1,12 @@
 ---
 import Layout from '~layouts/Layout.astro'
-import HeaderLink from '~components/Buttons/HeaderLink.astro'
-import {Icon} from 'astro-icon'
+// import HeaderLink from '~components/Buttons/HeaderLink.astro'
+// import {Icon} from 'astro-icon'
 ---
 
 <Layout class='text-xl text-slate-300 md:text-2xl lg:text-4xl container mx-auto px-5'>
   <!-- home section -->
-  <section
+  <!-- <section
     id='home'
     class='flex min-h-screen flex-col items-center justify-center gap-6 text-center md:max-w-3xl md:gap-8 lg:gap-12'
   >
@@ -23,10 +23,10 @@ import {Icon} from 'astro-icon'
       <HeaderLink href='#values'>Values</HeaderLink>
       <HeaderLink href='#humans' noBorder>Humans</HeaderLink>
     </div>
-  </section>
+  </section> -->
 
   <!-- story -->
-  <section
+  <!-- <section
     id='story'
     class='flex min-h-screen flex-col justify-center gap-6 pt-16 text-left md:gap-8 lg:gap-12'
   >
@@ -69,12 +69,12 @@ import {Icon} from 'astro-icon'
         completely different beliefs, norms and ideas about what it means to be alive today.
       </p>
     </div>
-  </section>
+  </section> -->
 
   <!-- mission -->
   <section
     id='mission'
-    class='flex min-h-screen flex-col justify-center gap-6 pt-16 text-center md:gap-8 lg:gap-12'
+    class='flex min-h-screen flex-col justify-center gap-6 pt-28 pb-16 text-center md:gap-8 lg:gap-12'
   >
     <h2
       class='text-gradient font-title text-7xl font-extrabold uppercase leading-none tracking-tight text-white md:text-8xl xl:text-9xl'
@@ -102,7 +102,7 @@ import {Icon} from 'astro-icon'
   </section>
 
   <!-- values -->
-  <section
+  <!-- <section
     id='values'
     class='flex min-h-screen flex-col justify-center gap-6 pt-16 text-center md:gap-8 lg:gap-12'
   >
@@ -165,10 +165,10 @@ import {Icon} from 'astro-icon'
         </div>
       </div>
     </div>
-  </section>
+  </section> -->
 
   <!-- humans -->
-  <section
+  <!-- <section
     id='humans'
     class='flex min-h-screen flex-col justify-center gap-6 pt-16 text-center md:gap-8 lg:gap-12'
   >
@@ -204,13 +204,15 @@ import {Icon} from 'astro-icon'
         </div>
       </div>
     </div>
-  </section>
-  <div class='btn-circle btn fixed -bottom-14 right-4 transition-all' id='btn-back-to-top'>
+  </section> -->
+  <!-- scroll to top button -->
+  <!-- <div class='btn-circle btn fixed -bottom-14 right-4 transition-all' id='btn-back-to-top'>
     <Icon name='akar-icons:arrow-up' class='h-6 w-6' />
-  </div>
+  </div> -->
 </Layout>
 
-<script>
+<!-- scroll to top script -->
+<!-- <script>
   const scrollButton = document.getElementById('btn-back-to-top')!
   const container = document.getElementById('main')!
   const TOP = 100
@@ -229,4 +231,4 @@ import {Icon} from 'astro-icon'
   scrollButton.onclick = () => {
     container.scrollTo({top: 0})
   }
-</script>
+</script> -->

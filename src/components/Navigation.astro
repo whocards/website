@@ -1,18 +1,15 @@
 ---
 import {Icon} from 'astro-icon'
 import {getCurrentLanguage} from '~utils/language'
+import NavLink from './Buttons/NavLink.astro'
 const home = getCurrentLanguage(Astro.url.pathname)
 const isQuestionPage = Astro.url.pathname.includes('question')
 
 const links: Record<string, string>[] = [
-  {href: '/about', title: 'About'},
+  {href: home, title: 'Home'},
+  {href: '/mission', title: 'Mission'},
   {href: '/print', title: 'Print'},
 ]
-if (isQuestionPage) {
-  links.unshift({href: home, title: 'Home'})
-} else {
-  links.unshift({href: '/play', title: 'Play'}) // TODO fix to be next
-}
 ---
 
 <div class='drawer drawer-end'>
@@ -29,7 +26,7 @@ if (isQuestionPage) {
           {
             links.map((link) => (
               <li>
-                <a href={link.href}>{link.title}</a>
+                <NavLink {...link} selected={Astro.url.pathname === link.href} />
               </li>
             ))
           }
