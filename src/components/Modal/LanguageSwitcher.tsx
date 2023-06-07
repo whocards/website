@@ -1,4 +1,4 @@
-import {onCleanup, onMount} from 'solid-js'
+import {createEffect, onCleanup} from 'solid-js'
 import {Icon} from '@iconify-icon/solid'
 import {LANGUAGES, getCurrentLanguage, getCurrentQuestionUrl} from '~utils'
 
@@ -8,17 +8,17 @@ export const LanguageSwitcher = () => {
 
   const handleClick = (event: MouseEvent) => {
     if (ref && ref === event.target) {
-      // @ts-ignore
       window.langsModal.close()
     }
   }
 
-  onMount(() => {
-    document.addEventListener('click', handleClick)
-  })
+  // TODO toggle event listener on dialog open
+  createEffect(() => {
+    ref.addEventListener('click', handleClick)
 
-  onCleanup(() => {
-    document.removeEventListener('click', handleClick)
+    onCleanup(() => {
+      ref.removeEventListener('click', handleClick)
+    })
   })
 
   return (
@@ -29,7 +29,7 @@ export const LanguageSwitcher = () => {
       >
         <div class='flex h-16 items-center justify-between pl-4 pr-3'>
           <h3 class='text-2xl font-bold'>Choose your language</h3>
-          <button for='langsModal' class='btn-ghost btn-square btn'>
+          <button onClick={() => ref?.close()} class='btn-ghost btn-square btn'>
             <Icon icon='ic:round-close' class='text-2xl' />
           </button>
         </div>

@@ -18,7 +18,7 @@ export const socialShare = (social: Social | string | undefined, title: string, 
   }
 
   if (social === 'copy') {
-    navigator.clipboard.writeText(title + '\n' + url)
+    navigator.clipboard.writeText(url)
   } else {
     // create share url
     const shareUrl = urls[social as SocialKey]
