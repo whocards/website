@@ -4,7 +4,6 @@ import {LANGUAGES, getCurrentLanguage, getCurrentQuestionUrl} from '~utils'
 
 export const LanguageSwitcher = () => {
   let ref: HTMLDialogElement
-  const path = window.location.pathname.slice(1)
   const lang = getCurrentLanguage(window.location.pathname.slice(1))
 
   const handleClick = (event: MouseEvent) => {
@@ -43,7 +42,6 @@ export const LanguageSwitcher = () => {
               href={getCurrentQuestionUrl(key)}
               class='who-modal btn-ghost flex h-16 w-full items-center px-4'
               classList={{'text-primary-dark active-language': key === lang}}
-              data-lang={key}
             >
               {name}
               {key === lang && <Icon icon='zondicons:checkmark' class='ml-2 h-4 w-4' />}
