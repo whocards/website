@@ -17,7 +17,9 @@ const {class: mainClasses, title, description} = Astro.props
     class='m-0 flex h-screen flex-col bg-hero bg-fixed bg-center bg-no-repeat font-sans text-white'
   >
     <Navigation>
-      <main class:list={['flex h-screen w-full flex-col items-center justify-center', mainClasses]}>
+      <main
+        class:list={['flex min-h-screen w-full flex-col items-center justify-center', mainClasses]}
+      >
         <slot />
       </main>
     </Navigation>

@@ -17,15 +17,19 @@ export async function getStaticPaths() {
 
 const {question} = Astro.props
 const {language} = Astro.params
-
-const formatedQuestion = question.trim().replace(/([?|？]) /g, '$1\n\n')
 ---
 
 <Layout>
   <div
+    id='question'
     class='flex h-full w-full items-center px-4 pb-[10%] text-5xl font-semibold text-white md:px-8 md:text-7xl lg:max-w-[1140px] xl:px-0 phone-landscape:text-2xl'
   >
-    <h1 class='whitespace-pre-wrap leading-tight'>{formatedQuestion}</h1>
+    <h1 class='whitespace-pre-wrap leading-tight'>{question}</h1>
   </div>
   <GameControls language={language} />
 </Layout>
+
+<script define:vars={{language}}>
+  const {direction} = new Intl.Locale(language).textInfo
+  document.getElementById('question').setAttribute('dir', direction)
+</script>

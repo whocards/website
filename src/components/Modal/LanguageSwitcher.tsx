@@ -48,7 +48,7 @@ export const LanguageSwitcher = () => {
             </a>
           ))}
           <div class='flex h-16 flex-col justify-center px-4 opacity-50'>
-            Japanese
+            Hebrew
             <br />
             <span class='text-sm'>coming soon&hellip;</span>
           </div>
