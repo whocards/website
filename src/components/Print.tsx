@@ -17,7 +17,7 @@ export default function Print() {
         Print your own WhoCards for free and experience the power of authentic connections.
         <br />
         <span class='text-lg italic md:text-xl lg:text-2xl'>
-          Donations help us make this possible, please consider{' '}
+          Help us make this possible, and please consider{' '}
           <a
             href='https://opencollective.com/whocards/donate'
             target='_blank'
