@@ -7,7 +7,7 @@ const home = getCurrentLanguage(Astro.url.pathname)
 const isQuestionPage = Astro.url.pathname.includes('question')
 
 const links: Record<string, string>[] = [
-  {href: home, title: 'Home'},
+  {href: '/', title: 'Home'},
   {href: '/mission', title: 'Mission'},
   {href: '/print', title: 'Print'},
 ]
@@ -18,7 +18,7 @@ const links: Record<string, string>[] = [
   <div class='drawer-content transition-all' id='main'>
     <!-- Navbar -->
     <div class='navbar fixed h-16 justify-between bg-transparent pr-4 pl-0 md:px-4'>
-      <a href={`/${home}`} aria-label='homepage link' class='btn-ghost btn'>
+      <a href='/' aria-label='homepage link' class='btn-ghost btn'>
         <Icon name='logo' class='w-36' />
       </a>
       <div class:list={['flex-none hidden', {' lg:block': !isQuestionPage}]}>
@@ -31,7 +31,7 @@ const links: Record<string, string>[] = [
               </li>
             ))
           }
-          <PreOrder />
+          <PreOrder class='ml-4' />
         </ul>
       </div>
     </div>

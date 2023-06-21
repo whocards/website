@@ -1,12 +1,19 @@
-import {createEffect, onCleanup} from 'solid-js'
+import {ParentProps, createEffect, onCleanup, Show} from 'solid-js'
 import {Icon} from '@iconify-icon/solid'
 import {LANGUAGES, getCurrentLanguage, getCurrentQuestionUrl} from '~utils'
+import type {Language} from '~types'
+import {useStore} from '@nanostores/solid'
+import {$langStore, setLang} from '~stores/Language.store'
 
-export const LanguageSwitcher = () => {
+interface Props {
+  shouldUseStore: boolean
+}
+
+export const LanguageSwitcher = ({shouldUseStore}: Props) => {
+  const store = useStore($langStore)
   let ref: HTMLDialogElement
-  const lang = getCurrentLanguage(window.location.pathname.slice(1))
 
-  const handleClick = (event: MouseEvent) => {
+  const handleClose = (event: MouseEvent) => {
     if (ref && ref === event.target) {
       window.langsModal.close()
     }
@@ -14,11 +21,15 @@ export const LanguageSwitcher = () => {
 
   // TODO toggle event listener on dialog open
   createEffect(() => {
-    ref.addEventListener('click', handleClick)
+    ref.addEventListener('click', handleClose)
 
     onCleanup(() => {
-      ref.removeEventListener('click', handleClick)
+      ref.removeEventListener('click', handleClose)
     })
+  })
+
+  createEffect(() => {
+    setLang(getCurrentLanguage(window.location.pathname.slice(1)))
   })
 
   return (
@@ -38,14 +49,16 @@ export const LanguageSwitcher = () => {
           style='max-height: calc(100vh - 4rem)'
         >
           {Object.entries(LANGUAGES).map(([key, name]) => (
-            <a
-              href={getCurrentQuestionUrl(key)}
-              class='who-modal btn-ghost flex h-16 w-full items-center px-4'
-              classList={{'text-primary-dark active-language': key === lang}}
+            <QuestionLink
+              lang={key as Language}
+              selected={key === store().lang}
+              useButton={shouldUseStore}
             >
               {name}
-              {key === lang && <Icon icon='zondicons:checkmark' class='ml-2 h-4 w-4' />}
-            </a>
+              <Show when={key === store().lang}>
+                <Icon icon='zondicons:checkmark' class='ml-2 h-4 w-4' />
+              </Show>
+            </QuestionLink>
           ))}
           <div class='flex h-16 flex-col justify-center px-4 opacity-50'>
             Hebrew
@@ -55,5 +68,39 @@ export const LanguageSwitcher = () => {
         </section>
       </form>
     </dialog>
+  )
+}
+
+interface QuestionLinkProps extends ParentProps {
+  lang: Language
+  selected: boolean
+  useButton: boolean
+}
+
+const QuestionButton = (props: QuestionLinkProps) => {
+  return (
+    <button
+      onclick={() => setLang(props.lang)}
+      class='who-modal btn-ghost flex h-16 w-full items-center px-4'
+      classList={{'text-primary-dark active-language': props.selected}}
+    >
+      {props.children}
+    </button>
+  )
+}
+
+const QuestionLink = (props: QuestionLinkProps) => {
+  if (props.useButton) {
+    return <QuestionButton {...props} />
+  }
+
+  return (
+    <a
+      href={getCurrentQuestionUrl(props.lang)}
+      class='who-modal btn-ghost flex h-16 w-full items-center px-4'
+      classList={{'text-primary-dark active-language': props.selected}}
+    >
+      {props.children}
+    </a>
   )
 }

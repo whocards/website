@@ -1,14 +1,12 @@
 ---
 import Layout from '~layouts/Layout.astro'
-import {Icon} from 'astro-icon'
-import langugages from '~data/languages.json'
 import Printer from '~components/Print'
 ---
 
-<Layout
-  class='flex min-h-screen flex-col justify-center gap-6 pt-28 pb-16 md:gap-8 lg:gap-12'
-  title='Print'
-  description='We hope you ask meaningful questions using these beautiful cards'
->
-  <Printer client:visible />
+<Layout title='Print'>
+  <section
+    class='mx-6 flex min-h-screen flex-col items-center gap-6 pt-20 pb-16 md:gap-8 md:pt-28 md:pb-8 lg:gap-12 lg:pb-0'
+  >
+    <Printer client:load />
+  </section>
 </Layout>

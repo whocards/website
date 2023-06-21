@@ -7,7 +7,7 @@ const canonicalUrl = new URL(Astro.url.pathname, site)
 
 // non question pages
 const titles: string[] = ['WhoCards']
-let description = propDesc || 'Bringing connection into our lives'
+let description = propDesc || 'Dare to be Curious?'
 let image = `whocards-social.png`
 
 if (propTitle) {
@@ -17,7 +17,6 @@ if (propTitle) {
 // question pages
 if (id) {
   titles.push(`Question #${id}`)
-  description = 'Dare to be Curious?'
   image = `${language}/${id}.png`
 }
 // complete image url

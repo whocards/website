@@ -23,7 +23,7 @@ const {class: mainClasses, title, description} = Astro.props
         <slot />
       </main>
     </Navigation>
-    <LanguageSwitcher client:only />
+    <LanguageSwitcher client:only shouldUseStore={Astro.url.pathname === '/print'} />
     <style is:global></style>
   </body>
 </html>
