@@ -32,6 +32,9 @@ module.exports = {
       fontFamily: {
         sans: ['golos-text', ...defaultTheme.fontFamily.sans],
         title: ['aptly', ...defaultTheme.fontFamily.sans],
+        chinese: ['noto-sans-chinese', ...defaultTheme.fontFamily.sans],
+        hebrew: ['noto-sans-hebrew', ...defaultTheme.fontFamily.sans],
+        japanese: ['noto-sans-japanese', ...defaultTheme.fontFamily.sans],
       },
       gridTemplateRows: {
         question: '1fr min-content',
