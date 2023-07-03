@@ -37,8 +37,12 @@ export const LanguageSwitcher = () => {
         class='modal-box h-full w-full bg-white p-0 text-darker md:h-fit md:max-w-2xl md:rounded-lg phone-landscape:max-w-full'
       >
         <div class='flex h-16 items-center justify-between pl-4 pr-3'>
-          <h4 class='text-2xl font-bold'>Choose your language</h4>
-          <button onClick={() => ref?.close()} class='btn-ghost btn-square btn'>
+          <h2 class='text-2xl font-bold'>Choose your language</h2>
+          <button
+            onClick={() => ref?.close()}
+            class='btn-ghost btn-square btn'
+            aria-label='close modal'
+          >
             <Icon icon='ic:round-close' class='text-2xl' />
           </button>
         </div>
