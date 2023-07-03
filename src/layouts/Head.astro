@@ -20,7 +20,7 @@ if (id) {
   image = `${language}/${id}.png`
 }
 // complete image url
-image = `${site}/images/` + image
+image = `${site}${site?.toString().endsWith('/') ? '' : '/'}images/` + image
 
 const title = titles.join(' | ')
 ---
