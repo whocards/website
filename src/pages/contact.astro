@@ -1,0 +1,45 @@
+---
+import Layout from '~layouts/Layout.astro'
+import {Icon} from 'astro-icon'
+
+const contactPoints: string[] = [
+  'About our new site',
+  'If you have any issues with the cards',
+  "If you have a question you'd like to suggest",
+  'If you would like to get involved in the project',
+  'To get updated about changes',
+  'To learn more about our new cards',
+  'Or just to say hi!',
+]
+---
+
+<Layout
+  title='Contact'
+  class='container mx-auto px-5 text-xl text-slate-300 md:text-2xl lg:text-4xl'
+>
+  <section
+    class='flex min-h-screen flex-col justify-center gap-6 pb-16 pt-20 text-center md:gap-8 md:pt-28 lg:gap-12'
+  >
+    <h2
+      class='text-gradient text-center font-title text-7xl font-extrabold uppercase leading-none tracking-tight text-white md:text-8xl xl:text-9xl'
+    >
+      contact
+    </h2>
+    <p>We would love to hear from you!</p>
+    <ul>
+      {
+        contactPoints.map((i) => (
+          <li>
+            <Icon name='typcn:flash' class='mr-2 inline-block h-6 w-6' />
+            {i}
+          </li>
+        ))
+      }
+    </ul>
+    <a
+      target='_blank'
+      href="mailto:hi@whocards.cc?subject=Hi%20from%20the%20website&body=I'm%20writing%20to%20you%20about%3A%0A"
+      class='btn-primary btn self-center'>Say Hi!</a
+    >
+  </section>
+</Layout>

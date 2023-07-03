@@ -7,6 +7,18 @@
 [functions]
   node_bundler = "esbuild"
 
+# plausible analytics
+[[redirects]]
+  from = "/js/script.js"
+  to = "https://plausible.io/js/script.js"
+  status = 200
+  force = true
+[[redirects]]
+  from = "/api/event"
+  to = "https://plausible.io/api/event"
+  status = 200
+  force = true
+ 
 [[redirects]]
   from = "/api/*" # simplify all calls to serverless functions
   to = "/.netlify/functions/:splat" # all function calls will go to this path

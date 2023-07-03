@@ -4,29 +4,84 @@ html {
   font-feature-settings: 'kern' 1;
   font-kerning: normal;
 }
-body {
-  height: 100vh;
+#question:lang(zh) {
+  @apply font-chinese;
+}
+
+#question:lang(he) {
+  @apply font-hebrew;
+}
+
+#question:lang(jp) {
+  @apply font-japanese;
 }
 
 @font-face {
-  font-family: 'aptly';
-  src: url('/fonts/aptly_regular.woff2') format('woff2');
-  font-weight: normal;
-  font-style: normal;
   font-display: swap;
+  font-family: 'aptly';
+  font-style: normal;
+  font-weight: normal;
+  src: url(/fonts/aptly_regular.woff2) format('woff2');
 }
 @font-face {
+  font-display: swap;
   font-family: 'aptly';
-  src: url('/fonts/aptly_medium.woff2') format('woff2');
+  font-style: normal;
+  font-weight: bold;
+  src: url(/fonts/aptly_medium.woff2) format('woff2');
+}
+@font-face {
+  font-display: swap;
+  font-family: 'golos-text';
+  font-style: normal;
+  src: url(/fonts/golos_text.woff2) format('woff2');
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'noto-sans-chinese';
+  font-style: normal;
+  font-weight: normal;
+  src: url(/fonts/noto-sans-chinese_regular.woff2) format('woff2');
+}
+
+@font-face {
+  font-family: 'noto-sans-chinese';
+  src: url(/fonts/noto-sans-chinese_bold.woff2) format('woff2');
   font-weight: bold;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
-  font-family: 'golos-text';
-  src: url(/fonts/golos_text.woff2) format('woff2');
   font-display: swap;
+  font-family: 'noto-sans-hebrew';
   font-style: normal;
+  font-weight: normal;
+  src: url(/fonts/noto-sans-hebrew_regular.woff2) format('woff2');
+}
+
+@font-face {
+  font-family: 'noto-sans-hebrew';
+  src: url(/fonts/noto-sans-hebrew_bold.woff2) format('woff2');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'noto-sans-japanese';
+  font-style: normal;
+  font-weight: normal;
+  src: url(/fonts/noto-sans-japanese_regular.woff2) format('woff2');
+}
+
+@font-face {
+  font-family: 'noto-sans-japanese';
+  src: url(/fonts/noto-sans-japanese_bold.woff2) format('woff2');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
 }
 
 .btn {

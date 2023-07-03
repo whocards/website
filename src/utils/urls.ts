@@ -2,8 +2,6 @@ import {DEFAULT_LANGUAGE} from '~utils'
 import {idsStore} from '~stores/Game.store'
 import type {QuestionId} from '~types'
 
-export const AMPLITUDE_API_KEY = import.meta.env.PUBLIC_AMPLITUDE_API_KEY
-
 export const getTrimmedPath = () => window.location.pathname.replace(/\/$/, '')
 
 /**
@@ -31,4 +29,8 @@ export const getQuestionUrl = (id: QuestionId) => {
   if (!id) return ''
 
   return window.location.origin + getTrimmedPath().replace(/\/[^\/]*$/, `/${id}`)
+}
+
+export const isPrintPage = () => {
+  return window.location.pathname.replace(/\/+$/, '') === '/print'
 }

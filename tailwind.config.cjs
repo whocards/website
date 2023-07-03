@@ -4,6 +4,11 @@ const defaultTheme = require('tailwindcss/defaultTheme')
 module.exports = {
   content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
   theme: {
+    breakpointsInspector: {
+      position: ['bottom', 'left'],
+      prefix: '',
+      width: 50,
+    },
     extend: {
       colors: {
         yellow: {
@@ -26,7 +31,10 @@ module.exports = {
       },
       fontFamily: {
         sans: ['golos-text', ...defaultTheme.fontFamily.sans],
-        aptly: ['aptly', ...defaultTheme.fontFamily.sans],
+        title: ['aptly', ...defaultTheme.fontFamily.sans],
+        chinese: ['noto-sans-chinese', ...defaultTheme.fontFamily.sans],
+        hebrew: ['noto-sans-hebrew', ...defaultTheme.fontFamily.sans],
+        japanese: ['noto-sans-japanese', ...defaultTheme.fontFamily.sans],
       },
       gridTemplateRows: {
         question: '1fr min-content',
@@ -38,7 +46,11 @@ module.exports = {
       },
     },
   },
-  plugins: [require('@tailwindcss/typography'), require('daisyui')],
+  plugins: [
+    require('tailwindcss-breakpoints-inspector'),
+    require('@tailwindcss/typography'),
+    require('daisyui'),
+  ],
   daisyui: {
     themes: false,
     logs: false,

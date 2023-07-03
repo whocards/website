@@ -1,22 +1,28 @@
 ---
 const {id, language} = Astro.params
+const {title: propTitle, desc: propDesc} = Astro.props
 const site = Astro.site
 
 const canonicalUrl = new URL(Astro.url.pathname, site)
 
 // non question pages
-let title = 'WhoCards'
-let description = 'Bringing connection into our lives'
+const titles: string[] = ['WhoCards']
+let description = propDesc || 'Dare to be Curious?'
 let image = `whocards-social.png`
+
+if (propTitle) {
+  titles.push(propTitle)
+}
 
 // question pages
 if (id) {
-  title += ` | Question #${id}`
-  description = 'Dare to Open Up?'
+  titles.push(`Question #${id}`)
   image = `${language}/${id}.png`
 }
 // complete image url
-image = `${site}/images/` + image
+image = `${site}${site?.toString().endsWith('/') ? '' : '/'}images/` + image
+
+const title = titles.join(' | ')
 ---
 
 <!-- Global Metadata -->
@@ -67,12 +73,12 @@ image = `${site}/images/` + image
 
 <!-- Analytics -->
 <script>
-  import * as amplitude from '@amplitude/analytics-browser'
-  import {AMPLITUDE_API_KEY} from '~utils'
+  // import * as amplitude from '@amplitude/analytics-browser'
+  // import {AMPLITUDE_API_KEY} from '~utils'
 
-  if (AMPLITUDE_API_KEY) {
-    amplitude.init(AMPLITUDE_API_KEY, undefined, {
-      defaultTracking: {sessions: true, pageViews: true, formInteractions: true},
-    })
-  }
+  // if (AMPLITUDE_API_KEY) {
+  //   amplitude.init(AMPLITUDE_API_KEY, undefined, {
+  //     defaultTracking: {sessions: true, pageViews: true, formInteractions: true},
+  //   })
+  // }
 </script>

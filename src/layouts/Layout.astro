@@ -1,32 +1,31 @@
 ---
-// import Navigation from '~components/Navigation.astro'
-import LanguageSwitcher from '~components/Modal/LanguageSwitcher.astro'
+import Navigation from '~components/Navigation.astro'
+import {LanguageSwitcher} from '~components/Modal/LanguageSwitcher'
 import Head from './Head.astro'
+import {IS_PROD} from '#scripts/env'
 
 import '~styles/base.css'
-// temp
-import Icon from 'astro-icon'
-import {getCurrentLanguage} from '~utils/language'
-const home = getCurrentLanguage(Astro.url.pathname)
+
+const {class: mainClasses, title, description, lang = 'en'} = Astro.props
 ---
 
 <!DOCTYPE html>
-<html lang='en' class='bg-dark'>
+<html lang={lang} class='scroll-smooth bg-dark'>
   <head>
-    <Head />
+    <Head title={title} description={description} />
+    {IS_PROD && <script defer='defer' data-domain='whocards.cc' src='/js/script.js' />}
   </head>
-  <body class='flex flex-col bg-hero bg-fixed bg-center bg-no-repeat font-sans text-white'>
-    <div class='navbar h-16 justify-between bg-transparent pr-4 pl-0 md:px-4'>
-      <a href={`/${home}`} aria-label='homepage link' class='btn-ghost btn'>
-        <Icon name='logo' class='w-36' />
-      </a>
-    </div>
-    <!-- <Navigation> -->
-    <main class='flex h-full w-full items-center justify-center'>
-      <slot />
-    </main>
-    <!-- </Navigation> -->
-    <LanguageSwitcher />
+  <body
+    class='m-0 flex min-h-screen flex-col bg-hero bg-fixed bg-center bg-no-repeat font-sans text-white'
+  >
+    <Navigation>
+      <main
+        class:list={['flex min-h-screen w-full flex-col items-center justify-center', mainClasses]}
+      >
+        <slot />
+      </main>
+    </Navigation>
+    <LanguageSwitcher client:only />
     <style is:global></style>
   </body>
 </html>
