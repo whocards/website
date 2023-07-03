@@ -50,7 +50,7 @@ const buttons = [
   import {socialShare} from '~utils'
 
   const title = 'Who cards - Question ' + idsStore.get().current
-  const url = window.location.toString()
+  const url = window.location.toString() + '?utm='
   // const url = 'https://calmly.whocards.cc' + window.location.pathname
 
   // use navigator share on mobile
@@ -61,7 +61,7 @@ const buttons = [
       e.stopPropagation()
       navigator.share({
         title,
-        url,
+        url: url + 'mobile',
       })
     })
   } else {
@@ -82,7 +82,7 @@ const buttons = [
             el.classList.add('swap-active')
           }
 
-          socialShare(social, title, url)
+          socialShare(social, title, url + social)
 
           setTimeout(() => {
             el.classList.remove('pointer-events-none')

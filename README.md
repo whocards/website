@@ -21,3 +21,5 @@ https://app.netlify.com/sites/whocards-calmly/overview
 - [ ] animations
 - [ ] testing
 - [ ] remove redirects from trailing slash
+- [ ] track file downloads https://plausible.io/docs/file-downloads-tracking
+- [ ] hebrew seo images
