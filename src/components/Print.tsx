@@ -29,10 +29,10 @@ export default function Print() {
         </span>
       </p>
       <div class='my-8 grid w-full grid-cols-1 gap-8 md:my-4 md:w-auto md:grid-cols-2'>
-        <h3 class='order-1 text-center font-title text-5xl md:order-none'>Language</h3>
-        <h3 class='order-3 mt-8 text-center font-title text-5xl md:order-none md:mt-0'>
+        <h2 class='order-1 text-center font-title text-5xl md:order-none'>Language</h2>
+        <h2 class='order-3 mt-8 text-center font-title text-5xl md:order-none md:mt-0'>
           Orientation
-        </h3>
+        </h2>
         <div class='order-2 flex items-center justify-center md:order-none'>
           <button
             class='flex h-12 w-full items-center justify-center rounded-lg border-2 border-primary-light px-2 font-bold tracking-wider md:mx-6'
@@ -47,22 +47,22 @@ export default function Print() {
             />
           </button>
         </div>
-        <div class='order-4 grid w-fit grid-cols-2 items-center gap-4 justify-self-center md:order-none'>
+        <div class='order-4 grid w-fit grid-cols-2 items-center gap-4 justify-self-center text-black md:order-none'>
           <button
             class='flex h-32 w-32 items-center justify-center'
-            classList={{'rounded-lg border-2 border-primary-light': isWide()}}
+            classList={{'rounded-lg border-2 border-primary-dark': isWide()}}
             onClick={() => setIsWide(true)}
           >
-            <div class='flex h-16 w-24 items-center justify-center gap-2 rounded-lg bg-primary-dark'>
+            <div class='flex h-16 w-24 items-center justify-center gap-2 rounded-lg bg-primary-light font-bold'>
               <div>Wide</div>
             </div>
           </button>
           <button
             class='flex h-32 w-32 items-center justify-center'
-            classList={{'rounded-lg border-2 border-primary-light': !isWide()}}
+            classList={{'rounded-lg border-2 border-primary-dark': !isWide()}}
             onClick={() => setIsWide(false)}
           >
-            <div class='mx-auto flex h-24 w-16 flex-col items-center justify-center gap-2 rounded-lg bg-primary-dark'>
+            <div class='mx-auto flex h-24 w-16 flex-col items-center justify-center gap-2 rounded-lg bg-primary-light font-bold'>
               <div>Tall</div>
             </div>
           </button>

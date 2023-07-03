@@ -16,7 +16,7 @@ const {language} = Astro.params
     class='flex w-full max-w-2xl items-center justify-between gap-4 transition-all duration-500'
   >
     <!-- back button -->
-    <a id='prev' class='btn-game enabled' href=''>
+    <a id='prev' class='btn-game enabled' href='' aria-label='previous question'>
       <Icon name='ic:outline-arrow-back' class:list='h-10 w-10' />
     </a>
     <!-- full screen button -->
@@ -24,6 +24,7 @@ const {language} = Astro.params
     <!-- language button -->
     <button
       onclick='langsModal.showModal()'
+      aria-label='change language'
       class:list={[
         'btn btn-circle who-modal uppercase bg-gray hover:bg-gray hover:text-primary-light',
         {'w-fit px-4': language?.includes('-')},
@@ -32,7 +33,7 @@ const {language} = Astro.params
     <!-- share button -->
     <ShareButton />
     <!-- next button -->
-    <a id='next' class='btn-game enabled' href=''>
+    <a id='next' class='btn-game enabled' href='' aria-label='next question'>
       <Icon name='ic:outline-arrow-forward' class='h-10 w-10' />
     </a>
   </div>

@@ -1,5 +1,11 @@
 ---
 import Icon from 'astro-icon'
+const buttons = [
+  {share: 'facebook', icon: 'ri:facebook-fill'},
+  {share: 'twitter', icon: 'mdi:twitter'},
+  {share: 'linkedin', icon: 'mdi:linkedin'},
+  {share: 'email', icon: 'ic:baseline-email'},
+]
 ---
 
 <button tabindex='0' class='btn-game' id='share'>
@@ -17,25 +23,24 @@ import Icon from 'astro-icon'
     tabindex='0'
     class='dropdown-content w-12 rounded-full bg-gray text-white shadow'
   >
-    <button class='btn-ghost btn-circle btn hover:text-primary-light' data-sharer='facebook'>
-      <Icon name='ri:facebook-fill' class='h-6 w-6' />
-    </button>
-    <button class='btn-ghost btn-circle btn hover:text-primary-light' data-sharer='twitter'>
-      <Icon name='mdi:twitter' class='h-6 w-6' />
-    </button>
-    <button class='btn-ghost btn-circle btn hover:text-primary-light' data-sharer='linkedin'>
-      <Icon name='mdi:linkedin' class='h-6 w-6' />
-    </button>
-    <button class='btn-ghost btn-circle btn hover:text-primary-light' data-sharer='email'>
-      <Icon name='ic:baseline-email' class='h-6 w-6' />
-    </button>
+    {
+      buttons.map((btn) => (
+        <button
+          class='btn-ghost btn-circle btn hover:text-primary-light'
+          data-sharer={btn.share}
+          aria-label={'share ' + btn.share}
+        >
+          <Icon name={btn.icon} class='h-6 w-6' />
+        </button>
+      ))
+    }
     <!-- handle different -->
     <button
       class='swap btn-ghost swap-flip btn-circle btn hover:text-primary-light'
       data-sharer='copy'
     >
-      <Icon name='fa-solid:clone' class='h-5 w-5 swap-off' />
-      <Icon name='zondicons:checkmark' class='h-5 w-5 swap-on' />
+      <Icon name='fa-solid:clone' class='swap-off h-5 w-5' />
+      <Icon name='zondicons:checkmark' class='swap-on h-5 w-5' />
     </button>
   </div>
 </div>

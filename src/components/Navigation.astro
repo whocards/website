@@ -15,7 +15,13 @@ const links: Record<string, string>[] = [
 ---
 
 <div class='drawer drawer-end'>
-  <input id='who-drawer' type='checkbox' class='drawer-toggle' aria-label='sidebar toggle' />
+  <input
+    id='who-drawer'
+    type='checkbox'
+    class='drawer-toggle'
+    aria-label='sidebar toggle'
+    checked={false}
+  />
   <div class='drawer-content transition-all' id='main'>
     <!-- Navbar -->
     <div class='navbar fixed h-16 justify-between bg-transparent pl-0 pr-4 md:px-4'>

@@ -17,10 +17,10 @@ if (propTitle) {
 // question pages
 if (id) {
   titles.push(`Question #${id}`)
-  image = `${language}/${id}.png`
+  image = `images/${language}/${id}.png`
 }
 // complete image url
-image = `${site}${site?.toString().endsWith('/') ? '' : '/'}images/` + image
+image = `${site}${site?.toString().endsWith('/') ? '' : '/'}` + image
 
 const title = titles.join(' | ')
 ---
