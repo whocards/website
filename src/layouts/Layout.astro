@@ -2,6 +2,7 @@
 import Navigation from '~components/Navigation.astro'
 import {LanguageSwitcher} from '~components/Modal/LanguageSwitcher'
 import Head from './Head.astro'
+import {IS_DEV} from '~utils'
 
 import '~styles/base.css'
 
@@ -12,6 +13,7 @@ const {class: mainClasses, title, description, lang = 'en'} = Astro.props
 <html lang={lang} class='scroll-smooth bg-dark'>
   <head>
     <Head title={title} description={description} />
+    {!IS_DEV && <script defer='defer' data-domain='whocards.cc' src='/js/script.js' />}
   </head>
   <body
     class='m-0 flex min-h-screen flex-col bg-hero bg-fixed bg-center bg-no-repeat font-sans text-white'
