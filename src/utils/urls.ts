@@ -2,8 +2,6 @@ import {DEFAULT_LANGUAGE} from '~utils'
 import {idsStore} from '~stores/Game.store'
 import type {QuestionId} from '~types'
 
-export const IS_DEV = import.meta.env.IS_DEV === 'true'
-
 export const getTrimmedPath = () => window.location.pathname.replace(/\/$/, '')
 
 /**

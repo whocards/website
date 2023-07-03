@@ -8,9 +8,9 @@ const hasProcess = typeof process !== undefined
 
 export let SITE_URL: string = localhost
 
-let NETLIFY_URL: string | undefined
+export const IS_PROD = hasProcess && !!process.env.NETLIFY
 
-if (hasProcess && process.env.NETLIFY) {
+if (IS_PROD) {
   SITE_URL = (
     process.env.CONTEXT === 'production' ? process.env.URL : process.env.DEPLOY_PRIME_URL
   )!

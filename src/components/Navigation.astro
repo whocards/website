@@ -10,6 +10,7 @@ const links: Record<string, string>[] = [
   {href: '/', title: 'Home'},
   {href: '/mission', title: 'Mission'},
   {href: '/print', title: 'Print'},
+  {href: '/contact', title: 'Contact'},
 ]
 ---
 
@@ -17,7 +18,7 @@ const links: Record<string, string>[] = [
   <input id='who-drawer' type='checkbox' class='drawer-toggle' aria-label='sidebar toggle' />
   <div class='drawer-content transition-all' id='main'>
     <!-- Navbar -->
-    <div class='navbar fixed h-16 justify-between bg-transparent pr-4 pl-0 md:px-4'>
+    <div class='navbar fixed h-16 justify-between bg-transparent pl-0 pr-4 md:px-4'>
       <a href='/' aria-label='homepage link' class='btn-ghost btn'>
         <Icon name='logo' class='w-36' />
       </a>
