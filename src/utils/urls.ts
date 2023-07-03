@@ -32,3 +32,7 @@ export const getQuestionUrl = (id: QuestionId) => {
 
   return window.location.origin + getTrimmedPath().replace(/\/[^\/]*$/, `/${id}`)
 }
+
+export const isPrintPage = () => {
+  return window.location.pathname.replace(/\/+$/, '') === '/print'
+}

@@ -1,13 +1,13 @@
 import {ParentProps, createEffect, onCleanup, Show} from 'solid-js'
 import {Icon} from '@iconify-icon/solid'
-import {LANGUAGES, LANG_KEYS, getCurrentLanguage, getCurrentQuestionUrl} from '~utils'
+import {LANGUAGES, LANG_KEYS, getCurrentLanguage, getCurrentQuestionUrl, isPrintPage} from '~utils'
 import type {Language} from '~types'
 import {useStore} from '@nanostores/solid'
 import {$langStore, setLang} from '~stores/Language.store'
 
 // TODO get current language perhaps from url, query param, or persistant store
 export const LanguageSwitcher = () => {
-  const shouldUseStore = window.location.pathname === '/print'
+  const shouldUseStore = isPrintPage()
   const store = useStore($langStore)
   let ref: HTMLDialogElement
 
