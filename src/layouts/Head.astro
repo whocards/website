@@ -10,7 +10,7 @@ const titles: string[] = ['WhoCards']
 let description =
   propDesc ||
   'WhoCards help us create conversations that encourage honest self-expression, active listening and deeper human connections.'
-let image = `whocards-social.png`
+let image = `social.png`
 
 if (propTitle) {
   titles.push(propTitle)
@@ -73,15 +73,3 @@ const title = titles.join(' | ')
 
 <!-- generator -->
 <meta name='generator' content={Astro.generator} />
-
-<!-- Analytics -->
-<script>
-  // import * as amplitude from '@amplitude/analytics-browser'
-  // import {AMPLITUDE_API_KEY} from '~utils'
-
-  // if (AMPLITUDE_API_KEY) {
-  //   amplitude.init(AMPLITUDE_API_KEY, undefined, {
-  //     defaultTracking: {sessions: true, pageViews: true, formInteractions: true},
-  //   })
-  // }
-</script>
