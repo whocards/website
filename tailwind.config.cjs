@@ -41,7 +41,10 @@ module.exports = {
       },
       screens: {
         'phone-landscape': {
-          raw: `only screen and (max-height: 480px) and (max-width: 960px) and (orientation: portrait)`,
+          raw: 'only screen and (min-device-width: 480px) and (max-device-width: 960px) and (orientation: portrait)',
+        },
+        short: {
+          raw: '(max-height: 500px)',
         },
       },
     },
