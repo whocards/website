@@ -5,9 +5,6 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
-  '@amplitude/analytics-browser':
-    specifier: ^2.1.1
-    version: 2.1.1
   '@astrojs/image':
     specifier: ^0.17.2
     version: 0.17.2(astro@2.7.3)(sharp@0.32.1)
@@ -106,58 +103,6 @@ packages:
 
   /@altano/tiny-async-pool@1.0.2:
     resolution: {integrity: sha512-qQzaI0TBUPdpjZ3qo5b2ziQY9MSNpbziH2ZrE5lvtUZL+kn9GwVuVJwoOubaoNkeDB+rqEefnpu1k+oMpOCYiw==}
-    dev: false
-
-  /@amplitude/analytics-browser@2.1.1:
-    resolution: {integrity: sha512-fQbbPcIgfqqLZbQB9xUm4XXnxAJ+FJjvdH/TsKrT5/NPOOP6+t/quI4euYdj+3kZQI60KVhF6Z+PehwXlyfBEw==}
-    dependencies:
-      '@amplitude/analytics-client-common': 2.0.3
-      '@amplitude/analytics-core': 2.0.3
-      '@amplitude/analytics-types': 2.1.1
-      '@amplitude/plugin-page-view-tracking-browser': 2.0.3
-      '@amplitude/plugin-web-attribution-browser': 2.0.3
-      tslib: 2.6.0
-    dev: false
-
-  /@amplitude/analytics-client-common@2.0.3:
-    resolution: {integrity: sha512-Sb5c3oHVnXosIgvgbBbSZJzvUt6vNgDZc4cNijR2QEWmRWbbUZcM1s5dwuV/0d4lIJA6n7Ewv60cGw1twn5zXw==}
-    dependencies:
-      '@amplitude/analytics-connector': 1.4.8
-      '@amplitude/analytics-core': 2.0.3
-      '@amplitude/analytics-types': 2.1.1
-      tslib: 2.6.0
-    dev: false
-
-  /@amplitude/analytics-connector@1.4.8:
-    resolution: {integrity: sha512-dFW7c7Wb6Ng7vbmzwbaXZSpqfBx37ukamJV9ErFYYS8vGZK/Hkbt3M7fZHBI4WFU6CCwakr2ZXPme11uGPYWkQ==}
-    dev: false
-
-  /@amplitude/analytics-core@2.0.3:
-    resolution: {integrity: sha512-tpD1gCmPpzPNPumQT1ecOJtuan5OsQdKp9AX8YKc7t1/K3xHzGo3FH3JvdaAJVYYWeZV40bp/JL6wJiYIzyZjA==}
-    dependencies:
-      '@amplitude/analytics-types': 2.1.1
-      tslib: 2.6.0
-    dev: false
-
-  /@amplitude/analytics-types@2.1.1:
-    resolution: {integrity: sha512-H3vebPR9onRdp0WzAZmI/4qmAE903uLOd2ZfMeHsVc1zaFTTCk46SoCuV4IrlF+VILrDw9Fy6gC9yl5N2PZcJQ==}
-    dev: false
-
-  /@amplitude/plugin-page-view-tracking-browser@2.0.3:
-    resolution: {integrity: sha512-Rqy/x2OOCipRV+YEp0TRB0Dig/9Wsu3I9X3/kMD015B8a17p44Rgob6gVJKXl4JgMtZb2ZMgq52gqgGwolqhMQ==}
-    dependencies:
-      '@amplitude/analytics-client-common': 2.0.3
-      '@amplitude/analytics-types': 2.1.1
-      tslib: 2.6.0
-    dev: false
-
-  /@amplitude/plugin-web-attribution-browser@2.0.3:
-    resolution: {integrity: sha512-WojjFTZ5fPCgwyY9lBYN9KXfm+5b6DlezAfEUe9IURRyyfGgCVJOL+BKAiMwP49wQiwwVNtP2SqcVSOQ+9tYjw==}
-    dependencies:
-      '@amplitude/analytics-client-common': 2.0.3
-      '@amplitude/analytics-core': 2.0.3
-      '@amplitude/analytics-types': 2.1.1
-      tslib: 2.6.0
     dev: false
 
   /@ampproject/remapping@2.2.1:
