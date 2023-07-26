@@ -10,7 +10,7 @@
 # plausible analytics
 [[redirects]]
   from = "/js/script.js"
-  to = "https://plausible.io/js/script.js"
+  to = "https://plausible.io/js/script.file-downloads.js"
   status = 200
   force = true
 [[redirects]]

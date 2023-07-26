@@ -4,5 +4,5 @@ export const usePagesCMS = async () => await useSanityClient().fetch(groq`*[_typ
 
 export const usePageLinksCMS = async () =>
   await useSanityClient().fetch(
-    groq`*[_type == "page" && includeInMenu]{title, "href": url.current}`
+    groq`*[_type == "page" && includeInMenu]{title, "href": '/' + url.current}`
   )
