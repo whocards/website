@@ -5,6 +5,8 @@ import type {Language} from '~types'
 import {useStore} from '@nanostores/solid'
 import {$langStore, setLang} from '~stores/Language.store'
 
+const comingSoon: string[] = []
+
 // TODO get current language perhaps from url, query param, or persistant store
 export const LanguageSwitcher = () => {
   const shouldUseStore = isPrintPage()
@@ -62,11 +64,13 @@ export const LanguageSwitcher = () => {
               </Show>
             </QuestionLink>
           ))}
-          <div class='flex h-16 flex-col justify-center px-4 opacity-50'>
-            Hebrew
-            <br />
-            <span class='text-sm'>coming soon&hellip;</span>
-          </div>
+          {comingSoon.map((newLang) => (
+            <div class='flex h-16 flex-col justify-center px-4 opacity-50'>
+              {newLang}
+              <br />
+              <span class='text-sm'>coming soon&hellip;</span>
+            </div>
+          ))}
         </section>
       </form>
     </dialog>
