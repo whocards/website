@@ -4,6 +4,7 @@ const {href, title, selected} = Astro.props
 
 <li
   class:list={{
+    capitalize: true,
     'text-primary-light pointer-events-none': selected,
     'btn-ghost hover:text-primary-light hover:opacity-80 active:opacity-100': !selected,
   }}

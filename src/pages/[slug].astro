@@ -1,0 +1,24 @@
+---
+import Layout from '~layouts/Layout.astro'
+import {usePagesCMS} from '~utils/sanity'
+
+export async function getStaticPaths() {
+  const pages = await usePagesCMS()
+
+  return pages.map(({url, title, ...rest}: any) => ({
+    params: {slug: url.current},
+    props: {title, rest},
+  }))
+}
+const {slug} = Astro.params
+const {title, rest} = Astro.props
+---
+
+<Layout>
+  <h1
+    class='text-gradient font-title text-7xl font-extrabold uppercase leading-none tracking-tight text-white md:text-8xl xl:text-9xl'
+  >
+    {title}
+  </h1>
+  <hr class='w-full bg-white' />
+</Layout>
