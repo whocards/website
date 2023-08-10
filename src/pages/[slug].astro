@@ -1,24 +1,29 @@
 ---
+import TextSection from '~components/TextSection'
 import Layout from '~layouts/Layout.astro'
-import {usePagesCMS} from '~utils/sanity'
+import type {SanityPage} from '~types/Sanity'
+import {urlForImage, usePagesCMS} from '~utils/sanity'
 
 export async function getStaticPaths() {
   const pages = await usePagesCMS()
 
-  return pages.map(({url, title, ...rest}: any) => ({
+  return pages.map(({url, ...data}) => ({
     params: {slug: url.current},
-    props: {title, rest},
+    props: {data},
   }))
 }
+
 const {slug} = Astro.params
-const {title, rest} = Astro.props
+const data: SanityPage = Astro.props.data
 ---
 
-<Layout>
+<Layout class='mx-auto mt-10 md:max-w-3xl' align='justify-start'>
   <h1
-    class='text-gradient font-title text-7xl font-extrabold uppercase leading-none tracking-tight text-white md:text-8xl xl:text-9xl'
+    class='text-gradient my-12 font-title text-7xl font-extrabold uppercase leading-none tracking-tight text-white md:my-24 md:text-8xl xl:text-9xl'
   >
-    {title}
+    {data.title}
   </h1>
-  <hr class='w-full bg-white' />
+
+  <img src={urlForImage(data.image).url()} class='' alt={data.image.alt} />
+  {data.textSections.map((section) => <TextSection section={section} />)}
 </Layout>
