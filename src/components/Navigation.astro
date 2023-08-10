@@ -1,16 +1,19 @@
 ---
 import {Icon} from 'astro-icon'
-import {getCurrentLanguage} from '~utils/language'
+// import {getCurrentLanguage} from '~utils/language'
 import NavLink from './Buttons/NavLink.astro'
 import PreOrder from './Buttons/PreOrder.astro'
-const home = getCurrentLanguage(Astro.url.pathname)
+import {usePageLinksCMS} from '~utils/sanity'
+// const home = getCurrentLanguage(Astro.url.pathname)
 const isQuestionPage = Astro.url.pathname.includes('question')
+
+const pages = await usePageLinksCMS()
 
 const links: Record<string, string>[] = [
   {href: '/', title: 'Home'},
   {href: '/mission', title: 'Mission'},
   {href: '/print', title: 'Print'},
-  // {href: '/contact', title: 'Contact'},
+  ...pages,
 ]
 ---
 
