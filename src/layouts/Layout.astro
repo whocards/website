@@ -7,7 +7,7 @@ import {ViewTransitions} from 'astro:transitions'
 
 import '~styles/base.css'
 
-const {class: mainClasses, title, description, lang = 'en', hideLangModal} = Astro.props
+const {class: mainClasses = '', title, description, lang = 'en', hideLangModal} = Astro.props
 ---
 
 <!DOCTYPE html>
@@ -22,7 +22,11 @@ const {class: mainClasses, title, description, lang = 'en', hideLangModal} = Ast
   >
     <Navigation transition:persist>
       <main
-        class:list={['flex min-h-screen w-full flex-col items-center justify-center', mainClasses]}
+        class:list={[
+          'flex w-full flex-col items-center justify-center',
+          mainClasses,
+          !mainClasses.includes('min-h') && 'min-h-screen',
+        ]}
       >
         <slot />
       </main>
