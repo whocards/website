@@ -11,6 +11,9 @@ import robotsTxt from 'astro-robots-txt'
 
 // https://astro.build/config
 export default defineConfig({
+  experimental: {
+    viewTransitions: true,
+  },
   site: SITE_URL,
   trailingSlash: 'never',
   integrations: [

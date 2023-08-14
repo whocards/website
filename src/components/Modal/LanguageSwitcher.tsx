@@ -1,6 +1,6 @@
 import {ParentProps, createEffect, onCleanup, Show} from 'solid-js'
 import {Icon} from '@iconify-icon/solid'
-import {LANGUAGES, LANG_KEYS, getCurrentLanguage, getCurrentQuestionUrl, isPrintPage} from '~utils'
+import {LANGUAGES, getCurrentLanguage, getCurrentQuestionUrl, isPrintPage} from '~utils'
 import type {Language} from '~types'
 import {useStore} from '@nanostores/solid'
 import {$langStore, setLang} from '~stores/Language.store'
@@ -86,7 +86,7 @@ interface QuestionLinkProps extends ParentProps {
 const QuestionButton = (props: QuestionLinkProps) => {
   return (
     <button
-      onclick={() => setLang(props.lang)}
+      onClick={() => setLang(props.lang)}
       class='who-modal btn-ghost flex h-16 w-full items-center px-4'
       classList={{'text-primary-dark active-language': props.selected}}
     >
@@ -105,6 +105,7 @@ const QuestionLink = (props: QuestionLinkProps) => {
       href={getCurrentQuestionUrl(props.lang)}
       class='who-modal btn-ghost flex h-16 w-full items-center px-4'
       classList={{'text-primary-dark active-language': props.selected}}
+      onClick={() => window.langsModal.close()}
     >
       {props.children}
     </a>

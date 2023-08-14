@@ -1,7 +1,7 @@
 ---
 import Icon from 'astro-icon'
 import ShareButton from './Share.astro'
-// import {FullScreen} from './FullScreen'
+import FullScreen from './FullScreen.astro'
 
 interface Props {
   language: string | undefined
@@ -17,13 +17,15 @@ const {language} = Astro.params
   >
     <!-- back button -->
     <a id='prev' class='btn-game enabled' href='' aria-label='previous question'>
-      <Icon name='ic:outline-arrow-back' class:list='h-10 w-10' />
+      <Icon name='ic:outline-arrow-back' class='h-10 w-10' />
     </a>
     <!-- full screen button -->
-    <!-- <FullScreen client:only /> -->
+    <FullScreen />
     <!-- language button -->
     <button
-      onclick='langsModal.showModal()'
+      onclick='
+      langsModal.showModal()
+      '
       aria-label='change language'
       class:list={[
         'btn btn-circle who-modal uppercase bg-gray hover:bg-gray hover:text-primary-light',
@@ -51,53 +53,66 @@ const {language} = Astro.params
 <script>
   import {debounce} from '~utils/debounce'
 
-  const el = document.getElementById('controls')
-
-  if (el) {
-    const hide = () => el.classList.add('translate-y-16')
-    const show = () => el.classList.remove('translate-y-16')
-    const delayHide = debounce(() => hide(), 3000)
-
-    delayHide()
-
-    document.addEventListener('pointermove', () => {
-      show()
-      delayHide()
-    })
-  }
-</script>
-
-<script>
   import {initPage, idsStore, GameStatus} from '~stores/Game.store'
   import {getCurrentQuestionId, getQuestionUrl} from '~utils'
 
-  initPage(getCurrentQuestionId())
+  const addToggle = () => {
+    const el = document.getElementById('controls')
 
-  const dirs = ['prev', 'next']
-  const els = {
-    [dirs[0]]: document.getElementById(dirs[0])!,
-    [dirs[1]]: document.getElementById(dirs[1])!,
-  }
-  const keys: {[key: string]: string} = {
-    ArrowLeft: dirs[0],
-    ArrowRight: dirs[1],
-  }
+    if (el) {
+      const hide = () => el.classList.add('translate-y-16')
+      const show = () => el.classList.remove('translate-y-16')
+      const delayHide = debounce(() => hide(), 3000)
 
-  dirs.forEach((dir) => {
-    const qid = idsStore.get()[dir as keyof GameStatus]
+      delayHide()
 
-    if (qid) {
-      els[dir].setAttribute('href', getQuestionUrl(qid)!)
-    } else {
-      els[dir].classList.replace('enabled', 'disabled')
+      document.addEventListener('pointermove', () => {
+        show()
+        delayHide()
+      })
     }
+  }
+
+  const addNextPrev = () => {
+    initPage(getCurrentQuestionId())
+
+    const dirs = ['prev', 'next']
+    const els = {
+      [dirs[0]]: document.getElementById(dirs[0])!,
+      [dirs[1]]: document.getElementById(dirs[1])!,
+    }
+    const keys: {[key: string]: string} = {
+      ArrowLeft: 'prev',
+      ArrowRight: 'next',
+    }
+
+    dirs.forEach((dir) => {
+      const qid = idsStore.get()[dir as keyof GameStatus]
+
+      if (qid) {
+        els[dir].setAttribute('href', getQuestionUrl(qid)!)
+      } else {
+        els[dir].classList.replace('enabled', 'disabled')
+      }
+    })
+
+    const keyPress = ({key}: KeyboardEvent) => {
+      if (Object.keys(keys).includes(key)) {
+        const qid = idsStore.get()[keys[key] as keyof GameStatus]
+        if (!qid) return
+
+        window.location.href = getQuestionUrl(qid)
+      }
+    }
+
+    document.addEventListener('keydown', keyPress)
+  }
+
+  addToggle()
+  addNextPrev()
+
+  document.addEventListener('astro:load', () => {
+    addToggle()
+    addNextPrev()
   })
-
-  const keyPress = ({key}: KeyboardEvent) => {
-    if (Object.keys(keys).includes(key)) {
-      els[keys[key]].click()
-    }
-  }
-
-  document.addEventListener('keydown', keyPress)
 </script>
