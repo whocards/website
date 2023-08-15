@@ -3,10 +3,11 @@ import Navigation from '~components/Navigation.astro'
 import {LanguageSwitcher} from '~components/Modal/LanguageSwitcher'
 import Head from './Head.astro'
 import {IS_PROD} from '#scripts/env'
+import {ViewTransitions} from 'astro:transitions'
 
 import '~styles/base.css'
 
-const {class: mainClasses, title, description, lang = 'en', hideLangModal} = Astro.props
+const {class: mainClasses = '', title, description, lang = 'en', hideLangModal} = Astro.props
 ---
 
 <!DOCTYPE html>
@@ -14,18 +15,23 @@ const {class: mainClasses, title, description, lang = 'en', hideLangModal} = Ast
   <head>
     <Head title={title} description={description} />
     {IS_PROD && <script defer='defer' data-domain='whocards.cc' src='/js/script.js' />}
+    <ViewTransitions />
   </head>
   <body
     class='m-0 flex min-h-screen flex-col bg-hero bg-fixed bg-center bg-no-repeat font-sans text-white'
   >
-    <Navigation>
+    <Navigation transition:persist>
       <main
-        class:list={['flex min-h-screen w-full flex-col items-center justify-center', mainClasses]}
+        class:list={[
+          'flex w-full flex-col items-center justify-center',
+          mainClasses,
+          !mainClasses.includes('min-h') && 'min-h-screen',
+        ]}
       >
         <slot />
       </main>
     </Navigation>
-    {!hideLangModal && <LanguageSwitcher client:only />}
+    {!hideLangModal && <LanguageSwitcher client:only transition:persist />}
     <style is:global></style>
   </body>
 </html>

@@ -1,0 +1,53 @@
+---
+import Icon from 'astro-icon'
+---
+
+<label id='btn-full-screen' class='btn-game swap swap-rotate relative'>
+  <input type='checkbox' id='full-screen' />
+  <Icon name='ps:full-screen' class='swap-off absolute h-6 w-6' />
+  <Icon name='ps:resize' class='swap-on absolute h-6 w-6' />
+</label>
+
+<script>
+  interface Elmnt extends HTMLElement {
+    webkitRequestFullscreen(): void
+  }
+  interface Doc extends Document {
+    webkitExitFullscreen(): void
+    webkitFullscreenElement: Element
+  }
+
+  const addOnClick = () => {
+    document.getElementById('btn-full-screen')?.addEventListener('click', () => {
+      const doc = document as Doc
+      const el = doc.documentElement as Elmnt
+      // TODO test on more devices
+      // safari
+      if (!!doc.webkitExitFullscreen) {
+        if (!doc.webkitFullscreenElement) {
+          el.webkitRequestFullscreen()
+        } else {
+          doc.webkitExitFullscreen()
+        }
+      } else {
+        // chrome / firefox
+        if (!doc.fullscreenElement) {
+          if (el.requestFullscreen) {
+            el.requestFullscreen()
+          } else {
+            doc.exitFullscreen()
+          }
+        }
+      }
+    })
+
+    const checkbox = document.getElementById('full-screen') as HTMLInputElement
+    if (checkbox && window.matchMedia('(display-mode: fullscreen)').matches) {
+      checkbox.checked = true
+    }
+  }
+
+  addOnClick()
+
+  document.addEventListener('astro:beforeload', addOnClick)
+</script>

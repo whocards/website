@@ -13,13 +13,23 @@ https://github.com/whocards/website
 https://icon-sets.iconify.design/
 https://app.netlify.com/sites/whocards-calmly/overview
 
-# questions / non critical upgrades
+# TODO list
 
-- [ ] switch to using our icons?
+## General items
+
+- [ ] switch to using our icons
 - [x] share modal
 - [ ] update readme
-- [ ] animations
+- [x] animations
 - [ ] testing
 - [ ] remove redirects from trailing slash
-- [ ] track file downloads https://plausible.io/docs/file-downloads-tracking
-- [ ] hebrew seo images
+- [x] track file downloads https://plausible.io/docs/file-downloads-tracking
+- [x] hebrew seo images
+- [ ] rewrite GameControls into solid and persist
+- [ ] implement changelog and versioning
+- [ ] move todo items to github project
+
+## SEO
+
+- [ ] add redirect for old pages
+- [ ] /lang/question/undefined is showing up somehow?

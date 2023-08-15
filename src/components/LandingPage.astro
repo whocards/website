@@ -36,5 +36,8 @@ import Layout from '~layouts/Layout.astro'
   initGame()
 
   document.getElementById('play')?.setAttribute('href', getCurrentQuestionUrl())
-  // document.getElementById('play-wrapper')?.classList.remove('opacity-0')
+
+  document.addEventListener('astro:beforeload', () => {
+    document.getElementById('play')?.setAttribute('href', getCurrentQuestionUrl())
+  })
 </script>

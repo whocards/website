@@ -63,7 +63,7 @@ const links: Record<string, string>[] = [
 
 <!-- hamburger menu -->
 <div class:list={['flex-none fixed right-1 md:right-5 top-2 z-10', {'lg:hidden': !isQuestionPage}]}>
-  <label class='right swap btn-ghost swap-rotate btn-square btn' id='who-menu-button'>
+  <label class='right swap-rotate swap btn-ghost btn-square btn' id='who-menu-button'>
     <!-- hamburger icon -->
     <svg
       class='swap-off fill-current'
@@ -89,12 +89,18 @@ const links: Record<string, string>[] = [
 </div>
 
 <script>
-  const button = document.getElementById('who-menu-button')!
-  const drawer = document.getElementById('who-drawer')! as HTMLInputElement
+  const addMenuClick = () => {
+    const button = document.getElementById('who-menu-button')!
+    const drawer = document.getElementById('who-drawer')! as HTMLInputElement
 
-  button.addEventListener('click', (e) => {
-    e.preventDefault()
-    drawer.checked = !drawer.checked
-    button.classList.toggle('swap-active')
-  })
+    button.addEventListener('click', (e) => {
+      e.preventDefault()
+      drawer.checked = !drawer.checked
+      button.classList.toggle('swap-active')
+    })
+  }
+
+  addMenuClick()
+
+  document.addEventListener('astro:beforeload', addMenuClick)
 </script>

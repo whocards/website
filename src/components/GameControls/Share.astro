@@ -49,49 +49,54 @@ const buttons = [
   import {idsStore} from '~stores/Game.store'
   import {socialShare} from '~utils'
 
-  const title = 'Who cards - Question ' + idsStore.get().current
-  const url = window.location.toString() + '?utm='
-  // const url = 'https://calmly.whocards.cc' + window.location.pathname
+  const addShare = () => {
+    const title = 'Who cards - Question ' + idsStore.get().current
+    const url = window.location.toString() + '?utm='
+    // const url = 'https://calmly.whocards.cc' + window.location.pathname
 
-  // use navigator share on mobile
-  if (!!navigator.share) {
-    document.getElementById('share-dropdown')!.remove()
-    document.getElementById('share')!.addEventListener('click', (e) => {
-      e.preventDefault()
-      e.stopPropagation()
-      navigator.share({
-        title,
-        url: url + 'mobile',
-      })
-    })
-  } else {
-    document.getElementById('share')!.remove()
-    document.getElementById('share-dropdown')!.className = 'dropdown dropdown-top dropdown-hover'
-    // share
-    const els = document.getElementById('share-menu')?.children
-    if (els) {
-      for (let i = 0; i < els.length; i++) {
-        const el = els[i] as HTMLButtonElement
-        const social = el.dataset.sharer
-        const isCopy = social === 'copy'
-
-        el.addEventListener('click', () => {
-          el.classList.add('pointer-events-none')
-
-          if (isCopy) {
-            el.classList.add('swap-active')
-          }
-
-          socialShare(social, title, url + social)
-
-          setTimeout(() => {
-            el.classList.remove('pointer-events-none')
-            if (isCopy) {
-              el.classList.remove('swap-active')
-            }
-          }, 2000)
+    // use navigator share on mobile
+    if (!!navigator.share) {
+      document.getElementById('share-dropdown')!.remove()
+      document.getElementById('share')!.addEventListener('click', (e) => {
+        e.preventDefault()
+        e.stopPropagation()
+        navigator.share({
+          title,
+          url: url + 'mobile',
         })
+      })
+    } else {
+      document.getElementById('share')!.remove()
+      document.getElementById('share-dropdown')!.className = 'dropdown dropdown-top dropdown-hover'
+      // share
+      const els = document.getElementById('share-menu')?.children
+      if (els) {
+        for (let i = 0; i < els.length; i++) {
+          const el = els[i] as HTMLButtonElement
+          const social = el.dataset.sharer
+          const isCopy = social === 'copy'
+
+          el.addEventListener('click', () => {
+            el.classList.add('pointer-events-none')
+
+            if (isCopy) {
+              el.classList.add('swap-active')
+            }
+
+            socialShare(social, title, url + social)
+
+            setTimeout(() => {
+              el.classList.remove('pointer-events-none')
+              if (isCopy) {
+                el.classList.remove('swap-active')
+              }
+            }, 2000)
+          })
+        }
       }
     }
   }
+
+  addShare()
+  document.addEventListener('astro:beforeload', addShare)
 </script>
