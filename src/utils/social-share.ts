@@ -1,27 +1,31 @@
 // copied with love from https://github.com/ellisonleao/sharer.js/blob/main/sharer.js
-export type Social = 'facebook' | 'linkedin' | 'twitter' | 'email' | 'copy'
+type SocialCopy = 'copy' | 'copy-pic'
+type SocialShare = 'facebook' | 'linkedin' | 'twitter' | 'email'
+export type Social = SocialShare | SocialCopy
 
-type SocialKey = Exclude<Social, 'copy'>
-
-const urls: Record<SocialKey, string> = {
+const urls: Record<SocialShare, string> = {
   facebook: 'https://www.facebook.com/sharer/sharer.php?u={URL}&quote={TITLE}',
   linkedin: 'https://www.linkedin.com/shareArticle?mini=true&url={URL}',
   twitter: 'https://twitter.com/intent/tweet?url={URL}&text={TITLE}',
   email: 'mailto:?subject={TITLE}&body={URL}',
 }
 
-export const socialShare = (social: Social | string | undefined, title: string, url: string) => {
+export const socialShare = async (social: Social | undefined, title: string, url: string) => {
   // handle invalid social
-  if (!social || (!urls[social as SocialKey] && social !== 'copy')) {
+  if (!social) {
     console.error(social, 'is not supported')
     return
   }
 
   if (social === 'copy') {
-    navigator.clipboard.writeText(url)
+    await navigator.clipboard.writeText(url)
+  } else if (social === 'copy-pic') {
+    const response = await fetch(url)
+    const blob = await response.blob()
+    await navigator.clipboard.write([new ClipboardItem({'image/png': blob})])
   } else {
     // create share url
-    const shareUrl = urls[social as SocialKey]
+    const shareUrl = urls[social as SocialShare]
       .replace('{URL}', encodeURIComponent(url))
       .replace('{TITLE}', encodeURIComponent(title))
 
