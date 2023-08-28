@@ -1,0 +1,44 @@
+---
+import Icon from 'astro-icon'
+---
+
+<form
+  data-netlify='true'
+  netlify-honeypot
+  name='email-signup'
+  method='post'
+  onsubmit='onSubmit(); return false'
+>
+  <p class='hidden'>
+    <label>
+      Don't fill this out if you're human: <input name='bot-field' />
+    </label>
+  </p>
+  <input type='hidden' name='form-name' value='email-signup' />
+  <!-- <label for='name'>Name</label> -->
+  <!-- <input id='name' type='text' name='name' /> -->
+  <!-- <label for='email'>Email</label> -->
+  <span class='relative h-14'>
+    <input
+      class='h-14 w-full rounded-full pl-5 text-lg md:w-64'
+      id='email'
+      type='email'
+      name='email'
+      placeholder='email'
+      required
+    />
+    <button
+      class='absolute bottom-0 right-0 top-0 my-auto flex h-14 w-14 items-center justify-center'
+      type='submit'
+    >
+      <Icon name='ic:round-send' class='h-10 w-10' />
+    </button>
+  </span>
+</form>
+
+<script is:inline>
+  const onSubmit = (e) => {
+    console.log('submitted', document.getElementById('email').value)
+    return false
+  }
+</script>
