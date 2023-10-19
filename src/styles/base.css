@@ -103,7 +103,7 @@ html {
 }
 
 .btn-game {
-  @apply btn-ghost btn-circle btn transition-all duration-300 ease-in-out hover:text-yellow-500;
+  @apply btn btn-circle btn-ghost transition-all duration-300 ease-in-out hover:text-yellow-500;
 }
 
 .text-gradient {

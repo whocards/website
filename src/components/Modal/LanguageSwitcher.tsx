@@ -42,7 +42,7 @@ export const LanguageSwitcher = () => {
           <h2 class='text-2xl font-bold'>Choose your language</h2>
           <button
             onClick={() => ref?.close()}
-            class='btn-ghost btn-square btn'
+            class='btn btn-square btn-ghost'
             aria-label='close modal'
           >
             <Icon icon='ic:round-close' class='text-2xl' />

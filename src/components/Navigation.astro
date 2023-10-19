@@ -10,6 +10,7 @@ const links: Record<string, string>[] = [
   {href: '/', title: 'Home'},
   {href: '/mission', title: 'Mission'},
   {href: '/print', title: 'Print'},
+  // {href: '/preorder', title: 'Preorder'}
   // {href: '/contact', title: 'Contact'},
 ]
 ---
@@ -31,13 +32,7 @@ const links: Record<string, string>[] = [
       <div class:list={['flex-none hidden', {' lg:block': !isQuestionPage}]}>
         <ul class='menu menu-horizontal'>
           <!-- Navbar menu content here -->
-          {
-            links.map((link) => (
-              <li>
-                <NavLink {...link} selected={Astro.url.pathname === link.href} />
-              </li>
-            ))
-          }
+          {links.map((link) => <NavLink {...link} selected={Astro.url.pathname === link.href} />)}
           <PreOrder class='ml-4' />
         </ul>
       </div>
@@ -49,13 +44,7 @@ const links: Record<string, string>[] = [
     <label for='who-drawer' class='drawer-overlay'></label>
     <ul class='menu h-full w-80 bg-dark py-10'>
       <!-- Sidebar content here -->
-      {
-        links.map((link) => (
-          <li>
-            <NavLink {...link} selected={Astro.url.pathname === link.href} />
-          </li>
-        ))
-      }
+      {links.map((link) => <NavLink {...link} selected={Astro.url.pathname === link.href} />)}
       <PreOrder class='mt-4' />
     </ul>
   </div>
