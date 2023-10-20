@@ -11,7 +11,6 @@
     "pretty": "prettier --write .",
     "prepare": "is-ci || husky install",
     "analyze": "pnpx unlighthouse --site https://calmly.whocards.cc",
-    "db:studio": "drizzle-kit studio",
     "db:pull": "drizzle-kit introspect:pg",
     "db:push": "drizzle-kit push:pg"
   },
@@ -28,7 +27,6 @@
     "@astrojs/tailwind": "^5.0.2",
     "@nanostores/persistent": "^0.9.1",
     "@nanostores/solid": "^0.4.2",
-    "@prisma/client": "^5.4.2",
     "@solid-primitives/keyboard": "^1.2.5",
     "@t3-oss/env-core": "^0.7.1",
     "@tailwindcss/typography": "^0.5.10",
@@ -60,9 +58,7 @@
     "lint-staged": "^15.0.1",
     "prettier": "^3.0.3",
     "prettier-plugin-astro": "^0.12.0",
-    "prettier-plugin-prisma": "^5.0.0",
     "prettier-plugin-tailwindcss": "^0.5.6",
-    "prisma": "^5.4.2",
     "tailwindcss-breakpoints-inspector": "^1.1.0"
   }
 }

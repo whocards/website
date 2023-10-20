@@ -63,12 +63,12 @@ const handler: Handler = async (event, context) => {
   }
 
   // add to DB and sheets
-  const [dbEntry, sheetEntry] = await Promise.all([
-    db.insert(schema.purchase).values(purchase),
+  const [dbEntry, sheetEntry] = await Promise.allSettled([
+    db.insert(schema.purchase).values(purchase).returning(),
     fetch(env.SHEET_URL, {
       method: 'POST',
       body: serialize(purchase),
-    }),
+    }).then((res) => res.json()),
   ])
 
   console.log({dbEntry, sheetEntry})

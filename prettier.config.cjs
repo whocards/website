@@ -6,7 +6,7 @@ const config = {
   bracketSpacing: false,
   jsxSingleQuote: true,
   printWidth: 100,
-  plugins: ['prettier-plugin-tailwindcss', 'prettier-plugin-astro', 'prettier-plugin-prisma'],
+  plugins: ['prettier-plugin-tailwindcss', 'prettier-plugin-astro'],
   overrides: [
     {
       files: '*.astro',

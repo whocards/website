@@ -3,7 +3,7 @@ import type {Config} from 'drizzle-kit'
 dotenv.config()
 
 const config: Config = {
-  schema: './src/server/schema/*',
+  schema: './src/server/schema.ts',
   out: './src/server/schema',
   driver: 'pg',
   dbCredentials: {

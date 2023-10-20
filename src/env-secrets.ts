@@ -14,5 +14,5 @@ export const env = createEnv({
     DB_URL: z.string(),
     SHEET_URL: z.string(),
   },
-  runtimeEnv: import.meta.env,
+  runtimeEnv: process.env,
 })
