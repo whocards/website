@@ -13,7 +13,6 @@ export const env = createEnv({
     OC_REDIRECT_URL: z.string().optional(),
     DB_URL: z.string(),
     SHEET_URL: z.string(),
-    STRIPE_PUBLIC_KEY: z.string(),
   },
   runtimeEnv: import.meta.env,
 })
