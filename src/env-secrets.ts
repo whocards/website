@@ -9,6 +9,8 @@ export const env = createEnv({
     OC_API_KEY: z.string(),
     OC_API_URL: z.string(),
     OC_URL: z.string(),
+    OC_PRODUCT_IDS: z.string().transform((val: string) => val.split(',')),
+    OC_REDIRECT_URL: z.string().optional(),
     DB_URL: z.string(),
     SHEET_URL: z.string(),
     STRIPE_PUBLIC_KEY: z.string(),
