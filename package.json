@@ -10,7 +10,6 @@
     "preview": "astro preview",
     "pretty": "prettier --write .",
     "prepare": "is-ci || husky install",
-    "postinstall": "pnpm db:generate",
     "analyze": "pnpx unlighthouse --site https://calmly.whocards.cc",
     "db:studio": "drizzle-kit studio",
     "db:pull": "drizzle-kit introspect:pg",
