@@ -6,9 +6,16 @@ import robotsTxt from 'astro-robots-txt'
 import {defineConfig} from 'astro/config'
 import {SITE_URL as site} from './src/constants/env'
 
+import netlify from '@astrojs/netlify/functions'
+
 // https://astro.build/config
 export default defineConfig({
   site,
+  build: {
+    format: 'file',
+  },
   trailingSlash: 'never',
   integrations: [solid(), tailwind(), mdx(), sitemap(), robotsTxt()],
+  output: 'hybrid',
+  adapter: netlify(),
 })

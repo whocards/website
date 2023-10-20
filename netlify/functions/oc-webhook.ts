@@ -1,9 +1,8 @@
 import type {Handler} from '@netlify/functions'
-import type {Purchase} from '@prisma/client'
 import {serialize} from 'object-to-formdata'
 import {env} from '~env-secrets'
+import {db, schema, type PurchaseCreate} from '~server/db'
 import {graphQLClient, userEmailQuery, type UserWithEmail} from '~server/graphql'
-import {prisma} from '~server/prisma'
 import type {Contribution} from '~types/contributions'
 
 const handledTypes = ['collective.transaction.created']
@@ -51,23 +50,21 @@ const handler: Handler = async (event, context) => {
   })
   const email = user.individual.emails[0]
 
-  const purchase: Purchase = {
+  const purchase: PurchaseCreate = {
     id: body.data.transaction.uuid,
     name: body.data.fromCollective.name,
     slug: body.data.fromCollective.slug,
     email: email,
     price: body.data.transaction.amountInHostCurrency,
     netPrice: body.data.transaction.netAmountInHostCurrency,
-    date: new Date(body.data.transaction.createdAt),
+    date: new Date(body.data.transaction.createdAt).toISOString(),
     category: contributionType,
     addressProvided: false,
   }
 
   // add to DB and sheets
   const [dbEntry, sheetEntry] = await Promise.all([
-    prisma.purchase.create({
-      data: purchase,
-    }),
+    db.insert(schema.purchase).values(purchase),
     fetch(env.SHEET_URL, {
       method: 'POST',
       body: serialize(purchase),
