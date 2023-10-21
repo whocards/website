@@ -1,7 +1,7 @@
 import type {Handler} from '@netlify/functions'
 import {serialize} from 'object-to-formdata'
 import {env} from '~env-secrets'
-import {db, schema, type PurchaseCreate} from '~server/db'
+import {db, insertPurchaseSchema, insertUserSchema, schemas} from '~server/db'
 import {graphQLClient, userEmailQuery, type UserWithEmail} from '~server/graphql'
 import type {Contribution} from '~types/contributions'
 
@@ -50,21 +50,31 @@ const handler: Handler = async (event, context) => {
   })
   const email = user.individual.emails[0]
 
-  const purchase: PurchaseCreate = {
-    id: body.data.transaction.uuid,
+  // validate user exists
+  const parseUser = insertUserSchema.parse({
     name: body.data.fromCollective.name,
     slug: body.data.fromCollective.slug,
-    email: email,
+    email,
+  })
+
+  const [dbUser] = await db
+    .insert(schemas.users)
+    .values(parseUser)
+    .onConflictDoNothing()
+    .returning()
+
+  const purchase = insertPurchaseSchema.parse({
+    id: body.data.transaction.uuid,
     price: body.data.transaction.amountInHostCurrency,
     netPrice: body.data.transaction.netAmountInHostCurrency,
-    date: new Date(body.data.transaction.createdAt).toISOString(),
+    date: new Date(body.data.transaction.createdAt),
     category: contributionType,
-    addressProvided: false,
-  }
+    userId: dbUser.id,
+  })
 
   // add to DB and sheets
   const [dbEntry, sheetEntry] = await Promise.allSettled([
-    db.insert(schema.purchase).values(purchase).returning(),
+    db.insert(schemas.purchases).values(purchase).returning(),
     fetch(env.SHEET_URL, {
       method: 'POST',
       body: serialize(purchase),
