@@ -6,11 +6,20 @@ import Input from '~components/Form/Input.astro'
 import {openCollectiveProducts} from '~constants/products'
 import Layout from '~layouts/Layout.astro'
 import {createSheetRow, createZenShipping} from '~server/csv'
-import {getPurchaseById, insertShippingAddress, insertShippingSchema} from '~server/db'
+import {
+  getPurchaseById,
+  insertShippingAddress,
+  insertShippingSchema,
+  type PurchaseSelect,
+  type UserSelect,
+} from '~server/db'
 
 let errors
 let formData
 let submitted: boolean = false
+let user: UserSelect | null
+let purchase: PurchaseSelect
+let quantity: number
 
 // TODO validate not resubmitting
 
@@ -51,12 +60,16 @@ if (!purchaseId) {
   return Astro.redirect('/preorder?error=missingParams')
 }
 
-const {user, purchase} = await getPurchaseById(purchaseId)
-const {quantity} = openCollectiveProducts.filter((p) => p.title === purchase.category)[0]
-
-// TODO where should redirect happen?
-if (!user || !purchase) {
-  return Astro.redirect('/preorder?error=invalidOrderId')
+try {
+  const dbModels = await getPurchaseById(purchaseId)
+  purchase = dbModels.purchase
+  user = dbModels.user
+  quantity = openCollectiveProducts.filter((p) => p.title === purchase.category)[0].quantity
+  if (!user || !purchase || !quantity) {
+    throw new Error('invalidParams')
+  }
+} catch (error) {
+  return Astro.redirect('/preorder?error=invalidParams')
 }
 ---
 
