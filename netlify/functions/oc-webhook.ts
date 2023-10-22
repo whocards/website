@@ -8,23 +8,26 @@ import type {Contribution} from '~types/contributions'
 
 const handledTypes = ['collective.transaction.created']
 
+const exit = (statusCode: number, reason: string) => {
+  console.log(reason)
+  console.log('=================')
+  return {statusCode}
+}
+
 const handler: Handler = async (event, context) => {
   // validate auth
   const authToken = event.queryStringParameters?.auth_token
   if (authToken !== env.WEBHOOK_AUTH_TOKEN) {
-    console.error('INVALID AUTH TOKEN')
-    return {statusCode: 401}
+    return exit(401, 'INVALID AUTH TOKEN')
   }
   // validate method
   if (event.httpMethod !== 'POST') {
-    console.error('INVALID METHOD')
-    return {statusCode: 405}
+    return exit(405, 'INVALID METHOD')
   }
 
   // validate and parse body
   if (!event.body) {
-    console.error('NO BODY')
-    return {statusCode: 400}
+    return exit(400, 'NO BODY')
   }
 
   console.log('=================')
@@ -33,7 +36,7 @@ const handler: Handler = async (event, context) => {
 
   const body = JSON.parse(event.body) as Contribution
   if (!handledTypes.includes(body.type)) {
-    console.error('INVALID TYPE')
+    console.log('SKIPPING TYPE', body.type)
     return {statusCode: 200}
   }
 
