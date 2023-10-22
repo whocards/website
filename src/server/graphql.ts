@@ -33,7 +33,7 @@ export type OrderId = {
 
 export const orderIdFromLegacyQuery = gql`
   query order($id: Int!) {
-    order(legacyId: $id) {
+    order(order: {legacyId: $id}) {
       id
     }
   }
