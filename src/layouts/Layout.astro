@@ -6,6 +6,14 @@ import Head from './Head.astro'
 
 import '~styles/base.css'
 
+export interface Props {
+  class?: string
+  title?: string
+  description?: string
+  lang?: string
+  showLangModal?: boolean
+}
+
 const {class: mainClasses, title, description, lang = 'en', showLangModal} = Astro.props
 ---
 

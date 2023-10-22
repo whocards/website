@@ -1,4 +1,4 @@
-import { openCollectiveProducts } from '~constants/products'
+import {openCollectiveProducts} from '~constants/products'
 
 export const PreOrderCards = () => {
   return (

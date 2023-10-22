@@ -1,5 +1,6 @@
 import type {Handler} from '@netlify/functions'
 import {serialize} from 'object-to-formdata'
+import {openCollectiveProducts} from '~constants/products'
 import {env} from '~env-secrets'
 import {db, insertPurchaseSchema, insertUserSchema, schemas} from '~server/db'
 import {graphQLClient, userEmailQuery, type UserWithEmail} from '~server/graphql'
@@ -38,9 +39,8 @@ const handler: Handler = async (event, context) => {
 
   // get contribution type
   const {description} = body.data.transaction
-  const regex = /\(([^)]+)\)/
-  const matches = regex.exec(description)
-  const contributionType = matches?.[1] ?? description
+  const product = openCollectiveProducts.find((p) => description.includes(p.title))
+  const contributionType = product?.title ?? description
 
   console.log('contributionType', contributionType)
 
@@ -48,19 +48,20 @@ const handler: Handler = async (event, context) => {
   const user = await graphQLClient.request<UserWithEmail>(userEmailQuery, {
     slug: body.data.fromCollective.slug,
   })
+  console.log('user', user)
   const email = user.individual.emails[0]
 
   // validate user exists
   const parseUser = insertUserSchema.parse({
     name: body.data.fromCollective.name,
-    slug: body.data.fromCollective.slug,
+    ocSlug: body.data.fromCollective.slug,
     email,
   })
 
   const [dbUser] = await db
     .insert(schemas.users)
     .values(parseUser)
-    .onConflictDoNothing()
+    .onConflictDoUpdate({target: schemas.users.email, set: {name: parseUser.name}})
     .returning()
 
   const purchase = insertPurchaseSchema.parse({
@@ -75,9 +76,17 @@ const handler: Handler = async (event, context) => {
   // add to DB and sheets
   const [dbEntry, sheetEntry] = await Promise.allSettled([
     db.insert(schemas.purchases).values(purchase).returning(),
-    fetch(env.SHEET_URL, {
+    fetch(env.PURCHASE_SHEET_URL, {
       method: 'POST',
-      body: serialize(purchase),
+      body: serialize({
+        id: purchase.id,
+        date: purchase.date.toISOString().split('T')[0],
+        name: dbUser.name,
+        email: dbUser.email,
+        price: purchase.price / 100,
+        netPrice: purchase.netPrice / 100,
+        category: purchase.category,
+      }),
     }).then((res) => res.json()),
   ])
 

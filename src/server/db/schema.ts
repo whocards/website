@@ -25,9 +25,9 @@ export const purchases = pgTable('purchase', {
 })
 
 export const purchasesRelations = relations(purchases, ({one}) => ({
-  shipping: one(shipping, {
+  shipping: one(shippings, {
     fields: [purchases.id],
-    references: [shipping.purchaseId],
+    references: [shippings.purchaseId],
   }),
   user: one(users, {
     fields: [purchases.userId],
@@ -35,9 +35,12 @@ export const purchasesRelations = relations(purchases, ({one}) => ({
   }),
 }))
 
-export const shipping = pgTable('shipping', {
+export const shippings = pgTable('shipping', {
   id: serial('id').primaryKey(),
-  date: timestamp('date', {mode: 'date'}).notNull(),
+  createdAt: timestamp('created_at').notNull().defaultNow(),
+  updatedAt: timestamp('updated_at'),
+  name: text('name').notNull(),
+  email: text('email').notNull(),
   phone: text('phone').notNull(),
   company: text('company'),
   address: text('address').notNull(),
@@ -52,9 +55,9 @@ export const shipping = pgTable('shipping', {
     .references(() => purchases.id),
 })
 
-export const shippingRelations = relations(shipping, ({one}) => ({
+export const shippingRelations = relations(shippings, ({one}) => ({
   purchase: one(purchases, {
-    fields: [shipping.purchaseId],
+    fields: [shippings.purchaseId],
     references: [purchases.id],
   }),
 }))
