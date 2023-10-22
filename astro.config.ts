@@ -17,6 +17,10 @@ export default defineConfig({
   },
   trailingSlash: 'never',
   integrations: [solid(), tailwind(), mdx(), sitemap(), robotsTxt()],
-  output: 'hybrid',
-  adapter: IS_PROD ? netlify() : nodejs({mode: 'standalone'}),
+  output: 'server',
+  adapter: IS_PROD
+    ? netlify({
+        functionPerRoute: true,
+      })
+    : nodejs({mode: 'standalone'}),
 })
