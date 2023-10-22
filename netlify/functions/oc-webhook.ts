@@ -3,7 +3,13 @@ import {serialize} from 'object-to-formdata'
 import {openCollectiveProducts} from '~constants/products'
 import {env} from '~env-secrets'
 import {db, insertPurchaseSchema, insertUserSchema, schemas} from '~server/db'
-import {graphQLClient, userEmailQuery, type UserWithEmail} from '~server/graphql'
+import {
+  graphQLClient,
+  orderIdFromLegacyQuery,
+  userEmailQuery,
+  type OrderId,
+  type UserWithEmail,
+} from '~server/graphql'
 import type {Contribution} from '~types/contributions'
 
 const handledTypes = ['collective.transaction.created']
@@ -47,6 +53,11 @@ const handler: Handler = async (event, context) => {
 
   console.log('contributionType', contributionType)
 
+  // get new order id from legacy ID
+  const fetchedId = await graphQLClient.request<OrderId>(orderIdFromLegacyQuery, {
+    id: body.data.transaction.OrderId,
+  })
+
   // get users email
   const user = await graphQLClient.request<UserWithEmail>(userEmailQuery, {
     slug: body.data.fromCollective.slug,
@@ -68,7 +79,7 @@ const handler: Handler = async (event, context) => {
     .returning()
 
   const purchase = insertPurchaseSchema.parse({
-    id: body.data.transaction.uuid,
+    id: fetchedId.order.id,
     price: body.data.transaction.amountInHostCurrency,
     netPrice: body.data.transaction.netAmountInHostCurrency,
     date: new Date(body.data.transaction.createdAt),

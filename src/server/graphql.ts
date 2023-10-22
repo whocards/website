@@ -1,4 +1,4 @@
-import {request, gql, GraphQLClient} from 'graphql-request'
+import {GraphQLClient, gql} from 'graphql-request'
 import {env} from '~env-secrets'
 
 export const graphQLClient = new GraphQLClient(env.OC_API_URL, {
@@ -21,6 +21,20 @@ export const userEmailQuery = gql`
       id
       name
       emails
+    }
+  }
+`
+
+export type OrderId = {
+  order: {
+    id: string
+  }
+}
+
+export const orderIdFromLegacyQuery = gql`
+  query order($id: Int!) {
+    order(legacyId: $id) {
+      id
     }
   }
 `
