@@ -1,0 +1,22 @@
+---
+import questions from '~/data/questions.json'
+import type {Language, QuestionId} from '~types'
+
+export interface Props {
+  id: QuestionId
+  lang: Language
+  class?: string
+}
+
+const {id, lang, class: classes} = Astro.props
+const question = questions[id][lang]
+---
+
+<div
+  class:list={[
+    'rounded-xl border-[0.3px] border-gray-light bg-dark w-[165px] min-w-[165px] h-[225px]',
+    classes,
+  ]}
+>
+  <p lang={lang} class='p-6 text-sm whitespace-pre-line'>{question}</p>
+</div>

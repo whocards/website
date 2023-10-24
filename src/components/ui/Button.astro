@@ -1,0 +1,42 @@
+---
+import Icon from 'astro-icon'
+import type {HTMLAttributes, HTMLTag} from 'astro/types'
+
+interface Props<T> extends HTMLAttributes<'button' | 'a'> {
+  size?: 'md' | 'lg'
+  type?: 'button' | 'submit'
+  variant?: 'primary' | 'secondary'
+  hideIcon?: boolean
+  light?: boolean
+  href?: string
+  tag?: HTMLTag
+}
+
+const {
+  tag: Element = 'button',
+  size = 'lg',
+  type = 'button',
+  variant = 'primary',
+  hideIcon = false,
+  light = false,
+  class: classes,
+  ...props
+} = Astro.props
+---
+
+<Element
+  class:list={[
+    'text-center',
+    variant === 'primary' && 'bg-primary-light hover:bg-yellow-500 active:bg-yellow-300',
+    variant === 'secondary' &&
+      'border rounded-[14px] hover:bg-gray-100 active:bg-gray-200 hover:bg-opacity-25 active:bg-opacity-10',
+    size === 'lg' && 'py-3.5 px-8 rounded-2xl',
+    size === 'md' && 'py-2.5 px-5 rounded-xl',
+    light ? 'text-white border-white' : 'text-dark border-dark',
+    classes,
+  ]}
+  {...props}
+>
+  <slot />
+  {!hideIcon && <Icon class='inline-block ml-1.5 h-6 w-6' name='chevron' />}
+</Element>

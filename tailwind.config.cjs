@@ -1,6 +1,6 @@
-/** @type {import('tailwindcss').Config} */
 const defaultTheme = require('tailwindcss/defaultTheme')
 
+/** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
   theme: {
@@ -10,25 +10,41 @@ module.exports = {
       width: 50,
     },
     extend: {
+      space: {
+        7.5: '1.875rem',
+      },
+      rounded: {
+        '2.5xl': '1.25rem',
+      },
       colors: {
         yellow: {
           100: '#7E7552',
           200: '#FFE37E',
           400: '#F9D75F',
-          500: '#FFC700',
+          500: '#F6C944',
         },
-        gray: '#65636E',
-        dark: '#262433',
+        gray: {
+          DEFAULT: '#65636E',
+          light: '#DCDEE9',
+          dark: '#9698AF',
+        },
+        dark: '#262432',
         darker: '#111516',
+        darkest: '#08001A',
+        background: '#0A0018',
         white: '#F5F5F5',
+        red: '#EE1E23',
         primary: {
           light: '#F9D75F',
           dark: '#C058D2',
         },
       },
-      backgroundImage: {
+      backgroundImage: (theme) => ({
         hero: 'url(/background.svg)',
-      },
+        'gradient-primary': `linear-gradient(to bottom left, ${theme(
+          'colors.primary.dark'
+        )} 25%, ${theme('colors.primary.light')} 92%)`,
+      }),
       fontFamily: {
         sans: ['golos-text', ...defaultTheme.fontFamily.sans],
         title: ['aptly', ...defaultTheme.fontFamily.sans],
@@ -52,6 +68,7 @@ module.exports = {
   plugins: [
     require('tailwindcss-breakpoints-inspector'),
     require('@tailwindcss/typography'),
+    require('tailwind-scrollbar-hide'),
     require('daisyui'),
   ],
   daisyui: {

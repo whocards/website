@@ -1,9 +1,215 @@
 ---
-import {PreOrderCards} from '~components/Purchase/PreorderCards'
-import Layout from '~layouts/Layout.astro'
+import Icon from 'astro-icon'
+import {Image} from 'astro:assets'
+import cardsImage from '~assets/images/cards.png'
+import humanityImage from '~assets/images/humanity.png'
+import teamImage from '~assets/images/team.png'
+import PreOrderCards from '~components/Purchase/PreorderCards.astro'
+import PreorderSection from '~components/Purchase/PreorderSection.astro'
+import Testimonials from '~components/Purchase/Testimonials.astro'
+import WhatCard from '~components/Purchase/WhatCard.astro'
+import Accordion from '~components/ui/Accordion.astro'
+import Button from '~components/ui/Button.astro'
+import WhoCard from '~components/ui/WhoCard.astro'
+import {faqs} from '~constants/faqs'
+import Layout from '~layouts/LayoutPreorder.astro'
 ---
 
-<Layout title='Preorder'>
-  <PreOrderCards />
-  <a href='/thanks'>thanks</a>
+<Layout title='Preorder' class='relative'>
+  <Icon name='pattern-mobile' class='absolute top-0 left-0 right-0 -z-10' />
+  <div class='flex flex-col gap-4 px-8 pb-14 pt-28'>
+    <h1 class='text-center font-title font-bold text-white text-4xl leading-10'>
+      Let's create waves of meaningful <br class='hidden lg:visible' /><span class='text-gradient'
+        >connections</span
+      > across the world
+    </h1>
+    <p class='text-center text-sm font-semibold leading-6 pb-2'>
+      WhoCards is on the mission to transform social interactions by encouraging greater openness,
+      vulnerability and authenticity. Join us spreading this mission by pre-ordering WhoCards and
+      gifting away at least a pack to someone who'll treasure it.
+    </p>
+    <Button tag='a' href='#support-us' class='w-full'>Pre-Order Now</Button>
+    <Button tag='a' href='#what-is-who-cards' class='w-full' light hideIcon variant='secondary'>
+      Learn More
+    </Button>
+  </div>
+  <div
+    class='flex gap-10 overflow-x-scroll overflow-y-hidden h-52 w-screen scrollbar-hide justify-center'
+  >
+    <WhoCard lang='da' id='1' />
+    <WhoCard lang='de' id='1' />
+    <WhoCard lang='es' id='1' />
+    <WhoCard lang='fr' id='1' />
+    <WhoCard lang='en' id='1' />
+    <WhoCard lang='he' id='1' />
+    <WhoCard lang='hu' id='1' />
+    <WhoCard lang='pl' id='1' />
+    <WhoCard lang='pt' id='1' />
+  </div>
+  <PreorderSection
+    subtitle='what is who cards'
+    title='Unlock Deep Conversations and Meaningful Connections'
+    description='WhoCards offers 66 carefully curated questions, empowering you to transform your interactions with people from social gatherings to professional settings. The courageous questions and playful guidelines of WhoCards create an atmosphere where you can relax, open up and get to know each other better.'
+  >
+    <WhatCard icon='cards' title='Play with Anyone'>
+      Practice speaking what's true to you and actively listen to others as they do the same. Enter
+      the warm hum of mutuality and experience belonging like never before.
+    </WhatCard>
+    <WhatCard icon='group-chat' title='Courageous Conversations'>
+      Unveiling the courage it takes to foster authentic and vulnerable dialogue.
+    </WhatCard>
+    <WhatCard icon='group' title='Multiple Ways'>
+      WhoCards easily finds its place among friends and family, social gatherings or workshops, team
+      meetings and coaching conversations.
+    </WhatCard>
+    <WhatCard icon='star-circle' title='Take the Lead'>
+      Most people enjoy the experience facilitated by WhoCards, and it only requires you to draw a
+      card and initiate the game.
+    </WhatCard>
+  </PreorderSection>
+  <div class='flex flex-col px-5 pt-12 gap-4'>
+    <Image
+      src={humanityImage}
+      alt='people stacking their hands'
+      class='rounded-2.5xl mb-2 w-full'
+    />
+    <h3 class='text-sm font-semibold uppercase leading-snug tracking-wide text-primary-dark'>
+      why?
+    </h3>
+    <h2 class='text-3xl font-medium font-title leading-10'>
+      Humanity needs more meaningful and authentic connections
+    </h2>
+    <p class='text-sm leading-snug text-gray-dark pb-2'>
+      We strongly believe that in this age of disruption and complexity, when our differences are
+      used to keep us separate, one of the most courageous things we can do is show up for others
+      with authenticity, vulnerability, and openness. When you pre-order WhoCards you're joining us
+      on our missionby gifting at least a pack to someone special who'll treasure it. Click the
+      Pre-Order button to choose your packs and help us make WhoCards happen through our Open
+      Collective fundraising page.
+    </p>
+    <Button tag='a' href='#support-us' class='w-full'>Pre-Order Now</Button>
+  </div>
+  <div class='flex flex-col px-5 pt-12 gap-4'>
+    <Image src={teamImage} alt='a team of people' class='rounded-2.5xl mb-2 w-full' />
+    <h3 class='text-sm font-semibold uppercase leading-snug tracking-wide text-primary-dark'>
+      Our story
+    </h3>
+    <h2 class='text-3xl font-medium font-title leading-10'>The power of human connections</h2>
+    <p class='text-sm leading-snug text-gray-dark pb-2'>
+      In 2016, a dynamic, self-organized laboratory called Amanitas was born in order to explore
+      radical collaboration and emergence for our future humanity. Amanitas was inspired by the
+      superpowers and patterns of the natural world. Throughout a series of retreats, a community
+      house and co-created events, we learnt, played and experimented around a core belief: That
+      positive change does not originate from any single individual, rather it ebbs and flows as a
+      force which guides a living system.
+    </p>
+    <Button class='w-full' variant='secondary' light>Read more</Button>
+  </div>
+
+  <div class='flex flex-col px-5 pt-12 gap-4'>
+    <Image src={cardsImage} alt='a set of whocards' class='rounded-2.5xl mb-2 w-full' />
+    <h3 class='text-sm font-semibold uppercase leading-snug tracking-wide text-primary-dark'>
+      How to play?
+    </h3>
+    <h2 class='text-3xl font-medium font-title leading-10'>Different ways to engage</h2>
+    <div class='flex flex-col'>
+      <div class='flex gap-4'>
+        <div class='flex flex-col items-center'>
+          <div
+            class='flex justify-center items-center rounded-full border-2 border-primary-dark h-10 w-10'
+          >
+            <Icon name='card' class='h-[23px] w-[23px]' />
+          </div>
+          <div class='w-0.5 flex-1 bg-primary-dark'></div>
+          <div class='w-0.5 flex-1 bg-dark'></div>
+        </div>
+        <div class='flex flex-col gap-3'>
+          <h4 class='text-lg font-semibold leading-7'>Choose Your Own Card.</h4>
+          <p class='text-gray-dark leading-snug pb-6'>
+            Each participant picks a card of their choice. Someone volunteers to start. Whoever is
+            ready to go can turn the card, read the question out loud and answer it for the rest of
+            the players. Continue until the last person has read and answered their question.
+          </p>
+        </div>
+      </div>
+      <div class='flex gap-4'>
+        <div class='flex flex-col items-center'>
+          <div class='flex justify-center items-center rounded-full border-2 border-dark h-10 w-10'>
+            <Icon name='group-small' class='h-[23px] w-[23px]' />
+          </div>
+          <div class='w-0.5 flex-1 bg-dark'></div>
+        </div>
+        <div class='flex flex-col gap-3'>
+          <h4 class='text-lg font-semibold leading-7'>Choose One Card for Everyone.</h4>
+          <p class='text-gray-dark leading-snug pb-6'>
+            Pick a card and place it in the middle without showing the question. Someone volunteers
+            to start. Whoever is ready to go turns the card in the middle, reads the question out
+            loud and answers it. Continue until the last person has answered the question in the
+            middle.
+          </p>
+        </div>
+      </div>
+      <div class='flex gap-4'>
+        <div class='flex flex-col items-center'>
+          <div class='flex justify-center items-center rounded-full border-2 border-dark h-10 w-10'>
+            <Icon name='star-square' class='h-[23px] w-[23px]' />
+          </div>
+        </div>
+        <div class='flex flex-col gap-3'>
+          <h4 class='text-lg font-semibold leading-7'>Find More Tips & Tricks in the Box!</h4>
+          <p class='text-gray-dark leading-snug pb-6'>
+            The Tips will help you to set the scene for creating authentic connections. The various
+            Tricks will give you ideas about how to play the cards in different settings.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class='flex flex-col px-5 pt-12 gap-4'>
+    <h3 class='text-sm font-semibold uppercase leading-snug tracking-wide text-primary-dark'>
+      Testimonials
+    </h3>
+    <h2 class='text-3xl font-medium font-title leading-10'>Why do people love to play WhoCards?</h2>
+  </div>
+  <Testimonials />
+  <PreorderSection
+    title='Donate to Make it Happen'
+    subtitle='support us'
+    description='Choose your package, click the Pre-Order button and help us make WhoCards happen through our Open Collective fundraising page.'
+  >
+    <PreOrderCards />
+  </PreorderSection>
+
+  <PreorderSection
+    title='Questions? Answers.'
+    subtitle='faqs'
+    description='Do you have other questions?'
+    class='pb-12'
+  >
+    <Accordion name='faqs' contents={faqs} />
+  </PreorderSection>
+
+  <div class='px-5 pb-12 w-full'>
+    <div class='rounded-3xl items-center border border-gray-dark pt-16'>
+      <span class='px-5 flex flex-col w-full'>
+        <h3
+          class='text-gradient text-center font-title text-4xl font-extrabold leading-10 text-white'
+        >
+          Preorder today
+        </h3>
+        <p class='text-center pt-5 text-sm leading-snug px-0.5 pb-10'>
+          WhoCards is on the mission to transform social interactions to become more open,
+          vulnerable and authentic. Join us spreading this mission by pre-ordering WhoCards and
+          gifting away at least a pack to someone who'll treasure it.
+        </p>
+        <Button tag='a' href='#support-us' class='w-full'>Pre-Order Now</Button>
+      </span>
+      <div class='w-full h-60 relative overflow-hidden'>
+        <WhoCard lang='en' id='2' class='absolute -bottom-8 mx-auto left-0 right-0 z-10' />
+        <WhoCard lang='en' id='3' class='absolute -bottom-16 -left-14 -rotate-12' />
+        <WhoCard lang='en' id='4' class='absolute -bottom-16 -right-14 rotate-12' />
+      </div>
+    </div>
+  </div>
 </Layout>

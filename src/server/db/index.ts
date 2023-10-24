@@ -27,7 +27,7 @@ export const insertShippingSchema = createInsertSchema(schema.shippings, {
   zip: z.string().min(1, {message: 'Field is required'}),
   country: z.string().min(1, {message: 'Field is required'}),
   city: z.string().min(1, {message: 'Field is required'}),
-  phone: z.string().regex(/^\d{7,15}$/, {message: 'Invalid phone number'}),
+  phone: z.string().regex(/^[\d\s()+-.]+$/, {message: 'Invalid phone number'}),
 })
 
 // queries

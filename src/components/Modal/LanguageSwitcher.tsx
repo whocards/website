@@ -1,9 +1,9 @@
-import {ParentProps, createEffect, onCleanup, Show} from 'solid-js'
-import {Icon} from '@iconify-icon/solid'
-import {LANGUAGES, LANG_KEYS, getCurrentLanguage, getCurrentQuestionUrl, isPrintPage} from '~utils'
-import type {Language} from '~types'
-import {useStore} from '@nanostores/solid'
-import {$langStore, setLang} from '~stores/Language.store'
+import { Icon } from '@iconify-icon/solid'
+import { useStore } from '@nanostores/solid'
+import { Show, createEffect, onCleanup, type ParentProps } from 'solid-js'
+import { $langStore, setLang } from '~stores/Language.store'
+import type { Language } from '~types'
+import { LANGUAGES, getCurrentLanguage, getCurrentQuestionUrl, isPrintPage } from '~utils'
 
 const comingSoon: string[] = []
 

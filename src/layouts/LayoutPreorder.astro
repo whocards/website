@@ -1,5 +1,4 @@
 ---
-import {LanguageSwitcher} from '~components/Modal/LanguageSwitcher'
 import Navigation from '~components/Navigation.astro'
 import {IS_PROD} from '~constants/env'
 import Head from './Head.astro'
@@ -10,22 +9,18 @@ export interface Props {
   class?: string
   title?: string
   description?: string
-  lang?: string
-  showLangModal?: boolean
 }
 
-const {class: mainClasses, title, description, lang = 'en', showLangModal} = Astro.props
+const {class: mainClasses, title, description} = Astro.props
 ---
 
 <!doctype html>
-<html lang={lang} class='scroll-smooth bg-dark'>
+<html lang='en' class='scroll-smooth bg-darkest'>
   <head>
     <Head title={title} description={description} />
     {IS_PROD && <script defer='defer' data-domain='whocards.cc' src='/js/script.js' />}
   </head>
-  <body
-    class='m-0 flex min-h-screen flex-col bg-hero bg-fixed bg-center bg-no-repeat bg-cover font-sans text-white'
-  >
+  <body class='m-0 flex min-h-screen flex-col font-sans text-white'>
     <Navigation>
       <main
         class:list={['flex min-h-screen w-full flex-col items-center justify-center', mainClasses]}
@@ -33,7 +28,5 @@ const {class: mainClasses, title, description, lang = 'en', showLangModal} = Ast
         <slot />
       </main>
     </Navigation>
-    {showLangModal && <LanguageSwitcher client:only />}
-    <style is:global></style>
   </body>
 </html>
