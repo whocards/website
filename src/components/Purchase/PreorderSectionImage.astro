@@ -1,0 +1,47 @@
+---
+export interface Props {
+  title: string
+  subtitle: string
+  description?: string
+  class?: string
+  reverse?: boolean
+}
+
+const {title, subtitle, description, class: classes, reverse = false} = Astro.props
+---
+
+<div
+  class='flex lg:grid lg:grid-flow-col lg:gap-14'
+  id={subtitle.replaceAll(' ', '-')}
+  class:list={[
+    'px-5 pt-24 gap-4 w-screen lg:max-w-7xl lg:px-20 lg:py-28',
+    reverse ? 'flex-col-reverse lg:grid-cols-[52%,48%]' : 'flex-col lg:grid-cols-[48%,52%]',
+    classes,
+  ]}
+>
+  {!reverse && <slot />}
+
+  <div class='flex flex-col gap-4 lg:gap-5 w-full'>
+    <h3
+      class='text-sm font-semibold uppercase leading-snug tracking-wide text-primary-dark lg:text-base lg:tracking-normal lg:leading-7'
+    >
+      {subtitle}
+    </h3>
+    <h2
+      class='text-3xl font-semibold font-title leading-10 lg:text-[54px] lg:leading-tight lg:tracking-tighter'
+    >
+      {title}
+    </h2>
+    {
+      description && (
+        <p class='text-sm leading-snug text-gray-dark pb-2 lg:text-lg lg:max-w-3xl lg:tracking-tight'>
+          {description}
+        </p>
+      )
+    }
+    <slot name='image-description' />
+    <slot name='button' />
+  </div>
+  {reverse && <slot />}
+  <slot name='end' />
+</div>

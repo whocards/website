@@ -10,7 +10,7 @@ const links: Record<string, string>[] = [
   {href: '/', title: 'Home'},
   {href: '/mission', title: 'Mission'},
   {href: '/print', title: 'Print'},
-  {href: '/preorder', title: 'Preorder'},
+  // {href: '/preorder', title: 'Preorder'},
   // {href: '/contact', title: 'Contact'},
 ]
 ---
@@ -25,7 +25,7 @@ const links: Record<string, string>[] = [
   />
   <div class='drawer-content transition-all' id='main'>
     <!-- Navbar -->
-    <div class='navbar fixed h-16 justify-between pl-0 pr-4 backdrop-blur md:px-4'>
+    <div class='navbar fixed h-16 justify-between pl-0 pr-4 backdrop-blur md:px-4 z-10'>
       <a href='/' aria-label='homepage link' class='btn-ghost btn'>
         <Icon name='logo' class='w-36' />
       </a>

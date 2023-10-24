@@ -1,6 +1,12 @@
 ---
+import Button from '~components/ui/Button.astro'
+
 const {class: className} = Astro.props
 ---
+
+<Button size='md' hideIcon full={false} class='min-w-[8rem]' tag='a' href='/preorder'>
+  Preorder
+</Button>
 
 <!-- <li
   class:list={[

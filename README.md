@@ -13,13 +13,14 @@ https://github.com/whocards/website
 https://icon-sets.iconify.design/
 https://app.netlify.com/sites/whocards-calmly/overview
 
-# questions / non critical upgrades
+## Review notes from Hoki
 
-- [ ] switch to using our icons?
-- [x] share modal
-- [ ] update readme
-- [ ] animations
-- [ ] testing
-- [ ] remove redirects from trailing slash
-- [ ] track file downloads https://plausible.io/docs/file-downloads-tracking
-- [ ] hebrew seo images
+- [x] add + to phone number regex
+- [ ] form revalidation
+- [ ] add formula for address provided in sheets
+
+## Design breakdown
+
+- [ ] footer
+- [ ] header
+- [ ] nav

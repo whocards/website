@@ -20,7 +20,9 @@ const {class: mainClasses, title, description} = Astro.props
     <Head title={title} description={description} />
     {IS_PROD && <script defer='defer' data-domain='whocards.cc' src='/js/script.js' />}
   </head>
-  <body class='m-0 flex min-h-screen flex-col font-sans text-white'>
+  <body
+    class='m-0 flex min-h-screen flex-col font-sans text-white selection:text-primary-light selection:bg-primary-dark'
+  >
     <Navigation>
       <main
         class:list={['flex min-h-screen w-full flex-col items-center justify-center', mainClasses]}
