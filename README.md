@@ -22,5 +22,5 @@ https://app.netlify.com/sites/whocards-calmly/overview
 ## Design breakdown
 
 - [ ] footer
-- [ ] header
-- [ ] nav
+- [ ] background images
+- [ ] social sharing

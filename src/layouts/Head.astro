@@ -1,6 +1,12 @@
 ---
+export interface Props {
+  title?: string
+  description?: string
+  image?: string
+}
+
 const {id, language} = Astro.params
-const {title: propTitle, desc: propDesc} = Astro.props
+const {title: propTitle, description: propDesc, image: img} = Astro.props
 const site = Astro.site
 
 const canonicalUrl = new URL(Astro.url.pathname, site)
@@ -10,7 +16,7 @@ const titles: string[] = ['WhoCards']
 let description =
   propDesc ||
   'WhoCards help us create conversations that encourage honest self-expression, active listening and deeper human connections.'
-let image = `social.png`
+let image = img || `social.png`
 
 if (propTitle) {
   titles.push(propTitle)
@@ -19,7 +25,7 @@ if (propTitle) {
 // question pages
 if (id) {
   titles.push(`Question #${id}`)
-  image = `images/${language}/${id}.png`
+  if (!img) image = `images/${language}/${id}.png`
   description = 'Dare to be Curious?'
 }
 // complete image url
