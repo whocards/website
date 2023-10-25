@@ -10,7 +10,8 @@ module.exports = {
       width: 50,
     },
     extend: {
-      space: {
+      spacing: {
+        4.5: '1.125rem',
         7.5: '1.875rem',
       },
       rounded: {
@@ -25,7 +26,8 @@ module.exports = {
         },
         gray: {
           DEFAULT: '#65636E',
-          light: '#DCDEE9',
+          lighter: '#DCDEE9',
+          light: '#474A69',
           dark: '#9698AF',
         },
         dark: '#262432',

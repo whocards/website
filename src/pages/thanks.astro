@@ -1,8 +1,9 @@
 ---
 export const prerender = false
 
+import {Icon} from 'astro-icon'
 import type {ZodIssue} from 'zod'
-import Input from '~components/ui/Input.astro'
+import ShippingForm from '~components/Purchase/ShippingForm.astro'
 import {openCollectiveProducts} from '~constants/products'
 import Layout from '~layouts/Layout.astro'
 import {createSheetRow, createZenShipping} from '~server/csv'
@@ -74,36 +75,55 @@ try {
 ---
 
 <Layout title='Thank You!'>
-  <h1>thanks!</h1>
-
-  {
-    submitted && (
-      <div class='bg-green-100 text-green-800 p-4 mb-4'>
-        Your shipping information has been submitted!
+  <div
+    class='grid grid-flow-row md:grid-flow-col md:grid-cols-2 md:px-[2vw] lg:max-w-7xl px-5 lg:px-32 pt-28 lg:pt-32'
+  >
+    <div
+      class='flex text-sm lg:text-xl text-gray-dark flex-col items-center md:items-start md:justify-start justify-center text-center md:text-start gap-4 md:gap-5 pb-14'
+    >
+      <Icon name='thumbs-up' class='w-16 h-16' />
+      <h1
+        class='text-4xl text-white lg:text-6xl md:pt-4 md:pb-2 font-bold font-title tracking-tight leading-tight'
+      >
+        Thank you for<br />your contribution
+      </h1>
+      <p>Your support makes a difference!</p>
+      <Icon name='divider' class='w-64 py-2 md:hidden' />
+      <Icon name='divider-left' class='w-3/4 py-4 hidden md:block' />
+      <p class='text-xs md:text-sm uppercase font-semibold'>Purchase details</p>
+      <h2 class='text-6xl text-white font-semibold pb-2'>€{purchase.price / 100}</h2>
+      <div class='flex flex-col gap-3'>
+        <p>Plan: {purchase.category}</p>
+        <p>Date: {purchase.date.toDateString()}</p>
+        <p>ID: {purchase.id}</p>
       </div>
-    )
-  }
-
-  <form id='address-form' method='POST' class='flex flex-col'>
-    <Input name='name' value={formData?.name ?? user!.name} error={errors?.name} />
-    <Input name='email' value={formData?.email ?? user!.email} error={errors?.email} />
-    <Input name='phone' value={formData?.phone} error={errors?.phone} />
-    <div class='flex gap-4'>
-      <Input name='address' title='street 1' value={formData?.address} error={errors?.address} />
-      <Input name='address2' title='street 2' value={formData?.address2} error={errors?.address2} />
     </div>
-    <div class='flex gap-4'>
-      <Input name='zip' title='zip code' value={formData?.zip} error={errors?.zip} />
-      <Input name='city' value={formData?.city} error={errors?.city} />
+    <div
+      class='flex flex-col items-center justify-center text-center md:text-start md:items-start gap-4 md:gap-5'
+    >
+      <h2 class='text-3xl lg:text-5xl font-bold font-title tracking-tight leading-tight'>
+        Fill Out the Form for delivery
+      </h2>
+      <p class='text-sm lg:text-xl text-gray-dark'>
+        Please ensure that you complete the form below in order to receive your WhoCards. Expect the
+        shipment to take place in early December, right on time for Christmas.
+      </p>
+      {
+        submitted ? (
+          <div class='bg-green-100 text-green-800 p-4 mb-4'>
+            Your shipping information has been submitted!
+          </div>
+        ) : (
+          <ShippingForm
+            user={user}
+            purchase={purchase}
+            quantity={quantity}
+            errors={errors}
+            formData={formData}
+            submitted
+          />
+        )
+      }
     </div>
-    <div class='flex gap-4'>
-      <Input name='region' value={formData?.region} error={errors?.region} />
-      <Input name='country' value={formData?.country} error={errors?.country} />
-    </div>
-
-    <!-- hidden inputs -->
-    <input type='hidden' name='purchaseId' value={purchaseId} />
-    <input type='hidden' name='quantity' value={quantity} />
-    <button type='submit' class='btn btn-primary mt-4' disabled={submitted}>submit</button>
-  </form>
+  </div>
 </Layout>

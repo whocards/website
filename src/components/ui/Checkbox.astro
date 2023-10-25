@@ -1,0 +1,22 @@
+---
+import type {HTMLAttributes} from 'astro/types'
+
+interface Props extends HTMLAttributes<'input'> {
+  name: string
+  class?: string
+}
+const {name, required, class: classes, ...props} = Astro.props
+const id = `checkbox-${name}`
+---
+
+<div class:list={['flex gap-2.5 pb-2.5', classes]}>
+  <input
+    type='checkbox'
+    id={id}
+    {...props}
+    class='checkbox checkbox-md rounded-md border-2 mt-2 md:mt-0'
+  />
+  <label for={id} class='text-start capitalize text-base font-medium'
+    ><slot />{required ? ' *' : ''}</label
+  >
+</div>

@@ -13,9 +13,17 @@ export interface Props {
   description?: string
   lang?: string
   showLangModal?: boolean
+  showFooter?: boolean
 }
 
-const {class: mainClasses, title, description, lang = 'en', showLangModal} = Astro.props
+const {
+  class: mainClasses,
+  title,
+  description,
+  lang = 'en',
+  showLangModal = false,
+  showFooter = false,
+} = Astro.props
 ---
 
 <!doctype html>

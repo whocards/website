@@ -1,0 +1,59 @@
+---
+import type { ZodIssue } from 'zod'
+import Button from '~components/ui/Button.astro'
+import Checkbox from '~components/ui/Checkbox.astro'
+import Input from '~components/ui/Input.astro'
+import type { PurchaseSelect, UserSelect } from '~server/db'
+
+export interface Props {
+  user: UserSelect
+  purchase: PurchaseSelect
+  quantity: number
+  formData?: Record<string, string>
+  errors?: Record<string, ZodIssue>
+  submitted: boolean
+}
+
+const {user, purchase, quantity, formData, errors, submitted} = Astro.props
+---
+
+<form id='address-form' method='POST' class='flex flex-col w-full pb-14'>
+  <Input name='name' required value={formData?.name ?? user.name} error={errors?.name} />
+  <Input
+    name='email'
+    type='email'
+    required
+    value={formData?.email ?? user.email}
+    error={errors?.email}
+  />
+  <Input name='phone' type='tel' required value={formData?.phone} error={errors?.phone} />
+  <div class='flex flex-col lg:gap-4'>
+    <Input
+      name='address'
+      required
+      title='street 1'
+      value={formData?.address}
+      error={errors?.address}
+    />
+    <Input name='address2' title='street 2' value={formData?.address2} error={errors?.address2} />
+  </div>
+  <div class='flex flex-col lg:gap-4'>
+    <Input name='zip' required title='zip code' value={formData?.zip} error={errors?.zip} />
+    <Input name='city' required value={formData?.city} error={errors?.city} />
+  </div>
+  <div class='flex flex-col lg:gap-4'>
+    <Input name='region' autocomplete='state' value={formData?.region} error={errors?.region} />
+    <Input name='country' required value={formData?.country} error={errors?.country} />
+  </div>
+  <Checkbox name='privacy-policy' required>
+    Yes, I have read and agree to WhoCards' Privacy Policy
+  </Checkbox>
+  <Checkbox name='newsletter' class='pt-4'>
+    Yes, I would like to sign up for occasional newsletters from WhoCards.
+  </Checkbox>
+
+  <!-- hidden inputs -->
+  <input type='hidden' name='purchaseId' value={purchase.id} />
+  <input type='hidden' name='quantity' value={quantity} />
+  <Button type='submit' class='mt-4 capitalize' full>{submitted ? 'update' : 'submit'}</Button>
+</form>
