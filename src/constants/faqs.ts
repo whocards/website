@@ -16,7 +16,7 @@ export const faqs = [
   },
   {
     title: "What's the expected delivery time?",
-    content: 'After November 17th we estimate shipping times will take between 2-7 business days.',
+    content: 'After November 22nd we estimate shipping times will take between 2-7 business days.',
   },
   {
     title: 'Is there a digital version available for download?',

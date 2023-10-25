@@ -17,18 +17,26 @@ import {faqs} from '~constants/faqs'
 import Layout from '~layouts/LayoutPreorder.astro'
 ---
 
-<Layout title='Preorder' class='relative'>
+<Layout
+  title='Pre-Order'
+  class='relative'
+  description='Donate to the WhoCards and receive one of the 1000 cards decks by the Holiday Season.'
+>
   <!-- TODO background -->
   <Icon name='pattern-mobile' class='absolute top-0 left-0 right-0 -z-10 lg:hidden' />
   <div
-    class='flex flex-col gap-4 lg:gap-5 px-8 pt-16 max-w-5xl lg:items-center h-[calc(100vh-13rem)] lg:h-[calc(100vh-21rem)] justify-center'
+    class='flex flex-col gap-4 lg:gap-5 px-8 pt-16 max-w-5xl lg:items-center xs:h-screen h-[calc(100vh-13rem)] lg:h-[calc(100vh-21rem)] lg:min-h-[35rem] justify-center'
   >
-    <h1 class='text-center font-title font-bold text-white text-4xl lg:text-7xl leading-10'>
+    <h1
+      class='text-center font-title font-bold text-white text-4xl lg:text-7xl leading-10 xs:text-2xl'
+    >
       Let's create waves of meaningful <br class='hidden lg:block' /><span class='text-gradient'
         >connections</span
       > across the world
     </h1>
-    <p class='text-center text-sm lg:text-lg font-semibold leading-7 pb-2 lg:px-10'>
+    <p
+      class='text-center text-sm lg:text-lg font-semibold xs:leading-normal leading-7 pb-2 lg:px-10'
+    >
       WhoCards is on the mission to transform social interactions by encouraging greater openness,
       vulnerability and authenticity. Join us spreading this mission by pre-ordering WhoCards and
       gifting away at least a pack to someone who'll treasure it.
@@ -43,15 +51,15 @@ import Layout from '~layouts/LayoutPreorder.astro'
   <div
     class='flex gap-10 overflow-x-scroll overflow-y-hidden h-52 lg:h-[21rem] w-screen scrollbar-hide justify-center'
   >
-    <WhoCard lang='da' id='1' />
-    <WhoCard lang='de' id='1' />
-    <WhoCard lang='es' id='1' />
-    <WhoCard lang='fr' id='1' />
     <WhoCard lang='en' id='1' />
-    <WhoCard lang='he' id='1' />
-    <WhoCard lang='hu' id='1' />
-    <WhoCard lang='pl' id='1' />
-    <WhoCard lang='pt' id='1' />
+    <WhoCard lang='en' id='2' />
+    <WhoCard lang='en' id='3' />
+    <WhoCard lang='en' id='4' />
+    <WhoCard lang='en' id='5' />
+    <WhoCard lang='en' id='6' />
+    <WhoCard lang='en' id='7' />
+    <WhoCard lang='en' id='8' />
+    <WhoCard lang='en' id='9' />
   </div>
   <PreorderSection
     subtitle='what is who cards'
@@ -60,11 +68,12 @@ import Layout from '~layouts/LayoutPreorder.astro'
   >
     <div class='grid lg:grid-flow-col gap-4 lg:gap-8 lg:grid-cols-4'>
       <WhatCard icon='cards' title='Play with Anyone'>
-        Practice speaking what's true to you and actively listen to others as they do the same.
-        Enter the warm hum of mutuality and experience belonging like never before.
+        Establish new connections or uncover deeper aspects of those you believe you already know,
+        all by asking one of the "Who Are You" questions.
       </WhatCard>
       <WhatCard icon='group-chat' title='Courageous Conversations'>
-        Unveiling the courage it takes to foster authentic and vulnerable dialogue.
+        Practice speaking what's true to you and actively listen to others as they do the same.
+        Enter the warm hum of mutuality and experience belonging like never before.
       </WhatCard>
       <WhatCard icon='group' title='Multiple Ways'>
         WhoCards easily finds its place among friends and family, social gatherings or workshops,
@@ -109,9 +118,9 @@ import Layout from '~layouts/LayoutPreorder.astro'
   </PreorderSectionImage>
 
   <PreorderSection
-    subtitle='Testimonials'
+    subtitle='testimonials'
     title='Why do people love to play WhoCards?'
-    class='lg:pb-10'
+    class='lg:pb-10 pb-4'
   >
     <Testimonials slot='outside' />
   </PreorderSection>
@@ -134,7 +143,9 @@ import Layout from '~layouts/LayoutPreorder.astro'
   </PreorderSectionImage>
 
   <div class='px-5 pb-12 w-full'>
-    <div class='rounded-3xl items-center border border-gray-dark pt-16 relative lg:h-[80vh]'>
+    <div
+      class='rounded-3xl items-center border border-gray-dark pt-16 relative lg:min-h-[80vh] overflow-hidden'
+    >
       <Icon name='pattern-mobile' class='absolute top-0 left-0 right-0 -z-10 lg:hidden' />
       <div class='flex flex-col w-full h-full lg:items-center lg:gap-5'>
         <h3

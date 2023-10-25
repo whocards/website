@@ -56,6 +56,9 @@ module.exports = {
         question: '1fr min-content',
       },
       screens: {
+        xs: {
+          raw: '(max-width: 320px)',
+        },
         'phone-landscape': {
           raw: 'only screen and (min-device-width: 480px) and (max-device-width: 960px) and (orientation: portrait)',
         },
