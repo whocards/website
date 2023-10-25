@@ -4,6 +4,7 @@ import Navigation from '~components/Navigation.astro'
 import {IS_PROD} from '~constants/env'
 import Head from './Head.astro'
 
+import {mainLinks} from '~constants/navigation'
 import '~styles/base.css'
 
 export interface Props {
@@ -26,7 +27,7 @@ const {class: mainClasses, title, description, lang = 'en', showLangModal} = Ast
   <body
     class='m-0 flex min-h-screen flex-col bg-hero bg-fixed bg-center bg-no-repeat bg-cover font-sans text-white'
   >
-    <Navigation>
+    <Navigation links={mainLinks}>
       <main
         class:list={['flex min-h-screen w-full flex-col items-center justify-center', mainClasses]}
       >

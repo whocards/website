@@ -11,11 +11,11 @@ const {title, subtitle, description, class: classes, reverse = false} = Astro.pr
 ---
 
 <div
-  class='flex lg:grid lg:grid-flow-col lg:gap-14'
-  id={subtitle.replaceAll(' ', '-')}
+  class='flex lg:grid lg:grid-flow-col lg:grid-cols-2 lg:gap-14'
+  id={subtitle.replaceAll(' ', '-').replace('?', '')}
   class:list={[
-    'px-5 pt-24 gap-4 w-screen lg:max-w-7xl lg:px-20 lg:py-28',
-    reverse ? 'flex-col-reverse lg:grid-cols-[52%,48%]' : 'flex-col lg:grid-cols-[48%,52%]',
+    'px-5 pt-24 gap-4 lg:max-w-7xl xl:px-0 lg:py-28 lg:w-full lg:min-h-[44.5rem]',
+    reverse ? 'flex-col-reverse' : 'flex-col',
     classes,
   ]}
 >

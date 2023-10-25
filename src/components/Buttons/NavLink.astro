@@ -1,12 +1,29 @@
 ---
-const {href, title, selected} = Astro.props
+import Button from '~components/ui/Button.astro'
+import type {Link} from '~constants/navigation'
+
+export interface Props extends Link {
+  selected: boolean
+}
+
+const {href, title, button, selected} = Astro.props
 ---
 
 <li
   class:list={{
-    'text-primary-light pointer-events-none': selected,
-    'btn-ghost hover:text-primary-light hover:opacity-80 active:opacity-100': !selected,
+    'text-primary-light pointer-events-none': selected && !button,
+    'btn-ghost hover:text-primary-light hover:opacity-80 active:opacity-100': !selected && !button,
   }}
 >
-  <a href={href} class='text-lg font-bold'>{title}</a>
+  {
+    button ? (
+      <Button size='md' hideIcon full={false} class='min-w-[8rem]' tag='a' href={href}>
+        {title}
+      </Button>
+    ) : (
+      <a href={href} class='text-lg font-bold'>
+        {title}
+      </a>
+    )
+  }
 </li>

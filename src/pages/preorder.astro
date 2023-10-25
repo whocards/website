@@ -13,13 +13,13 @@ import Accordion from '~components/ui/Accordion.astro'
 import Button from '~components/ui/Button.astro'
 import RoundedImage from '~components/ui/RoundedImage.astro'
 import WhoCard from '~components/ui/WhoCard.astro'
-import {faqs} from '~constants/faqs'
+import { faqs } from '~constants/faqs'
 import Layout from '~layouts/LayoutPreorder.astro'
 ---
 
 <Layout
   title='Pre-Order'
-  class='relative'
+  class='relative scrollbar-hide'
   description='Donate to the WhoCards and receive one of the 1000 cards decks by the Holiday Season.'
 >
   <!-- TODO background -->
@@ -49,7 +49,7 @@ import Layout from '~layouts/LayoutPreorder.astro'
     </div>
   </div>
   <div
-    class='flex gap-10 overflow-x-scroll overflow-y-hidden h-52 lg:h-[21rem] w-screen scrollbar-hide justify-center'
+    class='flex gap-10 overflow-x-scroll overflow-y-hidden h-52 lg:h-[21rem] w-[95vw] scrollbar-hide justify-center'
   >
     <WhoCard lang='en' id='1' />
     <WhoCard lang='en' id='2' />
@@ -106,7 +106,7 @@ import Layout from '~layouts/LayoutPreorder.astro'
     <Button tag='a' href='#testimonials' slot='button' variant='secondary' light>Read more</Button>
   </PreorderSectionImage>
 
-  <PreorderSectionImage subtitle='How to play?' title='Different ways to engage' reverse>
+  <PreorderSectionImage subtitle='how to play?' title='Different ways to engage' reverse>
     <RoundedImage
       src={cardsImage}
       alt='a set of whocards'
@@ -142,18 +142,18 @@ import Layout from '~layouts/LayoutPreorder.astro'
     <Accordion name='faqs' contents={faqs} slot='end' />
   </PreorderSectionImage>
 
-  <div class='px-5 pb-12 w-full'>
+  <div class='px-5 w-full lg:max-w-7xl lg:px-0 lg:min-h-[80vh]'>
     <div
-      class='rounded-3xl items-center border border-gray-dark pt-16 relative lg:min-h-[80vh] overflow-hidden'
+      class='rounded-3xl flex items-center border border-gray-dark pt-16 relative overflow-hidden'
     >
       <Icon name='pattern-mobile' class='absolute top-0 left-0 right-0 -z-10 lg:hidden' />
-      <div class='flex flex-col w-full h-full lg:items-center lg:gap-5'>
+      <div class='flex flex-col h-full flex-1 lg:items-center lg:gap-5'>
         <h3
           class='px-5 text-gradient text-center font-title text-4xl lg:text-[54px] lg:leading-normal font-extrabold leading-10 text-white'
         >
           Preorder today
         </h3>
-        <p class='px-5 text-center pt-5 text-sm leading-snug pb-10 max-w-xl'>
+        <p class='px-5 text-center pt-5 text-sm lg:text-lg lg:leading-normal leading-snug pb-10 max-w-xl lg:max-w-3xl'>
           WhoCards is on the mission to transform social interactions to become more open,
           vulnerable and authentic. Join us spreading this mission by pre-ordering WhoCards and
           gifting away at least a pack to someone who'll treasure it.
@@ -164,7 +164,7 @@ import Layout from '~layouts/LayoutPreorder.astro'
         <div
           class='w-full h-60 lg:h-96 overflow-hidden mt-auto mx-auto flex items-end justify-center'
         >
-          <div class='relative w-[165px] lg:w-[16.5rem] h-1'>
+          <div class='relative w-[165px] lg:w-[16.5rem]'>
             <WhoCard
               lang='en'
               id='66'
