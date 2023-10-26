@@ -1,17 +1,13 @@
 ---
 import {Icon} from 'astro-icon'
-import {getCurrentLanguage} from '~utils/language'
 import NavLink from './Buttons/NavLink.astro'
-import PreOrder from './Buttons/PreOrder.astro'
-const home = getCurrentLanguage(Astro.url.pathname)
+import type {Link} from '~constants/navigation'
 const isQuestionPage = Astro.url.pathname.includes('question')
 
-const links: Record<string, string>[] = [
-  {href: '/', title: 'Home'},
-  {href: '/mission', title: 'Mission'},
-  {href: '/print', title: 'Print'},
-  // {href: '/contact', title: 'Contact'},
-]
+interface Props {
+  links: Link[]
+}
+const {links} = Astro.props
 ---
 
 <div class='drawer drawer-end'>
@@ -24,21 +20,14 @@ const links: Record<string, string>[] = [
   />
   <div class='drawer-content transition-all' id='main'>
     <!-- Navbar -->
-    <div class='navbar fixed h-16 justify-between pl-0 pr-4 backdrop-blur md:px-4'>
+    <div class='navbar fixed h-16 justify-between pl-0 pr-4 backdrop-blur md:px-4 z-10'>
       <a href='/' aria-label='homepage link' class='btn-ghost btn'>
         <Icon name='logo' class='w-36' />
       </a>
-      <div class:list={['flex-none hidden', {' lg:block': !isQuestionPage}]}>
+      <div class:list={['flex-none hidden', {'lg:block': !isQuestionPage}]}>
         <ul class='menu menu-horizontal'>
           <!-- Navbar menu content here -->
-          {
-            links.map((link) => (
-              <li>
-                <NavLink {...link} selected={Astro.url.pathname === link.href} />
-              </li>
-            ))
-          }
-          <PreOrder class='ml-4' />
+          {links.map((link) => <NavLink {...link} selected={Astro.url.pathname === link.href} />)}
         </ul>
       </div>
     </div>
@@ -47,16 +36,9 @@ const links: Record<string, string>[] = [
   </div>
   <div class='drawer-side'>
     <label for='who-drawer' class='drawer-overlay'></label>
-    <ul class='menu h-full w-80 bg-dark py-10'>
+    <ul class='menu h-full w-80 bg-dark mt-16'>
       <!-- Sidebar content here -->
-      {
-        links.map((link) => (
-          <li>
-            <NavLink {...link} selected={Astro.url.pathname === link.href} />
-          </li>
-        ))
-      }
-      <PreOrder class='mt-4' />
+      {links.map((link) => <NavLink {...link} selected={Astro.url.pathname === link.href} />)}
     </ul>
   </div>
 </div>

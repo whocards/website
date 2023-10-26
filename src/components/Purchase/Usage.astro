@@ -1,0 +1,36 @@
+---
+import Icon from 'astro-icon'
+import {usage} from '~constants/usage'
+
+const {class: classes} = Astro.props
+---
+
+<div class='flex flex-col lg:pt-16' class:list={[classes]}>
+  {
+    usage.map((item) => (
+      <div class='flex gap-4'>
+        <div class='flex flex-col items-center'>
+          <div
+            class='flex justify-center items-center rounded-full border-2 h-10 w-10 lg:h-14 lg:w-14'
+            class:list={[item.active ? 'border-primary-dark' : 'border-dark']}
+          >
+            <Icon name='card' class='h-[23px] w-[23px] lg:h-8 lg:w-8' />
+          </div>
+          {item.active && <div class='w-0.5 flex-1 bg-primary-dark' />}
+          {item.line && <div class='w-0.5 flex-1 bg-dark' />}
+        </div>
+        <div class='flex flex-col gap-3'>
+          <h4 class='text-lg lg:text-2xl font-semibold leading-7 lg:leading-normal'>
+            {item.title}
+          </h4>
+          <p
+            class='text-gray-dark leading-snug pb-6 lg:text-lg'
+            class:list={[item.line && 'lg:pb-16']}
+          >
+            {item.contents}
+          </p>
+        </div>
+      </div>
+    ))
+  }
+</div>

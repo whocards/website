@@ -1,0 +1,37 @@
+---
+import Navigation from '~components/Navigation.astro'
+import {IS_PROD} from '~constants/env'
+import Head from './Head.astro'
+
+import {preorderLinks} from '~constants/navigation'
+import '~styles/base.css'
+import Footer from './Footer.astro'
+
+export interface Props {
+  class?: string
+  title?: string
+  description?: string
+}
+
+const {class: mainClasses, title, description} = Astro.props
+---
+
+<!doctype html>
+<html lang='en' class='scroll-smooth bg-darkest'>
+  <head>
+    <Head title={title} description={description} image='preorder.png' />
+    {IS_PROD && <script defer='defer' data-domain='whocards.cc' src='/js/script.js' />}
+  </head>
+  <body
+    class='m-0 flex min-h-screen flex-col font-sans text-white selection:text-primary-light selection:bg-primary-dark'
+  >
+    <Navigation links={preorderLinks}>
+      <main
+        class:list={['flex min-h-screen w-full flex-col items-center justify-center', mainClasses]}
+      >
+        <slot />
+        <Footer />
+      </main>
+    </Navigation>
+  </body>
+</html>

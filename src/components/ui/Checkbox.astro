@@ -1,0 +1,38 @@
+---
+import type {HTMLAttributes} from 'astro/types'
+import type {ZodIssue} from 'zod'
+
+interface Props extends HTMLAttributes<'input'> {
+  name: string
+  class?: string
+  error?: ZodIssue
+}
+const {name, required, class: classes, value, error, ...props} = Astro.props
+const id = `checkbox-${name}`
+---
+
+<label
+  for={id}
+  class='text-start capitalize text-base font-medium cursor-pointer flex gap-2.5 py-2.5'
+  class:list={[classes]}
+>
+  <input
+    type='checkbox'
+    {...props}
+    id={id}
+    name={name}
+    class='checkbox checkbox-md rounded-md border-2 mt-2 md:mt-0'
+    checked={value ? 'checked' : undefined}
+  />
+  <span class='flex flex-col'>
+    <span class='basis-full'><slot />{required ? ' *' : ''}</span>
+    <p class='flex flex-1 text-xs text-red'>{error?.message ?? <>&nbsp;</>}</p>
+  </span>
+</label>
+
+<script define:vars={{id}}>
+  document.getElementById(id).addEventListener('change', (e) => {
+    console.log(e.target.checked)
+    e.target.setAttribute('checked', e.target.checked)
+  })
+</script>

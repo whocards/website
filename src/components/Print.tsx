@@ -70,7 +70,7 @@ export default function Print() {
         <div class='mx order-5 mt-8 text-center md:order-none md:col-span-2'>
           <a
             target='_blank'
-            class='btn-primary btn mt-auto'
+            class='btn btn-primary mt-auto'
             href={`/cards/${store().lang}-${isWide() ? 'wide' : 'tall'}.pdf`}
           >
             Download

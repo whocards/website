@@ -12,14 +12,3 @@ https://calmly.whocards.cc
 https://github.com/whocards/website
 https://icon-sets.iconify.design/
 https://app.netlify.com/sites/whocards-calmly/overview
-
-# questions / non critical upgrades
-
-- [ ] switch to using our icons?
-- [x] share modal
-- [ ] update readme
-- [ ] animations
-- [ ] testing
-- [ ] remove redirects from trailing slash
-- [ ] track file downloads https://plausible.io/docs/file-downloads-tracking
-- [ ] hebrew seo images

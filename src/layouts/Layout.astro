@@ -1,31 +1,48 @@
 ---
-import Navigation from '~components/Navigation.astro'
 import {LanguageSwitcher} from '~components/Modal/LanguageSwitcher'
+import Navigation from '~components/Navigation.astro'
+import {IS_PROD} from '~constants/env'
 import Head from './Head.astro'
-import {IS_PROD} from '#scripts/env'
 
+import {mainLinks} from '~constants/navigation'
 import '~styles/base.css'
 
-const {class: mainClasses, title, description, lang = 'en', hideLangModal} = Astro.props
+export interface Props {
+  class?: string
+  title?: string
+  description?: string
+  lang?: string
+  showLangModal?: boolean
+  showFooter?: boolean
+}
+
+const {
+  class: mainClasses,
+  title,
+  description,
+  lang = 'en',
+  showLangModal = false,
+  showFooter = false,
+} = Astro.props
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang={lang} class='scroll-smooth bg-dark'>
   <head>
     <Head title={title} description={description} />
     {IS_PROD && <script defer='defer' data-domain='whocards.cc' src='/js/script.js' />}
   </head>
   <body
-    class='m-0 flex min-h-screen flex-col bg-hero bg-fixed bg-center bg-no-repeat font-sans text-white'
+    class='m-0 flex min-h-screen flex-col bg-hero bg-fixed bg-center bg-no-repeat bg-cover font-sans text-white'
   >
-    <Navigation>
+    <Navigation links={mainLinks}>
       <main
         class:list={['flex min-h-screen w-full flex-col items-center justify-center', mainClasses]}
       >
         <slot />
       </main>
     </Navigation>
-    {!hideLangModal && <LanguageSwitcher client:only />}
+    {showLangModal && <LanguageSwitcher client:only />}
     <style is:global></style>
   </body>
 </html>

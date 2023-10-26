@@ -1,11 +1,12 @@
-module.exports = {
+/** @type {import("prettier").Config} */
+const config = {
   trailingComma: 'es5',
   semi: false,
   singleQuote: true,
   bracketSpacing: false,
   jsxSingleQuote: true,
   printWidth: 100,
-  plugins: [require('prettier-plugin-tailwindcss'), require.resolve('prettier-plugin-astro')],
+  plugins: ['prettier-plugin-tailwindcss', 'prettier-plugin-astro'],
   overrides: [
     {
       files: '*.astro',
@@ -15,3 +16,5 @@ module.exports = {
     },
   ],
 }
+
+module.exports = config

@@ -1,0 +1,74 @@
+---
+import Icon from 'astro-icon'
+import {preorderLinks} from '~constants/navigation'
+
+const socialLinks = [
+  {icon: 'mdi:linkedin', href: 'https://www.linkedin.com/company/whocard'},
+  // { icon: 'mdi:twitter', href: 'https://twitter.com/whocards' },
+  {icon: 'ri:facebook-fill', href: 'https://facebook.com/whocards'},
+  {icon: 'mdi:instagram', href: 'https://instagram.com/who_cards'},
+]
+---
+
+<div
+  class='flex flex-col gap-12 text-gray-dark w-full px-5 py-12 lg:max-w-7xl xl:px-0 lg:py-28 lg:w-full lg:flex-row lg:justify-between lg:flex-wrap border-t border-t-dark'
+>
+  <div class='flex flex-col gap-8 items-start'>
+    <Icon name='logo-plain' class='h-7 fill-white' />
+    <div class='flex flex-row gap-2.5'>
+      {
+        socialLinks.map((link) => (
+          <a
+            href={link.href}
+            target='_blank'
+            class='bg-dark p-2 rounded-full flex items-center justify-center'
+          >
+            <Icon name={link.icon} class='h-5 w-5' />
+          </a>
+        ))
+      }
+      <button
+        id='share'
+        type='button'
+        class='hidden bg-dark p-2 rounded-full items-center justify-center'
+      >
+        <Icon name='ic:twotone-share' class='h-5 w-5' />
+      </button>
+    </div>
+    <p class='hidden lg:block'>Copyright @ 2023<br />Alles ist Dialog</p>
+  </div>
+  <div class='flex justify-between'>
+    <div class='flex flex-col gap-4'>
+      {
+        preorderLinks
+          .filter((i) => !i.button)
+          .map((link) => (
+            <a href={link.href} class='text-sm font-semibold w-36'>
+              {link.title}
+            </a>
+          ))
+      }
+    </div>
+    <div class='flex flex-col gap-4'>
+      <a href='/legal/pp' target='_blank' class='text-sm font-semibold w-36'>Privacy Policy</a>
+    </div>
+  </div>
+  <div class='hidden lg:flex lg:basis-full'></div>
+  <p class='lg:hidden'>Copyright @ 2023<br />Alles ist Dialog</p>
+</div>
+
+<script>
+  if (!!navigator.share) {
+    const share = document.getElementById('share') as HTMLButtonElement
+    share.classList.remove('hidden')
+    share.classList.add('flex')
+    share.addEventListener('click', (e) => {
+      e.preventDefault()
+      e.stopPropagation()
+      navigator.share({
+        title: 'WhoCards | Pre-Order Now!',
+        url: window.location.toString(),
+      })
+    })
+  }
+</script>
