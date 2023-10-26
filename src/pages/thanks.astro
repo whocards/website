@@ -83,6 +83,7 @@ if (Astro.request.method === 'POST') {
       let shouldUpdate = !data.shipping
 
       if (!shouldUpdate) {
+        // @ts-ignore
         const {id, createdAt, updatedAt, ...shippingData} = data.shipping
         shouldUpdate = JSON.stringify(shippingData) !== JSON.stringify(shipping.data)
       }

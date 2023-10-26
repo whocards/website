@@ -53,6 +53,8 @@ export const createSheetRow = async (data: ShippingSelect) =>
     method: 'POST',
     body: serialize({
       ...data,
+      reference: data.purchaseId,
+      date: data.createdAt.toISOString().split('.')[0],
       sku: createSKU(data.quantity),
       quantity: createQuantity(data.quantity),
     }),

@@ -13,7 +13,7 @@ import Accordion from '~components/ui/Accordion.astro'
 import Button from '~components/ui/Button.astro'
 import RoundedImage from '~components/ui/RoundedImage.astro'
 import WhoCard from '~components/ui/WhoCard.astro'
-import { faqs } from '~constants/faqs'
+import {faqs} from '~constants/faqs'
 import Layout from '~layouts/LayoutPreorder.astro'
 ---
 
@@ -62,7 +62,7 @@ import Layout from '~layouts/LayoutPreorder.astro'
     <WhoCard lang='en' id='9' />
   </div>
   <PreorderSection
-    subtitle='what is who cards'
+    subtitle='what is who cards?'
     title='Unlock Deep Conversations and Meaningful Connections'
     description='WhoCards offers 66 carefully curated questions, empowering you to transform your interactions with people from social gatherings to professional settings. The courageous questions and playful guidelines of WhoCards create an atmosphere where you can relax, open up and get to know each other better.'
   >
@@ -103,7 +103,29 @@ import Layout from '~layouts/LayoutPreorder.astro'
   >
     <RoundedImage alt='a team of people' src={teamImage} />
 
-    <Button tag='a' href='#testimonials' slot='button' variant='secondary' light>Read more</Button>
+    <div id='description-extra' slot='image-description' class='flex flex-col gap-4 lg:gap5 hidden'>
+      <p class='leading-snug text-gray-dark pb-2 lg:text-lg lg:max-w-3xl lg:tracking-tight'>
+        WhoCards were born as part of this experiment, as a helper to go beyond starting
+        conversations with questions related to our job titles, identities and social status.
+        Instead of leaning on socially acceptable questions like, “What do you do?’ or “Where are
+        you from?,” we focused on “Who are you?” and a myriad of subsequent questions like “What
+        does happiness mean to you?”, “How do you want to grow old?” or “What was the last thing you
+        cried about?”
+      </p>
+      <p class='leading-snug text-gray-dark pb-2 lg:text-lg lg:max-w-3xl lg:tracking-tight'>
+        Since then, countless people have found delight in using our carefully curated questions
+        across the planet amongst a manifold of different contexts. From garden parties with family
+        or friends to strategic and innovation workshops, from orthodox jewish matchmaking dates to
+        political negotiations; WhoCards have helped us to move beyond social anxiety, disconnection
+        and loneliness.
+      </p>
+      <p class='leading-snug text-gray-dark pb-2 lg:text-lg lg:max-w-3xl lg:tracking-tight'>
+        As a result we, humans, were able to playfully find commonalities with others while holding
+        completely different beliefs, norms and ideas about what it means to be alive today.
+      </p>
+    </div>
+
+    <Button slot='button' variant='secondary' id='read-more' light hideIcon>Read more</Button>
   </PreorderSectionImage>
 
   <PreorderSectionImage subtitle='how to play?' title='Different ways to engage' reverse>
@@ -153,7 +175,9 @@ import Layout from '~layouts/LayoutPreorder.astro'
         >
           Preorder today
         </h3>
-        <p class='px-5 text-center pt-5 text-sm lg:text-lg lg:leading-normal leading-snug pb-10 max-w-xl lg:max-w-3xl'>
+        <p
+          class='px-5 text-center pt-5 text-sm lg:text-lg lg:leading-normal leading-snug pb-10 max-w-xl lg:max-w-3xl'
+        >
           WhoCards is on the mission to transform social interactions to become more open,
           vulnerable and authentic. Join us spreading this mission by pre-ordering WhoCards and
           gifting away at least a pack to someone who'll treasure it.
@@ -186,3 +210,16 @@ import Layout from '~layouts/LayoutPreorder.astro'
     </div>
   </div>
 </Layout>
+
+<script>
+  const button = document.getElementById('read-more') as HTMLButtonElement
+  if (button) {
+    button.addEventListener('click', () => {
+      document.getElementById('description-extra')?.classList.toggle('hidden')
+      console.log(document.getElementById('description-extra')?.classList.contains('hidden'))
+      button.innerHTML = document.getElementById('description-extra')?.classList.contains('hidden')
+        ? 'Read more'
+        : 'Read less'
+    })
+  }
+</script>

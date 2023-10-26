@@ -8,11 +8,12 @@ export interface Props {
 }
 
 const {title, subtitle, description, class: classes, reverse = false} = Astro.props
+const id = subtitle.replaceAll(' ', '-').replace('?', '')
 ---
 
 <div
   class='flex lg:grid lg:grid-flow-col lg:grid-cols-2 lg:gap-14'
-  id={subtitle.replaceAll(' ', '-').replace('?', '')}
+  id={id}
   class:list={[
     'px-5 pt-24 gap-4 lg:max-w-7xl xl:px-0 lg:py-28 lg:w-full lg:min-h-[44.5rem]',
     reverse ? 'flex-col-reverse' : 'flex-col',
