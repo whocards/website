@@ -105,9 +105,27 @@ if (Astro.request.method === 'POST') {
 }
 ---
 
-<Layout title='Thank You!'>
+<Layout title='Thank You!' class='pt-28 lg:pt-32'>
+  <span class='md:px-[2vw] lg:max-w-7xl px-5 lg:px-32 w-full'>
+    {
+      data.shipping && (
+        <p class='border-green-800 border-2 text-white p-4 mb-4 rounded-lg w-full'>
+          Your shipping information has been submitted sucessfully!
+          <br />
+          You may edit your shipping information below if needed.
+        </p>
+      )
+    }
+    {
+      errors && Object.keys(errors).length > 0 && (
+        <p class='border-red border-2 text-white p-4 mb-4 rounded-lg w-full'>
+          There were some errors with your submission. Please review the form below and try again.
+        </p>
+      )
+    }
+  </span>
   <div
-    class='grid grid-flow-row md:grid-flow-col md:grid-cols-2 md:px-[2vw] lg:max-w-7xl px-5 lg:px-32 pt-28 lg:pt-32'
+    class='grid grid-flow-row md:grid-flow-col md:grid-cols-2 md:px-[2vw] lg:max-w-7xl px-5 lg:px-32'
   >
     <div
       class='flex text-sm lg:text-xl text-gray-dark flex-col items-center md:items-start md:justify-start justify-center text-center md:text-start gap-4 md:gap-5 pb-14'
@@ -137,24 +155,9 @@ if (Astro.request.method === 'POST') {
       </h2>
       <p class='text-sm lg:text-xl text-gray-dark'>
         Please ensure that you complete the form below in order to receive your WhoCards. Expect the
-        shipment to take place in early December, right on time for Christmas.
+        shipment to take place in early December, right on time for the Holiday Season.
       </p>
-      {
-        data.shipping && (
-          <p class='border-green-800 border-2 text-white p-4 mb-4 rounded-lg w-full'>
-            Your shipping information has been submitted sucessfully!
-            <br />
-            You may edit your shipping information below if needed.
-          </p>
-        )
-      }
-      {
-        errors && Object.keys(errors).length > 0 && (
-          <p class='border-red border-2 text-white p-4 mb-4 rounded-lg w-full'>
-            There were some errors with your submission. Please review the form below and try again.
-          </p>
-        )
-      }
+
       <ShippingForm data={data} quantity={quantity} errors={errors} formData={formData} submitted />
     </div>
   </div>

@@ -12,15 +12,3 @@ https://calmly.whocards.cc
 https://github.com/whocards/website
 https://icon-sets.iconify.design/
 https://app.netlify.com/sites/whocards-calmly/overview
-
-## Review notes from Hoki
-
-- [x] add + to phone number regex
-- [ ] form revalidation
-- [ ] add formula for address provided in sheets
-
-## Design breakdown
-
-- [ ] footer
-- [ ] background images
-- [ ] social sharing

@@ -128,15 +128,9 @@ import Layout from '~layouts/LayoutPreorder.astro'
     <Button slot='button' variant='secondary' id='read-more' light hideIcon>Read more</Button>
   </PreorderSectionImage>
 
-  <PreorderSectionImage subtitle='how to play?' title='Different ways to engage' reverse>
-    <RoundedImage
-      src={cardsImage}
-      alt='a set of whocards'
-      slot='image-description'
-      class='mt-6'
-      full
-    />
-    <Usage />
+  <PreorderSectionImage subtitle='how to play?' title='Different ways to engage' forceReverse>
+    <RoundedImage src={cardsImage} alt='a set of whocards' class='mt-6' full />
+    <Usage slot='end' />
   </PreorderSectionImage>
 
   <PreorderSection
