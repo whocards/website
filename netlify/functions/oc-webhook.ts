@@ -2,7 +2,7 @@ import type {Handler} from '@netlify/functions'
 import {serialize} from 'object-to-formdata'
 import {openCollectiveProducts} from '~constants/products'
 import {env} from '~env-secrets'
-import {db, insertPurchaseSchema, insertUserSchema, schemas} from '~server/db'
+import {db, insertPurchaseSchema, insertUser, insertUserSchema, schema} from '~server/db'
 import {
   graphQLClient,
   orderIdFromLegacyQuery,
@@ -72,11 +72,7 @@ const handler: Handler = async (event, context) => {
     email,
   })
 
-  const [dbUser] = await db
-    .insert(schemas.users)
-    .values(parseUser)
-    .onConflictDoUpdate({target: schemas.users.email, set: {name: parseUser.name}})
-    .returning()
+  const dbUser = await insertUser(parseUser)
 
   const purchase = insertPurchaseSchema.parse({
     id: fetchedId.order.id,
@@ -89,7 +85,7 @@ const handler: Handler = async (event, context) => {
 
   // add to DB and sheets
   const [dbEntry, sheetEntry] = await Promise.allSettled([
-    db.insert(schemas.purchases).values(purchase).returning(),
+    db.insert(schema.purchases).values(purchase).returning(),
     fetch(env.PURCHASE_SHEET_URL, {
       method: 'POST',
       body: serialize({

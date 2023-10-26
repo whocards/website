@@ -11,49 +11,19 @@ import {
   getPurchaseById,
   insertShippingAddress,
   insertShippingSchema,
+  insertUser,
+  type FullPurchase,
   type PurchaseSelect,
-  type UserSelect,
 } from '~server/db'
+import {thankYouFormSchema} from '~utils/schemas'
 
-let errors
+let errors = {}
 let formData
-let submitted: boolean = false
-let user: UserSelect | null
+let data: FullPurchase
 let purchase: PurchaseSelect
 let quantity: number
 
-// TODO validate not resubmitting
-
-// when form is posted
-if (Astro.request.method === 'POST') {
-  try {
-    const data = await Astro.request.formData()
-    formData = Object.fromEntries(data.entries()) as Record<string, string>
-    const shipping = insertShippingSchema.safeParse(formData)
-    // invalid form
-    if (!shipping.success) {
-      errors = shipping.error.issues?.reduce(
-        (acc, curr) => {
-          acc[`${curr.path[0]}`] = curr
-          return acc
-        },
-        {} as Record<string, ZodIssue>
-      )
-    } else {
-      // TODO validate form before submit
-      // valid form
-      const [dbShipping] = await insertShippingAddress(shipping.data)
-      const zenShipping = await createZenShipping(dbShipping)
-      if (!zenShipping.errors.length) {
-        submitted = true
-        await createSheetRow(dbShipping)
-      }
-    }
-  } catch (error) {
-    console.error(error)
-  }
-}
-
+// get purchase id from url
 const purchaseId = Astro.url.searchParams.get('orderIdV2') ?? ''
 
 // TODO where should redirect happen?
@@ -61,16 +31,76 @@ if (!purchaseId) {
   return Astro.redirect('/preorder?error=missingParams')
 }
 
+// get data from db
 try {
-  const dbModels = await getPurchaseById(purchaseId)
-  purchase = dbModels.purchase
-  user = dbModels.user
-  quantity = openCollectiveProducts.filter((p) => p.title === purchase.category)[0].quantity
-  if (!user || !purchase || !quantity) {
-    throw new Error('invalidParams')
-  }
+  data = await getPurchaseById(purchaseId)
+  if (!data) throw new Error('Purchase not found')
+  purchase = data.purchase
+  quantity =
+    data.shipping?.quantity ??
+    openCollectiveProducts.filter((p) => p.title === purchase.category)[0].quantity
 } catch (error) {
+  console.error((error as Error).message)
   return Astro.redirect('/preorder?error=invalidParams')
+}
+
+// when form is posted
+if (Astro.request.method === 'POST') {
+  try {
+    const rawFormData = await Astro.request.formData()
+    formData = Object.fromEntries(rawFormData.entries()) as Record<string, string>
+    // validate base form
+    const form = thankYouFormSchema.safeParse({...formData})
+    if (!form.success) {
+      const formErrors = form.error.issues?.reduce(
+        (acc, curr) => {
+          acc[`${curr.path[0]}`] = curr
+          return acc
+        },
+        {} as Record<string, ZodIssue>
+      )
+      errors = {...errors, ...formErrors}
+    }
+    // validate shipping
+    const shipping = insertShippingSchema.safeParse(formData)
+    if (!shipping.success) {
+      const shippingErrors = shipping.error.issues?.reduce(
+        (acc, curr) => {
+          acc[`${curr.path[0]}`] = curr
+          return acc
+        },
+        {} as Record<string, ZodIssue>
+      )
+      errors = {...errors, ...shippingErrors}
+    }
+
+    if (form.success && shipping.success) {
+      // update user if newsletter is different
+      if (Object.hasOwn(form.data, 'newsletter') && form.data.newsletter !== data.user.newsletter) {
+        await insertUser({...data.user, newsletter: form.data.newsletter})
+      }
+
+      let shouldUpdate = !data.shipping
+
+      if (!shouldUpdate) {
+        const {id, createdAt, updatedAt, ...shippingData} = data.shipping
+        shouldUpdate = JSON.stringify(shippingData) !== JSON.stringify(shipping.data)
+      }
+
+      if (shouldUpdate) {
+        console.log('updating shipping')
+        const dbShipping = await insertShippingAddress(shipping.data)
+        const zenShipping = await createZenShipping(dbShipping)
+        if (!zenShipping.errors.length && !data.shipping) {
+          await createSheetRow(dbShipping)
+        } else {
+          // TODO update sheet?
+        }
+      }
+    }
+  } catch (error) {
+    console.error(error)
+  }
 }
 ---
 
@@ -109,21 +139,22 @@ try {
         shipment to take place in early December, right on time for Christmas.
       </p>
       {
-        submitted ? (
-          <div class='bg-green-100 text-green-800 p-4 mb-4'>
-            Your shipping information has been submitted!
-          </div>
-        ) : (
-          <ShippingForm
-            user={user}
-            purchase={purchase}
-            quantity={quantity}
-            errors={errors}
-            formData={formData}
-            submitted
-          />
+        data.shipping && (
+          <p class='border-green-800 border-2 text-white p-4 mb-4 rounded-lg w-full'>
+            Your shipping information has been submitted sucessfully!
+            <br />
+            You may edit your shipping information below if needed.
+          </p>
         )
       }
+      {
+        errors && Object.keys(errors).length > 0 && (
+          <p class='border-red border-2 text-white p-4 mb-4 rounded-lg w-full'>
+            There were some errors with your submission. Please review the form below and try again.
+          </p>
+        )
+      }
+      <ShippingForm data={data} quantity={quantity} errors={errors} formData={formData} submitted />
     </div>
   </div>
 </Layout>

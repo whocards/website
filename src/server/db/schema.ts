@@ -52,7 +52,8 @@ export const shippings = pgTable('shipping', {
   country: text('country').notNull(),
   purchaseId: text('purchaseId')
     .notNull()
-    .references(() => purchases.id),
+    .references(() => purchases.id)
+    .unique(),
 })
 
 export const shippingRelations = relations(shippings, ({one}) => ({
@@ -61,14 +62,3 @@ export const shippingRelations = relations(shippings, ({one}) => ({
     references: [purchases.id],
   }),
 }))
-
-// export const purchaseRelations = relations(purchases, ({one}) => ({
-//   // shipping: one(shipping, {
-//   //   fields: [purchase.id],
-//   //   references: [shipping.purchaseId],
-//   // }),
-//   user: one(users, {
-//     fields: [purchases.userId],
-//     references: [users.id],
-//   }),
-// }))

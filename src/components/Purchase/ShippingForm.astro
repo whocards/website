@@ -1,20 +1,25 @@
 ---
-import type { ZodIssue } from 'zod'
+import type {ZodIssue} from 'zod'
 import Button from '~components/ui/Button.astro'
 import Checkbox from '~components/ui/Checkbox.astro'
 import Input from '~components/ui/Input.astro'
-import type { PurchaseSelect, UserSelect } from '~server/db'
+import type {getPurchaseById} from '~server/db'
 
 export interface Props {
-  user: UserSelect
-  purchase: PurchaseSelect
+  data: Awaited<ReturnType<typeof getPurchaseById>>
   quantity: number
-  formData?: Record<string, string>
+  formData?: Record<string, any>
   errors?: Record<string, ZodIssue>
   submitted: boolean
 }
 
-const {user, purchase, quantity, formData, errors, submitted} = Astro.props
+const {
+  data: {user, purchase, shipping},
+  quantity,
+  formData,
+  errors,
+  submitted,
+} = Astro.props
 ---
 
 <form id='address-form' method='POST' class='flex flex-col w-full pb-14'>
@@ -26,29 +31,57 @@ const {user, purchase, quantity, formData, errors, submitted} = Astro.props
     value={formData?.email ?? user.email}
     error={errors?.email}
   />
-  <Input name='phone' type='tel' required value={formData?.phone} error={errors?.phone} />
+  <Input name='company' value={formData?.company ?? shipping?.company} error={errors?.company} />
+  <Input
+    name='phone'
+    type='tel'
+    required
+    value={formData?.phone ?? shipping?.phone}
+    error={errors?.phone}
+  />
   <div class='flex flex-col lg:gap-4'>
     <Input
       name='address'
       required
       title='street 1'
-      value={formData?.address}
+      value={formData?.address ?? shipping?.address}
       error={errors?.address}
     />
-    <Input name='address2' title='street 2' value={formData?.address2} error={errors?.address2} />
+    <Input
+      name='address2'
+      title='street 2'
+      value={formData?.address2 ?? shipping?.address2}
+      error={errors?.address2}
+    />
   </div>
   <div class='flex flex-col lg:gap-4'>
-    <Input name='zip' required title='zip code' value={formData?.zip} error={errors?.zip} />
-    <Input name='city' required value={formData?.city} error={errors?.city} />
+    <Input
+      name='zip'
+      required
+      title='zip code'
+      value={formData?.zip ?? shipping?.zip}
+      error={errors?.zip}
+    />
+    <Input name='city' required value={formData?.city ?? shipping?.city} error={errors?.city} />
   </div>
   <div class='flex flex-col lg:gap-4'>
-    <Input name='region' autocomplete='state' value={formData?.region} error={errors?.region} />
-    <Input name='country' required value={formData?.country} error={errors?.country} />
+    <Input name='region' value={formData?.region ?? shipping?.region} error={errors?.region} />
+    <Input
+      name='country'
+      required
+      value={formData?.country ?? shipping?.country}
+      error={errors?.country}
+    />
   </div>
-  <Checkbox name='privacy-policy' required>
+  <Checkbox
+    name='privacy'
+    required
+    checked={!!formData?.privacy ?? !!shipping}
+    error={errors?.privacy}
+  >
     Yes, I have read and agree to WhoCards' Privacy Policy
   </Checkbox>
-  <Checkbox name='newsletter' class='pt-4'>
+  <Checkbox name='newsletter' checked={!!formData?.newsletter ?? !!user.newsletter}>
     Yes, I would like to sign up for occasional newsletters from WhoCards.
   </Checkbox>
 

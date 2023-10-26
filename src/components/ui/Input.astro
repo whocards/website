@@ -9,16 +9,18 @@ interface Props extends HTMLAttributes<'input'> {
 }
 
 const {error, type = 'text', title, name, required, ...props} = Astro.props
+const id = `input-${name}`
 ---
 
-<div class='flex flex-col gap-2 pb-2.5'>
-  <label for={name} class='text-start capitalize text-base font-medium'
-    >{title ?? name}{required ? ' *' : ''}</label
-  >
+<label for={id} class='text-start capitalize text-base font-medium flex flex-col gap-2 pb-2.5'>
+  <div>{title ?? name}{required ? ' *' : ''}</div>
   <input
     {...props}
-    class='w-full bg-transparent py-3 px-4.5 border border-gray placeholder:text-gray-dark placeholder:capitalize rounded-xl'
+    name={name}
+    id={id}
+    class='w-full bg-transparent py-3 px-4.5 border placeholder:text-gray-dark placeholder:capitalize rounded-xl'
+    class:list={[error ? 'border-red' : 'border-gray']}
     placeholder={`Enter ${title ?? name}`}
   />
   <p class='text-xs text-red'>{error?.message ?? <>&nbsp;</>}</p>
-</div>
+</label>
