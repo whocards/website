@@ -25,7 +25,7 @@ import Layout from '~layouts/LayoutPreorder.astro'
   <!-- TODO background -->
   <Icon name='pattern-mobile' class='absolute top-0 left-0 right-0 -z-10 lg:hidden' />
   <div
-    class='flex flex-col gap-4 lg:gap-5 px-8 pt-16 max-w-5xl lg:items-center xs:h-screen h-[calc(100vh-13rem)] min-h-[35rem] lg:h-[calc(100vh-21rem)] justify-center'
+    class='flex flex-col gap-4 lg:gap-5 px-8 pt-16 max-w-5xl lg:items-center xs:h-screen h-[calc(100vh-13rem)] min-h-[37rem] lg:h-[calc(100vh-21rem)] justify-center'
   >
     <h1
       class='text-center font-title font-bold text-white text-4xl lg:text-7xl leading-10 xs:text-2xl'
@@ -37,11 +37,10 @@ import Layout from '~layouts/LayoutPreorder.astro'
     <p
       class='text-center text-sm lg:text-lg font-semibold xs:leading-normal leading-7 pb-2 lg:px-10'
     >
-      WhoCards is on the mission to transform social interactions by encouraging greater openness,
-      vulnerability and authenticity. Join us spreading this mission by pre-ordering WhoCards and
+      Join us spreading openness, vulnerability and authenticity by pre-ordering WhoCards and
       gifting away at least a pack to someone who'll treasure it.
     </p>
-    <div class='flex flex-col lg:flex-row gap-4 lg:gap-5 lg:pt-5'>
+    <div class='flex flex-col md:flex-row gap-4 lg:gap-5 py-5 lg:pt-8'>
       <Button tag='a' href='#support-us'>Pre-Order Now</Button>
       <Button tag='a' href='#what-is-who-cards' class='w-full' light hideIcon variant='secondary'>
         Learn More
@@ -49,7 +48,7 @@ import Layout from '~layouts/LayoutPreorder.astro'
     </div>
   </div>
   <div
-    class='flex gap-10 overflow-x-scroll overflow-y-hidden h-52 lg:h-[21rem] w-[95vw] scrollbar-hide justify-center'
+    class='flex gap-10 overflow-x-scroll overflow-y-hidden h-52 lg:h-[21rem] w-screen scrollbar-hide justify-center'
   >
     <WhoCard lang='en' id='1' />
     <WhoCard lang='en' id='2' />
