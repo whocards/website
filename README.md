@@ -9,10 +9,10 @@ https://calmly.whocards.cc
 
 ## References
 
-https://github.com/whocards/website
-https://icon-sets.iconify.design/
-https://app.netlify.com/sites/whocards-calmly/overview
+- https://github.com/whocards/website
+- https://icon-sets.iconify.design/
+- https://app.netlify.com/sites/whocards/overview
 
 # TODOs
 
-- [ ] setup development sheets and database
+- [x] setup development sheets and database
