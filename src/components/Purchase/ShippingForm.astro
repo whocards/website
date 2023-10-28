@@ -73,12 +73,7 @@ const {
       error={errors?.country}
     />
   </div>
-  <Checkbox
-    name='privacy'
-    required
-    checked={!!formData?.privacy ?? !!shipping}
-    error={errors?.privacy}
-  >
+  <Checkbox name='privacy' required checked={!!shipping} error={errors?.privacy}>
     Yes, I have read and agree to WhoCards' Privacy Policy
   </Checkbox>
   <Checkbox name='newsletter' checked={!!formData?.newsletter ?? !!user.newsletter}>
@@ -88,5 +83,19 @@ const {
   <!-- hidden inputs -->
   <input type='hidden' name='purchaseId' value={purchase.id} />
   <input type='hidden' name='quantity' value={quantity} />
-  <Button type='submit' class='mt-4 capitalize' full>{submitted ? 'update' : 'submit'}</Button>
+  <Button type='submit' class='mt-4 capitalize' disabled full>
+    {submitted ? 'update' : 'submit'}
+  </Button>
 </form>
+
+<script>
+  const form = document.getElementById('address-form') as HTMLFormElement
+  form?.addEventListener('change', (e) => {
+    const submit = form?.querySelector('button[type="submit"]')
+    if (form?.checkValidity()) {
+      submit?.removeAttribute('disabled')
+    } else {
+      submit?.setAttribute('disabled', '')
+    }
+  })
+</script>

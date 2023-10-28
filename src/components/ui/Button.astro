@@ -28,8 +28,9 @@ const {
 ---
 
 <Element
+  type={type}
   class:list={[
-    'text-center min-w-[214px] flex justify-center items-center disabled:opacity-50 disabled:cursor-not-allowed',
+    'text-center min-w-[214px] flex justify-center items-center transition-opacity duration-300 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed',
     variant === 'primary' && 'bg-primary-light hover:bg-yellow-500 active:bg-yellow-300',
     variant === 'secondary' &&
       'border rounded-[14px] hover:bg-gray-100 active:bg-gray-200 hover:bg-opacity-25 active:bg-opacity-10',
