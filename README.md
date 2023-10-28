@@ -16,4 +16,3 @@ https://app.netlify.com/sites/whocards-calmly/overview
 # TODOs
 
 - [ ] setup development sheets and database
-- [ ] fix update of shipping address

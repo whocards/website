@@ -1,9 +1,8 @@
 ---
 export const prerender = false
 
-import {Icon} from 'astro-icon'
 import type {ZodIssue} from 'zod'
-import ShippingForm from '~components/Purchase/ShippingForm.astro'
+import {FormSuccess, OrderDetails, ShippingForm} from '~components/thanks'
 import {openCollectiveProducts} from '~constants/products'
 import Layout from '~layouts/Layout.astro'
 import {createSheetRow, createZenShipping} from '~server/csv'
@@ -25,6 +24,7 @@ let quantity: number
 
 // get purchase id from url
 const purchaseId = Astro.url.searchParams.get('orderIdV2') ?? ''
+let confirmed = Astro.url.searchParams.get('confirmed') === 'true'
 
 // TODO where should redirect happen?
 if (!purchaseId) {
@@ -75,6 +75,18 @@ if (Astro.request.method === 'POST') {
     }
 
     if (form.success && shipping.success) {
+      if (!confirmed) {
+        const urlParams = new URLSearchParams(Astro.url.searchParams)
+
+        // append as there could be other query string params
+        urlParams.set('confirmed', 'true')
+
+        // this will reload the page and set query string params..
+        // ex: http://localhost:3000/dashboard?paramKey=paramValue
+        urlParams.toString()
+        Astro.url.search = urlParams.toString()
+      }
+      confirmed = true
       // update user if newsletter is different
       if (Object.hasOwn(form.data, 'newsletter') && form.data.newsletter !== data.user.newsletter) {
         await insertUser({...data.user, newsletter: form.data.newsletter})
@@ -106,59 +118,22 @@ if (Astro.request.method === 'POST') {
 ---
 
 <Layout title='Thank You!' class='pt-28 lg:pt-32'>
-  <span class='md:px-[2vw] lg:max-w-7xl px-5 lg:px-32 w-full'>
-    {
-      data.shipping && (
-        <p class='border-green-800 border-2 text-white p-4 mb-4 rounded-lg w-full'>
-          Your shipping information has been submitted sucessfully!
-          <br />
-          You may edit your shipping information below if needed.
-        </p>
-      )
-    }
-    {
-      errors && Object.keys(errors).length > 0 && (
-        <p class='border-red border-2 text-white p-4 mb-4 rounded-lg w-full'>
-          There were some errors with your submission. Please review the form below and try again.
-        </p>
-      )
-    }
-  </span>
   <div
-    class='grid grid-flow-row md:grid-flow-col md:grid-cols-2 md:px-[2vw] lg:max-w-7xl px-5 lg:px-32'
+    class='grid grid-flow-row md:grid-flow-col md:grid-cols-2 md:px-[2vw] lg:max-w-7xl px-5 lg:px-0 w-full justify-between'
   >
-    <div
-      class='flex text-sm lg:text-xl text-gray-dark flex-col items-center md:items-start md:justify-start justify-center text-center md:text-start gap-4 md:gap-5 pb-14'
-    >
-      <Icon name='thumbs-up' class='w-16 h-16' />
-      <h1
-        class='text-4xl text-white lg:text-6xl md:pt-4 md:pb-2 font-bold font-title tracking-tight leading-tight'
-      >
-        Thank you for<br />your contribution
-      </h1>
-      <p>Your support makes a difference!</p>
-      <Icon name='divider' class='w-64 py-2 md:hidden' />
-      <Icon name='divider-left' class='w-3/4 py-4 hidden md:block' />
-      <p class='text-xs md:text-sm uppercase font-semibold'>Purchase details</p>
-      <h2 class='text-6xl text-white font-semibold pb-2'>€{purchase.price / 100}</h2>
-      <div class='flex flex-col gap-3'>
-        <p>Plan: {purchase.category}</p>
-        <p>Date: {purchase.date.toDateString()}</p>
-        <p>ID: {purchase.id}</p>
-      </div>
-    </div>
-    <div
-      class='flex flex-col items-center justify-center text-center md:text-start md:items-start gap-4 md:gap-5'
-    >
-      <h2 class='text-3xl lg:text-5xl font-bold font-title tracking-tight leading-tight'>
-        Fill Out the Form for delivery
-      </h2>
-      <p class='text-sm lg:text-xl text-gray-dark'>
-        Please ensure that you complete the form below in order to receive your WhoCards. Expect the
-        shipment to take place in early December, right on time for the Holiday Season.
-      </p>
-
-      <ShippingForm data={data} quantity={quantity} errors={errors} formData={formData} submitted />
-    </div>
+    <OrderDetails purchase={purchase} class={confirmed ? 'hidden md:flex' : ''} />
+    {
+      confirmed ? (
+        <FormSuccess href={`/thanks?orderIdV2=${purchaseId}`} />
+      ) : (
+        <ShippingForm
+          data={data}
+          quantity={quantity}
+          errors={errors}
+          formData={formData}
+          submitted
+        />
+      )
+    }
   </div>
 </Layout>

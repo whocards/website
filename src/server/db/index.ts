@@ -50,7 +50,7 @@ export const insertShippingAddress = (shipping: ShippingCreate) =>
     .insert(schema.shippings)
     .values(shipping)
     .onConflictDoUpdate({
-      target: shippings.id,
+      target: shippings.purchaseId,
       set: {
         name: shipping.name,
         email: shipping.email,
