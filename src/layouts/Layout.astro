@@ -13,7 +13,7 @@ export interface Props {
   description?: string
   lang?: string
   showLangModal?: boolean
-  showFooter?: boolean
+  newBg?: boolean
 }
 
 const {
@@ -22,18 +22,19 @@ const {
   description,
   lang = 'en',
   showLangModal = false,
-  showFooter = false,
+  newBg = false,
 } = Astro.props
 ---
 
 <!doctype html>
-<html lang={lang} class='scroll-smooth bg-dark'>
+<html lang={lang} class='scroll-smooth bg-darkest'>
   <head>
     <Head title={title} description={description} />
     {IS_PROD && <script defer='defer' data-domain='whocards.cc' src='/js/script.js' />}
   </head>
   <body
-    class='m-0 flex min-h-screen flex-col bg-hero bg-fixed bg-center bg-no-repeat bg-cover font-sans text-white'
+    class='m-0 flex min-h-screen flex-col font-sans text-white'
+    class:list={[newBg ? '' : 'bg-hero bg-fixed bg-center bg-no-repeat bg-cover']}
   >
     <Navigation links={mainLinks}>
       <main
