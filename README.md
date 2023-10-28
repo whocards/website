@@ -12,3 +12,8 @@ https://calmly.whocards.cc
 https://github.com/whocards/website
 https://icon-sets.iconify.design/
 https://app.netlify.com/sites/whocards-calmly/overview
+
+# TODOs
+
+- [ ] setup development sheets and database
+- [ ] fix update of shipping address

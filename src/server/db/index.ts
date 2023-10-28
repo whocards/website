@@ -4,6 +4,7 @@ import {createInsertSchema} from 'drizzle-zod'
 import postgres from 'postgres'
 import {z} from 'zod'
 import {env} from '~env-secrets'
+import {countryString} from '~utils/schemas'
 import * as schemas from './schema'
 
 const client = postgres(env.DB_URL)
@@ -28,7 +29,7 @@ export const insertShippingSchema = createInsertSchema(shippings, {
   quantity: z.coerce.number(),
   address: z.string().min(1, {message: 'Field is required'}),
   zip: z.string().min(1, {message: 'Field is required'}),
-  country: z.string().min(1, {message: 'Field is required'}),
+  country: countryString,
   city: z.string().min(1, {message: 'Field is required'}),
   phone: z.string().regex(/^[\d\s()+-.]+$/, {message: 'Invalid phone number'}),
   company: z.string().optional().default(''),
@@ -50,7 +51,18 @@ export const insertShippingAddress = (shipping: ShippingCreate) =>
     .values(shipping)
     .onConflictDoUpdate({
       target: shippings.id,
-      set: shipping,
+      set: {
+        name: shipping.name,
+        email: shipping.email,
+        phone: shipping.phone,
+        company: shipping.company,
+        address: shipping.address,
+        address2: shipping.address2,
+        zip: shipping.zip,
+        city: shipping.city,
+        region: shipping.region,
+        country: shipping.country,
+      },
     })
     .returning()
     .then((rows) => rows[0])
@@ -59,6 +71,14 @@ export const insertUser = (user: UserCreate) =>
   db
     .insert(schema.users)
     .values(user)
-    .onConflictDoUpdate({target: schema.users.email, set: user})
+    .onConflictDoUpdate({
+      target: schema.users.email,
+      set: {
+        ocSlug: user.ocSlug,
+        name: user.name,
+        newsletter: user.newsletter,
+        email: user.email,
+      },
+    })
     .returning()
     .then((rows) => rows[0])
