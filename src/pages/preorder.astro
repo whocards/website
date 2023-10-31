@@ -14,22 +14,18 @@ import Button from '~components/ui/Button.astro'
 import RoundedImage from '~components/ui/RoundedImage.astro'
 import WhoCard from '~components/ui/WhoCard.astro'
 import {faqs} from '~constants/faqs'
-import Layout from '~layouts/LayoutPreorder.astro'
+import Layout from '~layouts/Layout.astro'
 import {Image} from 'astro:assets'
 import bgRightImage from '~assets/images/bg-right-large.svg'
 import bgLeftImage from '~assets/images/bg-left-large.svg'
-import BackgroundImages from '~components/ui/BackgroundImages.astro'
 ---
 
 <Layout
+  newBg
   title='Pre-Order'
-  class='relative overflow-x-hidden'
+  class='overflow-x-hidden'
   description='Donate to the WhoCards and receive one of the 1000 card decks by the Holiday Season.'
 >
-  <!-- TODO background -->
-  <span class='h-screen w-screen -z-10 overflow-hidden absolute top-0 right-0 left-0 bottom-0'>
-    <BackgroundImages />
-  </span>
   <div
     class='flex flex-col gap-4 lg:gap-5 px-8 pt-16 max-w-5xl lg:items-center xs:h-screen min-h-[85vh] justify-center'
   >

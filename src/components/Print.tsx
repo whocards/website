@@ -1,8 +1,8 @@
-import {createSignal} from 'solid-js'
-import {LANGUAGES} from '~utils'
 import {Icon} from '@iconify-icon/solid'
 import {useStore} from '@nanostores/solid'
-import {$langStore, setLang} from '~stores/Language.store'
+import {createSignal} from 'solid-js'
+import {$langStore} from '~stores/Language.store'
+import {LANGUAGES} from '~utils'
 
 export default function Print() {
   const store = useStore($langStore)
@@ -19,7 +19,7 @@ export default function Print() {
         <span class='text-lg italic md:text-xl lg:text-2xl'>
           Help us make this possible, and please consider{' '}
           <a
-            href='https://opencollective.com/whocards/donate'
+            href='/preorder'
             target='_blank'
             class=' text-primary-light underline hover:font-bold hover:underline'
           >

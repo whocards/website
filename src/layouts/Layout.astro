@@ -4,6 +4,7 @@ import Navigation from '~components/Navigation.astro'
 import {IS_PROD} from '~constants/env'
 import Head from './Head.astro'
 
+import BackgroundImages from '~components/ui/BackgroundImages.astro'
 import {mainLinks, type Link} from '~constants/navigation'
 import '~styles/base.css'
 
@@ -39,6 +40,13 @@ const {
     class:list={[newBg ? '' : 'bg-hero bg-fixed bg-center bg-no-repeat bg-cover']}
   >
     <Navigation links={links}>
+      {
+        newBg && (
+          <span class='h-screen w-screen -z-10 overflow-hidden absolute top-0 right-0 left-0 bottom-0'>
+            <BackgroundImages />
+          </span>
+        )
+      }
       <main
         class:list={['flex min-h-screen w-full flex-col items-center justify-center', mainClasses]}
       >
