@@ -1,0 +1,12 @@
+---
+import {Image} from 'astro:assets'
+import Layout from '~layouts/Layout.astro'
+---
+
+<Layout title='Images' newBg class='pt-16'>
+  <div class='flex flex-col gap-5 p-5'>
+    <Image src='/icon.png' alt='logo' width={270} height={270} />
+    <Image src='/pre-order.png' alt='Pre-order' width={400} height={210} />
+    <Image src='/social.png' alt='Pre-order' width={400} height={210} />
+  </div>
+</Layout>
