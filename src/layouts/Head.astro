@@ -5,6 +5,8 @@ export interface Props {
   image?: string
 }
 
+const fonts = ['aptly_regular', 'aptly_medium', 'golos']
+
 const {id, language} = Astro.params
 const {title: propTitle, description: propDesc, image: img} = Astro.props
 const site = Astro.site
@@ -79,3 +81,10 @@ const title = titles.join(' | ')
 
 <!-- generator -->
 <meta name='generator' content={Astro.generator} />
+
+<!-- fonts -->
+{
+  fonts.map((font) => (
+    <link rel='preload' href={`/fonts/${font}.woff2`} as='font' type='font/woff2' crossorigin />
+  ))
+}

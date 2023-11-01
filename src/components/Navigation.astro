@@ -2,6 +2,7 @@
 import {Icon} from 'astro-icon'
 import NavLink from './Buttons/NavLink.astro'
 import type {Link} from '~constants/navigation'
+import {listIcons} from '@iconify-icon/solid'
 const isQuestionPage = Astro.url.pathname.includes('question')
 
 interface Props {
@@ -27,7 +28,11 @@ const {links} = Astro.props
       <div class:list={['flex-none hidden', {'lg:block': !isQuestionPage}]}>
         <ul class='menu menu-horizontal'>
           <!-- Navbar menu content here -->
-          {links.map((link) => <NavLink {...link} selected={Astro.url.pathname === link.href} />)}
+          {
+            links.map((link) => (
+              <NavLink {...link} selected={Astro.url.pathname === link.href} hideIcon />
+            ))
+          }
         </ul>
       </div>
     </div>
@@ -36,15 +41,31 @@ const {links} = Astro.props
   </div>
   <div class='drawer-side'>
     <label for='who-drawer' class='drawer-overlay'></label>
-    <ul class='menu h-full w-80 bg-dark mt-16'>
+    <ul class='menu h-full w-full md:w-80 bg-darkest pt-16 gap-3'>
       <!-- Sidebar content here -->
-      {links.map((link) => <NavLink {...link} selected={Astro.url.pathname === link.href} />)}
+      {
+        links.map((link) => (
+          <NavLink
+            {...link}
+            selected={Astro.url.pathname === link.href}
+            size='lg'
+            button
+            variant={link.button ? 'primary' : 'secondary'}
+            light={!link.button}
+            hideIcon={!link.button}
+            class:list={[link.button && 'mt-3']}
+          />
+        ))
+      }
     </ul>
   </div>
 </div>
 
 <!-- hamburger menu -->
-<div class:list={['flex-none fixed right-1 md:right-5 top-2 z-10', {'lg:hidden': !isQuestionPage}]}>
+<div
+  class='flex-none fixed right-1 md:right-5 top-2 z-10 border rounded-2xl border-white/30'
+  class:list={[{'lg:hidden': !isQuestionPage}]}
+>
   <label class='right swap btn-ghost swap-rotate btn-square btn' id='who-menu-button'>
     <!-- hamburger icon -->
     <svg

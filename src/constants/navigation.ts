@@ -8,7 +8,7 @@ export const mainLinks: Link[] = [
   {href: '/', title: 'Home'},
   {href: '/mission', title: 'Mission'},
   {href: '/print', title: 'Print'},
-  {href: '/preorder', title: 'Pre-Order', button: true},
+  {href: '/preorder', title: 'Pre-Order Now', button: true},
 ]
 
 export const preorderLinks: Link[] = [

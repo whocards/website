@@ -1,12 +1,13 @@
 ---
-import Button from '~components/ui/Button.astro'
+import Button, {type Props as ButtonProps} from '~components/ui/Button.astro'
 import type {Link} from '~constants/navigation'
 
-export interface Props extends Link {
+export interface Props extends Omit<Link, 'href'>, Omit<ButtonProps<'a'>, 'title'> {
   selected: boolean
+  hideIcon?: boolean
 }
 
-const {href, title, button, selected} = Astro.props
+const {href, title, button, selected, size = 'md', full = false, ...rest} = Astro.props
 ---
 
 <li
@@ -17,7 +18,17 @@ const {href, title, button, selected} = Astro.props
 >
   {
     button ? (
-      <Button size='md' hideIcon full={false} class='min-w-[8rem]' tag='a' href={href}>
+      <Button
+        size={size}
+        {...rest}
+        full={full}
+        class='min-w-[8rem]'
+        class:list={[
+          selected ? 'border-primary-light' : rest.variant === 'secondary' && 'border-white/20',
+        ]}
+        tag='a'
+        href={href}
+      >
         {title}
       </Button>
     ) : (

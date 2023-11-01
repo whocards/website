@@ -35,20 +35,14 @@ const {
     <Head title={title} description={description} />
     {IS_PROD && <script defer='defer' data-domain='whocards.cc' src='/js/script.js' />}
   </head>
-  <body
-    class='m-0 flex min-h-screen flex-col font-sans text-white'
-    class:list={[newBg ? '' : 'bg-hero bg-fixed bg-center bg-no-repeat bg-cover']}
-  >
+  <body class='m-0 flex min-h-screen flex-col font-sans text-white'>
     <Navigation links={links}>
-      {
-        newBg && (
-          <span class='h-screen w-screen -z-10 overflow-hidden absolute top-0 right-0 left-0 bottom-0'>
-            <BackgroundImages />
-          </span>
-        )
-      }
+      <span class='h-screen w-screen -z-10 overflow-hidden absolute top-0 right-0 left-0 bottom-0'>
+        <BackgroundImages />
+      </span>
       <main
-        class:list={['flex min-h-screen w-full flex-col items-center justify-center', mainClasses]}
+        class='flex min-h-screen pt-16 w-full flex-col items-center justify-center'
+        class:list={[mainClasses]}
       >
         <slot />
       </main>

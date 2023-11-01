@@ -18,6 +18,7 @@ import Layout from '~layouts/Layout.astro'
 import {Image} from 'astro:assets'
 import bgRightImage from '~assets/images/bg-right-large.svg'
 import bgLeftImage from '~assets/images/bg-left-large.svg'
+import {preorderLinks} from '~constants/navigation'
 ---
 
 <Layout
@@ -25,12 +26,13 @@ import bgLeftImage from '~assets/images/bg-left-large.svg'
   title='Pre-Order'
   class='overflow-x-hidden'
   description='Donate to the WhoCards and receive one of the 1000 card decks by the Holiday Season.'
+  links={preorderLinks}
 >
   <div
-    class='flex flex-col gap-4 lg:gap-5 px-8 pt-16 max-w-5xl lg:items-center xs:h-screen min-h-[85vh] justify-center'
+    class='flex flex-col gap-4 lg:gap-5 px-8 py-3 max-w-5xl lg:items-center min-h-[85vh] md:min-h-[80vh] justify-center'
   >
     <h1
-      class='text-center font-title font-bold text-white text-4xl lg:text-7xl leading-10 xs:text-2xl'
+      class='text-center font-title font-bold text-white text-4xl lg:text-7xl leading-10 xs:text-3xl'
     >
       Let's create waves of meaningful <br class='hidden lg:block' /><span class='text-gradient'
         >connections</span
@@ -50,7 +52,7 @@ import bgLeftImage from '~assets/images/bg-left-large.svg'
     </div>
   </div>
   <div
-    class='flex gap-10 overflow-x-scroll overflow-y-hidden h-52 lg:h-[21rem] w-[97vw] xl:w-[99vw] scrollbar-hide max-md:scrollbar-hide justify-center'
+    class='flex gap-10 overflow-x-scroll overflow-y-hidden h-52 lg:h-[21rem] w-screen scrollbar-hide max-md:scrollbar-hide justify-center'
   >
     <WhoCard lang='en' id='1' />
     <WhoCard lang='en' id='2' />
