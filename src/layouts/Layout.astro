@@ -16,6 +16,7 @@ export interface Props {
   showLangModal?: boolean
   links?: Link[]
   image?: string
+  oldBg?: boolean
 }
 
 const {
@@ -26,6 +27,7 @@ const {
   showLangModal = false,
   links = mainLinks,
   image,
+  oldBg = false,
 } = Astro.props
 ---
 
@@ -35,11 +37,18 @@ const {
     <Head title={title} description={description} image={image} />
     {IS_PROD && <script defer='defer' data-domain='whocards.cc' src='/js/script.js' />}
   </head>
-  <body class='m-0 flex min-h-screen flex-col font-sans text-white'>
+  <body
+    class='m-0 flex min-h-screen flex-col font-sans text-white'
+    class:list={[oldBg && 'bg-hero bg-fixed bg-center bg-no-repeat bg-cover']}
+  >
     <Navigation links={links}>
-      <span class='h-screen w-screen -z-10 overflow-hidden absolute top-0 right-0 left-0 bottom-0'>
-        <BackgroundImages />
-      </span>
+      {
+        !oldBg && (
+          <span class='h-screen w-screen -z-10 overflow-hidden absolute top-0 right-0 left-0 bottom-0'>
+            <BackgroundImages />
+          </span>
+        )
+      }
       <main
         class='flex min-h-screen pt-16 w-full flex-col items-center justify-center'
         class:list={[mainClasses]}

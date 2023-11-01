@@ -91,6 +91,9 @@ const {links} = Astro.props
   </label>
 </div>
 
+<!-- top of site pixel anchor -->
+<div id='top-of-site-pixel-anchor' class='absolute w-px h-px top-24 left-0'></div>
+
 <script>
   const button = document.getElementById('who-menu-button')!
   const drawer = document.getElementById('who-drawer')! as HTMLInputElement
@@ -108,4 +111,16 @@ const {links} = Astro.props
     drawer.checked = !drawer.checked
     button.classList.toggle('swap-active')
   })
+</script>
+
+<script>
+  const navbar = document.querySelectorAll('.navbar')![0]
+  let observer = new IntersectionObserver((entries) => {
+    if (entries[0].boundingClientRect.y < 0) {
+      navbar.classList.add('backdrop-blur')
+    } else {
+      navbar.classList.remove('backdrop-blur')
+    }
+  })
+  observer.observe(document.querySelector('#top-of-site-pixel-anchor')!)
 </script>

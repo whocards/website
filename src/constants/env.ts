@@ -2,7 +2,7 @@ import dotEnv from 'dotenv'
 
 dotEnv.config()
 
-const localhost = 'http://localhost:3000'
+const localhost = 'http://localhost:4321'
 
 const hasProcess = typeof process !== undefined
 

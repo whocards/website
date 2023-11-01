@@ -82,7 +82,7 @@ if (Astro.request.method === 'POST') {
         urlParams.set('confirmed', 'true')
 
         // this will reload the page and set query string params..
-        // ex: http://localhost:3000/dashboard?paramKey=paramValue
+        // ex: http://localhost:4321/dashboard?paramKey=paramValue
         urlParams.toString()
         Astro.url.search = urlParams.toString()
       }
