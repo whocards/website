@@ -31,5 +31,8 @@ const {language} = Astro.params
 
 <script define:vars={{language}}>
   const locale = new Intl.Locale(language)
-  document.getElementById('question').setAttribute('dir', locale.getTextInfo().direction)
+  const direction = !!locale?.getTextInfo
+    ? locale.getTextInfo().direction
+    : locale.textInfo.direction
+  document.getElementById('question').setAttribute('dir', direction)
 </script>
