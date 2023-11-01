@@ -88,6 +88,10 @@ html {
   @apply rounded-full border-none font-sans text-xl;
 }
 
+.btn-square {
+  @apply rounded-none;
+}
+
 .btn-primary,
 .btn-secondary {
   @apply h-14 w-full md:w-64 sm:landscape:w-64;
