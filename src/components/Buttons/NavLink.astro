@@ -14,21 +14,12 @@ const {href, title, button, selected, size = 'md', full = false, ...rest} = Astr
   class:list={{
     'text-primary-light pointer-events-none': selected && !button,
     'btn-ghost hover:text-primary-light hover:opacity-80 active:opacity-100': !selected && !button,
+    contents: button,
   }}
 >
   {
     button ? (
-      <Button
-        size={size}
-        {...rest}
-        full={full}
-        class='min-w-[8rem]'
-        class:list={[
-          selected ? 'border-primary-light' : rest.variant === 'secondary' && 'border-white/20',
-        ]}
-        tag='a'
-        href={href}
-      >
+      <Button size={size} {...rest} full={full} tag='a' href={href}>
         {title}
       </Button>
     ) : (

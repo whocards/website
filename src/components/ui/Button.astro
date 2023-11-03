@@ -3,7 +3,7 @@ import Icon from 'astro-icon'
 import type {HTMLAttributes, HTMLTag} from 'astro/types'
 
 export interface Props<T> extends HTMLAttributes<'button' | 'a'> {
-  size?: 'md' | 'lg'
+  size?: 'sm' | 'md' | 'lg'
   type?: 'button' | 'submit'
   variant?: 'primary' | 'secondary'
   hideIcon?: boolean
@@ -30,12 +30,13 @@ const {
 <Element
   type={type}
   class:list={[
-    'text-center min-w-[214px] flex justify-center items-center transition-opacity duration-300 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed',
+    'text-center flex justify-center items-center transition-opacity duration-300 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed',
     variant === 'primary' && 'bg-primary-light hover:bg-yellow-500 active:bg-yellow-300',
     variant === 'secondary' &&
       'border rounded-[14px] hover:bg-gray-100 active:bg-gray-200 hover:bg-opacity-25 active:bg-opacity-10',
     size === 'lg' && 'py-3.5 px-8 rounded-2xl text-lg font-semibold',
     size === 'md' && 'py-2.5 px-5 rounded-xl',
+    size === 'sm' && 'text-sm min-w-fit rounded-xl',
     light ? 'text-white border-white' : 'text-dark border-dark',
     full === undefined && 'w-full lg:w-fit',
     full !== undefined && full && 'w-full',
