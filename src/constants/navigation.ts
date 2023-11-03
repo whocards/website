@@ -12,9 +12,9 @@ export const mainLinks: Link[] = [
 ]
 
 export const preorderLinks: Link[] = [
-  {href: '#what-is-who-cards', title: 'About'},
-  {href: '#how-to-play', title: 'How to Play'},
-  {href: '#support-us', title: 'Pricing'},
-  {href: '#faqs', title: 'FAQs'},
-  {href: '#support-us', title: 'Pre-Order Now', button: true},
+  {href: '/preorder#what-is-who-cards', title: 'About'},
+  {href: '/preorder#how-to-play', title: 'How to Play'},
+  {href: '/preorder#support-us', title: 'Pricing'},
+  {href: '/preorder#faqs', title: 'FAQs'},
+  {href: '/preorder#support-us', title: 'Pre-Order Now', button: true},
 ]

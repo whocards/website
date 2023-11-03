@@ -7,6 +7,7 @@ import Head from './Head.astro'
 import BackgroundImages from '~components/ui/BackgroundImages.astro'
 import {mainLinks, type Link} from '~constants/navigation'
 import '~styles/base.css'
+import Footer from './Footer.astro'
 
 export interface Props {
   class?: string
@@ -17,6 +18,7 @@ export interface Props {
   links?: Link[]
   image?: string
   oldBg?: boolean
+  noFooter?: boolean
 }
 
 const {
@@ -28,6 +30,7 @@ const {
   links = mainLinks,
   image,
   oldBg = false,
+  noFooter = false,
 } = Astro.props
 ---
 
@@ -55,6 +58,7 @@ const {
       >
         <slot />
       </main>
+      {!noFooter && <Footer />}
     </Navigation>
     {showLangModal && <LanguageSwitcher client:only />}
     <style is:global></style>
