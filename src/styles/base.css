@@ -111,5 +111,5 @@ html {
 }
 
 .text-gradient {
-  @apply bg-gradient-to-r from-primary-light to-primary-dark bg-clip-text text-transparent;
+  @apply bg-gradient-to-r from-primary-light to-primary-dark bg-clip-text pb-2 text-transparent;
 }

@@ -1,0 +1,94 @@
+---
+import type {ZodIssue} from 'zod'
+import Button from '~components/ui/Button.astro'
+import Checkbox from '~components/ui/Checkbox.astro'
+import Input from '~components/ui/Input.astro'
+import type {getPurchaseById} from '~server/db'
+
+export interface Props {
+  data?: Pick<Awaited<ReturnType<typeof getPurchaseById>>, 'user'>
+  formData?: Record<string, any>
+  errors?: Record<string, ZodIssue>
+  submitted?: boolean
+}
+
+const {data, formData, errors, submitted = false} = Astro.props
+---
+
+<div
+  class='flex flex-col items-center justify-center text-center md:text-start md:items-start gap-4 md:gap-5'
+>
+  <h2 class='text-3xl lg:text-5xl text-gradient font-bold font-title tracking-tight leading-tight'>
+    Let us get in touch with you
+  </h2>
+  {
+    errors && (
+      <p class='lg:text-xl text-red-500'>
+        There were some errors with your submission. Please check the form and try again.
+      </p>
+    )
+  }
+  <form id='email-form' method='POST' class='flex flex-col w-full pb-14'>
+    <Input
+      name='name'
+      min={2}
+      autocomplete='name'
+      required
+      value={formData?.name ?? data?.user.name}
+      error={errors?.name}
+    />
+    <Input
+      name='email'
+      type='email'
+      autocomplete='email'
+      required
+      value={formData?.email ?? data?.user.email}
+      error={errors?.email}
+    />
+    <Checkbox
+      name='privacy'
+      required
+      checked={!!formData?.newsletter ?? !!data?.user.newsletter}
+      error={errors?.privacy}
+    >
+      Yes, I have read and agree to WhoCards' <a
+        href='/legal/pp'
+        target='_blank'
+        class='underline text-primary-light'>Privacy Policy</a
+      >
+    </Checkbox>
+    <Checkbox
+      name='newsletter'
+      required
+      checked={!!formData?.newsletter ?? !!data?.user.newsletter}
+    >
+      Yes, I would like to sign up for occasional newsletters from WhoCards.
+    </Checkbox>
+
+    <!-- hidden inputs -->
+    <input type='hidden' name='thanks' autocomplete='off' value='youre-welcome' />
+    <input type='text' name='password' autocomplete='off' value='' class='hidden' />
+    <Button type='submit' class='mt-4 capitalize lg:max-w-xs' full>
+      {submitted ? 'update' : 'submit'}
+    </Button>
+  </form>
+</div>
+
+<script>
+  const form = document.getElementById('email-form') as HTMLFormElement
+  const submit = form?.querySelector('button[type="submit"]')
+
+  const setIsValid = () => {
+    if (form?.checkValidity()) {
+      submit?.removeAttribute('disabled')
+    } else {
+      submit?.setAttribute('disabled', '')
+    }
+  }
+
+  setIsValid()
+
+  form?.addEventListener('change', (e) => {
+    setIsValid()
+  })
+</script>

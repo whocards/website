@@ -1,0 +1,43 @@
+---
+import Icon from 'astro-icon'
+import EmailForm from '~components/thanks/EmailForm.astro'
+import {contactLinks} from '~constants/navigation'
+import {Layout} from '~layouts'
+---
+
+<Layout title='Thank You!' class='pt-28 lg:pt-32'>
+  <div
+    class='grid grid-flow-row md:grid-flow-col md:grid-cols-2 md:px-[2vw] lg:max-w-7xl px-5 xl:px-0 w-full justify-between items-start'
+  >
+    <div
+      class='flex text-lg lg:text-xl text-gray-dark flex-col items-center md:items-start md:justify-start justify-center text-center md:text-start gap-4 md:gap-5 pb-14'
+    >
+      <Icon name='chat' class='w-16 h-16' />
+      <h1
+        class='text-4xl text-white lg:text-6xl md:pt-4 md:pb-2 font-bold font-title tracking-tight leading-tight'
+      >
+        Get in touch with us
+      </h1>
+      <p class='md:text-lg font-semibold'>We look forward to hearing from you!</p>
+      <Icon name='divider' class='w-64 py-2 md:hidden' />
+      <Icon name='divider-left' class='w-3/4 py-4 hidden md:block' />
+      <div class='grid grid-cols-2 lg:grid-cols-1 gap-3'>
+        {
+          contactLinks.map((link) => (
+            <a
+              href={link.href}
+              target='_blank'
+              class='flex items-center text-gray-dark hover:text-primary-light active:text-primary-dark gap-3'
+            >
+              <>
+                <Icon name={link.icon} class='h-6 w-6' />
+                <span class='block'>{link.title}</span>
+              </>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+    <EmailForm />
+  </div>
+</Layout>

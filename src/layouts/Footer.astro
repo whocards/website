@@ -1,13 +1,6 @@
 ---
 import Icon from 'astro-icon'
-import {preorderLinks} from '~constants/navigation'
-
-const socialLinks = [
-  {icon: 'mdi:linkedin', href: 'https://www.linkedin.com/company/whocards'},
-  // { icon: 'mdi:twitter', href: 'https://twitter.com/whocards' },
-  {icon: 'ri:facebook-fill', href: 'https://facebook.com/whocards'},
-  {icon: 'mdi:instagram', href: 'https://instagram.com/who_cards'},
-]
+import {preorderLinks, socialLinks, legalLinks} from '~constants/navigation'
 ---
 
 <hr class='w-full border-dark' />
@@ -22,7 +15,7 @@ const socialLinks = [
           <a
             href={link.href}
             target='_blank'
-            class='bg-dark p-2 rounded-full flex items-center justify-center border border-transparent hover:border-primary-light active:bg-darker'
+            class='bg-dark p-2 rounded-full flex items-center justify-center border border-transparent hover:border-primary-light active:border-primary-dark'
           >
             <Icon name={link.icon} class='h-5 w-5' />
           </a>
@@ -54,12 +47,17 @@ const socialLinks = [
       }
     </div>
     <div class='flex flex-col gap-4 text-end'>
-      <a
-        href='/legal/pp'
-        target='_blank'
-        class='text-sm font-semibold w-36 hover:text-primary-light active:underline'
-        >Privacy Policy</a
-      >
+      {
+        legalLinks.map((link) => (
+          <a
+            href={link.href}
+            target='_blank'
+            class='text-sm font-semibold w-36 hover:text-primary-light active:underline'
+          >
+            {link.title}
+          </a>
+        ))
+      }
     </div>
   </div>
   <p class='md:hidden'>Copyright @ 2023<br />Alles ist Dialog</p>
