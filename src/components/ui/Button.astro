@@ -44,6 +44,8 @@ const {
   ]}
   {...props}
 >
-  <slot />
-  {!hideIcon && <Icon class='inline-block ml-1.5 h-6 w-6' name='chevron' />}
+  <span>
+    <slot />
+  </span>
+  {!hideIcon && <Icon class='inline-block pl-1.5 pt-1 h-6' name='chevron' />}
 </Element>
