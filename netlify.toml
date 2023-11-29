@@ -25,6 +25,12 @@
   status = 200 # ok code
   force = true # ensure to always redirect
 
+[[redirects]]
+  from = "/preorder"
+  to = "/gift"
+  status = 301
+  force = true
+
 # [[plugins]] 
 #   package = "netlify-plugin-cypress"
 
