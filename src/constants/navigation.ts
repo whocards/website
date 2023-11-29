@@ -33,4 +33,7 @@ export const contactLinks: Link[] = [
   {icon: 'mdi:github', title: 'Github', href: 'https://github.com/whocards'},
 ]
 
-export const legalLinks: Link[] = [{title: 'Privacy Policy', href: '/legal/pp'}]
+export const legalLinks: Link[] = [
+  {title: 'Contact', href: '/contact'},
+  {title: 'Privacy Policy', href: '/legal/pp'},
+]
