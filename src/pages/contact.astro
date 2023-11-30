@@ -4,7 +4,7 @@ import {FormSuccess} from '~components/thanks'
 import EmailForm from '~components/thanks/EmailForm.astro'
 import {contactLinks} from '~constants/navigation'
 import {Layout} from '~layouts'
-import {insertUserSchema} from '~server/db'
+import {insertUser, insertUserSchema} from '~server/db'
 import {createContactSheetRow} from '~server/gsheet'
 
 let formData
@@ -25,7 +25,7 @@ if (Astro.request.method === 'POST') {
       newsletter: formData.newsletter === 'on',
     })
 
-    // const dbUser = await insertUser(parsedUser)
+    const dbUser = await insertUser(parsedUser)
     confirmed = true
 
     // if (dbUser) {
