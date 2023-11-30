@@ -7,7 +7,7 @@ export const faqs = [
   {
     title: 'How can I order WhoCards and join the mission?',
     content:
-      'If you click on the Order button on this website, it will direct you to our Open Collective fundraising page. Choose the package you would like to receive, make a donation and we will send you the cards after November 22nd when the printing is ready.',
+      'If you click on the Order button on this website, it will direct you to our Open Collective fundraising page. Choose the pack you would like to receive, make a donation and we will send you the cards.',
   },
   {
     title: "What's the expected delivery time?",

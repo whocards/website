@@ -29,7 +29,7 @@ let confirmed = Astro.url.searchParams.get('confirmed') === 'true'
 
 // TODO where should redirect happen?
 if (!purchaseId) {
-  return Astro.redirect('/preorder?error=missingParams')
+  return Astro.redirect('/gift')
 }
 
 // get data from db

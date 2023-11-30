@@ -7,6 +7,12 @@
 [functions]
   node_bundler = "esbuild"
 
+[[redirects]]
+  from = "/preorder"
+  to = "/gift"
+  status = 301
+  force = true
+
 # plausible analytics
 [[redirects]]
   from = "/js/script.js"
