@@ -4,7 +4,9 @@ import Button from '~components/ui/Button.astro'
 import {openCollectiveProducts} from '~constants/products'
 ---
 
-<div class='flex flex-col lg:flex-row justify-center lg:justify-between gap-4 lg:gap-6'>
+<div
+  class='grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 justify-center lg:justify-between gap-4 lg:gap-6'
+>
   {
     openCollectiveProducts.map((product) => (
       <div class='bg-zinc-800 w-full p-5 lg:p-8 rounded-3xl flex flex-col gap-2.5 lg:gap-5 lg:text-lg'>
@@ -15,17 +17,19 @@ import {openCollectiveProducts} from '~constants/products'
         <div class='font-medium leading-[60px] text-[40px] lg:text-[54px]'>€{product.price}</div>
         <p class='pb-1.5 lg:pb-2 text-gray-dark'>{product.description}</p>
         <div class='flex gap-3 items-center mt-auto'>
-          <Icon name='check' class='w-6 h-6' />
-          <div class='font-medium leading-relaxed'>1 pack for you</div>
-        </div>
-        <div class='flex gap-3 pb-3.5'>
-          <Icon name='check' class='w-6 h-6 lg:w-7 lg:h-7' />
+          <Icon name='check' class='w-6 h-6 lg:w-7 lg:h-7 min-w-[1.5rem] lg:min-w-[1.75rem]' />
           <div class='font-medium leading-relaxed'>
-            {product.quantity - 1} pack{product.quantity === 2 ? '' : 's'} for gifting
+            {product.quantity === 1
+              ? '1 deck delivered to you or someone else'
+              : `${product.quantity} decks delivered to you`}
           </div>
         </div>
+        <div class='flex gap-3 pb-3.5'>
+          <Icon name='check' class='w-6 h-6 lg:w-7 lg:h-7 min-w-[1.5rem] lg:min-w-[1.75rem]' />
+          <div class='font-medium leading-relaxed'>Shipping included</div>
+        </div>
         <Button href={product.url} tag='a' target='_blank' full>
-          Pre-Order
+          Order
         </Button>
       </div>
     ))

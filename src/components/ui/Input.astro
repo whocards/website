@@ -8,12 +8,12 @@ interface Props extends HTMLAttributes<'input'> {
   title?: string
 }
 
-const {error, type = 'text', title, name, required, ...props} = Astro.props
+const {error, title, name, ...props} = Astro.props
 const id = `input-${name}`
 ---
 
 <label for={id} class='text-start capitalize text-base font-medium flex flex-col gap-2 pb-2.5'>
-  <div>{title ?? name}{required ? ' *' : ''}</div>
+  <div>{title ?? name}{props.required ? ' *' : ''}</div>
   <input
     {...props}
     name={name}

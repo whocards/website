@@ -2,7 +2,6 @@
 import {Icon} from 'astro-icon'
 import NavLink from './Buttons/NavLink.astro'
 import type {Link} from '~constants/navigation'
-import {listIcons} from '@iconify-icon/solid'
 const isQuestionPage = Astro.url.pathname.includes('question')
 
 interface Props {
@@ -21,7 +20,7 @@ const {links} = Astro.props
   />
   <div class='drawer-content transition-all' id='main'>
     <!-- Navbar -->
-    <div class='navbar fixed h-16 justify-between pl-0 pr-4 backdrop-blur md:px-4 z-10'>
+    <nav class='navbar fixed h-16 justify-between pl-0 pr-4 backdrop-blur md:px-4 z-10'>
       <a href='/' aria-label='homepage link' class='btn-ghost btn'>
         <Icon name='logo' class='w-36' />
       </a>
@@ -30,18 +29,24 @@ const {links} = Astro.props
           <!-- Navbar menu content here -->
           {
             links.map((link) => (
-              <NavLink {...link} selected={Astro.url.pathname === link.href} hideIcon />
+              <NavLink
+                {...link}
+                selected={Astro.url.pathname === link.href}
+                class='menu-title'
+                hideIcon
+                size='sm'
+              />
             ))
           }
         </ul>
       </div>
-    </div>
+    </nav>
     <!-- main content -->
     <slot />
   </div>
-  <div class='drawer-side'>
+  <nav class='drawer-side'>
     <label for='who-drawer' class='drawer-overlay'></label>
-    <ul class='menu h-full w-full md:w-80 bg-darkest pt-16 gap-3'>
+    <ul class='menu h-full w-full md:w-80 bg-darkest pt-20 gap-3 md:px-5'>
       <!-- Sidebar content here -->
       {
         links.map((link) => (
@@ -53,17 +58,17 @@ const {links} = Astro.props
             variant={link.button ? 'primary' : 'secondary'}
             light={!link.button}
             hideIcon={!link.button}
-            class:list={[link.button && 'mt-3']}
+            class:list={[link.button && 'mt-5 menu-title']}
           />
         ))
       }
     </ul>
-  </div>
+  </nav>
 </div>
 
 <!-- hamburger menu -->
 <div
-  class='flex-none fixed right-1 md:right-5 top-2 z-10 border rounded-2xl border-white/30 overflow-hidden'
+  class='flex-none fixed right-2 md:right-5 top-2 z-10 border rounded-2xl border-white/30 overflow-hidden'
   class:list={[{'lg:hidden': !isQuestionPage}]}
 >
   <label class='right swap btn-ghost swap-rotate btn-square btn' id='who-menu-button'>
@@ -98,6 +103,7 @@ const {links} = Astro.props
   const button = document.getElementById('who-menu-button')!
   const drawer = document.getElementById('who-drawer')! as HTMLInputElement
   const links = document.querySelectorAll('.drawer-side .menu a')!
+  const bg = document.querySelector('.drawer-overlay')!
 
   for (const link of links) {
     link.addEventListener('click', () => {
@@ -109,6 +115,10 @@ const {links} = Astro.props
   button.addEventListener('click', (e) => {
     e.preventDefault()
     drawer.checked = !drawer.checked
+    button.classList.toggle('swap-active')
+  })
+
+  bg.addEventListener('click', (e) => {
     button.classList.toggle('swap-active')
   })
 </script>

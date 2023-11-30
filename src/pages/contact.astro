@@ -1,0 +1,75 @@
+---
+import Icon from 'astro-icon'
+import {FormSuccess} from '~components/thanks'
+import EmailForm from '~components/thanks/EmailForm.astro'
+import {contactLinks} from '~constants/navigation'
+import {Layout} from '~layouts'
+import {insertUser, insertUserSchema} from '~server/db'
+import {createContactSheetRow} from '~server/gsheet'
+
+let formData
+let confirmed = false
+
+// when form is posted
+if (Astro.request.method === 'POST') {
+  try {
+    const rawFormData = await Astro.request.formData()
+    formData = Object.fromEntries(rawFormData.entries()) as Record<string, string>
+    if (formData['nobot'] !== '' && formData['thanks'] !== 'youre-welcome') {
+      throw new Error('Bot detected')
+    }
+
+    const parsedUser = insertUserSchema.parse({
+      name: formData.name,
+      email: formData.email,
+      newsletter: formData.newsletter === 'on',
+    })
+
+    const dbUser = await insertUser(parsedUser)
+    confirmed = true
+
+    // if (dbUser) {
+    await createContactSheetRow(parsedUser)
+    // }
+  } catch (error) {
+    console.error(error)
+  }
+}
+---
+
+<Layout title='Thank You!' class='pt-28 lg:pt-32'>
+  <div
+    class='grid grid-flow-row md:grid-flow-col md:grid-cols-2 md:px-[2vw] lg:max-w-7xl px-5 xl:px-0 w-full justify-between items-start'
+  >
+    <div
+      class='flex text-lg lg:text-xl text-gray-dark flex-col items-center md:items-start md:justify-start justify-center text-center md:text-start gap-4 md:gap-5 pb-14'
+    >
+      <h1
+        class='text-3xl lg:text-5xl text-white md:pb-2 font-bold font-title tracking-tight leading-tight'
+      >
+        Get in touch with us
+      </h1>
+      <Icon name='chat' class='w-16 h-16' />
+      <p class='md:text-lg font-semibold'>We look forward to hearing from you!</p>
+      <Icon name='divider' class='w-64 py-2 md:hidden' />
+      <Icon name='divider-left' class='w-3/4 py-4 hidden md:block' />
+      <div class='grid grid-cols-2 lg:grid-cols-1 gap-3'>
+        {
+          contactLinks.map((link) => (
+            <a
+              href={link.href}
+              target='_blank'
+              class='flex items-center text-gray-dark hover:text-primary-light active:text-primary-dark gap-3'
+            >
+              <>
+                <Icon name={link.icon} class='h-6 w-6' />
+                <span class='block'>{link.title}</span>
+              </>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+    {confirmed ? <FormSuccess class='h-full' type='contact info' href='/contact' /> : <EmailForm />}
+  </div>
+</Layout>

@@ -14,6 +14,7 @@ import {
   type FullPurchase,
   type PurchaseSelect,
 } from '~server/db'
+import {createContactSheetRow} from '~server/gsheet'
 import {thankYouFormSchema} from '~utils/schemas'
 
 let errors = {}
@@ -28,7 +29,7 @@ let confirmed = Astro.url.searchParams.get('confirmed') === 'true'
 
 // TODO where should redirect happen?
 if (!purchaseId) {
-  return Astro.redirect('/preorder?error=missingParams')
+  return Astro.redirect('/gift')
 }
 
 // get data from db
@@ -41,7 +42,7 @@ try {
     openCollectiveProducts.filter((p) => p.title === purchase.category)[0].quantity
 } catch (error) {
   console.error((error as Error).message)
-  return Astro.redirect('/preorder?error=invalidParams')
+  return Astro.redirect('/contact')
 }
 
 // when form is posted
@@ -89,7 +90,10 @@ if (Astro.request.method === 'POST') {
       confirmed = true
       // update user if newsletter is different
       if (Object.hasOwn(form.data, 'newsletter') && form.data.newsletter !== data.user.newsletter) {
-        await insertUser({...data.user, newsletter: form.data.newsletter})
+        const user = await insertUser({...data.user, newsletter: form.data.newsletter})
+        if (user.newsletter) {
+          createContactSheetRow(user)
+        }
       }
 
       let shouldUpdate = !data.shipping
@@ -124,7 +128,7 @@ if (Astro.request.method === 'POST') {
     <OrderDetails purchase={purchase} class={confirmed ? 'hidden md:flex' : ''} />
     {
       confirmed ? (
-        <FormSuccess href={`/thanks?orderIdV2=${purchaseId}`} />
+        <FormSuccess type='shipping' href={`/thanks?orderIdV2=${purchaseId}`} />
       ) : (
         <ShippingForm
           data={data}
