@@ -128,7 +128,7 @@ if (Astro.request.method === 'POST') {
     <OrderDetails purchase={purchase} class={confirmed ? 'hidden md:flex' : ''} />
     {
       confirmed ? (
-        <FormSuccess href={`/thanks?orderIdV2=${purchaseId}`} />
+        <FormSuccess type='shipping' href={`/thanks?orderIdV2=${purchaseId}`} />
       ) : (
         <ShippingForm
           data={data}

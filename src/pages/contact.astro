@@ -1,12 +1,14 @@
 ---
 import Icon from 'astro-icon'
+import {FormSuccess} from '~components/thanks'
 import EmailForm from '~components/thanks/EmailForm.astro'
 import {contactLinks} from '~constants/navigation'
 import {Layout} from '~layouts'
-import {insertUser, insertUserSchema} from '~server/db'
+import {insertUserSchema} from '~server/db'
 import {createContactSheetRow} from '~server/gsheet'
 
 let formData
+let confirmed = false
 
 // when form is posted
 if (Astro.request.method === 'POST') {
@@ -23,11 +25,12 @@ if (Astro.request.method === 'POST') {
       newsletter: formData.newsletter === 'on',
     })
 
-    const dbUser = await insertUser(parsedUser)
+    // const dbUser = await insertUser(parsedUser)
+    confirmed = true
 
-    if (dbUser) {
-      await createContactSheetRow(parsedUser)
-    }
+    // if (dbUser) {
+    await createContactSheetRow(parsedUser)
+    // }
   } catch (error) {
     console.error(error)
   }
@@ -67,6 +70,6 @@ if (Astro.request.method === 'POST') {
         }
       </div>
     </div>
-    <EmailForm />
+    {confirmed ? <FormSuccess class='h-full' type='contact info' href='/contact' /> : <EmailForm />}
   </div>
 </Layout>
