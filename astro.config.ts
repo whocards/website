@@ -20,9 +20,6 @@ export default defineConfig({
   output: 'hybrid',
   adapter: IS_PROD ? netlify() : nodejs({mode: 'standalone'}),
   redirects: {
-    '/preorder': {
-      status: 301,
-      destination: '/gift',
-    },
+    '/preorder': '/gift',
   },
 })
