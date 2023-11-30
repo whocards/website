@@ -16,6 +16,7 @@ export const env = createEnv({
     DB_URL: z.string(),
     PURCHASE_SHEET_URL: z.string(),
     SHIPPING_SHEET_URL: z.string(),
+    CONTACTS_SHEET_URL: z.string(),
   },
   runtimeEnv: process.env,
 })

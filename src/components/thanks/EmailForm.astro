@@ -67,7 +67,7 @@ const {data, formData, errors, submitted = false} = Astro.props
 
     <!-- hidden inputs -->
     <input type='hidden' name='thanks' autocomplete='off' value='youre-welcome' />
-    <input type='text' name='password' autocomplete='off' value='' class='hidden' />
+    <input type='text' name='nobot' autocomplete='off' value='' class='hidden' />
     <Button type='submit' class='mt-4 capitalize lg:max-w-xs' full>
       {submitted ? 'update' : 'submit'}
     </Button>

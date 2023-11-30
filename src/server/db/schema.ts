@@ -5,7 +5,7 @@ import {boolean, integer, pgTable, serial, text, timestamp} from 'drizzle-orm/pg
 export const users = pgTable('user', {
   id: serial('id').primaryKey(),
   email: text('email').notNull().unique(),
-  ocSlug: text('oc_slug').notNull(),
+  ocSlug: text('oc_slug'),
   name: text('name').notNull(),
   newsletter: boolean('newsletter').default(false).notNull(),
 })

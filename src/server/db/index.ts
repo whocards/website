@@ -74,7 +74,6 @@ export const insertUser = (user: UserCreate) =>
     .onConflictDoUpdate({
       target: schema.users.email,
       set: {
-        ocSlug: user.ocSlug,
         name: user.name,
         newsletter: user.newsletter,
         email: user.email,
