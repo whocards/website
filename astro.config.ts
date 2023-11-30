@@ -4,10 +4,9 @@ import solid from '@astrojs/solid-js'
 import tailwind from '@astrojs/tailwind'
 import robotsTxt from 'astro-robots-txt'
 import {defineConfig} from 'astro/config'
-import {IS_PROD, SITE_URL as site} from './src/constants/env'
+import {SITE_URL as site} from './src/constants/env'
 
 import netlify from '@astrojs/netlify'
-import nodejs from '@astrojs/node'
 
 // https://astro.build/config
 export default defineConfig({
@@ -18,5 +17,8 @@ export default defineConfig({
   trailingSlash: 'never',
   integrations: [solid(), tailwind(), mdx(), sitemap(), robotsTxt()],
   output: 'hybrid',
-  adapter: IS_PROD ? netlify() : nodejs({mode: 'standalone'}),
+  adapter: netlify(),
+  redirects: {
+    '/preorder': '/gift',
+  },
 })
