@@ -40,6 +40,9 @@ try {
   quantity =
     data.shipping?.quantity ??
     openCollectiveProducts.filter((p) => p.title === purchase.category)[0].quantity
+  if (data.user.name === 'Guest') {
+    data.user.name = ''
+  }
 } catch (error) {
   console.error((error as Error).message)
   return Astro.redirect('/contact')
