@@ -1,4 +1,4 @@
-import {eq} from 'drizzle-orm'
+import {count, eq} from 'drizzle-orm'
 import {drizzle} from 'drizzle-orm/postgres-js'
 import {createInsertSchema} from 'drizzle-zod'
 import postgres from 'postgres'
@@ -81,3 +81,5 @@ export const insertUser = (user: UserCreate) =>
     })
     .returning()
     .then((rows) => rows[0])
+
+export const getPurchaseCount = () => db.select({value: count(purchases.id)}).from(schema.purchases)
