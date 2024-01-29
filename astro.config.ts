@@ -1,12 +1,12 @@
 import mdx from '@astrojs/mdx'
 import sitemap from '@astrojs/sitemap'
-import solid from '@astrojs/solid-js'
 import tailwind from '@astrojs/tailwind'
 import robotsTxt from 'astro-robots-txt'
 import {defineConfig} from 'astro/config'
 import {SITE_URL as site} from './src/constants/env'
-
 import netlify from '@astrojs/netlify'
+
+import react from '@astrojs/react'
 
 // https://astro.build/config
 export default defineConfig({
@@ -15,7 +15,7 @@ export default defineConfig({
     format: 'file',
   },
   trailingSlash: 'never',
-  integrations: [solid(), tailwind(), mdx(), sitemap(), robotsTxt()],
+  integrations: [tailwind(), mdx(), sitemap(), robotsTxt(), react()],
   output: 'hybrid',
   adapter: netlify(),
   redirects: {
