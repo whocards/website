@@ -1,5 +1,5 @@
 ---
-import Icon from 'astro-icon'
+import {Icon} from 'astro-icon/components'
 import cardsImage from '~assets/images/cards.png'
 import humanityImage from '~assets/images/humanity.png'
 import teamImage from '~assets/images/team.png'
@@ -23,7 +23,7 @@ import {preorderLinks} from '~constants/navigation'
 
 <Layout
   title='Gift'
-  description='Donate to the WhoCards and receive one of the 1000 card decks by the Holiday Season.'
+  description='Donate to the WhoCards and receive one of the first 1000 card decks.'
   links={preorderLinks}
 >
   <!-- image='Order.png' -->
@@ -179,6 +179,7 @@ import {preorderLinks} from '~constants/navigation'
       variant='secondary'
       light
       size='md'
+      tag='a'
       hideIcon
     >
       Email us
