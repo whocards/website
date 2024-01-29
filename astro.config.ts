@@ -1,12 +1,12 @@
 import mdx from '@astrojs/mdx'
+import netlify from '@astrojs/netlify'
+import react from '@astrojs/react'
 import sitemap from '@astrojs/sitemap'
 import tailwind from '@astrojs/tailwind'
+import icon from 'astro-icon'
 import robotsTxt from 'astro-robots-txt'
 import {defineConfig} from 'astro/config'
 import {SITE_URL as site} from './src/constants/env'
-import netlify from '@astrojs/netlify'
-
-import react from '@astrojs/react'
 
 // https://astro.build/config
 export default defineConfig({
@@ -15,7 +15,28 @@ export default defineConfig({
     format: 'file',
   },
   trailingSlash: 'never',
-  integrations: [tailwind(), mdx(), sitemap(), robotsTxt(), react()],
+  integrations: [
+    tailwind(),
+    mdx(),
+    sitemap(),
+    robotsTxt(),
+    react({experimentalReactChildren: true}),
+    icon({
+      include: {
+        mdi: ['twitter', 'linkedin', 'instagram', 'github', 'email'],
+        'fa-solid': ['clone'],
+        ic: [
+          'outline-arrow-back',
+          'outline-arrow-forward',
+          'baseline-email',
+          'twotone-share',
+          'round-close',
+        ],
+        ri: ['facebook-fill'],
+        zondicons: ['checkmark'],
+      },
+    }),
+  ],
   output: 'hybrid',
   adapter: netlify(),
   redirects: {

@@ -1,8 +1,8 @@
-import { Icon } from '@iconify-icon/react'
-import { useStore } from '@nanostores/react'
-import { useState } from 'react'
-import { $langStore } from '~stores/Language.store'
-import { LANGUAGES, cn } from '~utils'
+import {Icon} from '@iconify-icon/react'
+import {useStore} from '@nanostores/react'
+import {useState} from 'react'
+import {$langStore} from '~stores/Language.store'
+import {LANGUAGES, cn} from '~utils'
 
 export default function Print() {
   const store = useStore($langStore)
@@ -49,7 +49,9 @@ export default function Print() {
         </div>
         <div className='order-4 grid w-fit grid-cols-2 items-center gap-4 justify-self-center text-black md:order-none'>
           <button
-            className={cn('flex h-32 w-32 items-center justify-center', {'rounded-lg border-2 border-primary-dark': isWide})}
+            className={cn('flex h-32 w-32 items-center justify-center', {
+              'rounded-lg border-2 border-primary-dark': isWide,
+            })}
             onClick={() => setIsWide(true)}
           >
             <div className='flex h-16 w-24 items-center justify-center gap-2 rounded-lg bg-primary-light font-bold'>
@@ -57,7 +59,9 @@ export default function Print() {
             </div>
           </button>
           <button
-            className={cn('flex h-32 w-32 items-center justify-center',{'rounded-lg border-2 border-primary-dark': !isWide})}
+            className={cn('flex h-32 w-32 items-center justify-center', {
+              'rounded-lg border-2 border-primary-dark': !isWide,
+            })}
             onClick={() => setIsWide(false)}
           >
             <div className='mx-auto flex h-24 w-16 flex-col items-center justify-center gap-2 rounded-lg bg-primary-light font-bold'>

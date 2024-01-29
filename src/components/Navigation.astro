@@ -1,5 +1,5 @@
 ---
-import {Icon} from 'astro-icon'
+import {Icon} from 'astro-icon/components'
 import NavLink from './Buttons/NavLink.astro'
 import type {Link} from '~constants/navigation'
 const isQuestionPage = Astro.url.pathname.includes('question')
@@ -106,19 +106,19 @@ const {links} = Astro.props
   const bg = document.querySelector('.drawer-overlay')!
 
   for (const link of links) {
-    link.addEventListener('click', () => {
+    link?.addEventListener('click', () => {
       drawer.checked = false
       button.classList.remove('swap-active')
     })
   }
 
-  button.addEventListener('click', (e) => {
+  button?.addEventListener('click', (e) => {
     e.preventDefault()
     drawer.checked = !drawer.checked
     button.classList.toggle('swap-active')
   })
 
-  bg.addEventListener('click', (e) => {
+  bg?.addEventListener('click', (e) => {
     button.classList.toggle('swap-active')
   })
 </script>

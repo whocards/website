@@ -1,9 +1,9 @@
-import { Icon } from '@iconify-icon/react'
-import { useStore } from '@nanostores/react'
-import { useEffect, useRef, type PropsWithChildren } from 'react'
-import { $langStore, setLang } from '~stores/Language.store'
-import type { Language } from '~types'
-import { LANGUAGES, cn, getCurrentLanguage, getCurrentQuestionUrl, isPrintPage } from '~utils'
+import {Icon} from '@iconify-icon/react'
+import {useStore} from '@nanostores/react'
+import {useEffect, useRef, type PropsWithChildren} from 'react'
+import {$langStore, setLang} from '~stores/Language.store'
+import type {Language} from '~types'
+import {LANGUAGES, cn, getCurrentLanguage, getCurrentQuestionUrl, isPrintPage} from '~utils'
 
 const comingSoon: string[] = []
 
@@ -39,18 +39,14 @@ export const LanguageSwitcher = () => {
   }
 
   return (
-    <dialog id='langsModal' className='modal' style={{ padding: 0, border: 0}} ref={ref}>
+    <dialog id='langsModal' className='modal' style={{padding: 0, border: 0}} ref={ref}>
       <form
         method='dialog'
         className='modal-box h-full w-full bg-white p-0 text-darker md:h-fit md:max-w-2xl md:rounded-lg phone-landscape:max-w-full'
       >
         <div className='flex h-16 items-center justify-between pl-4 pr-3'>
           <h2 className='text-2xl font-bold'>Choose your language</h2>
-          <button
-            onClick={close}
-            className='btn btn-square btn-ghost'
-            aria-label='close modal'
-          >
+          <button onClick={close} className='btn btn-square btn-ghost' aria-label='close modal'>
             <Icon icon='ic:round-close' className='text-2xl' />
           </button>
         </div>
@@ -66,9 +62,7 @@ export const LanguageSwitcher = () => {
               useButton={shouldUseStore}
             >
               {name}
-              {key === store.lang &&
-                <Icon icon='zondicons:checkmark' className='ml-2 h-4 w-4' />
-              }
+              {key === store.lang && <Icon icon='zondicons:checkmark' className='ml-2 h-4 w-4' />}
             </QuestionLink>
           ))}
           {comingSoon.map((newLang) => (
@@ -94,7 +88,9 @@ const QuestionButton = (props: QuestionLinkProps) => {
   return (
     <button
       onClick={() => setLang(props.lang)}
-      className={cn('who-modal btn-ghost flex h-16 w-full items-center px-4', {'text-primary-dark active-language': props.selected})}
+      className={cn('who-modal btn-ghost flex h-16 w-full items-center px-4', {
+        'active-language text-primary-dark': props.selected,
+      })}
     >
       {props.children}
     </button>
@@ -109,7 +105,9 @@ const QuestionLink = (props: QuestionLinkProps) => {
   return (
     <a
       href={getCurrentQuestionUrl(props.lang)}
-      className={cn('who-modal btn-ghost flex h-16 w-full items-center px-4', {'text-primary-dark active-language': props.selected})}
+      className={cn('who-modal btn-ghost flex h-16 w-full items-center px-4', {
+        'active-language text-primary-dark': props.selected,
+      })}
     >
       {props.children}
     </a>
