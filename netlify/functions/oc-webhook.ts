@@ -1,15 +1,9 @@
 import type {Handler} from '@netlify/functions'
 import {serialize} from 'object-to-formdata'
-import {openCollectiveProducts} from '~constants/products'
+import {products} from '~constants/products'
 import {env} from '~env-secrets'
 import {db, insertPurchaseSchema, insertUser, insertUserSchema, schema} from '~server/db'
-import {
-  graphQLClient,
-  orderIdFromLegacyQuery,
-  userEmailQuery,
-  type OrderId,
-  type UserWithEmail,
-} from '~server/graphql'
+import {graphQLClient, orderFromLegacyQuery, type OrderWithEmail} from '~server/graphql'
 import type {Contribution} from '~types/contributions'
 
 const handledTypes = ['collective.transaction.created']
@@ -48,22 +42,29 @@ const handler: Handler = async (event, context) => {
 
   // get contribution type
   const {description} = body.data.transaction
-  const product = openCollectiveProducts.find((p) => description.includes(p.title))
+  const product = products.find((p) => description.includes(p.title))
   const contributionType = product?.title ?? description
 
   console.log('contributionType', contributionType)
 
-  // get new order id from legacy ID
-  const fetchedId = await graphQLClient.request<OrderId>(orderIdFromLegacyQuery, {
+  // get rest of order details
+  const {order} = await graphQLClient.request<OrderWithEmail>(orderFromLegacyQuery, {
     id: body.data.transaction.OrderId,
   })
 
-  // get users email
-  const user = await graphQLClient.request<UserWithEmail>(userEmailQuery, {
-    slug: body.data.fromCollective.slug,
-  })
+  const user = order.fromAccount
+
+  // get new order id from legacy ID
+  // const fetchedId = await graphQLClient.request<OrderId>(orderIdFromLegacyQuery, {
+  //   id: body.data.transaction.OrderId,
+  // })
+
+  // // get users email
+  // const user = await graphQLClient.request<UserWithEmail>(userEmailQuery, {
+  //   slug: body.data.fromCollective.slug,
+  // })
   console.log('user', user)
-  const email = user.individual.emails[0]
+  const email = user.emails[0]
 
   // validate user exists
   const parseUser = insertUserSchema.parse({
@@ -75,7 +76,7 @@ const handler: Handler = async (event, context) => {
   const dbUser = await insertUser(parseUser)
 
   const purchase = insertPurchaseSchema.parse({
-    id: fetchedId.order.id,
+    id: order.id,
     price: body.data.transaction.amountInHostCurrency,
     netPrice: body.data.transaction.netAmountInHostCurrency,
     date: new Date(body.data.transaction.createdAt),

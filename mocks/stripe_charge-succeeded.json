@@ -1,0 +1,134 @@
+{
+  "id": "evt_3OhIA7FSWsx9XJSo0RiuIT6r",
+  "object": "event",
+  "api_version": "2022-11-15",
+  "created": 1707339369,
+  "data": {
+    "object": {
+      "id": "ch_3OhIA7FSWsx9XJSo0oJPZg8f",
+      "object": "charge",
+      "amount": 5420,
+      "amount_captured": 5420,
+      "amount_refunded": 0,
+      "application": null,
+      "application_fee": null,
+      "application_fee_amount": null,
+      "balance_transaction": "txn_3OhIA7FSWsx9XJSo0rl8prFM",
+      "billing_details": {
+        "address": {
+          "city": "Balatonalmádi",
+          "country": "HU",
+          "line1": "Veszprémi út 19/3",
+          "line2": null,
+          "postal_code": "8220",
+          "state": null
+        },
+        "email": "avicharlop@gmail.com",
+        "name": "Avraham Charlop",
+        "phone": null
+      },
+      "calculated_statement_descriptor": "ALLES IST DIALOG",
+      "captured": true,
+      "created": 1707339369,
+      "currency": "eur",
+      "customer": null,
+      "description": null,
+      "destination": null,
+      "dispute": null,
+      "disputed": false,
+      "failure_balance_transaction": null,
+      "failure_code": null,
+      "failure_message": null,
+      "fraud_details": {},
+      "invoice": null,
+      "livemode": false,
+      "metadata": {},
+      "on_behalf_of": null,
+      "order": null,
+      "outcome": {
+        "network_status": "approved_by_network",
+        "reason": null,
+        "risk_level": "normal",
+        "risk_score": 53,
+        "seller_message": "Payment complete.",
+        "type": "authorized"
+      },
+      "paid": true,
+      "payment_intent": "pi_3OhIA7FSWsx9XJSo0wkH3UEp",
+      "payment_method": "pm_1OhIA7FSWsx9XJSocjb0V8VU",
+      "payment_method_details": {
+        "card": {
+          "amount_authorized": 5420,
+          "brand": "visa",
+          "checks": {
+            "address_line1_check": "pass",
+            "address_postal_code_check": "pass",
+            "cvc_check": "pass"
+          },
+          "country": "US",
+          "exp_month": 4,
+          "exp_year": 2024,
+          "extended_authorization": {
+            "status": "disabled"
+          },
+          "fingerprint": "gKHpOrPqXl2wa8kb",
+          "funding": "credit",
+          "incremental_authorization": {
+            "status": "unavailable"
+          },
+          "installments": null,
+          "last4": "4242",
+          "mandate": null,
+          "multicapture": {
+            "status": "unavailable"
+          },
+          "network": "visa",
+          "network_token": {
+            "used": false
+          },
+          "overcapture": {
+            "maximum_amount_capturable": 5420,
+            "status": "unavailable"
+          },
+          "three_d_secure": null,
+          "wallet": null
+        },
+        "type": "card"
+      },
+      "radar_options": {},
+      "receipt_email": null,
+      "receipt_number": null,
+      "receipt_url": "https://pay.stripe.com/receipts/payment/CAcaFwoVYWNjdF8xTWVpQlFGU1dzeDlYSlNvKOrcj64GMgYtXftCx6o6LBbGtpXHuLZB6TCs-knZQOuahEuA1xto_x2wFCNJd8cXvxB2THXEDfLUj0rl",
+      "refunded": false,
+      "review": null,
+      "shipping": {
+        "address": {
+          "city": "Balatonalmádi",
+          "country": "HU",
+          "line1": "Veszprémi út 19/3",
+          "line2": null,
+          "postal_code": "8220",
+          "state": ""
+        },
+        "carrier": null,
+        "name": "Avraham Charlop",
+        "phone": null,
+        "tracking_number": null
+      },
+      "source": null,
+      "source_transfer": null,
+      "statement_descriptor": null,
+      "statement_descriptor_suffix": null,
+      "status": "succeeded",
+      "transfer_data": null,
+      "transfer_group": null
+    }
+  },
+  "livemode": false,
+  "pending_webhooks": 2,
+  "request": {
+    "id": "req_RzdV2pd1XsfMYQ",
+    "idempotency_key": "8f7cd2b8-e410-4517-ac8e-3d71fb9336d2"
+  },
+  "type": "charge.succeeded"
+}

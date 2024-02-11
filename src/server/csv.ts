@@ -48,7 +48,7 @@ export const createZenShipping = async (data: ShippingSelect) => {
   }
 }
 
-export const createSheetRow = async (data: ShippingSelect) =>
+export const createShippingSheetRow = async (data: ShippingSelect) =>
   fetch(env.SHIPPING_SHEET_URL, {
     method: 'POST',
     body: serialize({

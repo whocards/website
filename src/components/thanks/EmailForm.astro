@@ -3,23 +3,22 @@ import type {ZodIssue} from 'zod'
 import Button from '~components/ui/Button.astro'
 import Checkbox from '~components/ui/Checkbox.astro'
 import Input from '~components/ui/Input.astro'
-import type {getPurchaseById} from '~server/db'
+import type {UserSelect, getPurchaseById} from '~server/db'
 
 export interface Props {
   data?: Pick<Awaited<ReturnType<typeof getPurchaseById>>, 'user'>
   formData?: Record<string, any>
   errors?: Record<string, ZodIssue>
   submitted?: boolean
+  user?: UserSelect
 }
 
-const {data, formData, errors, submitted = false} = Astro.props
+const {data, formData, errors, user, submitted = false} = Astro.props
 ---
 
-<div
-  class='flex flex-col items-center justify-center text-center md:text-start md:items-start gap-4 md:gap-5'
->
+<div class='flex flex-col items-center text-center md:text-start md:items-start gap-4 md:gap-5'>
   <h2 class='text-3xl lg:text-5xl text-gradient font-bold font-title tracking-tight leading-tight'>
-    Let us get in touch with you
+    Would you like to<br class='hidden md:block' /> hear from us?
   </h2>
   {
     errors && (
@@ -45,12 +44,7 @@ const {data, formData, errors, submitted = false} = Astro.props
       value={formData?.email ?? data?.user.email}
       error={errors?.email}
     />
-    <Checkbox
-      name='privacy'
-      required
-      checked={!!formData?.newsletter ?? !!data?.user.newsletter}
-      error={errors?.privacy}
-    >
+    <Checkbox name='privacy' required checked error={errors?.privacy}>
       Yes, I have read and agree to WhoCards' <a
         href='/legal/pp'
         target='_blank'

@@ -1,5 +1,6 @@
 ---
 import {Icon} from 'astro-icon/components'
+import type {Icon as IconName} from 'virtual:astro-icon'
 import {FormSuccess} from '~components/thanks'
 import EmailForm from '~components/thanks/EmailForm.astro'
 import {contactLinks} from '~constants/navigation'
@@ -62,7 +63,7 @@ if (Astro.request.method === 'POST') {
               class='flex items-center text-gray-dark hover:text-primary-light active:text-primary-dark gap-3'
             >
               <>
-                <Icon name={link.icon} class='h-6 w-6' />
+                <Icon name={link.icon as IconName} class='h-6 w-6' />
                 <span class='block'>{link.title}</span>
               </>
             </a>

@@ -34,6 +34,7 @@ export default defineConfig({
         ],
         ri: ['facebook-fill'],
         zondicons: ['checkmark'],
+        'entypo-social': ['facebook'],
       },
     }),
   ],

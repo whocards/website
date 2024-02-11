@@ -1,6 +1,11 @@
 import {createEnv} from '@t3-oss/env-core'
 import {z} from 'zod'
 
+const stripeIds = z.object({
+  price: z.string(),
+  shipping: z.string(),
+})
+
 export const env = createEnv({
   server: {
     WEBHOOK_AUTH_TOKEN: z.string(),
@@ -17,6 +22,21 @@ export const env = createEnv({
     PURCHASE_SHEET_URL: z.string(),
     SHIPPING_SHEET_URL: z.string(),
     CONTACTS_SHEET_URL: z.string(),
+    STRIPE_PRIVATE_KEY: z.string(),
+    STRIPE_PRODUCTS: z.string().transform((val) =>
+      z
+        .object({
+          1: stripeIds,
+          2: stripeIds,
+          5: stripeIds,
+          12: stripeIds,
+        })
+        .parse(JSON.parse(val))
+    ),
   },
-  runtimeEnv: process.env,
+  clientPrefix: 'PUBLIC_',
+  client: {
+    PUBLIC_STRIPE_PUBLIC_KEY: z.string(),
+  },
+  runtimeEnv: import.meta.env,
 })

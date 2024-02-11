@@ -19,6 +19,27 @@ import {Image} from 'astro:assets'
 import bgRightImage from '~assets/images/bg-right-large.svg'
 import bgLeftImage from '~assets/images/bg-left-large.svg'
 import {preorderLinks} from '~constants/navigation'
+import {loadStripe} from '@stripe/stripe-js'
+import {env} from '~env-secrets'
+import {orderSchema} from '~utils/schemas'
+import {createSession} from '~server/stripe'
+
+loadStripe(env.PUBLIC_STRIPE_PUBLIC_KEY)
+
+if (Astro.request.method === 'POST') {
+  try {
+    const rawFormData = await Astro.request.formData()
+    const formData = orderSchema.parse(Object.fromEntries(rawFormData))
+
+    console.log(formData)
+
+    const session = await createSession(formData, Astro.url)
+    if (!session.url) throw new Error('No session URL')
+    return Astro.redirect(session.url, 303)
+  } catch (error) {
+    console.error(error)
+  }
+}
 ---
 
 <Layout
@@ -255,3 +276,4 @@ import {preorderLinks} from '~constants/navigation'
     })
   }
 </script>
+~server/stripe
