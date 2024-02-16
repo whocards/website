@@ -19,9 +19,9 @@
     ]
   },
   "dependencies": {
-    "@astrojs/mdx": "^2.1.0",
-    "@astrojs/netlify": "^5.0.0",
-    "@astrojs/react": "^3.0.9",
+    "@astrojs/mdx": "^2.1.1",
+    "@astrojs/netlify": "^5.1.2",
+    "@astrojs/react": "^3.0.10",
     "@astrojs/sitemap": "^3.0.5",
     "@astrojs/tailwind": "^5.1.0",
     "@iconify-icon/react": "^1.0.8",
@@ -39,7 +39,7 @@
     "@tailwindcss/typography": "^0.5.10",
     "@types/react": "^18.2.48",
     "@types/react-dom": "^18.2.18",
-    "astro": "^4.2.6",
+    "astro": "^4.4.0",
     "astro-icon": "^1.0.3",
     "astro-robots-txt": "^1.0.0",
     "astro-seo": "^0.8.0",
@@ -63,7 +63,7 @@
     "zod": "^3.22.4"
   },
   "devDependencies": {
-    "@astrojs/node": "^8.1.0",
+    "@astrojs/node": "^8.2.0",
     "@netlify/functions": "^2.3.0",
     "@types/node": "^20.8.6",
     "dotenv": "^16.3.1",
