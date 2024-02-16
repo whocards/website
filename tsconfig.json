@@ -10,9 +10,6 @@
       "#*": ["./*"]
     },
     "jsx": "react-jsx",
-    "jsxImportSource": "react",
-    "esbuild": {
-      "target": "next"
-    }
+    "jsxImportSource": "react"
   }
 }
