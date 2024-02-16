@@ -12,7 +12,7 @@ const {title, subtitle, description, class: classes} = Astro.props
 <div
   id={subtitle.replaceAll(' ', '-').replace('?', '')}
   class:list={[
-    'flex flex-col px-5 pt-24 gap-4 lg:gap-5 lg:max-w-7xl xl:px-0 lg:py-28 lg:w-full',
+    'flex flex-col px-5 pt-24 gap-4 lg:gap-5 lg:max-w-7xl xl:px-0 lg:py-28 lg:w-full snap-start',
     classes,
   ]}
 >
