@@ -7,7 +7,7 @@ export const faqs = [
   {
     title: 'How can I order WhoCards and join the mission?',
     content:
-      'If you click on the Order button on this website, it will direct you to our Open Collective fundraising page. Choose the pack you would like to receive, make a donation and we will send you the cards.',
+      'If you click on the Order button on this website, it will direct you to our Stripe order page. Order the pack you would like to receive and we will send you the cards.',
   },
   {
     title: "What's the expected delivery time?",
