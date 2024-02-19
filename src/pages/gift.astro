@@ -25,6 +25,7 @@ import {preorderLinks} from '~constants/navigation'
   title='Gift'
   description='Donate to the WhoCards and receive one of the first 1000 card decks.'
   links={preorderLinks}
+  class='scrollbar-hide'
 >
   <!-- image='Order.png' -->
   <div
@@ -51,7 +52,7 @@ import {preorderLinks} from '~constants/navigation'
     </div>
   </div>
   <div
-    class='flex gap-10 overflow-x-scroll overflow-y-hidden h-52 lg:h-[21rem] w-screen scrollbar-hide max-md:scrollbar-hide justify-center'
+    class='w-screen flex gap-10 snap-x scroll-pl-6 overflow-x-auto scrollbar-hide px-6 pb-24 lg:pb-28'
   >
     <WhoCard lang='en' id='1' />
     <WhoCard lang='en' id='2' />
@@ -61,7 +62,7 @@ import {preorderLinks} from '~constants/navigation'
     <WhoCard lang='en' id='10' />
     <WhoCard lang='en' id='7' />
     <WhoCard lang='en' id='8' />
-    <WhoCard lang='en' id='9' />
+    <WhoCard lang='en' id='9' class='mr-28' />
   </div>
   <PreorderSection
     subtitle='what is whocards?'

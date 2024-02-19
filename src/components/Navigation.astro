@@ -21,8 +21,8 @@ const {links} = Astro.props
   <div class='drawer-content transition-all' id='main'>
     <!-- Navbar -->
     <nav class='navbar fixed h-16 justify-between pl-0 pr-4 backdrop-blur md:px-4 z-10'>
-      <a href='/' aria-label='homepage link' class='btn-ghost btn'>
-        <Icon name='logo' class='w-36' />
+      <a href='/' aria-label='homepage link'>
+        <Icon name='logo' class='w-48 btn btn-ghost' />
       </a>
       <div class:list={['flex-none hidden', {'lg:block': !isQuestionPage}]}>
         <ul class='menu menu-horizontal'>

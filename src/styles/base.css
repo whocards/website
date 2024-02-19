@@ -4,6 +4,7 @@ html {
   font-feature-settings: 'kern' 1;
   font-kerning: normal;
   scroll-behavior: smooth;
+  @apply scrollbar-hide;
 }
 
 @media (prefers-reduced-motion: reduce) {
