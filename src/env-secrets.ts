@@ -23,6 +23,7 @@ export const env = createEnv({
     SHIPPING_SHEET_URL: z.string(),
     CONTACTS_SHEET_URL: z.string(),
     STRIPE_PRIVATE_KEY: z.string(),
+    STRIPE_WEBHOOK_SECRET: z.string(),
     STRIPE_PRODUCTS: z.string().transform((val) =>
       z
         .object({

@@ -17,9 +17,6 @@ import {purchaseSheetSchema} from '~utils/schemas'
 
 const stripe = new Stripe(env.STRIPE_PRIVATE_KEY)
 
-const STRIPE_WEBHOOK_SECRET =
-  '***REMOVED***'
-
 export const POST: APIRoute = async ({request}) => {
   const sig = request.headers.get('stripe-signature')
 
@@ -29,7 +26,7 @@ export const POST: APIRoute = async ({request}) => {
 
   try {
     if (!sig) throw new Error('No signature')
-    event = stripe.webhooks.constructEvent(await request.text(), sig, STRIPE_WEBHOOK_SECRET)
+    event = stripe.webhooks.constructEvent(await request.text(), sig, env.STRIPE_WEBHOOK_SECRET)
 
     if (event.livemode !== true) {
       console.log('Received event in test mode:')
