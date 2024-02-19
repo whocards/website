@@ -18,6 +18,10 @@ import {purchaseSheetSchema} from '~utils/schemas'
 const stripe = new Stripe(env.STRIPE_PRIVATE_KEY)
 
 export const POST: APIRoute = async ({request}) => {
+  if (new URL(request.url).searchParams.get('auth_token') !== env.WEBHOOK_AUTH_TOKEN) {
+    return new Response('Unauthorized', {status: 401})
+  }
+
   const sig = request.headers.get('stripe-signature')
 
   console.log('Received signature:', sig)
