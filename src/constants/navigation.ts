@@ -3,21 +3,22 @@ export type Link = {
   title: string
   button?: boolean
   icon?: string
+  play?: boolean
 }
 
 export const mainLinks: Link[] = [
-  {href: '/', title: 'Home'},
-  {href: '/mission', title: 'Mission'},
+  {href: '/#what-is-whocards', title: 'About'},
+  {href: '/play', title: 'Play', play: true},
   {href: '/print', title: 'Print'},
-  {href: '/gift', title: 'Order Now', button: true},
+  {href: '/#support-us', title: 'Order Now', button: true},
 ]
 
 export const preorderLinks: Link[] = [
-  {href: '/gift#what-is-whocards', title: 'About'},
-  {href: '/gift#how-to-play', title: 'How to Play'},
-  {href: '/gift#support-us', title: 'Pricing'},
-  {href: '/gift#faqs', title: 'FAQs'},
-  {href: '/gift#support-us', title: 'Order Now', button: true},
+  {href: '/#what-is-whocards', title: 'About'},
+  {href: '/#how-to-play', title: 'How to Play'},
+  {href: '/#support-us', title: 'Pricing'},
+  {href: '/#faqs', title: 'FAQs'},
+  {href: '/#support-us', title: 'Order Now', button: true},
 ]
 
 export const socialLinks: Link[] = [

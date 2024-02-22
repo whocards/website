@@ -3,6 +3,7 @@ import {useStore} from '@nanostores/react'
 import {useState} from 'react'
 import {$langStore} from '~stores/Language.store'
 import {LANGUAGES, cn} from '~utils'
+import {donationUrl} from '../constants/products'
 
 export default function Print() {
   const store = useStore($langStore)
@@ -19,7 +20,7 @@ export default function Print() {
         <span className='text-lg italic md:text-xl lg:text-2xl'>
           Help us make this possible, and please consider{' '}
           <a
-            href='/gift'
+            href={donationUrl}
             target='_blank'
             className=' text-primary-light underline hover:font-bold hover:underline'
           >

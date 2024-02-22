@@ -41,6 +41,7 @@ export default defineConfig({
   output: 'hybrid',
   adapter: netlify(),
   redirects: {
-    '/preorder': '/gift',
+    '/preorder': '/#support-us',
+    '/gift': '/#support-us',
   },
 })

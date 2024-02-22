@@ -1,7 +1,4 @@
-import {SITE_URL} from '~constants/env'
 import {env} from '~env-secrets'
-
-const redirect = env.OC_REDIRECT_URL ?? SITE_URL
 
 export const products = [
   {
@@ -10,7 +7,7 @@ export const products = [
     price: 25,
     icon: 'user',
     description:
-      "Ideal if you'd like to surprise yourself or someone else with one deck of WhoCards.",
+      "Ideal if you'd like to surprise yourself or someone else with 1 deck of WhoCards.",
     priceId: env.STRIPE_PRODUCTS[1].price,
     shippingId: env.STRIPE_PRODUCTS[1].shipping,
   },
@@ -44,3 +41,5 @@ export const products = [
     shippingId: env.STRIPE_PRODUCTS[12].shipping,
   },
 ]
+
+export const donationUrl = 'https://opencollective.com/whocards/contribute/donation-65718/checkout'

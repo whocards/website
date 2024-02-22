@@ -16,7 +16,7 @@ export const faqs = [
   {
     title: 'Is there a digital version available for download?',
     content:
-      "Yes, there is! The printable and online version of WhoCards is available in 14 languages. Go to the top of this page, click the Home or Print button to start! The online version is free, but if you want to support us, you can donate to us through the Open Collective Foundation's website! (link)",
+      "Yes, there is! The printable and online version of WhoCards is available in 14 languages. Go to the top of this page, click the Home or Print button to start! The online version is free, but if you want to support us, you can donate to us through the Open Collective Foundation's website (link)",
   },
   {
     title: "I didn't receive my WhoCards. What should I do?",

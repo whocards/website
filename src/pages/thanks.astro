@@ -18,7 +18,7 @@ const purchaseId = Astro.url.searchParams.get('session_id') ?? ''
 const confirmed = true
 
 if (!purchaseId) {
-  return Astro.redirect('/gift')
+  return Astro.redirect('/')
 }
 
 // get data from db

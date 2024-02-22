@@ -35,6 +35,8 @@ const {links} = Astro.props
                 class='menu-title'
                 hideIcon
                 size='sm'
+                dark={link.button}
+                class:list={[link.play && 'play']}
               />
             ))
           }
@@ -57,8 +59,9 @@ const {links} = Astro.props
             button
             variant={link.button ? 'primary' : 'secondary'}
             light={!link.button}
+            dark={link.button}
             hideIcon={!link.button}
-            class:list={[link.button && 'mt-5 menu-title']}
+            class:list={[link.button && 'mt-5 menu-title', link.play && 'play']}
           />
         ))
       }
@@ -98,6 +101,11 @@ const {links} = Astro.props
 
 <!-- top of site pixel anchor -->
 <div id='top-of-site-pixel-anchor' class='absolute w-px h-px top-24 left-0'></div>
+
+<script>
+  import {initGame} from '~stores'
+  initGame()
+</script>
 
 <script>
   const button = document.getElementById('who-menu-button')!

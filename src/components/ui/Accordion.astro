@@ -1,4 +1,6 @@
 ---
+import {donationUrl} from '~constants/products'
+
 export interface Props {
   name: string
   contents: Array<{
@@ -20,7 +22,18 @@ const {name, contents, class: classes} = Astro.props
           {title}
         </div>
         <div class='collapse-content text-sm lg:text-base leading-snug lg:leading-normal text-gray-dark peer-checked:pt-4 lg:peer-checked:p-5'>
-          <p>{content}</p>
+          <p>
+            {content.replace('(link)', '')}
+            {content.includes('(link)') && (
+              <a
+                href={donationUrl}
+                target='_blank'
+                class='text-primary-light underline hover:font-bold hover:underline'
+              >
+                here!
+              </a>
+            )}
+          </p>
         </div>
       </div>
     ))
