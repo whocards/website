@@ -4,13 +4,12 @@ import {products} from '~constants/products'
 import {env} from '~env-secrets'
 import {createShippingSheetRow, createZenShipping} from '~server/csv'
 import {
-  db,
+  insertPurchase,
   insertPurchaseSchema,
   insertShippingAddress,
   insertShippingSchema,
   insertUser,
   insertUserSchema,
-  schema,
 } from '~server/db'
 import {createPurchaseSheetRow} from '~server/gsheet'
 import {purchaseSheetSchema} from '~utils/schemas'
@@ -23,8 +22,6 @@ export const POST: APIRoute = async ({request}) => {
   }
 
   const sig = request.headers.get('stripe-signature')
-
-  console.log('Received signature:', sig)
 
   let event: Stripe.Event
 
@@ -93,8 +90,8 @@ export const POST: APIRoute = async ({request}) => {
           }
 
           // insert purchases
-          const [dbPurchase, sheetPurchase] = await Promise.allSettled([
-            db.insert(schema.purchases).values(purchaseSchema.data).returning(),
+          const [dbPurchase, sheetPurchase] = await Promise.all([
+            insertPurchase(purchaseSchema.data),
             createPurchaseSheetRow(purchaseSheetEntrySchema.data),
           ])
 
@@ -117,7 +114,7 @@ export const POST: APIRoute = async ({request}) => {
             address: address?.line1,
             postalCode: address?.postal_code,
             address2: address?.line2,
-            purchaseId: event.id,
+            purchaseId: dbPurchase.id,
             company: charge.custom_fields[0]?.text?.value ?? '',
           })
 
@@ -154,6 +151,7 @@ export const POST: APIRoute = async ({request}) => {
     // Return a 200 response to acknowledge receipt of the event
     return new Response('Success', {status: 200})
   } catch (err) {
+    console.error('purchase webhook failed')
     console.error(err)
     return new Response(`Webhook Error: ${(err as Error).message}`, {status: 400})
   }

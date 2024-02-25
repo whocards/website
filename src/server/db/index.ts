@@ -82,4 +82,12 @@ export const insertUser = (user: UserCreate) =>
     .returning()
     .then((rows) => rows[0])
 
+export const insertPurchase = (purchase: PurchaseCreate) =>
+  db
+    .insert(schema.purchases)
+    .values(purchase)
+    .onConflictDoNothing()
+    .returning()
+    .then((rows) => rows[0])
+
 export const getPurchaseCount = () => db.select({value: count(purchases.id)}).from(schema.purchases)

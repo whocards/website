@@ -3,12 +3,9 @@ export const prerender = false
 
 import {OrderDetails} from '~components/thanks'
 import EmailForm from '~components/thanks/EmailForm.astro'
-import {products} from '~constants/products'
 import Layout from '~layouts/Layout.astro'
 import {getPurchaseById, type FullPurchase, type PurchaseSelect} from '~server/db'
 
-let errors = {}
-let formData
 let data: FullPurchase
 let purchase: PurchaseSelect
 let quantity: number
@@ -26,8 +23,6 @@ try {
   data = await getPurchaseById(purchaseId)
   if (!data) throw new Error('Purchase not found')
   purchase = data.purchase
-  quantity =
-    data.shipping?.quantity ?? products.filter((p) => p.title === purchase.category)[0].quantity
   console.log(JSON.stringify(data, null, 2))
 } catch (error) {
   console.error((error as Error).message)
