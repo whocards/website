@@ -17,6 +17,7 @@ export interface Collective {
   type: string
   slug: string
   name: string
+  emails: string[]
 }
 
 export interface Transaction {

@@ -1,5 +1,4 @@
 import dotEnv from 'dotenv'
-
 dotEnv.config()
 
 const localhost = 'http://localhost:4321'
