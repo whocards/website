@@ -1,5 +1,6 @@
 ---
-import Icon from 'astro-icon'
+import {Icon} from 'astro-icon/components'
+import type {Icon as IconName} from 'virtual:astro-icon'
 const buttons = [
   {share: 'facebook', icon: 'ri:facebook-fill'},
   {share: 'twitter', icon: 'mdi:twitter'},
@@ -30,7 +31,7 @@ const buttons = [
           data-sharer={btn.share}
           aria-label={'share ' + btn.share}
         >
-          <Icon name={btn.icon} class='h-6 w-6' />
+          <Icon name={btn.icon as IconName} class='h-6 w-6' />
         </button>
       ))
     }

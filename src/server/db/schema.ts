@@ -21,7 +21,9 @@ export const purchases = pgTable('purchase', {
   date: timestamp('date', {mode: 'date'}).notNull(),
   category: text('category').notNull(),
   netPrice: integer('netPrice').notNull(),
-  userId: integer('user_id').notNull(),
+  userId: integer('user_id')
+    .notNull()
+    .references(() => users.id),
 })
 
 export const purchasesRelations = relations(purchases, ({one}) => ({

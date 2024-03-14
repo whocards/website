@@ -1,6 +1,8 @@
 ---
-import Icon from 'astro-icon'
+import {Icon} from 'astro-icon/components'
 import type {HTMLAttributes, HTMLTag} from 'astro/types'
+
+// TODO Polymorphic component https://docs.astro.build/en/guides/typescript/#polymorphic-type
 
 export interface Props<T> extends HTMLAttributes<'button' | 'a'> {
   size?: 'sm' | 'md' | 'lg'
@@ -8,10 +10,12 @@ export interface Props<T> extends HTMLAttributes<'button' | 'a'> {
   variant?: 'primary' | 'secondary'
   hideIcon?: boolean
   light?: boolean
+  dark?: boolean
   href?: string
   tag?: HTMLTag
   full?: boolean
   disabled?: boolean
+  target?: string
 }
 
 const {
@@ -21,6 +25,7 @@ const {
   variant = 'primary',
   hideIcon = false,
   light = false,
+  dark = false,
   class: classes,
   full,
   ...props
@@ -30,21 +35,30 @@ const {
 <Element
   type={type}
   class:list={[
-    'text-center flex justify-center items-center transition-opacity duration-300 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed',
-    variant === 'primary' && 'bg-primary-light hover:bg-yellow-500 active:bg-yellow-300',
+    'cursor-pointer text-center flex justify-center items-center transition-opacity duration-300 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed',
+    variant === 'primary' &&
+      !dark &&
+      'bg-primary-light hover:bg-yellow-500 active:bg-yellow-300 text-dark',
+    variant === 'primary' &&
+      dark &&
+      'bg-primary-dark hover:bg-opacity-50 active:bg-opacity-75 text-white',
     variant === 'secondary' &&
       'border rounded-[14px] hover:bg-gray-100 active:bg-gray-200 hover:bg-opacity-25 active:bg-opacity-10',
     size === 'lg' && 'py-3.5 px-8 rounded-2xl text-lg font-semibold',
     size === 'md' && 'py-2.5 px-5 rounded-xl',
     size === 'sm' && 'text-sm min-w-fit rounded-xl',
-    light ? 'text-white border-white' : 'text-dark border-dark',
+    variant === 'secondary'
+      ? light
+        ? 'text-white border-white'
+        : 'text-primary-dark border-primary-dark'
+      : '',
     full === undefined && 'w-full lg:w-fit',
     full !== undefined && full && 'w-full',
     classes,
   ]}
   {...props}
 >
-  <span>
+  <span class='pointer-events-none'>
     <slot />
   </span>
   {!hideIcon && <Icon class='inline-block pl-1.5 pt-1 h-6' name='chevron' />}

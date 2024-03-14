@@ -7,7 +7,16 @@ export interface Props extends Omit<Link, 'href'>, Omit<ButtonProps<'a'>, 'title
   hideIcon?: boolean
 }
 
-const {href, title, button, selected, size = 'md', full = false, ...rest} = Astro.props
+const {
+  href,
+  title,
+  button,
+  selected,
+  size = 'md',
+  play = false,
+  full = false,
+  ...rest
+} = Astro.props
 ---
 
 <li
@@ -23,7 +32,7 @@ const {href, title, button, selected, size = 'md', full = false, ...rest} = Astr
         {title}
       </Button>
     ) : (
-      <a href={href} class='text-lg font-bold'>
+      <a href={href} class='text-lg font-bold' class:list={[play && 'play']}>
         {title}
       </a>
     )

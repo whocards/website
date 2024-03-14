@@ -35,6 +35,37 @@ export const orderIdFromLegacyQuery = gql`
   query order($id: Int!) {
     order(order: {legacyId: $id}) {
       id
+      fromAccount {
+        id
+        slug
+        name
+        emails
+      }
+    }
+  }
+`
+
+export type OrderWithEmail = {
+  order: {
+    id: string
+    fromAccount: {
+      id: string
+      name: string
+      emails: string[]
+    }
+  }
+}
+
+export const orderFromLegacyQuery = gql`
+  query order($id: Int!) {
+    order(order: {legacyId: $id}) {
+      id
+      fromAccount {
+        id
+        slug
+        name
+        emails
+      }
     }
   }
 `

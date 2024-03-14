@@ -1,6 +1,6 @@
-import {DEFAULT_LANGUAGE} from '~utils'
 import {idsStore} from '~stores/Game.store'
 import type {QuestionId} from '~types'
+import {DEFAULT_LANGUAGE, LANG_KEYS} from '~utils'
 
 export const getTrimmedPath = () => window.location.pathname.replace(/\/$/, '')
 
@@ -18,6 +18,9 @@ export const getCurrentQuestionUrl = (lang?: string) => {
   // pathname with removed trailing slash
   let url = getTrimmedPath().replace(/^\//, '') || DEFAULT_LANGUAGE
 
+  if (!LANG_KEYS.includes(url)) {
+    url = DEFAULT_LANGUAGE
+  }
   // handle '/' route
   return `${window.location.origin}/${lang || url}/question/${idsStore.get().current}`
 }

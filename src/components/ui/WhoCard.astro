@@ -1,5 +1,5 @@
 ---
-import Icon from 'astro-icon'
+import {Icon} from 'astro-icon/components'
 import questions from '~/data/questions.json'
 import type {Language, QuestionId} from '~types'
 
@@ -14,7 +14,7 @@ const question = questions[id][lang]
 ---
 
 <div
-  class='bg-gradient-to-br from-gray-light to-dark rounded-t-xl pt-[0.5px] pl-[0.5px] to-70% min-w-[165px] w-[165px] lg:min-w-[16.5rem] lg:w-[16.5rem] h-[225px] lg:h-[22.5rem]'
+  class='bg-gradient-to-br from-gray-light to-dark rounded-t-xl pt-[0.5px] pl-[0.5px] to-70% min-w-[165px] w-[165px] lg:min-w-[16.5rem] lg:w-[16.5rem] h-[225px] lg:h-[22.5rem] snap-start'
   class:list={[classes]}
 >
   <div class='rounded-t-xl bg-dark relative h-full w-full overflow-hidden'>

@@ -3,7 +3,16 @@ html {
   -moz-osx-font-smoothing: grayscale;
   font-feature-settings: 'kern' 1;
   font-kerning: normal;
+  scroll-behavior: smooth;
+  @apply scrollbar-hide;
 }
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
 #question:lang(zh) {
   @apply font-chinese;
 }

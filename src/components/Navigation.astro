@@ -1,5 +1,5 @@
 ---
-import {Icon} from 'astro-icon'
+import {Icon} from 'astro-icon/components'
 import NavLink from './Buttons/NavLink.astro'
 import type {Link} from '~constants/navigation'
 const isQuestionPage = Astro.url.pathname.includes('question')
@@ -21,8 +21,8 @@ const {links} = Astro.props
   <div class='drawer-content transition-all' id='main'>
     <!-- Navbar -->
     <nav class='navbar fixed h-16 justify-between pl-0 pr-4 backdrop-blur md:px-4 z-10'>
-      <a href='/' aria-label='homepage link' class='btn-ghost btn'>
-        <Icon name='logo' class='w-36' />
+      <a href='/' aria-label='homepage link'>
+        <Icon name='logo' class='w-48 btn btn-ghost' />
       </a>
       <div class:list={['flex-none hidden', {'lg:block': !isQuestionPage}]}>
         <ul class='menu menu-horizontal'>
@@ -35,6 +35,8 @@ const {links} = Astro.props
                 class='menu-title'
                 hideIcon
                 size='sm'
+                dark={link.button}
+                class:list={[link.play && 'play']}
               />
             ))
           }
@@ -57,8 +59,9 @@ const {links} = Astro.props
             button
             variant={link.button ? 'primary' : 'secondary'}
             light={!link.button}
+            dark={link.button}
             hideIcon={!link.button}
-            class:list={[link.button && 'mt-5 menu-title']}
+            class:list={[link.button && 'mt-5 menu-title', link.play && 'play']}
           />
         ))
       }
@@ -100,25 +103,30 @@ const {links} = Astro.props
 <div id='top-of-site-pixel-anchor' class='absolute w-px h-px top-24 left-0'></div>
 
 <script>
+  import {initGame} from '~stores'
+  initGame()
+</script>
+
+<script>
   const button = document.getElementById('who-menu-button')!
   const drawer = document.getElementById('who-drawer')! as HTMLInputElement
   const links = document.querySelectorAll('.drawer-side .menu a')!
   const bg = document.querySelector('.drawer-overlay')!
 
   for (const link of links) {
-    link.addEventListener('click', () => {
+    link?.addEventListener('click', () => {
       drawer.checked = false
       button.classList.remove('swap-active')
     })
   }
 
-  button.addEventListener('click', (e) => {
+  button?.addEventListener('click', (e) => {
     e.preventDefault()
     drawer.checked = !drawer.checked
     button.classList.toggle('swap-active')
   })
 
-  bg.addEventListener('click', (e) => {
+  bg?.addEventListener('click', (e) => {
     button.classList.toggle('swap-active')
   })
 </script>

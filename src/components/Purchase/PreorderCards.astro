@@ -1,34 +1,37 @@
 ---
-import Icon from 'astro-icon'
+import {Icon} from 'astro-icon/components'
+import type {Icon as IconName} from 'virtual:astro-icon'
 import Button from '~components/ui/Button.astro'
-import {openCollectiveProducts} from '~constants/products'
+import {products} from '~constants/products'
+
+const queries = products.map((product) =>
+  new URLSearchParams({
+    count: product.quantity.toString(),
+    priceId: product.priceId,
+    shippingId: product.shippingId,
+  }).toString()
+)
 ---
 
 <div
   class='grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 justify-center lg:justify-between gap-4 lg:gap-6'
 >
   {
-    openCollectiveProducts.map((product) => (
+    products.map((product, index) => (
       <div class='bg-zinc-800 w-full p-5 lg:p-8 rounded-3xl flex flex-col gap-2.5 lg:gap-5 lg:text-lg'>
         <div class='flex items-center justify-center w-10 h-10 lg:w-16 lg:h-16 bg-gradient-primary rounded-full'>
-          <Icon name={product.icon} class='w-6 h-6 lg:w-10 lg:h-10 text-white' />
+          <Icon name={product.icon as IconName} class='w-6 h-6 lg:w-10 lg:h-10 text-white' />
         </div>
         <div class='text-lg lg:text-2xl font-semibold leading-7 pt-2.5'>{product.title}</div>
         <div class='font-medium leading-[60px] text-[40px] lg:text-[54px]'>€{product.price}</div>
-        <p class='pb-1.5 lg:pb-2 text-gray-dark'>{product.description}</p>
-        <div class='flex gap-3 items-center mt-auto'>
+        <div class='flex gap-3 items-center'>
           <Icon name='check' class='w-6 h-6 lg:w-7 lg:h-7 min-w-[1.5rem] lg:min-w-[1.75rem]' />
           <div class='font-medium leading-relaxed'>
-            {product.quantity === 1
-              ? '1 deck delivered to you or someone else'
-              : `${product.quantity} decks delivered to you`}
+            {product.quantity} {product.quantity === 1 ? 'deck' : 'decks'} of cards
           </div>
         </div>
-        <div class='flex gap-3 pb-3.5'>
-          <Icon name='check' class='w-6 h-6 lg:w-7 lg:h-7 min-w-[1.5rem] lg:min-w-[1.75rem]' />
-          <div class='font-medium leading-relaxed'>Shipping included</div>
-        </div>
-        <Button href={product.url} tag='a' target='_blank' full>
+        <p class='text-gray-dark mb-auto'>{product.description}</p>
+        <Button tag='a' full href={`/purchase?${queries[index]}`}>
           Order
         </Button>
       </div>
