@@ -12,7 +12,7 @@ export const createSession = async (order: Order, url: URL) => {
     line_items: [
       {
         price: order.priceId,
-        quantity: order.count,
+        quantity: 1,
       },
     ],
     custom_fields: [
