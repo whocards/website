@@ -6,7 +6,7 @@ import type {Order} from '~utils/schemas'
 export const createSession = async (order: Order, url: URL) => {
   const stripe = new Stripe(env.STRIPE_PRIVATE_KEY)
   return await stripe.checkout.sessions.create({
-    submit_type: 'donate',
+    submit_type: 'pay',
     mode: 'payment',
     locale: 'auto',
     line_items: [
