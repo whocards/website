@@ -1,0 +1,146 @@
+---
+export const prerender = false
+
+import type {ZodIssue} from 'zod'
+import {FormSuccess, OrderDetails, ShippingForm} from '~components/thanks'
+import {products} from '~constants/products'
+import Layout from '~layouts/Layout.astro'
+import {createShippingSheetRow, createZenShipping} from '~server/csv'
+import {
+  getPurchaseById,
+  insertShippingAddress,
+  insertShippingSchema,
+  insertUser,
+  type FullPurchase,
+  type PurchaseSelect,
+} from '~server/db'
+import {createContactSheetRow} from '~server/gsheet'
+import {thankYouFormSchema} from '~utils/schemas'
+
+let errors = {}
+let formData
+let data: FullPurchase
+let purchase: PurchaseSelect
+let quantity: number
+
+// get purchase id from url
+const purchaseId = Astro.url.searchParams.get('orderIdV2') ?? ''
+let confirmed = Astro.url.searchParams.get('confirmed') === 'true'
+
+// TODO where should redirect happen?
+if (!purchaseId) {
+  return Astro.redirect('/gift')
+}
+
+// get data from db
+try {
+  console.log(purchaseId)
+  data = await getPurchaseById(purchaseId)
+  if (!data) throw new Error('Purchase not found')
+  purchase = data.purchase
+  quantity =
+    data.shipping?.quantity ?? products.filter((p) => p.title === purchase.category)[0].quantity
+  if (data.user.name === 'Guest') {
+    data.user.name = ''
+  }
+} catch (error) {
+  console.error((error as Error).message)
+  return Astro.redirect('/contact')
+}
+
+// when form is posted
+if (Astro.request.method === 'POST') {
+  try {
+    const rawFormData = await Astro.request.formData()
+    formData = Object.fromEntries(rawFormData.entries()) as Record<string, string>
+    // validate base form
+    const form = thankYouFormSchema.safeParse({...formData})
+    if (!form.success) {
+      const formErrors = form.error.issues?.reduce(
+        (acc, curr) => {
+          acc[`${curr.path[0]}`] = curr
+          return acc
+        },
+        {} as Record<string, ZodIssue>
+      )
+      errors = {...errors, ...formErrors}
+    }
+    // validate shipping
+    const shipping = insertShippingSchema.safeParse(formData)
+    if (!shipping.success) {
+      const shippingErrors = shipping.error.issues?.reduce(
+        (acc, curr) => {
+          acc[`${curr.path[0]}`] = curr
+          return acc
+        },
+        {} as Record<string, ZodIssue>
+      )
+      errors = {...errors, ...shippingErrors}
+    }
+
+    if (form.success && shipping.success) {
+      if (!confirmed) {
+        const urlParams = new URLSearchParams(Astro.url.searchParams)
+
+        // append as there could be other query string params
+        urlParams.set('confirmed', 'true')
+
+        // this will reload the page and set query string params..
+        // ex: http://localhost:4321/dashboard?paramKey=paramValue
+        urlParams.toString()
+        Astro.url.search = urlParams.toString()
+      }
+      confirmed = true
+      // update user if newsletter is different
+      if (Object.hasOwn(form.data, 'newsletter') && form.data.newsletter !== data.user.newsletter) {
+        const user = await insertUser({...data.user, newsletter: form.data.newsletter})
+        if (user.newsletter) {
+          createContactSheetRow(user)
+        }
+      }
+
+      let shouldUpdate = !data.shipping
+
+      if (!shouldUpdate) {
+        // @ts-ignore
+        const {id, createdAt, updatedAt, ...shippingData} = data.shipping
+        shouldUpdate = JSON.stringify(shippingData) !== JSON.stringify(shipping.data)
+      }
+
+      if (shouldUpdate) {
+        console.log('updating shipping')
+        const dbShipping = await insertShippingAddress(shipping.data)
+        const zenShipping = await createZenShipping(dbShipping)
+        if (!zenShipping.errors.length && !data.shipping) {
+          await createShippingSheetRow(dbShipping)
+        } else {
+          // TODO update sheet?
+        }
+      }
+    }
+  } catch (error) {
+    console.error(error)
+  }
+}
+---
+
+<Layout title='Thank You!' class='pt-28 lg:pt-32'>
+  <div
+    class='grid grid-flow-row md:grid-flow-col md:grid-cols-2 md:px-[2vw] lg:max-w-7xl px-5 lg:px-0 w-full justify-between'
+  >
+    <OrderDetails purchase={purchase} class={confirmed ? 'hidden md:flex' : ''} />
+    {
+      confirmed ? (
+        <FormSuccess type='shipping' href={`/thanks?orderIdV2=${purchaseId}`} />
+      ) : (
+        <ShippingForm
+          data={data}
+          quantity={quantity}
+          errors={errors}
+          formData={formData}
+          submitted
+        />
+      )
+    }
+  </div>
+</Layout>
