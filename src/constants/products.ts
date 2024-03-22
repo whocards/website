@@ -41,5 +41,3 @@ export const products = [
     shippingId: env.STRIPE_PRODUCTS[12].shipping,
   },
 ]
-
-export const donationUrl = 'https://opencollective.com/whocards/contribute/donation-65718/checkout'

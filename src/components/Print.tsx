@@ -1,9 +1,9 @@
 import {Icon} from '@iconify-icon/react'
 import {useStore} from '@nanostores/react'
 import {useState} from 'react'
+import {donationUrl} from '~constants/urls'
 import {$langStore} from '~stores/Language.store'
 import {LANGUAGES, cn} from '~utils'
-import {donationUrl} from '../constants/products'
 
 export default function Print() {
   const store = useStore($langStore)
