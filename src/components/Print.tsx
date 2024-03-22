@@ -3,7 +3,8 @@ import {useStore} from '@nanostores/react'
 import {useState} from 'react'
 import {$langStore} from '~stores/Language.store'
 import {LANGUAGES, cn} from '~utils'
-import {donationUrl} from '../constants/products'
+
+const donationUrl = 'https://opencollective.com/whocards/contribute/donation-65718/checkout'
 
 export default function Print() {
   const store = useStore($langStore)
