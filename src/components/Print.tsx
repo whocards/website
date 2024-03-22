@@ -1,10 +1,9 @@
 import {Icon} from '@iconify-icon/react'
 import {useStore} from '@nanostores/react'
 import {useState} from 'react'
+import {donationUrl} from '~constants/urls'
 import {$langStore} from '~stores/Language.store'
 import {LANGUAGES, cn} from '~utils'
-
-const donationUrl = 'https://opencollective.com/whocards/contribute/donation-65718/checkout'
 
 export default function Print() {
   const store = useStore($langStore)
