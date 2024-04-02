@@ -14,6 +14,8 @@ import {
 import {createPurchaseSheetRow} from '~server/gsheet'
 import {purchaseSheetSchema} from '~utils/schemas'
 
+export const prerender = false
+
 const stripe = new Stripe(env.STRIPE_PRIVATE_KEY)
 
 export const POST: APIRoute = async ({request}) => {
