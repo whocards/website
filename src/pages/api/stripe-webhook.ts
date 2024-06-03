@@ -1,8 +1,8 @@
-import type {APIRoute} from 'astro'
 import Stripe from 'stripe'
+import type {APIRoute} from 'astro'
 import {products} from '~constants/products'
 import {env} from '~env-secrets'
-import {createShippingSheetRow, createZenShipping} from '~server/csv'
+import {createShippingSheetRow} from '~server/csv'
 import {
   insertPurchase,
   insertPurchaseSchema,
@@ -126,22 +126,18 @@ export const POST: APIRoute = async ({request}) => {
           }
 
           const dbShipping = await insertShippingAddress(shippingSchema.data)
-          const zenShipping = await createZenShipping(dbShipping)
+          // const zenShipping = await createZenShipping(dbShipping)
 
-          if (!!zenShipping?.errors?.length) {
-            console.error('zen shipping failed', zenShipping)
-            throw new Error('zen shipping failed')
-          }
+          // if (!!zenShipping?.errors?.length) {
+          //   console.error('zen shipping failed', zenShipping)
+          //   throw new Error('zen shipping failed')
+          // }
 
           const sheetShipping = await createShippingSheetRow(dbShipping)
 
           console.log('purchase webhook success')
           console.log(
-            JSON.stringify(
-              {dbPurchase, sheetPurchase, dbShipping, zenShipping, sheetShipping},
-              null,
-              2
-            )
+            JSON.stringify({dbPurchase, sheetPurchase, dbShipping, sheetShipping}, null, 2)
           )
         }
         break
