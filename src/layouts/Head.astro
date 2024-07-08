@@ -1,4 +1,5 @@
 ---
+import Posthog from './posthog.astro'
 export interface Props {
   title?: string
   description?: string
@@ -81,6 +82,9 @@ const title = titles.join(' | ')
 
 <!-- generator -->
 <meta name='generator' content={Astro.generator} />
+
+<!-- analytics -->
+<Posthog />
 
 <!-- fonts -->
 {

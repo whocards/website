@@ -1,7 +1,6 @@
 ---
 import {LanguageSwitcher} from '~components/Modal/LanguageSwitcher'
 import Navigation from '~components/Navigation.astro'
-import {IS_PROD} from '~constants/env'
 import Head from './Head.astro'
 
 import BackgroundImages from '~components/ui/BackgroundImages.astro'
@@ -38,7 +37,6 @@ const {
 <html lang={lang} class='scroll-smooth bg-darkest'>
   <head>
     <Head title={title} description={description} image={image} />
-    {IS_PROD && <script defer='defer' data-domain='whocards.cc' src='/js/script.js' />}
   </head>
   <body
     class='m-0 flex min-h-screen flex-col font-sans text-white selection:bg-primary-dark selection:text-primary-light scrollbar-hide'

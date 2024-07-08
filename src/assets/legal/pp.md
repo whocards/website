@@ -17,7 +17,7 @@ Next, we will outline the information we gather during your visit to our website
 
 ## 1. Collection and Storage of Personal Data and the Nature and Purpose of Their Use:
 
-### a. When you visit our website: Each time you access our website, the internet browser used on your device (whether it's a computer, laptop, tablet, smartphone, etc.) automatically transmits data to our analytics provider plausible.io.
+### a. When you visit our website: Each time you access our website, the internet browser used on your device (whether it's a computer, laptop, tablet, smartphone, etc.) automatically transmits data to our analytics provider eu.posthog.com.
 
 - Name of the accessed page and file, along with the timestamp of the access.
 - Requesting domain (the source of your request that led you to our website(s)).
@@ -76,9 +76,9 @@ As the provider of this website, we do not have any influence over these practic
 
 ### Web Statistics Collection (Web Statistics Tool)
 
-Our website uses Plausible Analytics, an EU-based open source website, dedicated to making web analytics more privacy-friendly.
+Our website uses Posthog Analytics, an EU-based open source website, dedicated to making web analytics more privacy-friendly.
 
-Plausible tracks overall trends in our website traffic, and does not track individual visitors. Plausible doesn’t use cookies, doesn’t generate any persistent identifiers and doesn’t collect or store any personal or identifiable data. All of the data is aggregated data only and it has no personal information.
+Posthog tracks overall trends in our website traffic, and does not track individual visitors. Posthog doesn’t use cookies, doesn’t generate any persistent identifiers and doesn’t collect or store any personal or identifiable data. All of the data is aggregated data only and it has no personal information.
 
 ### Newsletter
 
