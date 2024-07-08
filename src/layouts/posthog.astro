@@ -1,5 +1,6 @@
 ---
 // src/components/posthog.astro
+import {SITE_URL} from '~/constants/env'
 ---
 
 <script is:inline>
@@ -45,7 +46,7 @@
       (e.__SV = 1))
   })(document, window.posthog || [])
   posthog.init('phc_ThGKZAXvZSrCElRvqLzp2XCoNSWckfcxKMAJP4DtkgN', {
-    api_host: 'https://eu.i.posthog.com',
+    api_host: SITE_URL,
     person_profiles: 'identified_only',
   })
 </script>
