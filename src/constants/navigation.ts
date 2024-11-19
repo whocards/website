@@ -1,15 +1,19 @@
+import {donationUrl, websiteNextUrl} from './urls'
+
 export type Link = {
   href: string
   title: string
   button?: boolean
   icon?: string
   play?: boolean
+  external?: boolean
 }
 
 export const mainLinks: Link[] = [
   {href: '/#what-is-whocards', title: 'About'},
   {href: '/play', title: 'Play', play: true},
   {href: '/print', title: 'Print'},
+  {href: donationUrl, title: 'Donate', external: true},
   {href: '/#support-us', title: 'Order Now', button: true},
 ]
 
@@ -37,4 +41,5 @@ export const contactLinks: Link[] = [
 export const legalLinks: Link[] = [
   {title: 'Contact', href: '/contact'},
   {title: 'Privacy Policy', href: '/legal/pp'},
+  {title: 'Login', href: websiteNextUrl},
 ]
