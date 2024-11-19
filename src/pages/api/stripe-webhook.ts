@@ -1,5 +1,5 @@
-import Stripe from 'stripe'
 import type {APIRoute} from 'astro'
+import Stripe from 'stripe'
 import {products} from '~constants/products'
 import {env} from '~env-secrets'
 import {createShippingSheetRow} from '~server/csv'
@@ -11,7 +11,9 @@ import {
   insertUser,
   insertUserSchema,
 } from '~server/db'
+import {createNewShippingOrder} from '~server/egon'
 import {createPurchaseSheetRow} from '~server/gsheet'
+import type {CreateNewShippingOrder} from '~types/shipping'
 import {purchaseSheetSchema} from '~utils/schemas'
 
 export const prerender = false
@@ -126,6 +128,43 @@ export const POST: APIRoute = async ({request}) => {
           }
 
           const dbShipping = await insertShippingAddress(shippingSchema.data)
+
+          const is12Deck = product.quantity == 12
+
+          const newShippingOrder: CreateNewShippingOrder = {
+            // Static values
+            payment_cod: 0,
+            shop_setting_id: 1, // Example value; replace with the actual setting ID
+            original_order_id: dbShipping.purchaseId,
+            customer_name: dbShipping.name.split(' ')[0],
+            customer_surname: dbShipping.name.split(' ')[1] || '',
+            customer_phone: dbShipping.phone || '',
+            customer_email: dbShipping.email,
+            name: dbShipping.name.split(' ')[0],
+            surname: dbShipping.name.split(' ')[1] || '',
+            phone: dbShipping.phone || '',
+            email: dbShipping.email,
+            street: dbShipping.address + ' ' + dbShipping.address2,
+            street_number: '',
+            city: dbShipping.city,
+            country: dbShipping.country,
+            postal_code: dbShipping.zip,
+            // id_delivery: 1,
+            items: [
+              {
+                item_id: is12Deck ? 1 : 4,
+                name: is12Deck ? 'WhoCards 12 Decks' : 'WhoCards 1 Deck',
+                count: is12Deck ? 1 : product.quantity,
+              },
+            ],
+          }
+
+          const newShipping = await createNewShippingOrder(newShippingOrder)
+
+          if (!newShipping.ok) {
+            console.error('egon shipping failed', newShipping)
+            throw new Error('egon shipping failed')
+          }
           // const zenShipping = await createZenShipping(dbShipping)
 
           // if (!!zenShipping?.errors?.length) {

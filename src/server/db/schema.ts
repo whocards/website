@@ -1,5 +1,7 @@
 import {relations} from 'drizzle-orm'
-import {boolean, integer, pgTable, serial, text, timestamp} from 'drizzle-orm/pg-core'
+import {boolean, integer, pgTableCreator, serial, text, timestamp} from 'drizzle-orm/pg-core'
+
+const pgTable = pgTableCreator((name) => `whocards_${name}`)
 
 // user -> many purchases
 export const users = pgTable('user', {
