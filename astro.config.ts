@@ -24,7 +24,7 @@ export default defineConfig({
     icon({
       include: {
         mdi: ['twitter', 'linkedin', 'instagram', 'github', 'email'],
-        'fa-solid': ['clone'],
+        'fa-solid': ['clone', 'external-link-alt'],
         ic: [
           'outline-arrow-back',
           'outline-arrow-forward',
