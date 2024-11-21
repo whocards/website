@@ -60,7 +60,7 @@ const {
       </main>
       {!noFooter && <Footer />}
     </Navigation>
-    {showLangModal && <LanguageSwitcher client:only />}
+    {showLangModal && <LanguageSwitcher client:only='react' />}
     <style is:global></style>
   </body>
 </html>

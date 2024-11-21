@@ -31,6 +31,14 @@ export const getCurrentQuestionUrl = (lang?: string) => {
 export const getQuestionUrl = (id: QuestionId) => {
   if (!id) return ''
 
+  if (window.location.pathname.startsWith('/play')) {
+    return window.location.origin + '/en/question/' + id
+  }
+
+  if (window.location.pathname.endsWith('/play')) {
+    return window.location.origin + window.location.pathname.split('/')[0] + '/question/' + id
+  }
+
   return window.location.origin + getTrimmedPath().replace(/\/[^\/]*$/, `/${id}`)
 }
 

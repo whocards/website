@@ -1,5 +1,5 @@
-import type {QuestionIds} from '~types'
 import questions from '~data/questions.json'
+import type {QuestionIds} from '~types'
 
 // create shuffled array list
 function shuffle(ids: QuestionIds): void {
