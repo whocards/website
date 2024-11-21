@@ -3,5 +3,5 @@ import {getRandomQuestionId} from '~/utils/gameplay'
 
 const questionId = getRandomQuestionId()
 
-return Astro.redirect(`/en/question/${questionId}`)
+return Astro.redirect(`/en/question/${questionId}`, 303)
 ---

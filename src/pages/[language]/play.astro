@@ -10,5 +10,5 @@ export async function getStaticPaths() {
 
 const questionId = getRandomQuestionId()
 
-return Astro.redirect(`/${Astro.params.language}/question/${questionId}`)
+return Astro.redirect(`/${Astro.params.language}/question/${questionId}`, 303)
 ---
