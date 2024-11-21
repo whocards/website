@@ -1,6 +1,8 @@
 ---
+import Layout from '~/layouts/Layout.astro'
 import {LANGUAGES} from '~/utils'
 import {getRandomQuestionId} from '~/utils/gameplay'
+import GameControls from '~components/GameControls'
 
 export async function getStaticPaths() {
   return Object.keys(LANGUAGES).map((language) => ({
@@ -9,6 +11,17 @@ export async function getStaticPaths() {
 }
 
 const questionId = getRandomQuestionId()
+const {language} = Astro.params
 
-return Astro.redirect(`/${Astro.params.language}/question/${questionId}`, 303)
+return Astro.redirect(`/${language}/question/${questionId}`, 303)
 ---
+
+<Layout lang={language} showLangModal oldBg noFooter>
+  <div
+    id='question'
+    class='flex h-full w-full items-center px-4 pb-[10%] text-5xl font-semibold text-white md:px-8 md:text-7xl lg:max-w-[1140px] xl:px-0 phone-landscape:text-2xl xs:text-3xl'
+  >
+    <h1 class='whitespace-pre-wrap leading-tight'></h1>
+  </div>
+  <GameControls language={language} />
+</Layout>
