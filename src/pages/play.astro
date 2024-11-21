@@ -1,21 +1,9 @@
 ---
-import Layout from '~/layouts/Layout.astro'
 import {getRandomQuestionId} from '~/utils/gameplay'
-import GameControls from '~components/GameControls'
-import questions from '~data/questions.json'
 import type {Language} from '~types'
 
 const language = 'en' as Language
 const questionId = getRandomQuestionId()
-const question = questions[questionId][language]
----
 
-<Layout lang={language} showLangModal oldBg noFooter>
-  <div
-    id='question'
-    class='flex h-full w-full items-center px-4 pb-[10%] text-5xl font-semibold text-white md:px-8 md:text-7xl lg:max-w-[1140px] xl:px-0 phone-landscape:text-2xl xs:text-3xl'
-  >
-    <h1 class='whitespace-pre-wrap leading-tight'>{question}</h1>
-  </div>
-  <GameControls language={language} />
-</Layout>
+return Astro.rewrite(`/${language}/question/${questionId}`)
+---
