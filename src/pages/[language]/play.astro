@@ -1,6 +1,6 @@
 ---
 import {LANGUAGES} from '~/utils'
-import {getRandomQuestionId} from '~/utils/gameplay'
+import {getRandomQuestionId} from '~/utils/gameplay-server'
 
 export async function getStaticPaths() {
   return Object.keys(LANGUAGES).map((language) => ({
@@ -10,5 +10,5 @@ export async function getStaticPaths() {
 
 const {language} = Astro.params
 const questionId = getRandomQuestionId()
-return Astro.rewrite(`/${language}/question/${questionId}`, 303)
+return Astro.rewrite(`/${language}/question/${questionId}`)
 ---
