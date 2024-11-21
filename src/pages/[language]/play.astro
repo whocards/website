@@ -1,0 +1,14 @@
+---
+import {LANGUAGES} from '~/utils'
+import {getRandomQuestionId} from '~/utils/gameplay'
+
+export async function getStaticPaths() {
+  return Object.keys(LANGUAGES).map((language) => ({
+    params: {language},
+  }))
+}
+
+const questionId = getRandomQuestionId()
+
+return Astro.redirect(`/${Astro.params.language}/question/${questionId}`)
+---
