@@ -1,7 +1,7 @@
 import {relations} from 'drizzle-orm'
-import {boolean, integer, pgTableCreator, serial, text, timestamp} from 'drizzle-orm/pg-core'
+import {boolean, integer, pgTable, serial, text, timestamp} from 'drizzle-orm/pg-core'
 
-const pgTable = pgTableCreator((name) => `whocards_${name}`)
+// const pgTable = pgTableCreator((name) => `whocards_${name}`)
 
 // user -> many purchases
 export const users = pgTable('user', {
@@ -54,6 +54,8 @@ export const shippings = pgTable('shipping', {
   region: text('region'),
   quantity: integer('quantity').notNull(),
   country: text('country').notNull(),
+  shippingProvider: text('shipping_provider'),
+  providerOrderId: text('provider_order_id'),
   purchaseId: text('purchaseId')
     .notNull()
     .references(() => purchases.id)

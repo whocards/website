@@ -20,6 +20,10 @@ export type UserSelect = typeof users.$inferSelect
 export type ShippingCreate = typeof shippings.$inferInsert
 export type ShippingSelect = typeof shippings.$inferSelect
 export type FullPurchase = Awaited<ReturnType<typeof getPurchaseById>>
+export type ShippingProviderInfo = Pick<
+  ShippingSelect,
+  'shippingProvider' | 'providerOrderId' | 'id'
+>
 
 // schemas
 export const schema = {...schemas}
@@ -64,6 +68,17 @@ export const insertShippingAddress = (shipping: ShippingCreate) =>
         country: shipping.country,
       },
     })
+    .returning()
+    .then((rows) => rows[0])
+
+export const updateShippingProviderInfo = (shipping: ShippingProviderInfo) =>
+  db
+    .update(schema.shippings)
+    .set({
+      shippingProvider: shipping.shippingProvider,
+      providerOrderId: shipping.providerOrderId,
+    })
+    .where(eq(schema.shippings.id, shipping.id))
     .returning()
     .then((rows) => rows[0])
 

@@ -14,7 +14,7 @@ export const createNewShippingOrder = async (newShippingOrder: CreateNewShipping
         auth_token: env.EGON_AUTH_TOKEN,
       },
       request: {
-        req_method: 'CreateNewShipping',
+        req_method: 'CreateNewOrder',
         req_data: newShippingOrder,
       },
     }),

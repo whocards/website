@@ -11,8 +11,8 @@
     "pretty": "prettier --write . --plugin=prettier-plugin-astro",
     "prepare": "is-ci || husky install",
     "analyze": "pnpx unlighthouse --site https://calmly.whocards.cc",
-    "db:push": "dotenv drizzle-kit push:pg",
-    "db:studio": "drizzle-kit studio"
+    "db:push": "dotenv drizzle-kit push",
+    "db:studio": "dotenv drizzle-kit studio"
   },
   "lint-staged": {
     "*.{ts,js,css,json,mdx,astro}": [

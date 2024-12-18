@@ -10,8 +10,14 @@ import {
   insertShippingSchema,
   insertUser,
   insertUserSchema,
+  updateShippingProviderInfo,
 } from '~server/db'
-import {createNewShippingOrder} from '~server/egon'
+import {
+  createNewShippingOrder,
+  egonConstants,
+  egonCreateItems,
+  getShippingProvider,
+} from '~server/egon'
 import {createPurchaseSheetRow} from '~server/gsheet'
 import type {CreateNewShippingOrder} from '~types/shipping'
 import {purchaseSheetSchema} from '~utils/schemas'
@@ -129,12 +135,11 @@ export const POST: APIRoute = async ({request}) => {
 
           const dbShipping = await insertShippingAddress(shippingSchema.data)
 
-          const is12Deck = product.quantity == 12
-
           const newShippingOrder: CreateNewShippingOrder = {
             // Static values
-            payment_cod: 0,
-            shop_setting_id: 1, // Example value; replace with the actual setting ID
+            payment_cod: egonConstants.paymentCod,
+            shop_setting_id: egonConstants.shopId,
+            id_payment: egonConstants.paymentId,
             original_order_id: dbShipping.purchaseId,
             customer_name: dbShipping.name.split(' ')[0],
             customer_surname: dbShipping.name.split(' ')[1] || '',
@@ -144,26 +149,36 @@ export const POST: APIRoute = async ({request}) => {
             surname: dbShipping.name.split(' ')[1] || '',
             phone: dbShipping.phone || '',
             email: dbShipping.email,
-            street: dbShipping.address + ' ' + dbShipping.address2,
+            street: [dbShipping.address, dbShipping.address2].join(', '),
             street_number: '',
             city: dbShipping.city,
             country: dbShipping.country,
+            destination_country_code: dbShipping.country,
             postal_code: dbShipping.zip,
-            // id_delivery: 1,
-            items: [
-              {
-                item_id: is12Deck ? 1 : 4,
-                name: is12Deck ? 'WhoCards 12 Decks' : 'WhoCards 1 Deck',
-                count: is12Deck ? 1 : product.quantity,
-              },
-            ],
+            id_delivery: getShippingProvider(dbShipping.country),
+            items: egonCreateItems(product.quantity),
           }
 
-          const newShipping = await createNewShippingOrder(newShippingOrder)
+          let externalShipping
 
-          if (!newShipping.ok) {
-            console.error('egon shipping failed', newShipping)
-            throw new Error('egon shipping failed')
+          if (dbShipping.country === 'CH') {
+            console.log('Switzerland shipping, skipping Egon')
+            externalShipping = 'Switzerland shipping, skipping Egon'
+          } else {
+            const newShipping = await createNewShippingOrder(newShippingOrder)
+
+            if (!newShipping.ok) {
+              console.error('egon shipping failed', newShipping)
+              throw new Error('egon shipping failed')
+            }
+
+            await updateShippingProviderInfo({
+              id: dbShipping.id,
+              shippingProvider: egonConstants.name,
+              providerOrderId: newShipping.data.response.resp_data.order_id,
+            })
+
+            externalShipping = newShipping
           }
           // const zenShipping = await createZenShipping(dbShipping)
 
@@ -175,9 +190,7 @@ export const POST: APIRoute = async ({request}) => {
           const sheetShipping = await createShippingSheetRow(dbShipping)
 
           console.log('purchase webhook success')
-          console.log(
-            JSON.stringify({dbPurchase, sheetPurchase, dbShipping, sheetShipping}, null, 2)
-          )
+          console.log(JSON.stringify({dbPurchase, dbShipping, externalShipping}, null, 2))
         }
         break
       // ... handle other event types
