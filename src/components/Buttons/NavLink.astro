@@ -15,6 +15,7 @@ const {
   size = 'md',
   play = false,
   full = false,
+  external = false,
   ...rest
 } = Astro.props
 ---
@@ -28,11 +29,23 @@ const {
 >
   {
     button ? (
-      <Button size={size} {...rest} full={full} tag='a' href={href}>
+      <Button
+        size={size}
+        target={external ? '_blank' : '_self'}
+        {...rest}
+        full={full}
+        tag='a'
+        href={href}
+      >
         {title}
       </Button>
     ) : (
-      <a href={href} class='text-lg font-bold' class:list={[play && 'play']}>
+      <a
+        href={href}
+        target={external ? '_blank' : '_self'}
+        class='text-lg font-bold'
+        class:list={[play && 'play']}
+      >
         {title}
       </a>
     )
