@@ -2,7 +2,6 @@ import type {APIRoute} from 'astro'
 import Stripe from 'stripe'
 import {products} from '~constants/products'
 import {env} from '~env-secrets'
-import {createShippingSheetRow} from '~server/csv'
 import {
   insertPurchase,
   insertPurchaseSchema,
@@ -18,9 +17,7 @@ import {
   egonCreateItems,
   getShippingProvider,
 } from '~server/egon'
-import {createPurchaseSheetRow} from '~server/gsheet'
 import type {CreateNewShippingOrder} from '~types/shipping'
-import {purchaseSheetSchema} from '~utils/schemas'
 
 export const prerender = false
 
@@ -47,8 +44,7 @@ export const POST: APIRoute = async ({request}) => {
     switch (event.type) {
       case 'checkout.session.completed':
         {
-          console.log('handling event', event.type)
-          console.log(JSON.stringify(event, null, 2))
+          console.log('handling event', event.id)
 
           const charge = event.data.object
 
@@ -85,25 +81,8 @@ export const POST: APIRoute = async ({request}) => {
             throw new Error('purchase details failed')
           }
 
-          // create sheet purchase
-          const purchaseSheetEntrySchema = purchaseSheetSchema.safeParse({
-            ...purchaseSchema.data,
-            price: purchaseSchema.data.price / 100,
-            netPrice: purchaseSchema.data.netPrice / 100,
-            name: dbUser.name,
-            email: dbUser.email,
-          })
-
-          if (!purchaseSheetEntrySchema.success) {
-            console.error(purchaseSheetEntrySchema.error)
-            throw new Error('sheet entry details failed')
-          }
-
           // insert purchases
-          const [dbPurchase, sheetPurchase] = await Promise.all([
-            insertPurchase(purchaseSchema.data),
-            createPurchaseSheetRow(purchaseSheetEntrySchema.data),
-          ])
+          const dbPurchase = await insertPurchase(purchaseSchema.data)
 
           // create db shipping
           const address = charge.shipping_details?.address
@@ -160,12 +139,13 @@ export const POST: APIRoute = async ({request}) => {
           }
 
           let externalShipping
+          let newShipping
 
           if (dbShipping.country === 'CH') {
             console.log('Switzerland shipping, skipping Egon')
             externalShipping = 'Switzerland shipping, skipping Egon'
           } else {
-            const newShipping = await createNewShippingOrder(newShippingOrder)
+            newShipping = await createNewShippingOrder(newShippingOrder)
 
             if (!newShipping.ok) {
               console.error('egon shipping failed', newShipping)
@@ -175,7 +155,8 @@ export const POST: APIRoute = async ({request}) => {
             await updateShippingProviderInfo({
               id: dbShipping.id,
               shippingProvider: egonConstants.name,
-              providerOrderId: newShipping.data.response.resp_data.order_id,
+              providerShippingId: newShipping.data.response.resp_data.order_id,
+              trackingUrl: newShipping.data.response.resp_data.myorder_url,
             })
 
             externalShipping = newShipping
@@ -187,10 +168,10 @@ export const POST: APIRoute = async ({request}) => {
           //   throw new Error('zen shipping failed')
           // }
 
-          const sheetShipping = await createShippingSheetRow(dbShipping)
-
           console.log('purchase webhook success')
-          console.log(JSON.stringify({dbPurchase, dbShipping, externalShipping}, null, 2))
+          console.log(
+            JSON.stringify({dbPurchase, dbShipping, externalShipping, newShipping}, null, 2)
+          )
         }
         break
       // ... handle other event types

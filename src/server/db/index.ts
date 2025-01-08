@@ -22,7 +22,7 @@ export type ShippingSelect = typeof shippings.$inferSelect
 export type FullPurchase = Awaited<ReturnType<typeof getPurchaseById>>
 export type ShippingProviderInfo = Pick<
   ShippingSelect,
-  'shippingProvider' | 'providerOrderId' | 'id'
+  'shippingProvider' | 'providerShippingId' | 'trackingUrl' | 'id'
 >
 
 // schemas
@@ -76,7 +76,8 @@ export const updateShippingProviderInfo = (shipping: ShippingProviderInfo) =>
     .update(schema.shippings)
     .set({
       shippingProvider: shipping.shippingProvider,
-      providerOrderId: shipping.providerOrderId,
+      providerShippingId: shipping.providerShippingId,
+      trackingUrl: shipping.trackingUrl,
     })
     .where(eq(schema.shippings.id, shipping.id))
     .returning()

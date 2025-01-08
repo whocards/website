@@ -55,7 +55,8 @@ export const shippings = pgTable('shipping', {
   quantity: integer('quantity').notNull(),
   country: text('country').notNull(),
   shippingProvider: text('shipping_provider'),
-  providerOrderId: text('provider_order_id'),
+  providerShippingId: text('provider_shipping_id'),
+  trackingUrl: text('tracking_url'),
   purchaseId: text('purchaseId')
     .notNull()
     .references(() => purchases.id)

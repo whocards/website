@@ -29,15 +29,3 @@ export const orderSchema = z.object({
 })
 
 export type Order = z.infer<typeof orderSchema>
-
-export const purchaseSheetSchema = z.object({
-  id: z.string(),
-  date: z.date().transform((val) => val.toISOString().split('T')[0]),
-  name: z.string(),
-  email: z.string(),
-  price: z.number(),
-  netPrice: z.number(),
-  category: z.string(),
-})
-
-export type PurchaseSheetEntry = z.infer<typeof purchaseSheetSchema>
