@@ -34,6 +34,14 @@ export const env = createEnv({
         })
         .parse(JSON.parse(val))
     ),
+    EGON_AUTH_ID: z.string(),
+    EGON_AUTH_KEY: z.string(),
+    EGON_AUTH_TOKEN: z.string(),
+    EGON_SHOP_ID: z.coerce.number(),
+    EGON_ITEM_ONE_ID: z.coerce.number(),
+    EGON_ITEM_ONE_PRICE: z.coerce.number(),
+    EGON_ITEM_TWELVE_ID: z.coerce.number(),
+    EGON_ITEM_TWELVE_PRICE: z.coerce.number(),
   },
   clientPrefix: 'PUBLIC_',
   client: {

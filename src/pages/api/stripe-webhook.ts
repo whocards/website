@@ -1,8 +1,7 @@
-import Stripe from 'stripe'
 import type {APIRoute} from 'astro'
+import Stripe from 'stripe'
 import {products} from '~constants/products'
 import {env} from '~env-secrets'
-import {createShippingSheetRow} from '~server/csv'
 import {
   insertPurchase,
   insertPurchaseSchema,
@@ -10,9 +9,15 @@ import {
   insertShippingSchema,
   insertUser,
   insertUserSchema,
+  updateShippingProviderInfo,
 } from '~server/db'
-import {createPurchaseSheetRow} from '~server/gsheet'
-import {purchaseSheetSchema} from '~utils/schemas'
+import {
+  createNewShippingOrder,
+  egonConstants,
+  egonCreateItems,
+  getShippingProvider,
+} from '~server/egon'
+import type {CreateNewShippingOrder} from '~types/shipping'
 
 export const prerender = false
 
@@ -39,8 +44,7 @@ export const POST: APIRoute = async ({request}) => {
     switch (event.type) {
       case 'checkout.session.completed':
         {
-          console.log('handling event', event.type)
-          console.log(JSON.stringify(event, null, 2))
+          console.log('handling event', event.id)
 
           const charge = event.data.object
 
@@ -77,25 +81,8 @@ export const POST: APIRoute = async ({request}) => {
             throw new Error('purchase details failed')
           }
 
-          // create sheet purchase
-          const purchaseSheetEntrySchema = purchaseSheetSchema.safeParse({
-            ...purchaseSchema.data,
-            price: purchaseSchema.data.price / 100,
-            netPrice: purchaseSchema.data.netPrice / 100,
-            name: dbUser.name,
-            email: dbUser.email,
-          })
-
-          if (!purchaseSheetEntrySchema.success) {
-            console.error(purchaseSheetEntrySchema.error)
-            throw new Error('sheet entry details failed')
-          }
-
           // insert purchases
-          const [dbPurchase, sheetPurchase] = await Promise.all([
-            insertPurchase(purchaseSchema.data),
-            createPurchaseSheetRow(purchaseSheetEntrySchema.data),
-          ])
+          const dbPurchase = await insertPurchase(purchaseSchema.data)
 
           // create db shipping
           const address = charge.shipping_details?.address
@@ -126,6 +113,54 @@ export const POST: APIRoute = async ({request}) => {
           }
 
           const dbShipping = await insertShippingAddress(shippingSchema.data)
+
+          const newShippingOrder: CreateNewShippingOrder = {
+            // Static values
+            payment_cod: egonConstants.paymentCod,
+            shop_setting_id: egonConstants.shopId,
+            id_payment: egonConstants.paymentId,
+            original_order_id: dbShipping.purchaseId,
+            customer_name: dbShipping.name.split(' ')[0],
+            customer_surname: dbShipping.name.split(' ')[1] || '',
+            customer_phone: dbShipping.phone || '',
+            customer_email: dbShipping.email,
+            name: dbShipping.name.split(' ')[0],
+            surname: dbShipping.name.split(' ')[1] || '',
+            phone: dbShipping.phone || '',
+            email: dbShipping.email,
+            street: [dbShipping.address, dbShipping.address2].join(', '),
+            street_number: '',
+            city: dbShipping.city,
+            country: dbShipping.country,
+            destination_country_code: dbShipping.country,
+            postal_code: dbShipping.zip,
+            id_delivery: getShippingProvider(dbShipping.country),
+            items: egonCreateItems(product.quantity),
+          }
+
+          let externalShipping
+          let newShipping
+
+          if (dbShipping.country === 'CH') {
+            console.log('Switzerland shipping, skipping Egon')
+            externalShipping = 'Switzerland shipping, skipping Egon'
+          } else {
+            newShipping = await createNewShippingOrder(newShippingOrder)
+
+            if (!newShipping.ok) {
+              console.error('egon shipping failed', newShipping)
+              throw new Error('egon shipping failed')
+            }
+
+            await updateShippingProviderInfo({
+              id: dbShipping.id,
+              shippingProvider: egonConstants.name,
+              providerShippingId: newShipping.data.response.resp_data.order_id,
+              trackingUrl: newShipping.data.response.resp_data.myorder_url,
+            })
+
+            externalShipping = newShipping
+          }
           // const zenShipping = await createZenShipping(dbShipping)
 
           // if (!!zenShipping?.errors?.length) {
@@ -133,11 +168,9 @@ export const POST: APIRoute = async ({request}) => {
           //   throw new Error('zen shipping failed')
           // }
 
-          const sheetShipping = await createShippingSheetRow(dbShipping)
-
           console.log('purchase webhook success')
           console.log(
-            JSON.stringify({dbPurchase, sheetPurchase, dbShipping, sheetShipping}, null, 2)
+            JSON.stringify({dbPurchase, dbShipping, externalShipping, newShipping}, null, 2)
           )
         }
         break

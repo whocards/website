@@ -4,10 +4,11 @@ dotenv.config()
 
 const config: Config = {
   schema: './src/server/db/schema.ts',
-  driver: 'pg',
+  out: './src/server/db/migrations',
+  dialect: 'postgresql',
   verbose: true,
   dbCredentials: {
-    connectionString: process.env.DB_URL!,
+    url: process.env.DB_URL!,
   },
 }
 

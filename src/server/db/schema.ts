@@ -1,6 +1,8 @@
 import {relations} from 'drizzle-orm'
 import {boolean, integer, pgTable, serial, text, timestamp} from 'drizzle-orm/pg-core'
 
+// const pgTable = pgTableCreator((name) => `whocards_${name}`)
+
 // user -> many purchases
 export const users = pgTable('user', {
   id: serial('id').primaryKey(),
@@ -51,6 +53,9 @@ export const shippings = pgTable('shipping', {
   region: text('region'),
   quantity: integer('quantity').notNull(),
   country: text('country').notNull(),
+  shippingProvider: text('shipping_provider'),
+  providerShippingId: text('provider_shipping_id'),
+  trackingUrl: text('tracking_url'),
   purchaseId: text('purchaseId')
     .notNull()
     .references(() => purchases.id)
