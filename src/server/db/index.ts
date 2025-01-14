@@ -66,6 +66,9 @@ export const insertShippingAddress = (shipping: ShippingCreate) =>
         city: shipping.city,
         region: shipping.region,
         country: shipping.country,
+        providerShippingId: shipping.providerShippingId,
+        trackingUrl: shipping.trackingUrl,
+        shippingProvider: shipping.shippingProvider,
       },
     })
     .returning()
@@ -104,6 +107,14 @@ export const insertPurchase = (purchase: PurchaseCreate) =>
     .values(purchase)
     .onConflictDoNothing()
     .returning()
+    .then((rows) => rows[0])
+
+export const getPurchase = (purchaseId: string) =>
+  db
+    .select()
+    .from(schema.purchases)
+    .where(eq(schema.purchases.id, purchaseId))
+    .leftJoin(shippings, eq(purchases.id, shippings.purchaseId))
     .then((rows) => rows[0])
 
 export const getPurchaseCount = () => db.select({value: count(purchases.id)}).from(schema.purchases)

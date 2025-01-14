@@ -3,6 +3,7 @@ import Stripe from 'stripe'
 import {products} from '~constants/products'
 import {env} from '~env-secrets'
 import {
+  getPurchase,
   insertPurchase,
   insertPurchaseSchema,
   insertShippingAddress,
@@ -82,7 +83,13 @@ export const POST: APIRoute = async ({request}) => {
           }
 
           // insert purchases
-          const dbPurchase = await insertPurchase(purchaseSchema.data)
+          let dbPurchase =
+            (await insertPurchase(purchaseSchema.data)) ||
+            (await getPurchase(purchaseSchema.data.id))
+
+          if (!dbPurchase) {
+            throw new Error('purchase not created or found')
+          }
 
           // create db shipping
           const address = charge.shipping_details?.address
