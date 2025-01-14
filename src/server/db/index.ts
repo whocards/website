@@ -114,7 +114,6 @@ export const getPurchase = (purchaseId: string) =>
     .select()
     .from(schema.purchases)
     .where(eq(schema.purchases.id, purchaseId))
-    .leftJoin(shippings, eq(purchases.id, shippings.purchaseId))
     .then((rows) => rows[0])
 
 export const getPurchaseCount = () => db.select({value: count(purchases.id)}).from(schema.purchases)
