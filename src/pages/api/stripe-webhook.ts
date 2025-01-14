@@ -88,7 +88,6 @@ export const POST: APIRoute = async ({request}) => {
             (await getPurchase(purchaseSchema.data.id))
 
           if (!dbPurchase) {
-            console.error('purchase not created or found', dbPurchase, purchaseSchema.data)
             throw new Error('purchase not created or found')
           }
 
@@ -116,7 +115,7 @@ export const POST: APIRoute = async ({request}) => {
           })
 
           if (!shippingSchema.success) {
-            console.error(shippingSchema.error)
+            console.error(shippingSchema.error.flatten().fieldErrors, dbPurchase)
             throw new Error('shipping details failed')
           }
 
