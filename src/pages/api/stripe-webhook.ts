@@ -88,6 +88,7 @@ export const POST: APIRoute = async ({request}) => {
             (await getPurchase(purchaseSchema.data.id))
 
           if (!dbPurchase) {
+            console.error('purchase not created or found', dbPurchase, purchaseSchema.data)
             throw new Error('purchase not created or found')
           }
 
@@ -149,6 +150,7 @@ export const POST: APIRoute = async ({request}) => {
           let newShipping
 
           if (dbShipping.country === 'CH') {
+            // TODO: add notification to admin
             console.log('Switzerland shipping, skipping Egon')
             externalShipping = 'Switzerland shipping, skipping Egon'
           } else {
