@@ -1,4 +1,4 @@
-import {useState} from 'react'
+import {useCallback, useEffect, useState} from 'react'
 import {cn} from '~utils'
 import questions from './hajnalig-questions.json'
 
@@ -14,22 +14,54 @@ const getRandomIds = () => {
   return ids
 }
 
+const userIdKey = 'hajnalig-user-id'
+
+const getUserId = () => {
+  if (typeof window === 'undefined') return ''
+  const userId = localStorage.getItem(userIdKey)
+  if (!userId) {
+    const newUserId = crypto.randomUUID()
+    localStorage.setItem(userIdKey, newUserId)
+    return newUserId
+  }
+  return userId
+}
+
+const createQuestionTracking = async (userId: string, questionId: number, isBack?: boolean) => {
+  await fetch('/api/events/question-tracking', {
+    method: 'POST',
+    body: JSON.stringify({eventId: 1, userId, questionId, isBack}),
+  })
+}
+
 export const SimplePlay = () => {
   const [ids, setIds] = useState<number[]>(getRandomIds())
   const [idx, setIdx] = useState(0)
+  const [userId, setUserId] = useState(getUserId())
 
-  const handlePrevious = () => {
+  useEffect(() => {
+    let newUserId = userId ?? getUserId()
+    if (!userId) {
+      setUserId(newUserId)
+    }
+    void createQuestionTracking(newUserId, ids[idx])
+  }, [])
+
+  const handlePrevious = useCallback(() => {
     if (idx === 0) return
     setIdx(idx - 1)
-  }
+    void createQuestionTracking(userId, ids[idx], true)
+  }, [idx, userId, ids])
 
-  const handleNext = () => {
+  const handleNext = useCallback(() => {
     if (idx === count - 1) {
       setIds((prev) => [...prev, ...getRandomIds()])
     }
 
     setIdx(idx + 1)
-  }
+    console.log('createQuestionTracking', userId, ids[idx])
+    void createQuestionTracking(userId, ids[idx])
+  }, [idx, userId, ids])
 
   return (
     <>
