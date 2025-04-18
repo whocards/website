@@ -3,37 +3,47 @@ import {Icon} from 'astro-icon/components'
 import {IS_PROD} from '~constants/env'
 import Head from '~layouts/Head.astro'
 import '~styles/base.css'
+import Footer from './footer.astro'
 
 export interface Props {
   class?: string
   title?: string
   description?: string
+  showFooter?: boolean
 }
 
-const {class: mainClasses, title = 'Hajnalig', description = 'Hajnalig'} = Astro.props
+const {
+  class: mainClasses,
+  title = 'Hajnalig',
+  description = 'Hajnalig',
+  showFooter = false,
+} = Astro.props
 ---
 
 <!doctype html>
-<html lang='hu' class='scroll-smooth bg-[#FFF0E8]'>
+<html lang='hu' class='scroll-smooth'>
   <head>
     <Head title={title} description={description} />
     {IS_PROD && <script defer='defer' data-domain='whocards.cc' src='/js/script.js' />}
   </head>
   <body
-    class='m-0 flex min-h-screen flex-col font-sans selection:bg-primary-dark selection:text-primary-light scrollbar-hide'
+    class='m-0 flex min-h-screen bg-[#FFF0E8] text-darkest flex-col font-sans selection:bg-primary-dark selection:text-primary-light scrollbar-hide'
   >
-    <nav
-      class='navbar fixed h-16 justify-between pl-0 pr-4 backdrop-blur md:px-4 z-10 text-darkest'
-    >
-      <a href='/events/hajnalig' aria-label='homepage link'>
-        <Icon name='logo-plain' class='w-48 hover:text-primary-dark' />
+    <nav class='navbar fixed h-16 justify-between p-4 backdrop-blur z-10'>
+      <a
+        href='/events/hajnalig'
+        aria-label='homepage link'
+        class='hover:text-primary-dark text-darkest transition-colors duration-1000'
+      >
+        <Icon name='logo-plain' class='w-48' />
       </a>
     </nav>
     <main
-      class='flex min-h-screen pt-16 w-full flex-col items-center justify-center text-darkest'
+      class='flex flex-1 px-4 flex-col items-center justify-center max-w-3xl mx-auto w-full pt-16'
       class:list={[mainClasses]}
     >
       <slot />
     </main>
+    {showFooter && <Footer />}
   </body>
 </html>

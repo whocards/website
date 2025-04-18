@@ -1,21 +1,14 @@
 ---
-import {Image} from 'astro:assets'
 import Button from '~components/ui/Button.astro'
-import Logo1 from './_components/hajnalig-logo.png'
-import Logo2 from './_components/hello_parks-logo.png'
 import Layout from './_components/layout.astro'
 ---
 
-<Layout>
-  <div
-    class='flex flex-col gap-4 lg:gap-5 px-8 max-w-5xl lg:items-center h-[calc(100vh-4rem)] justify-center relative'
-  >
-    <h1 class='text-center font-title font-bold text-4xl lg:text-7xl leading-10 xs:text-3xl pb-16'>
+<Layout showFooter>
+  <div class='text-center space-y-4 md:space-y-8 w-full'>
+    <h1 class='text-center font-title font-bold text-4xl md:text-7xl md:pb-8'>
       Koccints. Kérdezz.<br />Kapcsolódj!
     </h1>
-    <p
-      class='text-center text-sm lg:text-lg font-semibold xs:leading-normal leading-7 pb-2 lg:px-10'
-    >
+    <p class='text-center text-sm md:text-lg font-semibold leading-4 md:leading-7'>
       A kártya nálad van, és Te döntesz. Ha kíváncsi vagy kezdeményezz egy beszélgetést. A
       kérdéseket pedig értelmezd szabadon.
     </p>
@@ -24,17 +17,6 @@ import Layout from './_components/layout.astro'
     >
       <Button tag='a' class='play' size='lg' full href='/events/hajnalig/play'>Új kérdés</Button>
       <Button tag='a' href='/#support-us' full hideIcon variant='secondary'>Rendelj meg</Button>
-    </div>
-    <div class='absolute bottom-5 left-0 right-0 grid place-items-center'>
-      <a
-        href='#what-is-whocards'
-        class='border-solid scale-150 border-t-primary-light border-t-8 border-x-transparent border-x-8 border-b-0 hover:scale-[2] transition-transform'
-      >
-      </a>
-    </div>
-    <div class='flex gap-4 pt-16'>
-      <Image src={Logo1} alt='Hajnalig' class='w-32' sizes='300px' />
-      <Image src={Logo2} alt='Hello Parks' class='w-24' sizes='300px' />
     </div>
   </div>
 </Layout>

@@ -1,0 +1,13 @@
+---
+import {Image} from 'astro:assets'
+import Logo1 from './hajnalig-logo.png'
+import Logo2 from './hello_parks-logo.png'
+---
+
+<hr class='w-full border-dark' />
+<footer class='flex flex-col gap-12 p-4 w-full md:max-w-7xl'>
+  <div class='flex gap-4 w-full items-center justify-center'>
+    <Image src={Logo1} alt='Hajnalig' class='w-16 md:w-32' sizes='300px' />
+    <Image src={Logo2} alt='Hello Parks' class='w-12 md:w-24' sizes='300px' />
+  </div>
+</footer>

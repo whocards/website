@@ -38,10 +38,7 @@ export const SimplePlay = () => {
       </div>
 
       <div className='group fixed bottom-4 mx-auto flex h-12 flex-col items-center justify-center'>
-        <div
-          id='controls'
-          className='flex w-full max-w-2xl items-center justify-between gap-4 text-gray transition-all duration-500'
-        >
+        <div className='flex w-full max-w-2xl items-center justify-between gap-8 text-gray transition-all delay-1000 duration-500 group-hover:translate-y-0 group-hover:delay-0 md:translate-y-16'>
           <button
             aria-label='previous question'
             onClick={handlePrevious}
@@ -54,9 +51,6 @@ export const SimplePlay = () => {
                 d='M20 11H7.83l5.59-5.59L12 4l-8 8l8 8l1.41-1.41L7.83 13H20z'
               />
             </svg>
-          </button>
-          <button className='btn btn-circle pointer-events-none bg-gray uppercase text-white hover:bg-gray'>
-            hu
           </button>
           <button
             aria-label='next question'
