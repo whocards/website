@@ -1,7 +1,8 @@
 import type {APIRoute} from 'astro'
+import {eq} from 'drizzle-orm'
 import {z} from 'zod'
 import {db} from '~server/db'
-import {conferenceQuestionTracking} from '~server/db/schema'
+import {conference, conferenceQuestionTracking} from '~server/db/schema'
 
 export const prerender = false
 
@@ -22,19 +23,37 @@ export const POST: APIRoute = async ({request}) => {
 
   const {eventId, userId, questionId, isBack} = data.data
 
-  try {
-    await db.insert(conferenceQuestionTracking).values({
-      conferenceId: eventId,
-      questionId,
-      isBack,
-      user: userId,
+  const {message, code} = await db.transaction(async (tx) => {
+    const currentConference = await tx.query.conference.findFirst({
+      where: eq(conference.id, eventId),
     })
-  } catch (error) {
-    console.error(error)
-    return new Response(`error: ${error instanceof Error ? error.message : String(error)}`, {
-      status: 500,
-    })
-  }
 
-  return new Response(JSON.stringify({success: true}), {status: 200})
+    if (!currentConference) {
+      return {message: 'Conference not found', code: 404}
+    }
+
+    if (!currentConference.isActive) {
+      return {message: 'Conference is not active', code: 400}
+    }
+
+    const res = await tx
+      .insert(conferenceQuestionTracking)
+      .values({
+        conferenceId: currentConference.id,
+        questionId,
+        isBack,
+        user: userId,
+      })
+      .returning({id: conferenceQuestionTracking.id})
+
+    console.log(res)
+
+    if (res.length === 0) {
+      return {message: 'Failed to insert question tracking', code: 500}
+    }
+
+    return {message: 'Success', code: 201}
+  })
+
+  return new Response(JSON.stringify({message}), {status: code})
 }
