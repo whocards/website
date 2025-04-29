@@ -1,6 +1,7 @@
 ---
 import {Icon} from 'astro-icon/components'
 import type {HTMLAttributes, HTMLTag} from 'astro/types'
+import {cn} from '~utils'
 
 // TODO Polymorphic component https://docs.astro.build/en/guides/typescript/#polymorphic-type
 
@@ -35,7 +36,7 @@ const {
 
 <Element
   type={type}
-  class:list={[
+  class:list={cn([
     'cursor-pointer text-center flex justify-center items-center transition-opacity duration-300 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed',
     variant === 'primary' &&
       !dark &&
@@ -57,7 +58,7 @@ const {
     full === undefined && 'w-full lg:w-fit',
     full !== undefined && full && 'w-full',
     classes,
-  ]}
+  ])}
   {...props}
   {...Element === 'a' && {target}}
 >
