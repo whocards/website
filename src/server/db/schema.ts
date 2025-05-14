@@ -1,5 +1,16 @@
 import {relations} from 'drizzle-orm'
-import {boolean, integer, pgTable, serial, text, timestamp} from 'drizzle-orm/pg-core'
+import {
+  bigint,
+  boolean,
+  date,
+  foreignKey,
+  integer,
+  pgTable,
+  serial,
+  smallint,
+  text,
+  timestamp,
+} from 'drizzle-orm/pg-core'
 
 // const pgTable = pgTableCreator((name) => `whocards_${name}`)
 
@@ -68,3 +79,49 @@ export const shippingRelations = relations(shippings, ({one}) => ({
     references: [purchases.id],
   }),
 }))
+
+export const conference = pgTable('conference', {
+  // You can use { mode: "bigint" } if numbers are exceeding js number limitations
+  id: bigint('id', {mode: 'number'}).primaryKey().generatedByDefaultAsIdentity({
+    name: 'conference_id_seq',
+    startWith: 1,
+    increment: 1,
+    minValue: 1,
+    maxValue: 9223372036854775807,
+    cache: 1,
+  }),
+  createdAt: timestamp('created_at', {withTimezone: true, mode: 'string'}).defaultNow().notNull(),
+  isActive: boolean('is_active').default(true).notNull(),
+  name: text('name').default('').notNull(),
+  date: date('date'),
+})
+
+export const conferenceQuestionTracking = pgTable(
+  'conference_question_tracking',
+  {
+    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
+    id: bigint('id', {mode: 'number'}).primaryKey().generatedByDefaultAsIdentity({
+      name: 'conference_question_tracking_id_seq',
+      startWith: 1,
+      increment: 1,
+      minValue: 1,
+      maxValue: 9223372036854775807,
+      cache: 1,
+    }),
+    createdAt: timestamp('created_at', {withTimezone: true, mode: 'string'}).defaultNow().notNull(),
+    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
+    conferenceId: bigint('conference_id', {mode: 'number'}).notNull(),
+    questionId: smallint('question_id').notNull(),
+    isBack: boolean('is_back'),
+    user: text('user'),
+  },
+  (table) => {
+    return {
+      conferenceQuestionTrackingConferenceIdFkey: foreignKey({
+        columns: [table.conferenceId],
+        foreignColumns: [conference.id],
+        name: 'conference_question_tracking_conference_id_fkey',
+      }),
+    }
+  }
+)
