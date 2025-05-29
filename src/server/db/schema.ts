@@ -112,8 +112,9 @@ export const conferenceQuestionTracking = pgTable(
     // You can use { mode: "bigint" } if numbers are exceeding js number limitations
     conferenceId: bigint('conference_id', {mode: 'number'}).notNull(),
     questionId: smallint('question_id').notNull(),
-    isBack: boolean('is_back'),
+    type: text('type').notNull().default('new'),
     user: text('user'),
+    language: text('language'),
   },
   (table) => {
     return {

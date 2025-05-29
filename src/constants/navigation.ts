@@ -17,6 +17,13 @@ export const mainLinks: Link[] = [
   {href: '/#support-us', title: 'Order Now', button: true},
 ]
 
+export const eventLinks: Link[] = [{href: '/events/hajnalig', title: 'Hajnalig'}]
+
+export const eventMainLinks: Link[] = [
+  {href: donationUrl, title: 'Donate', external: true},
+  {href: '/#support-us', title: 'Order Now', button: true},
+]
+
 export const preorderLinks: Link[] = [
   {href: '/#what-is-whocards', title: 'About'},
   {href: '/#how-to-play', title: 'How to Play'},

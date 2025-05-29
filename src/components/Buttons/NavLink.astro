@@ -16,6 +16,7 @@ const {
   play = false,
   full = false,
   external = false,
+  class: classes,
   ...rest
 } = Astro.props
 ---
@@ -23,7 +24,9 @@ const {
 <li
   class:list={{
     'text-primary-light pointer-events-none': selected && !button,
-    'btn-ghost hover:text-primary-light hover:opacity-80 active:opacity-100': !selected && !button,
+    'btn-ghost hover:text-primary-light hover:opacity-80 active:opacity-100 rounded-xl':
+      !selected && !button,
+    'text-white': !button,
     contents: button,
   }}
 >
@@ -36,6 +39,7 @@ const {
         full={full}
         tag='a'
         href={href}
+        class:list={[classes]}
       >
         {title}
       </Button>
@@ -43,8 +47,8 @@ const {
       <a
         href={href}
         target={external ? '_blank' : '_self'}
-        class='text-lg font-bold'
-        class:list={[play && 'play']}
+        class='text-lg font-bold rounded-xl hover:text-primary-light transition-colors duration-300'
+        class:list={[play && 'play', classes]}
       >
         {title}
       </a>

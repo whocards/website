@@ -1,10 +1,11 @@
 ---
 import Button from '~components/ui/Button.astro'
+import Footer from './_components/footer.astro'
 import Layout from './_components/layout.astro'
 ---
 
-<Layout showFooter class='max-h-[75vh]'>
-  <div class='text-center space-y-2 md:space-y-8 w-full'>
+<Layout showFooter>
+  <div class='text-center space-y-4 md:space-y-8 w-full'>
     <h1 class='text-center font-title font-bold text-4xl md:text-7xl md:pb-8'>
       Koccints. Kérdezz.<br />Kapcsolódj!
     </h1>
@@ -20,9 +21,15 @@ import Layout from './_components/layout.astro'
       <Button tag='a' class='play' size='lg' full href='/events/hajnalig/play' class='py-2'
         >Új kérdés</Button
       >
-      <Button tag='a' href='/#support-us' full hideIcon variant='secondary' class='py-2'
-        >Rendelj meg</Button
+      <Button
+        tag='a'
+        href='/#support-us'
+        full
+        hideIcon
+        variant='secondary'
+        class='py-2 hover:bg-primary-dark/20 active:bg-primary-dark/40'>Rendelj meg</Button
       >
     </div>
+    <Footer />
   </div>
 </Layout>
