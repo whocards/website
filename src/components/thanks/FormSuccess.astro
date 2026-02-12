@@ -6,9 +6,19 @@ export interface Props {
   href: string
   type: string
   class?: string
+  title?: string
+  message?: string
+  buttonLabel?: string
 }
 
-const {href, type, class: className} = Astro.props
+const {
+  href,
+  type,
+  class: className,
+  title = `Your ${type} has been submitted successfully`,
+  message = `We will get back to you shortly.`,
+  buttonLabel = 'Submit another request',
+} = Astro.props
 ---
 
 <div
@@ -16,12 +26,8 @@ const {href, type, class: className} = Astro.props
   class:list={[className]}
 >
   <Icon name='check-round' class='w-16 h-16 lg:w-20 lg:h-20 min-h-16 min-w-[4rem]' />
-  <h1 class='text-3xl font-title font-bold pt-2'>
-    Your {type} information has been submitted successfully
-  </h1>
-  <p class='text-base text-gray-dark'>
-    You may update your {type} information<br />later if necessary.
-  </p>
+  <h1 class='text-3xl font-title font-bold pt-2'>{title}</h1>
+  <p class='text-base text-gray-dark'>{message}</p>
   <Button
     variant='secondary'
     hideIcon
@@ -30,6 +36,6 @@ const {href, type, class: className} = Astro.props
     href={href}
     full={false}
   >
-    Update Address
+    {buttonLabel}
   </Button>
 </div>

@@ -3,14 +3,6 @@ import {Icon} from 'astro-icon/components'
 import type {Icon as IconName} from 'virtual:astro-icon'
 import Button from '~components/ui/Button.astro'
 import {products} from '~constants/products'
-
-const queries = products.map((product) =>
-  new URLSearchParams({
-    count: product.quantity.toString(),
-    priceId: product.priceId,
-    shippingId: product.shippingId,
-  }).toString()
-)
 ---
 
 <div
@@ -31,8 +23,8 @@ const queries = products.map((product) =>
           </div>
         </div>
         <p class='text-gray-dark mb-auto'>{product.description}</p>
-        <Button tag='a' full href={`/purchase?${queries[index]}`}>
-          Order
+        <Button tag='a' full href='/contact'>
+          Request via Contact Form
         </Button>
       </div>
     ))

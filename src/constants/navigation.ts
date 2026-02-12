@@ -14,22 +14,22 @@ export const mainLinks: Link[] = [
   {href: '/play', title: 'Play', play: true},
   {href: '/print', title: 'Print'},
   {href: donationUrl, title: 'Donate', external: true},
-  {href: '/#support-us', title: 'Order Now', button: true},
+  {href: '/contact', title: 'Request Cards', button: true},
 ]
 
 export const eventLinks: Link[] = [{href: '/events/hajnalig', title: 'Hajnalig'}]
 
 export const eventMainLinks: Link[] = [
   {href: donationUrl, title: 'Donate', external: true},
-  {href: '/#support-us', title: 'Order Now', button: true},
+  {href: '/contact', title: 'Request Cards', button: true},
 ]
 
 export const preorderLinks: Link[] = [
   {href: '/#what-is-whocards', title: 'About'},
   {href: '/#how-to-play', title: 'How to Play'},
-  {href: '/#support-us', title: 'Pricing'},
+  {href: '/contact', title: 'Contact'},
   {href: '/#faqs', title: 'FAQs'},
-  {href: '/#support-us', title: 'Order Now', button: true},
+  {href: '/contact', title: 'Request Cards', button: true},
 ]
 
 export const socialLinks: Link[] = [

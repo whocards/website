@@ -3,7 +3,6 @@ import {Icon} from 'astro-icon/components'
 import cardsImage from '~assets/images/cards.png'
 import humanityImage from '~assets/images/humanity.png'
 import teamImage from '~assets/images/team.png'
-import PreOrderCards from '~components/Purchase/PreorderCards.astro'
 import PreorderSection from '~components/Purchase/PreorderSection.astro'
 import PreorderSectionImage from '~components/Purchase/PreorderSectionImage.astro'
 import Testimonials from '~components/Purchase/Testimonials.astro'
@@ -21,7 +20,7 @@ import bgLeftImage from '~assets/images/bg-left-large.svg'
 ---
 
 <Layout
-  description='Donate to the WhoCards and receive one of the first 1000 card decks.'
+  description='Request a WhoCards deck by reaching out through our contact form.'
   class='scrollbar-hide'
 >
   <div
@@ -42,7 +41,7 @@ import bgLeftImage from '~assets/images/bg-left-large.svg'
       class='grid grid-flow-row md:grid-flow-col md:grid-cols-2 gap-8 w-full md:max-w-xl py-5 lg:pt-8 mx-auto'
     >
       <Button tag='a' class='play' size='lg' full>Play Online</Button>
-      <Button tag='a' href='#support-us' full hideIcon variant='secondary'>Order Now</Button>
+      <Button tag='a' href='/contact' full hideIcon variant='secondary'>Request Cards</Button>
     </div>
     <div class='absolute bottom-5 left-0 right-0 grid place-items-center'>
       <a
@@ -144,11 +143,13 @@ import bgLeftImage from '~assets/images/bg-left-large.svg'
   </PreorderSection>
 
   <PreorderSection
-    title='Get Your Deck!'
-    subtitle='support us'
-    description='Choose your pack and receive one of the first 1000 decks of WhoCards.'
+    title='Request Your Deck!'
+    subtitle='request cards'
+    description='Cards are available by request. Tell us how many you need and we will follow up.'
   >
-    <PreOrderCards />
+    <Button tag='a' href='/contact' variant='secondary' hideIcon class='lg:max-w-xs'>
+      Request via Contact Form
+    </Button>
   </PreorderSection>
 
   <PreorderSectionImage
@@ -191,17 +192,17 @@ import bgLeftImage from '~assets/images/bg-left-large.svg'
         <h3
           class='px-5 text-gradient text-center font-title text-4xl lg:text-[54px] lg:leading-normal font-extrabold leading-10 text-white'
         >
-          Get Your Deck!
+          Request Your Deck!
         </h3>
         <p
           class='px-5 text-center pt-5 text-sm lg:text-lg lg:leading-normal leading-snug pb-10 max-w-xl lg:max-w-3xl'
         >
           WhoCards is on a mission to transform social interactions to become more open, vulnerable,
-          and authentic. Join us in spreading openness, vulnerability, and authenticity by gifting
-          WhoCards for yourself or someone who'll treasure them.
+          and authentic. Reach out through our contact form to request cards for yourself or someone
+          who'll treasure them.
         </p>
         <span class='px-5'>
-          <Button tag='a' href='#support-us'>Order Now</Button>
+          <Button tag='a' href='/contact'>Request Cards</Button>
         </span>
         <div
           class='w-full h-60 lg:h-96 overflow-hidden mt-auto mx-auto flex items-end justify-center'

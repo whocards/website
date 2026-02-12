@@ -1,9 +1,19 @@
 import {serialize} from 'object-to-formdata'
 import {env} from '~env-secrets'
-import {type UserCreate} from '~server/db'
-import type {PurchaseSheetEntry} from '~utils/schemas'
 
-export const createContactSheetRow = async (data: UserCreate) =>
+type ContactSheetEntry = Record<string, string | number | boolean | null | undefined>
+
+type PurchaseSheetEntry = {
+  id: string
+  date: string
+  name: string
+  email: string
+  price: number
+  netPrice: number
+  category: string
+}
+
+export const createContactSheetRow = async (data: ContactSheetEntry) =>
   fetch(env.CONTACTS_SHEET_URL, {
     method: 'POST',
     body: serialize({
