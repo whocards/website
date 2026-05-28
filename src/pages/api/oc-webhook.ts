@@ -1,3 +1,5 @@
+export const prerender = false
+
 import type {APIRoute} from 'astro'
 import {serialize} from 'object-to-formdata'
 import {products} from '~constants/products'

@@ -2,7 +2,7 @@ import mdx from '@astrojs/mdx'
 import netlify from '@astrojs/netlify'
 import react from '@astrojs/react'
 import sitemap from '@astrojs/sitemap'
-import tailwind from '@astrojs/tailwind'
+import tailwindcss from '@tailwindcss/vite'
 import icon from 'astro-icon'
 import robotsTxt from 'astro-robots-txt'
 import {defineConfig, passthroughImageService} from 'astro/config'
@@ -17,13 +17,15 @@ export default defineConfig({
   image: {
     service: passthroughImageService(),
   },
+  vite: {
+    plugins: [tailwindcss()],
+  },
   trailingSlash: 'never',
   integrations: [
-    tailwind(),
     mdx(),
     sitemap(),
     robotsTxt(),
-    react({experimentalReactChildren: true}),
+    react(),
     icon({
       include: {
         mdi: ['twitter', 'linkedin', 'instagram', 'github', 'email'],
@@ -41,7 +43,7 @@ export default defineConfig({
       },
     }),
   ],
-  output: 'hybrid',
+  output: 'static',
   adapter: netlify(),
   redirects: {
     '/preorder': '/contact',

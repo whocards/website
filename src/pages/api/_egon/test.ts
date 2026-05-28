@@ -1,3 +1,5 @@
+export const prerender = false
+
 import type {APIRoute} from 'astro'
 import {createNewShippingOrder, egonCreateItems, getShippingProvider} from '~server/egon'
 import type {CreateNewShippingOrder} from '~types/shipping'

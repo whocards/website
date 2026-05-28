@@ -40,8 +40,9 @@ const {language} = Astro.params
 </div>
 
 <style>
+  @reference "../../styles/base.css";
   a.disabled {
-    @apply pointer-events-none text-gray opacity-50;
+    @apply text-gray pointer-events-none opacity-50;
   }
   a.enabled {
     @apply hover:bg-transparent hover:text-yellow-500;
