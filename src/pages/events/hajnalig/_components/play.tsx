@@ -1,4 +1,4 @@
-import {useCallback, useEffect, useRef, useState} from 'react'
+import {useCallback, useEffect, useReducer, useRef, useState} from 'react'
 import {cn} from '~utils'
 import {debounce} from '~utils/debounce'
 import questions from '../_data/hajnalig-questions.json'
@@ -8,8 +8,6 @@ type QuestionId = keyof typeof questions
 
 const questionIds = Object.keys(questions)
 
-const count = Object.keys(questions).length
-
 const getRandomIds = () => {
   const ids = [...questionIds]
   for (let i = ids.length - 1; i > 0; i--) {
@@ -17,6 +15,26 @@ const getRandomIds = () => {
     ;[ids[i], ids[j]] = [ids[j], ids[i]]
   }
   return ids as QuestionId[]
+}
+
+type NavState = {ids: QuestionId[]; idx: number}
+type NavAction = {type: 'next'} | {type: 'previous'}
+
+const navReducer = (state: NavState, action: NavAction): NavState => {
+  switch (action.type) {
+    case 'previous':
+      return state.idx === 0 ? state : {...state, idx: state.idx - 1}
+    case 'next': {
+      const ids = state.idx >= state.ids.length - 1 ? [...state.ids, ...getRandomIds()] : state.ids
+      return {ids, idx: state.idx + 1}
+    }
+  }
+}
+
+const getInitialNav = (): NavState => {
+  const q = new URLSearchParams(window.location.search).get('q') ?? undefined
+  if (!q || !questionIds.includes(q)) return {ids: getRandomIds(), idx: 0}
+  return {ids: questionIds as QuestionId[], idx: questionIds.indexOf(q)}
 }
 
 const userIdKey = 'hajnalig-user-id'
@@ -63,8 +81,7 @@ const getQuestion = (language: EventLanguage, id: QuestionId) => {
 }
 
 export const SimplePlay = () => {
-  const [ids, setIds] = useState<QuestionId[]>(getRandomIds())
-  const [idx, setIdx] = useState(0)
+  const [{ids, idx}, dispatch] = useReducer(navReducer, undefined, getInitialNav)
   const [userId, setUserId] = useState(getUserId())
   const [language, setLanguage] = useState<EventLanguage>(getLanguage())
   const [showControls, setShowControls] = useState(true)
@@ -144,19 +161,14 @@ export const SimplePlay = () => {
   }, [])
 
   const handlePrevious = useCallback(() => {
-    if (idx === 0) return
-    setIdx(idx - 1)
+    dispatch({type: 'previous'})
     void createQuestionTracking({userId, questionId: ids[idx], language, type: 'previous'})
-  }, [idx, userId, ids])
+  }, [idx, ids, userId, language])
 
   const handleNext = useCallback(() => {
-    if (idx === count - 1) {
-      setIds((prev) => [...prev, ...getRandomIds()])
-    }
-
-    setIdx(idx + 1)
+    dispatch({type: 'next'})
     void createQuestionTracking({userId, questionId: ids[idx], language, type: 'next'})
-  }, [idx, userId, ids])
+  }, [idx, ids, userId, language])
 
   const handleToggleLanguage = useCallback(() => {
     const newLanguage = language === 'hu' ? 'en' : 'hu'
@@ -171,7 +183,7 @@ export const SimplePlay = () => {
 
   return (
     <>
-      <div className='flex h-full w-full items-center px-4 pb-[10%] text-5xl font-semibold text-darkest md:px-8 md:text-7xl lg:max-w-[1140px] xl:px-0 xs:text-3xl phone-landscape:text-2xl'>
+      <div className='text-darkest xs:text-3xl phone-landscape:text-2xl flex h-full w-full items-center px-4 pb-[10%] text-5xl font-semibold md:px-8 md:text-7xl lg:max-w-[1140px] xl:px-0'>
         <h1 className='whitespace-pre-wrap leading-tight'>{getQuestion(language, ids[idx])}</h1>
       </div>
 
@@ -184,7 +196,7 @@ export const SimplePlay = () => {
         }`}
       >
         <div
-          className={`flex w-full max-w-2xl items-center justify-between gap-8 text-gray transition-all duration-500 ${
+          className={`text-gray flex w-full max-w-2xl items-center justify-between gap-8 transition-all duration-500 ${
             showControls ? 'translate-y-0' : 'md:translate-y-16'
           }`}
         >
@@ -203,7 +215,7 @@ export const SimplePlay = () => {
           </button>
           <button
             onClick={handleToggleLanguage}
-            className='group/button btn btn-circle btn-ghost relative bg-gray text-white hover:bg-gray/80 hover:text-primary-light'
+            className='group/button btn btn-circle btn-ghost bg-gray hover:bg-gray/80 hover:text-primary-light relative text-white'
           >
             <span className='absolute transition-all duration-200 group-hover/button:-translate-y-full group-hover/button:opacity-0'>
               {language}

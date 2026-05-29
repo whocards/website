@@ -1,4 +1,4 @@
-import {donationUrl, websiteNextUrl} from './urls'
+import {websiteNextUrl} from './urls'
 
 export type Link = {
   href: string
@@ -13,14 +13,14 @@ export const mainLinks: Link[] = [
   {href: '/#what-is-whocards', title: 'About'},
   {href: '/play', title: 'Play', play: true},
   {href: '/print', title: 'Print'},
-  {href: donationUrl, title: 'Donate', external: true},
+  // {href: donationUrl, title: 'Donate', external: true},
   {href: '/contact', title: 'Request Cards', button: true},
 ]
 
 export const eventLinks: Link[] = [{href: '/events/hajnalig', title: 'Hajnalig'}]
 
 export const eventMainLinks: Link[] = [
-  {href: donationUrl, title: 'Donate', external: true},
+  // {href: donationUrl, title: 'Donate', external: true},
   {href: '/contact', title: 'Request Cards', button: true},
 ]
 
