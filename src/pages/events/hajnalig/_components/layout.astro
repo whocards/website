@@ -2,7 +2,7 @@
 import {Icon} from 'astro-icon/components'
 import {Image} from 'astro:assets'
 import NavLink from '~components/Buttons/NavLink.astro'
-import {IS_PROD} from '~constants/env'
+import PostHog from '~components/PostHog.astro'
 import {eventMainLinks} from '~constants/navigation'
 import bgLeft from '~icons/bg-left.svg'
 import bgRight from '~icons/bg-right.svg'
@@ -23,7 +23,7 @@ const {class: mainClasses, title = 'Hajnalig', description = 'Hajnalig'} = Astro
 <html lang='hu' class='scroll-smooth'>
   <head>
     <Head title={title} description={description} />
-    {IS_PROD && <script defer='defer' data-domain='whocards.cc' src='/js/script.js' />}
+    <PostHog />
   </head>
   <body
     class='m-0 flex min-h-screen bg-[#FFF0E8] text-darkest flex-col font-sans selection:bg-primary-dark selection:text-primary-light scrollbar-hide'

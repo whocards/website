@@ -46,6 +46,8 @@ export const env = createEnv({
   clientPrefix: 'PUBLIC_',
   client: {
     PUBLIC_STRIPE_PUBLIC_KEY: z.string(),
+    PUBLIC_POSTHOG_KEY: z.string().optional(),
+    PUBLIC_POSTHOG_HOST: z.string().url().optional().default('https://eu.i.posthog.com'),
   },
   runtimeEnv: import.meta.env,
 })

@@ -17,7 +17,7 @@ Next, we will outline the information we gather during your visit to our website
 
 ## 1. Collection and Storage of Personal Data and the Nature and Purpose of Their Use:
 
-### a. When you visit our website: Each time you access our website, the internet browser used on your device (whether it's a computer, laptop, tablet, smartphone, etc.) automatically transmits data to our analytics provider plausible.io.
+### a. When you visit our website: Each time you access our website, the internet browser used on your device (whether it's a computer, laptop, tablet, smartphone, etc.) may automatically transmit technical and usage data to our privacy-conscious analytics provider.
 
 - Name of the accessed page and file, along with the timestamp of the access.
 - Requesting domain (the source of your request that led you to our website(s)).
@@ -76,9 +76,11 @@ As the provider of this website, we do not have any influence over these practic
 
 ### Web Statistics Collection (Web Statistics Tool)
 
-Our website uses Plausible Analytics, an EU-based open source website, dedicated to making web analytics more privacy-friendly.
+Our website uses a privacy-conscious web analytics tool to understand overall website usage and improve our pages, purchase flow, and interactive experiences.
 
-Plausible tracks overall trends in our website traffic, and does not track individual visitors. Plausible doesn’t use cookies, doesn’t generate any persistent identifiers and doesn’t collect or store any personal or identifiable data. All of the data is aggregated data only and it has no personal information.
+We use analytics to measure page views, traffic sources, language changes, and basic interactions such as moving forward or backward through questions in an event experience. We do not use analytics to collect payment card data, shipping form contents, or private message contents. We configure analytics features conservatively and do not enable session recording by default.
+
+Analytics data may include technical information such as the page visited, approximate location derived from network information, browser and device information, referrer, timestamps, and interaction events. Where cookies or similar technologies are used to recognize repeat visits or sessions, they are used for analytics purposes and not to sell personal data.
 
 ### Newsletter
 

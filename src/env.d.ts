@@ -4,4 +4,5 @@
 
 interface Window {
   langsModal: HTMLDialogElement
+  posthog?: import('posthog-js').PostHog
 }

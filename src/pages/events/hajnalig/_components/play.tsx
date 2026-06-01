@@ -1,6 +1,5 @@
 import {useCallback, useEffect, useReducer, useRef, useState} from 'react'
 import {cn} from '~utils'
-import {debounce} from '~utils/debounce'
 import questions from '../_data/hajnalig-questions.json'
 
 type EventLanguage = 'hu' | 'en'
@@ -69,12 +68,29 @@ type QuestionTracking = {
   language: EventLanguage
 }
 
-const createQuestionTracking = debounce(async (questionTracking: QuestionTracking) => {
+const createQuestionTracking = async (questionTracking: QuestionTracking) => {
   await fetch('/api/events/question-tracking', {
     method: 'POST',
     body: JSON.stringify({eventId: 1, ...questionTracking}),
   })
-}, 1000)
+}
+
+const captureEventQuestion = (
+  eventName: string,
+  properties: {
+    questionId: QuestionId
+    language: EventLanguage
+    [key: string]: unknown
+  }
+) => {
+  const {questionId, ...rest} = properties
+
+  window.posthog?.capture(eventName, {
+    event_id: 1,
+    question_id: Number(questionId),
+    ...rest,
+  })
+}
 
 const getQuestion = (language: EventLanguage, id: QuestionId) => {
   return language === 'hu' ? questions[id].hu : questions[id].en
@@ -84,6 +100,7 @@ export const SimplePlay = () => {
   const [{ids, idx}, dispatch] = useReducer(navReducer, undefined, getInitialNav)
   const [userId, setUserId] = useState(getUserId())
   const [language, setLanguage] = useState<EventLanguage>(getLanguage())
+  const [trackingSource, setTrackingSource] = useState('initial')
   const [showControls, setShowControls] = useState(true)
   const [isControlsHovered, setIsControlsHovered] = useState(false)
 
@@ -152,34 +169,59 @@ export const SimplePlay = () => {
     if (!userId) {
       setUserId(newUserId)
     }
+
     void createQuestionTracking({
       userId: newUserId,
       questionId: ids[idx],
       language,
-      type: 'first',
+      type: trackingSource,
     })
-  }, [])
+
+    captureEventQuestion('event_question_seen', {
+      questionId: ids[idx],
+      language,
+      source: trackingSource,
+    })
+  }, [idx, ids, language, trackingSource])
 
   const handlePrevious = useCallback(() => {
+    const previousQuestionId = ids[idx - 1]
+
+    if (previousQuestionId) {
+      captureEventQuestion('event_question_previous', {
+        questionId: previousQuestionId,
+        language,
+        from_question_id: Number(ids[idx]),
+      })
+    }
+
+    setTrackingSource('previous')
     dispatch({type: 'previous'})
-    void createQuestionTracking({userId, questionId: ids[idx], language, type: 'previous'})
-  }, [idx, ids, userId, language])
+  }, [idx, ids, language])
 
   const handleNext = useCallback(() => {
+    captureEventQuestion('event_question_next', {
+      questionId: ids[idx],
+      language,
+    })
+
+    setTrackingSource('next')
     dispatch({type: 'next'})
-    void createQuestionTracking({userId, questionId: ids[idx], language, type: 'next'})
-  }, [idx, ids, userId, language])
+  }, [idx, ids, language])
 
   const handleToggleLanguage = useCallback(() => {
     const newLanguage = language === 'hu' ? 'en' : 'hu'
-    setLanguage(newLanguage)
-    void createQuestionTracking({
-      userId,
+
+    captureEventQuestion('event_language_changed', {
       questionId: ids[idx],
       language: newLanguage,
-      type: 'change-language',
+      from_language: language,
+      to_language: newLanguage,
     })
-  }, [idx, userId, ids, language])
+
+    setTrackingSource('language_change')
+    setLanguage(newLanguage)
+  }, [idx, ids, language])
 
   return (
     <>
