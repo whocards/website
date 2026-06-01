@@ -3,4 +3,4 @@ allowBuilds:
   core-js: false
   esbuild: true
   protobufjs: false
-  sharp: set this to true or false
+  sharp: true

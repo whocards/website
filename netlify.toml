@@ -1,8 +1,8 @@
-# example netlify.[build.environment]
-NETLIFY_USE_PNPM = "true"
+[build.environment]
+  NODE_VERSION = "22"
 
 [build]
-  command = "OUTPUT=netlify astro build"
+  command = "pnpm build"
   publish = "dist"
 
 # [[plugins]] 
