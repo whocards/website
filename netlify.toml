@@ -1,6 +1,5 @@
 # example netlify.[build.environment]
-  NETLIFY_USE_PNPM = "true"
-  NODE_VERSION = "18"
+NETLIFY_USE_PNPM = "true"
 
 [build]
   command = "OUTPUT=netlify astro build"
