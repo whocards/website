@@ -1,14 +1,19 @@
 ---
+export const prerender = false
+
 import {Icon} from 'astro-icon/components'
 import type {Icon as IconName} from 'virtual:astro-icon'
+import type {ZodIssue} from 'zod'
 import {FormSuccess} from '~components/thanks'
 import EmailForm from '~components/thanks/EmailForm.astro'
 import {contactLinks} from '~constants/navigation'
 import {Layout} from '~layouts'
-import {insertUser, insertUserSchema} from '~server/db'
+import {insertUser} from '~server/db'
 import {createContactSheetRow} from '~server/gsheet'
+import {cardRequestSchema} from '~utils/schemas'
 
-let formData
+let formData: Record<string, string> | undefined
+let errors: Record<string, ZodIssue> | undefined
 let confirmed = false
 
 // when form is posted
@@ -20,27 +25,42 @@ if (Astro.request.method === 'POST') {
       throw new Error('Bot detected')
     }
 
-    const parsedUser = insertUserSchema.parse({
-      name: formData.name,
-      email: formData.email,
-      newsletter: formData.newsletter === 'on',
-    })
+    const parsed = cardRequestSchema.safeParse(formData)
+    if (!parsed.success) {
+      errors = Object.fromEntries(
+        parsed.error.issues.map((issue) => [String(issue.path[0]), issue])
+      )
+    } else {
+      const request = parsed.data
 
-    const dbUser = await insertUser(parsedUser)
-    confirmed = true
+      await insertUser({
+        name: request.name,
+        email: request.email,
+        newsletter: request.newsletter ?? false,
+      })
 
-    // if (dbUser) {
-    await createContactSheetRow({
-      ...parsedUser,
-      requestType: 'cards',
-      quantity: formData.quantity ?? '',
-      country: formData.country ?? '',
-      organization: formData.organization ?? '',
-      message: formData.message ?? '',
-    })
-    // }
+      await createContactSheetRow({
+        name: request.name,
+        email: request.email,
+        newsletter: request.newsletter ?? false,
+        requestType: 'cards',
+        quantity: request.quantity,
+        organization: request.organization,
+        phone: request.phone,
+        address: request.address,
+        address2: request.address2,
+        zip: request.zip,
+        city: request.city,
+        region: request.region,
+        country: request.country,
+        message: request.message,
+      })
+
+      confirmed = true
+    }
   } catch (error) {
     console.error(error)
+    errors ??= {}
   }
 }
 ---
@@ -89,7 +109,7 @@ if (Astro.request.method === 'POST') {
           buttonLabel='Submit another request'
         />
       ) : (
-        <EmailForm mode='request' />
+        <EmailForm mode='request' formData={formData} errors={errors} />
       )
     }
   </div>
