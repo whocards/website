@@ -22,6 +22,21 @@ export const countryString = z.string().transform((val, ctx) => {
   return country.code
 })
 
+export const cardRequestSchema = thankYouFormSchema.extend({
+  name: z.string().min(2, {message: 'Field is required'}),
+  email: z.string().email({message: 'A valid email is required'}),
+  quantity: z.coerce.number().int().min(1, {message: 'At least 1 deck is required'}),
+  organization: z.string().optional().default(''),
+  phone: z.string().regex(/^[\d\s()+-.]+$/, {message: 'Invalid phone number'}),
+  address: z.string().min(1, {message: 'Field is required'}),
+  address2: z.string().optional().default(''),
+  zip: z.string().min(1, {message: 'Field is required'}),
+  city: z.string().min(1, {message: 'Field is required'}),
+  region: z.string().optional().default(''),
+  country: countryString,
+  message: z.string().optional().default(''),
+})
+
 export const orderSchema = z.object({
   count: z.coerce.number().int(),
   priceId: z.string(),

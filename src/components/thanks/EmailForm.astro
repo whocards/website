@@ -74,17 +74,63 @@ const newsletterChecked =
             error={errors?.quantity}
           />
           <Input
+            name='organization'
+            title='Organization (optional)'
+            autocomplete='organization'
+            value={formData?.organization ?? ''}
+            error={errors?.organization}
+          />
+          <Input
+            name='phone'
+            type='tel'
+            autocomplete='tel'
+            required
+            value={formData?.phone ?? ''}
+            error={errors?.phone}
+          />
+          <Input
+            name='address'
+            title='street 1'
+            autocomplete='address-line1'
+            required
+            value={formData?.address ?? ''}
+            error={errors?.address}
+          />
+          <Input
+            name='address2'
+            title='street 2'
+            autocomplete='address-line2'
+            value={formData?.address2 ?? ''}
+            error={errors?.address2}
+          />
+          <Input
+            name='zip'
+            title='zip code'
+            autocomplete='postal-code'
+            required
+            value={formData?.zip ?? ''}
+            error={errors?.zip}
+          />
+          <Input
+            name='city'
+            autocomplete='address-level2'
+            required
+            value={formData?.city ?? ''}
+            error={errors?.city}
+          />
+          <Input
+            name='region'
+            autocomplete='address-level1'
+            value={formData?.region ?? ''}
+            error={errors?.region}
+          />
+          <Input
             name='country'
             title='Country'
+            autocomplete='country'
             required
             value={formData?.country ?? ''}
             error={errors?.country}
-          />
-          <Input
-            name='organization'
-            title='Organization (optional)'
-            value={formData?.organization ?? ''}
-            error={errors?.organization}
           />
           <label
             for='request-message'
@@ -98,9 +144,8 @@ const newsletterChecked =
               class='w-full bg-transparent py-3 px-4.5 border placeholder:text-gray-dark rounded-xl'
               class:list={[errors?.message ? 'border-red' : 'border-gray']}
               placeholder='Share any delivery notes or details'
-            >
-              {formData?.message ?? ''}
-            </textarea>
+              set:text={formData?.message ?? ''}
+            />
             <p class='text-xs text-red'>{errors?.message?.message ?? <>&nbsp;</>}</p>
           </label>
         </>
