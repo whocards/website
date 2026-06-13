@@ -31,3 +31,6 @@ mocks
 /playwright-report/
 /blob-report/
 /playwright/.cache/
+
+# Claude Code agent worktrees (harness-managed)
+.claude/worktrees/

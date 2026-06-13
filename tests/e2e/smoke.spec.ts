@@ -24,11 +24,13 @@ const staticRoutes = [
   '/mission',
   '/print',
   '/images',
-  '/en/question/1',
-  '/hu/question/1',
   '/events/hajnalig',
   '/events/hajnalig/play',
 ]
+
+// /en/question/:id now 301-redirects to /play?lang=en&q=:id (netlify.toml), and
+// /play is an SSR function — neither is served by the static dist/ e2e harness,
+// so they're covered by Netlify's redirect-rules check + the deploy preview, not here.
 
 for (const route of staticRoutes) {
   test(`route ${route} returns 200`, async ({request}) => {
