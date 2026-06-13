@@ -27,7 +27,9 @@ if (propTitle) {
 // question pages
 if (id) {
   titles.push(`Question #${id}`)
-  if (!img) image = `images/${language}/${id}.png`
+  // Card image is generated programmatically from questions.json at build time
+  // (see src/pages/og/[language]/[id].png.ts) — no committed PNG required.
+  if (!img) image = `og/${language}/${id}.png`
   description = 'Dare to be Curious?'
 }
 // complete image url
