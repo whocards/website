@@ -5,6 +5,15 @@
   command = "pnpm build"
   publish = "dist"
 
+# #43: old per-question urls now live on the generalized play screen.
+# Redirect /<lang>/question/<id> -> /play?lang=<lang>&q=<id> with a real 301 so
+# previously shared & indexed links keep working.
+[[redirects]]
+  from = "/:language/question/:id"
+  to = "/play?lang=:language&q=:id"
+  status = 301
+  force = true
+
 # [[plugins]] 
 #   package = "netlify-plugin-cypress"
 
