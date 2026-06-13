@@ -17,6 +17,8 @@ export interface Props {
   showLangModal?: boolean
   links?: Link[]
   image?: string
+  // question id for SSR pages (e.g. /play) that drive per-question metadata
+  id?: string
   oldBg?: boolean
   noFooter?: boolean
 }
@@ -29,6 +31,7 @@ const {
   showLangModal = false,
   links = mainLinks,
   image,
+  id,
   oldBg = false,
   noFooter = false,
 } = Astro.props
@@ -37,7 +40,7 @@ const {
 <!doctype html>
 <html lang={lang} class='scroll-smooth bg-darkest'>
   <head>
-    <Head title={title} description={description} image={image} />
+    <Head title={title} description={description} image={image} id={id} language={lang} />
     <PostHog />
   </head>
   <body
