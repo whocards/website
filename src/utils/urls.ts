@@ -12,6 +12,7 @@ export const getCurrentQuestionId = (): QuestionId => {
 }
 
 /**
+ * Build a link into the play screen, deep-linked to the current question via `?q=`.
  * defaultLang in case we want to start from different language in the future
  */
 export const getCurrentQuestionUrl = (lang?: string) => {
@@ -22,7 +23,7 @@ export const getCurrentQuestionUrl = (lang?: string) => {
     url = DEFAULT_LANGUAGE
   }
   // handle '/' route
-  return `${window.location.origin}/${lang || url}/question/${idsStore.get().current}`
+  return `${window.location.origin}/${lang || url}/play?q=${idsStore.get().current}`
 }
 
 /**
