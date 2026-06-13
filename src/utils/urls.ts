@@ -12,17 +12,18 @@ export const getCurrentQuestionId = (): QuestionId => {
 }
 
 /**
+ * Build a link into the play screen, deep-linked to the current question via `?q=`.
  * defaultLang in case we want to start from different language in the future
  */
 export const getCurrentQuestionUrl = (lang?: string) => {
-  // pathname with removed trailing slash
-  let url = getTrimmedPath().replace(/^\//, '') || DEFAULT_LANGUAGE
+  // derive the language from the current page path (e.g. `/en`) when not given
+  let pathLang = getTrimmedPath().replace(/^\//, '') || DEFAULT_LANGUAGE
 
-  if (!LANG_KEYS.includes(url)) {
-    url = DEFAULT_LANGUAGE
+  if (!LANG_KEYS.includes(pathLang)) {
+    pathLang = DEFAULT_LANGUAGE
   }
-  // handle '/' route
-  return `${window.location.origin}/${lang || url}/question/${idsStore.get().current}`
+  // language is now a query param, not a url path: /play?lang=<lang>&q=<id>
+  return `${window.location.origin}/play?lang=${lang || pathLang}&q=${idsStore.get().current}`
 }
 
 /**
