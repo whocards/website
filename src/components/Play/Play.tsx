@@ -45,7 +45,8 @@ const navReducer = (questionIds: string[]) => {
       case 'previous':
         return state.idx === 0 ? state : {...state, idx: state.idx - 1}
       case 'next': {
-        const ids = state.idx >= state.ids.length - 1 ? [...state.ids, ...getRandomIds()] : state.ids
+        const ids =
+          state.idx >= state.ids.length - 1 ? [...state.ids, ...getRandomIds()] : state.ids
         return {ids, idx: state.idx + 1}
       }
     }
@@ -263,7 +264,8 @@ export const Play = ({
   }, [otherLanguage, changeLanguage])
 
   const direction = getDirection(language)
-  const questionText = questions[ids[idx]]?.[language] ?? questions[ids[idx]]?.[defaultLanguage] ?? ''
+  const questionText =
+    questions[ids[idx]]?.[language] ?? questions[ids[idx]]?.[defaultLanguage] ?? ''
 
   return (
     <>
@@ -309,7 +311,7 @@ export const Play = ({
             <button
               aria-label='change language'
               onClick={handleToggleLanguage}
-              className='group/button btn btn-circle btn-ghost bg-gray hover:bg-gray/80 hover:text-primary-light relative text-white uppercase'
+              className='group/button btn btn-circle btn-ghost bg-gray hover:bg-gray/80 hover:text-primary-light relative uppercase text-white'
             >
               <span className='absolute transition-all duration-200 group-hover/button:-translate-y-full group-hover/button:opacity-0'>
                 {language}
@@ -326,7 +328,7 @@ export const Play = ({
                 value={language}
                 onChange={(e) => changeLanguage(e.target.value)}
                 className={cn(
-                  'btn btn-circle bg-gray hover:bg-gray/80 hover:text-primary-light cursor-pointer appearance-none text-center text-white uppercase',
+                  'btn btn-circle bg-gray hover:bg-gray/80 hover:text-primary-light cursor-pointer appearance-none text-center uppercase text-white',
                   language.includes('-') && 'w-fit px-4'
                 )}
               >
