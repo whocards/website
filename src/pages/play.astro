@@ -1,0 +1,31 @@
+---
+export const prerender = false
+
+import {Play, type QuestionSet} from '~components/Play'
+import questions from '~data/questions.json'
+import {DEFAULT_LANGUAGE, LANG_KEYS} from '~utils'
+import Layout from '~layouts/Layout.astro'
+
+// default language first, the rest available in the in-screen language control.
+// the <Play> component reads ?lang= from the url to pick the actual starting language.
+const languages = [DEFAULT_LANGUAGE, ...LANG_KEYS.filter((l) => l !== DEFAULT_LANGUAGE)]
+
+// SSR (prerender=false) so social crawlers — which don't run JS and never see the
+// client-side ?q=/?lang= — still get the per-question OG card. Read the query params
+// here and point og:image at the generated /og/{lang}/{id}.png; fall back to the
+// generic social image when no (valid) question is requested.
+const langParam = Astro.url.searchParams.get('lang')
+const lang = langParam && LANG_KEYS.includes(langParam) ? langParam : DEFAULT_LANGUAGE
+const qParam = Astro.url.searchParams.get('q')
+const image = qParam && qParam in questions ? `og/${lang}/${qParam}.png` : undefined
+---
+
+<Layout lang={lang} oldBg noFooter image={image}>
+  <Play
+    client:only='react'
+    questions={questions as QuestionSet}
+    languages={languages}
+    languageStorageKey='who-language'
+    questionClassName='text-white'
+  />
+</Layout>
