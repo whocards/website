@@ -3,12 +3,24 @@ export interface Props {
   title?: string
   description?: string
   image?: string
+  // id/language let SSR pages (e.g. /play) supply the per-question metadata that
+  // static question pages used to get from route params.
+  id?: string
+  language?: string
 }
 
 const fonts = ['aptly_regular', 'aptly_medium', 'golos_text']
 
-const {id, language} = Astro.params
-const {title: propTitle, description: propDesc, image: img} = Astro.props
+const {id: paramId, language: paramLang} = Astro.params
+const {
+  title: propTitle,
+  description: propDesc,
+  image: img,
+  id: propId,
+  language: propLang,
+} = Astro.props
+const id = paramId ?? propId
+const language = paramLang ?? propLang
 const site = Astro.site
 
 const canonicalUrl = new URL(Astro.url.pathname, site)

@@ -11,16 +11,17 @@ import Layout from '~layouts/Layout.astro'
 const languages = [DEFAULT_LANGUAGE, ...LANG_KEYS.filter((l) => l !== DEFAULT_LANGUAGE)]
 
 // SSR (prerender=false) so social crawlers — which don't run JS and never see the
-// client-side ?q=/?lang= — still get the per-question OG card. Read the query params
-// here and point og:image at the generated /og/{lang}/{id}.png; fall back to the
-// generic social image when no (valid) question is requested.
+// client-side ?q=/?lang= — still get the per-question metadata. Resolve lang/id from
+// the query params and hand them to <Head> (via Layout), which then derives the
+// title, og:locale, and og:image (/og/{lang}/{id}.png). With no valid question it
+// falls back to the generic title + social image.
 const langParam = Astro.url.searchParams.get('lang')
 const lang = langParam && LANG_KEYS.includes(langParam) ? langParam : DEFAULT_LANGUAGE
 const qParam = Astro.url.searchParams.get('q')
-const image = qParam && qParam in questions ? `og/${lang}/${qParam}.png` : undefined
+const questionId = qParam && qParam in questions ? qParam : undefined
 ---
 
-<Layout lang={lang} oldBg noFooter image={image}>
+<Layout lang={lang} oldBg noFooter id={questionId}>
   <Play
     client:only='react'
     questions={questions as QuestionSet}
