@@ -93,6 +93,12 @@ export const Play = ({
 
   const getStoredLanguage = useCallback((): string => {
     if (typeof window === 'undefined') return defaultLanguage
+    // a `?lang=` query param wins so deep links stay shareable
+    const urlLang = new URLSearchParams(window.location.search).get('lang')
+    if (urlLang && languages.includes(urlLang)) {
+      localStorage.setItem(languageStorageKey, urlLang)
+      return urlLang
+    }
     const stored = localStorage.getItem(languageStorageKey)
     if (stored && languages.includes(stored)) return stored
     localStorage.setItem(languageStorageKey, defaultLanguage)
@@ -214,13 +220,14 @@ export const Play = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [idx, ids, language, trackingSource])
 
-  // ---- keep ?q= in the url in sync with the current question ----
+  // ---- keep ?q= and ?lang= in the url in sync so links stay shareable ----
   useEffect(() => {
     if (typeof window === 'undefined') return
     const url = new URL(window.location.href)
     url.searchParams.set('q', ids[idx])
+    url.searchParams.set('lang', language)
     window.history.replaceState(null, '', url)
-  }, [idx, ids])
+  }, [idx, ids, language])
 
   // ---- navigation handlers ----
 

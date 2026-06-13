@@ -1,0 +1,20 @@
+---
+import {Play, type QuestionSet} from '~components/Play'
+import questions from '~data/questions.json'
+import {DEFAULT_LANGUAGE, LANG_KEYS} from '~utils'
+import Layout from '~layouts/Layout.astro'
+
+// default language first, the rest available in the in-screen language control.
+// the <Play> component reads ?lang= from the url to pick the actual starting language.
+const languages = [DEFAULT_LANGUAGE, ...LANG_KEYS.filter((l) => l !== DEFAULT_LANGUAGE)]
+---
+
+<Layout lang={DEFAULT_LANGUAGE} oldBg noFooter>
+  <Play
+    client:only='react'
+    questions={questions as QuestionSet}
+    languages={languages}
+    languageStorageKey='who-language'
+    questionClassName='text-white'
+  />
+</Layout>
