@@ -25,3 +25,9 @@ pnpm-debug.log*
 # Local Netlify folder
 .netlify
 mocks
+
+# playwright
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
