@@ -59,9 +59,9 @@ test('language toggle switches between Hungarian and English', async ({page}) =>
   await page.goto('/events/hajnalig/play?q=1')
   await expect(heading(page)).toHaveText(q1.hu)
 
-  // The toggle is the only control button without an aria-label; it sits between
-  // the prev and next buttons (which both have aria-labels).
-  const toggle = page.locator('button:not([aria-label])').first()
+  // With two languages the control is a toggle button (between prev/next),
+  // labelled "change language".
+  const toggle = page.getByRole('button', {name: 'change language'})
   await toggle.click()
   await expect(heading(page)).toHaveText(q1.en)
 
