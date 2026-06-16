@@ -1,0 +1,188 @@
+---
+import {Icon} from 'astro-icon/components'
+import Button from '~components/ui/Button.astro'
+import PreorderSection from '~components/Purchase/PreorderSection.astro'
+import WhatCard from '~components/Purchase/WhatCard.astro'
+import Layout from '~layouts/Layout.astro'
+
+// AI Check-In marketing landing page (Tier 0 "lead magnet" wedge).
+// See docs/strategy/ai-at-work.md §5 (Tier 0) and §7 (positioning).
+//
+// COPY: all visible text below is PLACEHOLDER. Final marketing words come from
+// the separate copy ticket — search this file for `TODO(copy)` and replace.
+//
+// TODO(#55/#57): The primary + footer CTAs point at the AI Check-In deck route.
+// The final route is being decided in #55 (likely `/play/ai-at-work`). Update
+// `deckHref` once #55/#57 land. Until then this links to a not-yet-built route.
+const deckHref = '/play/ai-at-work'
+
+// TODO(OG): give this page its own dedicated OG card. For now it falls back to
+// the site default social.png (handled by Head.astro when `image` is omitted).
+// e.g. pass image='og/ai-at-work.png' to <Layout>.
+
+// TODO(copy / strategy §2): replace placeholder stats with the real figures from
+// docs/strategy/ai-at-work.md §2 ("Why now"). Candidates:
+//   89% workers concerned about AI's impact on job security
+//   38% of employees feel fully supported adapting to AI
+//   62% of orgs stuck "experimenting/piloting"
+//   ~38% of adoption difficulty is people, not tech
+const stats = [
+  {value: '89%', label: 'TODO(copy): stat caption — strategy §2'},
+  {value: '38%', label: 'TODO(copy): stat caption — strategy §2'},
+  {value: '62%', label: 'TODO(copy): stat caption — strategy §2'},
+  {value: '20 min', label: 'TODO(copy): stat caption — strategy §2'},
+]
+---
+
+<Layout
+  title='AI Check-In'
+  description='TODO(copy): meta description — your AI rollout is stalling because of people, not tech. Start the conversation.'
+  class='scrollbar-hide'
+>
+  <!-- 1. HERO -->
+  <section
+    class='flex min-h-[calc(100vh-4rem)] w-full max-w-5xl flex-col items-center justify-center gap-6 px-8 text-center lg:gap-8'
+  >
+    <h3
+      class='text-sm font-semibold uppercase leading-snug tracking-wide text-primary-dark lg:text-base'
+    >
+      {/* TODO(copy): eyebrow */}
+      The AI Check-In
+    </h3>
+    <h1
+      class='font-title text-4xl font-bold leading-tight text-white lg:text-7xl lg:leading-tight'
+    >
+      {/* TODO(copy): hero headline */}
+      Your AI rollout is stalling because of
+      <span class='text-gradient'>people</span>, not tech.
+    </h1>
+    <p class='max-w-2xl text-sm font-semibold leading-7 lg:text-lg'>
+      {/* TODO(copy): hero subhead */}
+      Run a 20-minute team check-in that turns quiet anxiety about AI into an honest,
+      out-loud conversation — using the questions WhoCards is known for.
+    </p>
+    <div class='w-full max-w-xs pt-2'>
+      <Button tag='a' href={deckHref} size='lg' full>Run the check-in</Button>
+    </div>
+    <div class='absolute bottom-5 left-0 right-0 grid place-items-center'>
+      <a
+        href='#why-a-check-in'
+        class='scale-150 border-0 border-x-8 border-t-8 border-solid border-x-transparent border-t-primary-light transition-transform hover:scale-[2]'
+        aria-label='Scroll to learn more'
+      >
+      </a>
+    </div>
+  </section>
+
+  <!-- 2. VALUE PROPS -->
+  <PreorderSection
+    subtitle='why a check-in?'
+    title='TODO(copy): value-props section title'
+  >
+    <div class='grid grid-flow-row gap-8 lg:grid-flow-col lg:grid-cols-3 lg:gap-12'>
+      <WhatCard icon='group-chat' title='TODO(copy): value prop #1'>
+        {/* TODO(copy): value prop #1 body */}
+        Name the fear out loud. Give your team a safe, structured way to say what they're
+        actually worried about — before it turns into quiet resistance.
+      </WhatCard>
+      <WhatCard icon='group' title='TODO(copy): value prop #2'>
+        {/* TODO(copy): value prop #2 body */}
+        Not another AI literacy course. This makes people willing, not just capable —
+        the human layer every rollout skips.
+      </WhatCard>
+      <WhatCard icon='star-circle' title='TODO(copy): value prop #3'>
+        {/* TODO(copy): value prop #3 body */}
+        Ready in minutes. A manager draws a card and starts the conversation — no
+        facilitator, no prep, no slide deck.
+      </WhatCard>
+    </div>
+  </PreorderSection>
+
+  <!-- 3. PROOF / STAT STRIP -->
+  <section class='w-full px-5 lg:max-w-7xl xl:px-0'>
+    <div
+      class='grid grid-cols-2 gap-6 rounded-3xl border border-gray-dark bg-background px-6 py-10 lg:grid-cols-4 lg:gap-8 lg:px-12 lg:py-14'
+    >
+      {
+        stats.map((stat) => (
+          <div class='flex flex-col items-center gap-2 text-center'>
+            <span class='text-gradient font-title text-4xl font-extrabold lg:text-6xl'>
+              {stat.value}
+            </span>
+            <span class='text-xs leading-snug text-gray-dark lg:text-sm'>{stat.label}</span>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- 4. LEAD-MAGNET EMAIL CAPTURE -->
+  <PreorderSection
+    subtitle='free starter'
+    title='TODO(copy): lead-magnet section title'
+    description='TODO(copy): lead-magnet supporting line — "10 questions to run an AI check-in with your team."'
+  >
+    {/*
+      TODO(capture endpoint): this form does NOT submit anywhere yet. There is no
+      backend wired up. A later ticket must point the submit handler at a real
+      email-capture endpoint (e.g. a Netlify function or form provider) and add
+      validation + success/error states. For now the inline handler in the script
+      below prevents submission and is a harmless placeholder.
+    */}
+    <form id='lead-magnet-form' class='flex w-full max-w-xl flex-col gap-4 sm:flex-row'>
+      <label class='sr-only' for='lead-magnet-email'>Email address</label>
+      <input
+        id='lead-magnet-email'
+        type='email'
+        name='email'
+        required
+        placeholder='you@company.com'
+        class='w-full rounded-xl border border-gray-dark bg-background px-5 py-3 text-white placeholder:text-gray-dark focus:border-primary-light focus:outline-none'
+      />
+      <Button type='submit' tag='button' size='lg' hideIcon class='shrink-0'>
+        Get the 10-question starter
+      </Button>
+    </form>
+    <p id='lead-magnet-status' class='text-sm text-primary-light' role='status' aria-live='polite'>
+    </p>
+  </PreorderSection>
+
+  <!-- 5. FOOTER CTA back to the deck -->
+  <div class='w-full px-5 pb-12 lg:max-w-7xl xl:px-0'>
+    <div
+      class='relative flex flex-col items-center overflow-hidden rounded-3xl border border-gray-dark bg-background px-5 py-16 text-center lg:gap-5'
+    >
+      <Icon name='pattern-mobile' class='absolute left-0 right-0 top-0 lg:hidden' />
+      <h3
+        class='text-gradient px-5 text-center font-title text-4xl font-extrabold leading-10 text-white lg:text-[54px] lg:leading-normal'
+      >
+        {/* TODO(copy): footer CTA headline */}
+        Start the conversation today.
+      </h3>
+      <p
+        class='max-w-xl px-5 pb-10 pt-5 text-center text-sm leading-snug lg:max-w-3xl lg:text-lg lg:leading-normal'
+      >
+        {/* TODO(copy): footer CTA supporting line */}
+        It takes 20 minutes and costs nothing. Draw a card, ask the question, and find out
+        what your team is really thinking about AI.
+      </p>
+      <span class='px-5'>
+        {/* TODO(#55/#57): deck route — see deckHref above */}
+        <Button tag='a' href={deckHref} size='lg'>Run the check-in</Button>
+      </span>
+    </div>
+  </div>
+</Layout>
+
+<script>
+  // TODO(capture endpoint): placeholder only — no network request is made. Replace
+  // with a real submission to the email-capture endpoint once it exists.
+  const form = document.getElementById('lead-magnet-form') as HTMLFormElement | null
+  const status = document.getElementById('lead-magnet-status')
+  form?.addEventListener('submit', (event) => {
+    event.preventDefault()
+    if (status) {
+      status.textContent = 'TODO(copy): thanks — capture endpoint not wired up yet.'
+    }
+  })
+</script>
