@@ -42,6 +42,12 @@ export const env = createEnv({
     EGON_ITEM_ONE_PRICE: z.coerce.number(),
     EGON_ITEM_TWELVE_ID: z.coerce.number(),
     EGON_ITEM_TWELVE_PRICE: z.coerce.number(),
+    // Resend (AI Check-In lead-magnet email). Optional so builds/dev don't break
+    // before the key is configured; the API route degrades gracefully without it.
+    RESEND_API_KEY: z.string().optional(),
+    // Must be a Resend-verified sender. Defaults to the WhoCards domain — verify
+    // whocards.cc in Resend (or override this env) before it can email real users.
+    RESEND_FROM_EMAIL: z.string().default('WhoCards <hello@whocards.cc>'),
   },
   clientPrefix: 'PUBLIC_',
   client: {
