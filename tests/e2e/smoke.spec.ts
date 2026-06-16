@@ -22,6 +22,7 @@ const staticRoutes = [
   '/',
   '/en',
   '/mission',
+  '/ai-at-work',
   '/print',
   '/images',
   '/events/hajnalig',
