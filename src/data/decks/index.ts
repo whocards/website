@@ -1,6 +1,7 @@
 import type {QuestionSet} from '~components/Play'
 import globalQuestions from '~data/questions.json'
 
+import {aiAtWorkDeck} from './ai-at-work'
 import {hajnaligDeck} from './hajnalig'
 import {libraryDeck} from './library'
 import type {Deck, ResolvedDeck} from './types'
@@ -17,6 +18,7 @@ export const DEFAULT_DECK_SLUG = libraryDeck.slug
 const decks = {
   library: libraryDeck,
   hajnalig: hajnaligDeck,
+  'ai-at-work': aiAtWorkDeck,
 } satisfies Record<string, Deck>
 
 export type DeckSlug = keyof typeof decks
