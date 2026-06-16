@@ -1,16 +1,19 @@
 import {Play, type QuestionSet} from '~components/Play'
-import questions from '../_data/hajnalig-questions.json'
+import {getDeck} from '~data/decks'
 
-// hajnalig deck: language order matters — first entry is the default ('hu')
-const hajnaligLanguages = ['hu', 'en']
+// the hajnalig event is now expressed as a deck; resolve it through the registry
+// instead of importing the questions json directly. Resolution is pure data, so
+// it is safe at module scope in this client island.
+const deck = getDeck('hajnalig')!
 
 export const SimplePlay = () => (
   <Play
-    questions={questions as QuestionSet}
-    languages={hajnaligLanguages}
-    languageStorageKey='hajnalig-language'
-    userIdStorageKey='hajnalig-user-id'
-    tracking={{eventId: 1, endpoint: '/api/events/question-tracking'}}
+    questions={deck.questions as QuestionSet}
+    languages={deck.languages}
+    languageStorageKey={deck.languageStorageKey}
+    userIdStorageKey={deck.userIdStorageKey}
+    tracking={deck.tracking}
+    questionClassName={deck.questionClassName}
   />
 )
 
